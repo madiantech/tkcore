@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="WF_WORKFLOW_INST">
+    <tk:TableDesc>
+      <tk:Content>工作流实例</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="int" IsKey="true">
+      <tk:FieldName>WI_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>流程ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_WD_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>流程模式名</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:EasySearch RegName="WorkFlowDefine"/>
+      <tk:Control Control="EasySearch" Order="20" DefaultShow="All"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>WI_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>流程名称</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Control Control="Text" Order="30" DefaultShow="All"/>
+      <tk:ListDetail Search="true" ListWidth="180"/>
+    </tk:Field>
+    <tk:Field DataType="text" IsEmpty="true">
+      <tk:FieldName>WI_CONTENT_XML</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>流程内容</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="TextArea" Order="40" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime" IsEmpty="true">
+      <tk:FieldName>WI_CREATE_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>流程创建时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="50" DefaultShow="Detail"/>
+      <tk:ListDetail ListWidth="120"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_CREATE_USER</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>创建人</tk:Content>
+      </tk:DisplayName>
+      <tk:EasySearch RegName="USER"/>
+      <tk:Control Control="Text" Order="60" DefaultShow="All"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime" IsEmpty="true">
+      <tk:FieldName>WI_END_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>结束时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="50" DefaultShow="None"/>
+      <tk:ListDetail ListWidth="120"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_END_USER</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>结束人</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:Control Control="Text" Order="80" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_LAST_STEP</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>上一个步骤</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Control Control="Text" Order="90" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_LAST_STEP_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>上一个步骤名称</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Control Control="Text" Order="100" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_LAST_DISPLAY_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>上一步骤</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Control Control="Text" Order="105" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_LAST_MANUAL</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>上一人工步骤</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Control Control="Text" Order="110" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_LAST_MANUAL_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>上一步骤</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>200</tk:Length>
+      <tk:Control Control="Text" Order="120" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_CURRENT_STEP</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>当前步骤</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Control Control="Text" Order="130" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_CURRENT_STEP_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>当前步骤</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Control Control="Text" Order="140" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime" IsEmpty="true">
+      <tk:FieldName>WI_CURRENT_CREATE_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>当前步骤创建时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="150" DefaultShow="None"/>
+      <tk:ListDetail ListWidth="120"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_STEP_TYPE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>当前步骤类型</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="160" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_CUSTOM_DATA</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>流程自用数据</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>2000</tk:Length>
+      <tk:Control Control="Text" Order="170" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_SEND_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>发送人</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:Control Control="Text" Order="180" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime" IsEmpty="true">
+      <tk:FieldName>WI_SEND_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>发送时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="190" DefaultShow="None"/>
+      <tk:ListDetail ListWidth="120"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_RECEIVE_COUNT</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>接收人个数</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="200" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_RECEIVE_LIST</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>接收人列表</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>2000</tk:Length>
+      <tk:Control Control="Text" Order="210" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_RECEIVE_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>接收人</tk:Content>
+      </tk:DisplayName>
+      <tk:EasySearch RegName="USER"/>
+      <tk:Control Control="Text" Order="220" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime" IsEmpty="true">
+      <tk:FieldName>WI_RECEIVE_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>接收时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="230" DefaultShow="All"/>
+      <tk:ListDetail ListWidth="120"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_PROCESS_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>处理人</tk:Content>
+      </tk:DisplayName>
+      <tk:EasySearch RegName="USER"/>
+      <tk:Control Control="Text" Order="240" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime" IsEmpty="true">
+      <tk:FieldName>WI_PROCESS_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>处理时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="250" DefaultShow="All"/>
+      <tk:ListDetail ListWidth="120"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_REF_LIST</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>参与人列表</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>2000</tk:Length>
+      <tk:Control Control="Text" Order="260" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_ERROR_TYPE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>错误原因</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="270" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_STATUS</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>状态</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Hidden" Order="270" DefaultShow="List"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_RETRIEVABLE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>是否支持取回</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Hidden" Order="270" DefaultShow="List"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_PRIORITY</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>优先级</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Label" Order="280" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_IS_TIMEOUT</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>是否超时</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Hidden" Order="290" DefaultShow="All"/>
+      <tk:Extension CheckValue="1"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime" IsEmpty="true">
+      <tk:FieldName>WI_TIMEOUT_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>超时时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="300" DefaultShow="None"/>
+      <tk:ListDetail ListWidth="120"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_INFO1</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>信息1</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Control Control="Text" Order="310" DefaultShow="None"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_INFO2</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>信息2</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Control Control="Text" Order="320" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_WE_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>错误ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="330" DefaultShow="None"/>
+    </tk:Field>
+        <tk:Field DataType="short">
+      <tk:FieldName>WI_RETRIEVABLE</tk:FieldName>
+      <tk:NickName>Retrievable</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>支持取回标志</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="400" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>WI_LAST_PROCESS_ID</tk:FieldName>
+      <tk:NickName>LastProcessId</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>上一步骤处理人</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="410" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>WI_PC_FLAG</tk:FieldName>
+      <tk:NickName>PcFlag</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>父子流程标志</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="420" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>WI_PARENT_ID</tk:FieldName>
+      <tk:NickName>ParentId</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>父流程ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="430" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>WI_INDEX</tk:FieldName>
+      <tk:NickName>Index</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>当前步骤序号</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="440" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>WI_APPROVE</tk:FieldName>
+      <tk:NickName>Approve</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>审批意见</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="450" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>WI_APPROVE_NOTE</tk:FieldName>
+      <tk:NickName>ApproveNote</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>审批内容</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="460" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_NOTE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备注</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Control Control="Text" Order="340" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_UNUSED1</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用字段1</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="350" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_UNUSED2</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用字段2</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="360" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_UNUSED3</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用字段3</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Control Control="Text" Order="370" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_UNUSED4</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用字段4</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Control Control="Text" Order="380" DefaultShow="None"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_UNUSED5</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用字段5</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Control Control="Text" Order="390" DefaultShow="None"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

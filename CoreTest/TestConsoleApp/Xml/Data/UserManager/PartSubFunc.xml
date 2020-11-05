@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="SYS_PART_SUB_FUNC">
+    <tk:TableDesc>
+      <tk:Content>角色子功能表</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="int" IsKey="true" IsEmpty="false">
+      <tk:FieldName>PSF_PART_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>角色ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1" />
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsKey="true" IsEmpty="false">
+      <tk:FieldName>PSF_SF_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>功能ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1" />
+      <tk:Control Control="Hidden" Order="20" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>PSF_IS_FUNC</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>是否有权限</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1" />
+      <tk:Control Control="CheckBox" Order="30" DefaultShow="All"/>
+      <tk:Extension CheckValue="1" UnCheckValue="0"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

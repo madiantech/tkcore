@@ -1,0 +1,25 @@
+// 编辑页面
+.mq-edit-page {
+
+  // 内容区域
+  .section-content {
+    overflow: auto;
+    min-width: 400px;
+    min-height: 300px;
+
+    // 行
+    .row-wrapper {
+      // 列
+      .col-wrapper {
+
+      }
+    }
+  }
+
+  // 按钮区域
+  .section-button {
+    clear: both;
+    margin-top: 20px;
+    text-align: center;
+  }
+}

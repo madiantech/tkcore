@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\AccountDataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table IdName="Test">
+    <tk:TableDesc>
+      <tk:Content>排名数据表</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="int">
+      <tk:FieldName>RK_RANKING_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>编号</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="10"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>RK_RANKING_TYPE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>排名类别</tk:Content>
+      </tk:DisplayName>
+      <tk:Control Control="Text" Order="20"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

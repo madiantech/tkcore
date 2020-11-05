@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="Common.xsd"/>
+  <xs:include schemaLocation="Scheme.xsd"/>
+  <xs:complexType name="ResolverType">
+    <xs:annotation>
+      <xs:documentation>该类型为动态节点，可根据配置工厂实际情况，自由调整</xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:element ref="tk:RegResolver"/>
+      <xs:element ref="tk:TableNameResolver"/>
+      <xs:element ref="tk:DataXmlResolver"/>
+      <xs:element ref="tk:SchemeResolver"/>
+      <xs:element ref="tk:TreeResolver"/>
+      <xs:element ref="tk:DbCustomTableResolver"/>
+      <xs:any namespace="##local" processContents="lax" maxOccurs="unbounded"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:attributeGroup name="ResolverAttrGroup">
+    <xs:attribute name="AutoUpdateKey" type="xs:boolean" default="false">
+      <xs:annotation>
+        <xs:documentation>新建时，自动更新主键，默认为false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="AutoTrackField" type="xs:boolean" default="false">
+      <xs:annotation>
+        <xs:documentation>新建和修改时，自动更新CreateId，CreateDate，UpdateId，UpdateDate四个字段。默认为false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="RegResolver" type="xs:Name">
+    <xs:annotation>
+      <xs:documentation>根据配置的注册名实例化TableResolver</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="TableNameResolver">
+    <xs:annotation>
+      <xs:documentation>根据配置的表名，主键和字段来生成TableResolver</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="TableName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>表名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="KeyFields" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>主键字段名，多个字段用,隔开</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Fields" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>字段名，多个字段用,隔开。也可以配置*</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attributeGroup ref="tk:ResolverAttrGroup"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataXmlResolver">
+    <xs:annotation>
+      <xs:documentation>根据DataXml来生成Tk5TableResolver</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:DataXmlResolverType">
+          <xs:attributeGroup ref="tk:ResolverAttrGroup"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SchemeResolver">
+    <xs:annotation>
+      <xs:documentation>根据Scheme来生成TableResolver</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Scheme" type="tk:TableSchemeType">
+          <xs:annotation>
+            <xs:documentation>定义的Scheme用来生成TableResolver</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TreeResolver" type="tk:DataXmlResolverType">
+    <xs:annotation>
+      <xs:documentation>创建Tk5的TreeTableResolver</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="DataXmlResolverType">
+    <xs:attribute name="DataXml" type="xs:anyURI" use="required">
+      <xs:annotation>
+        <xs:documentation>以Xml\Data为基准地址的DataXml相对路径</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TableName" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>可以重载DataXml配置的表名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="DbCustomTableResolver">
+    <xs:annotation>
+      <xs:documentation>通过SYS_CUSTOM_TABLE表的定义获取产生的TableResolver，该配置只有包含了YJC.Toolkit.SysFunction.dll才有效。</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="tk:__tk_ContextGroup"/>
+      <xs:attribute name="TableName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>在SYS_CUSTOM_TABLE中CT_TABLE_NAME的表名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

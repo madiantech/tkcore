@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>筛选工单</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:MasterDetailMetaData>
+        <tk:Master>
+          <tk:SingleXmlMetaData DataXml="WorkOrder/WorkOrders.xml" />
+        </tk:Master>
+        <tk:Detail ListStyle="Table">
+          <tk:SingleXmlMetaData DataXml="WorkOrder/WorkOrdersAttachment.xml" DisableAutoDetailLink="true"/>
+        </tk:Detail>
+      </tk:MasterDetailMetaData>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:MasterDetailDbSource>
+        <tk:MasterResolver>
+          <tk:MetaDataResolver AutoTrackField="true" AutoUpdateKey="true">
+            <tk:Scheme>
+              <tk:Tk5DataXml FileName="WorkOrder/WorkOrders.xml"/>
+            </tk:Scheme>
+          </tk:MetaDataResolver>
+        </tk:MasterResolver>
+        <tk:Detail>
+          <tk:Resolver>
+            <tk:MetaDataResolver AutoUpdateKey="true">
+              <tk:Scheme>
+                <tk:Tk5DataXml FileName="WorkOrder/WorkOrdersAttachment.xml"/>
+              </tk:Scheme>
+            </tk:MetaDataResolver>
+          </tk:Resolver>
+          <tk:Relation>
+            <tk:MasterFields>Id</tk:MasterFields>
+            <tk:DetailFields>WoId</tk:DetailFields>
+          </tk:Relation>
+        </tk:Detail>
+        <tk:TabSheets>
+          <tk:TabSheet Id="DPQ">
+            <tk:Caption>
+              <tk:Content>未确认</tk:Content>
+            </tk:Caption>
+            <tk:Condition>WO_STATUS=1</tk:Condition>
+          </tk:TabSheet>
+          <tk:TabSheet Id="GDZX">
+            <tk:Caption>
+              <tk:Content>已确认</tk:Content>
+            </tk:Caption>
+            <tk:Condition>WO_STATUS=2</tk:Condition>
+          </tk:TabSheet>
+          <tk:TabSheet Id="All">
+            <tk:Caption>
+              <tk:Content>全部</tk:Content>
+            </tk:Caption>
+          </tk:TabSheet>
+        </tk:TabSheets>
+        <!--<tk:TabSheets>
+					<tk:TabSheet Id="All">
+						<tk:Caption>
+							<tk:Content>全部</tk:Content>
+						</tk:Caption>
+					</tk:TabSheet>
+					<tk:TabSheet Id="DPQ">
+						<tk:Caption>
+							<tk:Content>待排期</tk:Content>
+						</tk:Caption>
+						<tk:Condition>WO_STATUS=3</tk:Condition>
+					</tk:TabSheet>
+					<tk:TabSheet Id="GDZX">
+						<tk:Caption>
+							<tk:Content>工单执行</tk:Content>
+						</tk:Caption>
+						<tk:Condition>WO_STATUS=4</tk:Condition>
+					</tk:TabSheet>
+					<tk:TabSheet Id="GDQR">
+						<tk:Caption>
+							<tk:Content>工单确认</tk:Content>
+						</tk:Caption>
+						<tk:Condition>WO_STATUS=5</tk:Condition>
+					</tk:TabSheet>
+					<tk:TabSheet Id="DYS">
+						<tk:Caption>
+							<tk:Content>待验收</tk:Content>
+						</tk:Caption>
+						<tk:Condition>WO_STATUS=6</tk:Condition>
+					</tk:TabSheet>
+					<tk:TabSheet Id="YWC">
+						<tk:Caption>
+							<tk:Content>已完成</tk:Content>
+						</tk:Caption>
+						<tk:Condition>WO_STATUS=7</tk:Condition>
+					</tk:TabSheet>
+					<tk:TabSheet Id="YGB">
+						<tk:Caption>
+							<tk:Content>已关闭</tk:Content>
+						</tk:Caption>
+						<tk:Condition>WO_STATUS=0</tk:Condition>
+					</tk:TabSheet>
+				</tk:TabSheets>-->
+        <tk:Operators>
+          <tk:SimpleWorkflowListOperators/>
+        </tk:Operators>
+        <tk:DetailOperators>
+          <tk:SimpleWorkflowDetailOperators WorkflowName="ScreenApprove"/>
+        </tk:DetailOperators>
+      </tk:MasterDetailDbSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:RazorModuleTemplatePageMaker ModuleTemplate="MasterDetail">
+        <tk:PageTemplate Style="Update">
+          <tk:RazorData>
+            <tk:NormalMultiEditData>
+              <tk:TableData TableName="WO_WORK_ORDERS_ATTACHMENT">
+                <tk:TableDisplay ContentType="RazorFile">RazorTest/testtable.cshtml</tk:TableDisplay>
+              </tk:TableData>
+            </tk:NormalMultiEditData>
+          </tk:RazorData>
+          <tk:Script>usercss/upload.css</tk:Script>
+          <tk:Script>userjs/testupload.js</tk:Script>
+        </tk:PageTemplate>
+      </tk:RazorModuleTemplatePageMaker>
+    </tk:PageMaker>
+    <!--<tk:RecordLog TableName="WO_WORK_ORDERS">
+			<tk:DataPicker>
+				<DataRecordLog/>
+			</tk:DataPicker>
+			<tk:LogData>
+				<DataUpdateLog/>
+			</tk:LogData>
+		</tk:RecordLog>-->
+  </tk:Module>
+</tk:Toolkit>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tk:Toolkit version="5.0" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.qdocuments.net schema\v5\WorkflowSetting.xsd">
+  <tk:UserManager>
+    <tk:SimpleUserManager/>
+  </tk:UserManager>
+</tk:Toolkit>

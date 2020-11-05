@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="WeixinItems/WeixinMessage.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Rule">
+          <xs:annotation>
+            <xs:documentation>微信消息规则匹配处理插件</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Match" type="tk:MatchRuleType">
+                <xs:annotation>
+                  <xs:documentation>规则匹配</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Reply" type="tk:ReplyMessageType">
+                <xs:annotation>
+                  <xs:documentation>消息恢复</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="tk:RegItem"/>
+            <xs:attribute name="AppId" type="xs:unsignedInt">
+              <xs:annotation>
+                <xs:documentation>企业号模式下，配置为相应的应用Id。不配置将为0。根据文档0将是企业号的全局消息</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" fixed="5.0"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="EventType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Subscribe"/>
+      <xs:enumeration value="Unsubscribe"/>
+      <xs:enumeration value="Scan"/>
+      <xs:enumeration value="Location"/>
+      <xs:enumeration value="Click"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TextMatchType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Exactly"/>
+      <xs:enumeration value="StartWith"/>
+      <xs:enumeration value="Regex"/>
+      <xs:enumeration value="All"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="MatchRuleType">
+    <xs:choice>
+      <xs:element ref="tk:TextRule"/>
+      <xs:element ref="tk:EventClickRule"/>
+      <xs:element ref="tk:EventScanCodeWaitMsgRule"/>
+      <xs:element ref="tk:EventPicSysPhotoRule"/>
+      <xs:element ref="tk:EventPicPhotoAlbumRule"/>
+      <xs:element ref="tk:EventPicWeixinRule"/>
+      <xs:element ref="tk:EventLocationSelectRule"/>
+      <xs:element ref="tk:EventScanCodePushRule"/>
+      <xs:element ref="tk:EventScanRule"/>
+      <xs:element ref="tk:EventSubscribeRule"/>
+      <xs:element ref="tk:EventUnsubscribeRule"/>
+      <xs:element ref="tk:EventLocationRule"/>
+      <xs:element ref="tk:EventEnterAgentRule"/>
+      <xs:element ref="tk:ImageRule"/>
+      <xs:element ref="tk:VoiceRule"/>
+      <xs:element ref="tk:VideoRule"/>
+      <xs:element ref="tk:LocationRule"/>
+      <xs:element ref="tk:LinkRule"/>
+      <xs:any namespace="##other" processContents="lax" maxOccurs="unbounded"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="TextRuleType">
+    <xs:attribute name="MatchType" type="tk:TextMatchType" use="required">
+      <xs:annotation>
+        <xs:documentation>匹配的规则，有等于，以...开始，正则表达式，全适配四种方式</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Text" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>根据匹配规则需要匹配的内容。如果规则为All，这里的内容忽略。</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="EventKeyType">
+    <xs:attribute name="EventKey" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>微信菜单定义的EventKey</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="TextRule" type="tk:TextRuleType">
+    <xs:annotation>
+      <xs:documentation>匹配接收的文本消息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventClickRule" type="tk:EventKeyType">
+    <xs:annotation>
+      <xs:documentation>匹配自定义菜单事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventScanCodePushRule" type="tk:EventKeyType">
+    <xs:annotation>
+      <xs:documentation>匹配扫码推事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventScanCodeWaitMsgRule" type="tk:EventKeyType">
+    <xs:annotation>
+      <xs:documentation>匹配扫码推事件且弹出“消息接收中”提示框的事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventPicSysPhotoRule" type="tk:EventKeyType">
+    <xs:annotation>
+      <xs:documentation>匹配弹出系统拍照发图的事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventPicPhotoAlbumRule" type="tk:EventKeyType">
+    <xs:annotation>
+      <xs:documentation>匹配弹出拍照或者相册发图的事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventPicWeixinRule" type="tk:EventKeyType">
+    <xs:annotation>
+      <xs:documentation>匹配弹出微信相册发图器的事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventLocationSelectRule" type="tk:EventKeyType">
+    <xs:annotation>
+      <xs:documentation>匹配弹出地理位置选择器的事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventScanRule" type="tk:EventKeyType">
+    <xs:annotation>
+      <xs:documentation>匹配扫描带参数二维码事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventSubscribeRule" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>匹配关注事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventUnsubscribeRule" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>匹配取消事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventLocationRule" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>匹配上报地理位置事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EventEnterAgentRule" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>匹配企业号用户进入应用的事件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ImageRule" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>匹配接收的图片消息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="VoiceRule" type="tk:TextRuleType">
+    <xs:annotation>
+      <xs:documentation>匹配接收的语音消息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="VideoRule" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>匹配接收的视频消息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="LocationRule" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>匹配接收的地理位置消息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="LinkRule" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>匹配接收的链接消息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

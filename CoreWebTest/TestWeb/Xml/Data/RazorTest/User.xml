@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="UR_USERS1" NameField="Name">
+    <tk:TableDesc>
+      <tk:Content>用户表</tk:Content>
+    </tk:TableDesc>
+    <tk:FakeDeleteInfo FieldName="Active" Value="0"/>
+    <tk:Field DataType="string" IsKey="true" IsEmpty="false">
+      <tk:FieldName>USER_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>用户ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="false">
+      <tk:FieldName>USER_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>用户姓名</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>100</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="20" DefaultShow="All"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="false">
+      <tk:FieldName>USER_ORG_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>所属机构</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:EasySearch RegName="TENANT_ORG"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="30" DefaultShow="All"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="false">
+      <tk:FieldName>USER_LOGIN_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>登录帐号</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Label" Order="40" DefaultShow="All">
+        <tk:Page Style="Insert" Control="Text" Order="40"/>
+        <tk:Page Style="List" Control="Text" Order="40"/>
+      </tk:Control>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="false">
+      <tk:FieldName>USER_LOGIN_PASSWD</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>密码</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="50" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="Date">
+      <tk:FieldName>USER_LOGIN_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>上次登录时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="60" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_PHONE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>电话</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="70" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_MOBILE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>手机</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="80" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_EMAIL</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>EMail</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>100</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="90" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_WORK_NO</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>工号</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="100" DefaultShow="All"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_SEX</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>性别</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>2</tk:Length>
+      <tk:CodeTable RegName="CodeSex"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Combo" Order="110" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="Date">
+      <tk:FieldName>USER_BIRTHDAY</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>生日</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Date" Order="120" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_WORKED</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>曾从事岗位</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="130" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_EDUCATION</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>学历</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>2</tk:Length>
+      <tk:CodeTable RegName="CodeEducation"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Combo" Order="140" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_ORIGIN</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>籍贯</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>6</tk:Length>
+      <tk:EasySearch RegName="SX"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="135" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_TITLE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>职位</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="160" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_WORK_LIMIT</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>工作年限</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="170" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_IDENT_NO</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>身份证号码</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="180" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="Date">
+      <tk:FieldName>USER_IN_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>进公司时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Date" Order="190" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_AREA</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>地区</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>6</tk:Length>
+      <tk:EasySearch RegName="SX"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="200" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_ADDRESS</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>地址</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="210" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_POSTAL</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>邮编</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>20</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="220" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>USER_ACTIVE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>有效用户</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="230" DefaultShow="All"/>
+      <tk:Edit>
+        <tk:DefaultValue>1</tk:DefaultValue>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>USER_OUT</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>是否已离职</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="CheckBox" Order="240" DefaultShow="AllNoList"/>
+      <tk:Extension CheckValue="1" UnCheckValue="0"/>
+    </tk:Field>
+    <tk:Field DataType="Date">
+      <tk:FieldName>USER_OUT_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>离职时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Date" Order="250" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_NOTE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备注</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>500</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="260" DefaultShow="AllNoList"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_CREATE_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>创建人</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:EasySearch RegName="USER"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="270" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime">
+      <tk:FieldName>USER_CREATE_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>创建时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="280" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_UPDATE_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>更新人</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:EasySearch RegName="USER"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="290" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime">
+      <tk:FieldName>USER_UPDATE_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>更新日期</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="300" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="Date">
+      <tk:FieldName>USER_PASSWD_CHANGE_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>最后一次修改密码时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="310" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="Date">
+      <tk:FieldName>USER_UNLOCK_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>自动解封时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="320" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>USER_ADMIN</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>超级用户</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="CheckBox" Order="330" DefaultShow="All"/>
+      <tk:Extension CheckValue="1" UnCheckValue="0"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_UNUSED1</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用1</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="340" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>USER_UNUSED2</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用2</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="350" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>USER_UNUSED3</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用3</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="360" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>USER_UNUSED4</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用4</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="370" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>USER_BEFORE_NINE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>九点上班</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="CheckBox" Order="380" DefaultShow="None"/>
+      <tk:Extension CheckValue="1" UnCheckValue="0"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>USER_GATHER</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>切换账号</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="390" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>USER_TENANT_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>租户</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="390" DefaultShow="None"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

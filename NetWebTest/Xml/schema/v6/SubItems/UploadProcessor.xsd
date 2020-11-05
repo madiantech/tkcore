@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (mitu) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:complexType name="UploadProcessorType">
+    <xs:choice minOccurs="0">
+      <xs:element ref="tk:DbUploadProcessor"/>
+      <xs:element ref="tk:FileUploadProcessor"/>
+      <xs:any namespace="##local" processContents="lax"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="DbUploadProcessor">
+    <xs:annotation>
+      <xs:documentation>将上传文件存入SYS_ATTACHMENT表</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="OutputFileName" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>在Html头中输出文件名，浏览器在下载时可以显示数据表中对应的文件名。默认为true</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="CacheFile" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否在Html头中标记缓存，这样浏览器碰到同样地址就不会再次调用该地址。默认为true</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FileUploadProcessor">
+    <xs:annotation>
+      <xs:documentation>将上传文件放在指定目录，通过文件方式访问</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="BaseUploadPath" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>UploadPath的基地址Host名称，具体内容以Application.xml配置的为准</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="UploadPath" type="xs:anyURI">
+        <xs:annotation>
+          <xs:documentation>上传文件存放的物理路径，需要和BaseUploadPath联合</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="BaseVirtualPath" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>VirtualPath的基地址Host名称，具体内容以Application.xml配置的为准</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="VirtualPath" type="xs:anyURI">
+        <xs:annotation>
+          <xs:documentation>上传文件在Web下的访问路径。需要和BaseVirtualPath联合。</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

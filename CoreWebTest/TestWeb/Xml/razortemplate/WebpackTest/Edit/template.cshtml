@@ -1,0 +1,75 @@
+﻿@inherits YJC.Toolkit.Razor.ToolkitTemplatePage<TModel>
+@using System.Data;
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    INormalMetaData metaData = ViewBag.MetaData;
+    INormalTableData table = metaData.TableData;
+    IEnumerable<Tk5FieldInfoEx> hiddenFields = table.HiddenList;
+    IEnumerable<Tk5FieldInfoEx> normalFields = table.DataList;
+}
+    <template>
+        <el-dialog title="编辑"
+                   :visible.sync="dialogVisible"
+                   width="30%"
+                   @@open="open()">
+            <el-form :model="formData"
+                     label-width="80px">
+                @foreach (var field in normalFields)
+                {
+                <el-form-item label="@Raw(field.DisplayName)">
+                    <el-input v-model="formData.@field.NickName"></el-input>
+                </el-form-item>
+                }
+            </el-form>
+            <span slot="footer"
+                  class="dialog-footer">
+                <el-button @@click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary"
+                           @@click="confirm()">确 定</el-button>
+            </span>
+        </el-dialog>
+    </template>
+    <script>
+        export default {
+            props: {
+                visible: {
+                    type: Boolean,
+                    default: false
+                },
+                data: {
+                    type: Object,
+                    default: () => { }
+                }
+            },
+            data() {
+                return {
+                    formData: {}
+                }
+            },
+            computed: {
+                dialogVisible: {
+                    get() {
+                        return this.visible
+                    },
+                    set(val) {
+                        this.$emit('update:visible', val)
+                    }
+                }
+            },
+            methods: {
+                open() {
+                    this.formData = Object.assign({}, this.data)
+                },
+                confirm() {
+                    this.$emit('confirm', this.formData)
+                    this.dialogVisible = false
+                }
+            }
+        }
+    </script>

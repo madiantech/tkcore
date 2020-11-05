@@ -1,0 +1,27 @@
+{
+  "solution": {
+    "path": "Core.Toolkit5.5.sln",
+    "projects": [
+      "CoreTest\\TestConsoleApp\\TestConsoleApp.csproj",
+      "CoreTest\\TestData\\TestData.csproj",
+      "CoreTest\\TestToolApp\\TestToolApp.csproj",
+      "CoreTest\\UnitTest\\UnitTest.csproj",
+      "CoreWebTest\\TestWeb\\ToolkitWeb.csproj",
+      "CoreWeb\\YJC.Toolkit.NodeJs\\YJC.Toolkit.NodeJs.csproj",
+      "CoreWeb\\YJC.Toolkit.Razor.Web\\YJC.Toolkit.Razor.Web.csproj",
+      "CoreWeb\\YJC.Toolkit.WebApp\\YJC.Toolkit.WebApp.csproj",
+      "Core\\YJC.Toolkit.Core\\YJC.Toolkit.Core.csproj",
+      "Core\\YJC.Toolkit.MetaData\\YJC.Toolkit.MetaData.csproj",
+      "Data\\YJC.Toolkit.AdoData\\YJC.Toolkit.AdoData.csproj",
+      "Data\\YJC.Toolkit.Data\\YJC.Toolkit.Data.csproj",
+      "Data\\YJC.Toolkit.Razor.Web.Common\\YJC.Toolkit.Razor.Web.Common.csproj",
+      "Data\\YJC.Toolkit.Tenant\\YJC.Toolkit.Tenant.csproj",
+      "Data\\YJC.Toolkit.Web.Common\\YJC.Toolkit.Web.Common.csproj",
+      "Workflow\\TestWfData\\TestWfData.csproj",
+      "Workflow\\WfConsole\\WfConsole.csproj",
+      "Workflow\\YJC.Toolkit.SimpleWorkflow.Web\\YJC.Toolkit.SimpleWorkflow.Web.csproj",
+      "Workflow\\YJC.Toolkit.SimpleWorkflow\\YJC.Toolkit.SimpleWorkflow.csproj",
+      "Workflow\\YJC.Toolkit.UserIntf\\YJC.Toolkit.UserIntf.csproj"
+    ]
+  }
+}

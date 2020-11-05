@@ -1,0 +1,47 @@
+/* 页面背景 */
+.tk-body {
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#E1FACE), to(#86B760));
+	background-image:-o-linear-gradient(top,#E1FACE,#86B760);
+	background-image:-moz-linear-gradient(top,#E1FACE,#86B760);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#E1FACE',EndColorStr='#86B760');
+	-ms-filter-:"progid:DXImageTransform.Microsoft.gradient(startColorStr='#E1FACE',EndColorStr='#86B760')";
+}
+/* 文字颜色 */
+.titlecolor, .tk-headbar, .tk-headbar a, .tk-body a, .acc-header h3, .tk-tabs, .mod-header, .list-title ul li a, .tk-datatab ul li, .list-tabs ul li, a.btn {
+	color:#428B15;
+}
+/* 布局框架边框 */
+a.btn-submit, a.btn-action, a.btn-mini, .tk-sidebar, .acc-header h3, .acc-body, .tk-tabs ul li, .mod-frame, .mod-header, ul.tk-dropmenu .toplevel.hover, ul.tk-dropmenu .sublevel, ul.tk-dropmenu ul, .tk-datatab ul, .tk-datatab ul li.on, .tk-datalist, .list-tabs ul li, .list-title {
+	border-color:#92CF68;
+}
+/* 输入对象边框 */
+input[type=text], input[type=password], textarea, .tk-datatable dl dd span.ico, .tk-dataform .list-table td span.ico, .tk-datasearch .ctrl-search span.ico, .pop-search span.ico, .ctrl-search .mr20 {
+	border-color:#9c6;
+}
+/* 页面元素背景 */
+.tk-header, .acc-header h3, .tk-tabs, .tk-datatab ul, .mod-header, .list-tabs ul, .list-title, .tk-datatable dl dd span.ico, .tk-dataform .list-table td span.ico, .tk-datasearch .ctrl-search span.ico, .pop-search span.ico, a.btn {
+	background-image:url(images/bg.png);
+}
+a.btn-link {
+	background-image:none;
+}
+ul.tk-dropmenu .toplevel, .list-title ul li.sep, .list-table th {
+	background-image:url(images/sprite.png);
+}
+.list-table th.first { 
+	background-image:none;
+}
+/* 元素背景颜色 */
+.tk-tabs ul li.on { 
+	background-color:#DCF6C8;
+	border-bottom-color:#DCF6C8;
+}
+ul.tk-dropmenu .toplevel.hover, ul.tk-dropmenu .sublevel { 
+	background:#E1F8CF;
+}
+.list-table tr:hover td, .list-table col.selected { 
+	background-color:#F3FFEA;
+}
+.list-table tbody tr.selected td, .list-table tbody tr.selected:hover td, .tk-dataform .list-table .subforms tr.selected:hover td {
+	background-color:#CDF0A7;
+}

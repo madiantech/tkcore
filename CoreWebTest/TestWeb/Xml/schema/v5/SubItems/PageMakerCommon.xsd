@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="Common.xsd"/>
+  <xs:complexType name="CustomUrlType">
+    <xs:complexContent>
+      <xs:extension base="tk:MarcoConfigItem">
+        <xs:attribute name="UseKeyData" type="xs:boolean">
+          <xs:annotation>
+            <xs:documentation>是否将Resolver生成KeyParamData追加到Url上，默认为false</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ScriptType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Javascript"/>
+      <xs:enumeration value="Css"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="UserScriptType">
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attribute name="Type" type="tk:ScriptType">
+          <xs:annotation>
+            <xs:documentation>脚本的类型，如果不填写将根据文件名的扩展名自动适配，.css为CSS类型，.js为JS类型</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="UseAppPath" type="xs:boolean">
+          <xs:annotation>
+            <xs:documentation>是否在脚本的头部追加App的地址，默认为true</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:attributeGroup name="PostAttrGroup">
+    <xs:attribute name="DestUrl" type="tk:PageStyleType" use="optional">
+      <xs:annotation>
+        <xs:documentation>Post完成后跳转的页面，如果配置Custom，需要填写CustomUrl节点的内容</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="DataType" type="tk:OutputDataType">
+      <xs:annotation>
+        <xs:documentation>数据输出的格式Xml或者Json。默认为Json</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="UseRetUrlFirst" type="xs:boolean" default="true">
+      <xs:annotation>
+        <xs:documentation>如果true，且链接中有RetUrl，就使用该地址返回，DestUrl将被无视。该值默认为true</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:group name="PostElementGroup">
+    <xs:sequence>
+      <xs:element name="CustomUrl" type="tk:CustomUrlType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>配置自定义的值，可以是任意的链接。也可以是以下常量：WeixinClose：在微信中关闭窗口；Refresh：刷新当前页面；Back：返回上一页等同于浏览器的back按钮；CloseDialog：关闭对话框；ListRefresh：刷新列表页面（和刷新不一样，会考虑列表分页，查询条件等因素）；CloseDialogAndRefresh：关闭对话框并使用列表刷新的方式刷新页面</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AlertMessage" type="tk:MultiLanguageType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>页面跳转前，显示提示信息，支持多语言结构</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+</xs:schema>

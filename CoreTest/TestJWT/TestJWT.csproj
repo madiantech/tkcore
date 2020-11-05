@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>hello.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CoreApp\YJC.Toolkit.Core.ToolApp\YJC.Toolkit.Core.ToolApp.csproj" />
+    <ProjectReference Include="..\..\Data\JoseJWT\YJC.Toolkit.JWTLib.csproj" />
+  </ItemGroup>
+</Project>

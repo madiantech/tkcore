@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="SBY_APP">
+    <tk:TableDesc>
+      <tk:Content>测试应用</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="int" IsKey="true" IsEmpty="false">
+      <tk:FieldName>ID</tk:FieldName>
+      <tk:NickName>id</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+      <tk:ListDetail>
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>APP_NO</tk:FieldName>
+      <tk:NickName>No</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>应用编号</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>20</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="20" DefaultShow="All"/>
+      <tk:ListDetail Search="true">
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+        <tk:ListSearch>
+          <tk:MySqlRegexSearch/>
+        </tk:ListSearch>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>APP_NAME</tk:FieldName>
+      <tk:NickName>Name</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>应用名称</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="30" DefaultShow="All"/>
+      <tk:ListDetail Search="true">
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>APP_HOST</tk:FieldName>
+      <tk:NickName>Host</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>域名</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>100</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="40" DefaultShow="All"/>
+      <tk:ListDetail Search="true">
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>APP_IP</tk:FieldName>
+      <tk:NickName>Ip</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>IP地址</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>16</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="50" DefaultShow="All"/>
+      <tk:ListDetail Search="true">
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>APP_PORT</tk:FieldName>
+      <tk:NickName>Port</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>服务端口</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="60" DefaultShow="All"/>
+      <tk:ListDetail Search="true">
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+        <tk:ListSearch>
+          <tk:MySqlRegexSearch/>
+        </tk:ListSearch>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>APP_NOTE</tk:FieldName>
+      <tk:NickName>Note</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>备注</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>4000</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="70" DefaultShow="All"/>
+      <tk:ListDetail Search="true">
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>APP_PART</tk:FieldName>
+      <tk:NickName>Part</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>责任部门</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>40</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="80" DefaultShow="All"/>
+      <tk:ListDetail Search="true">
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>APP_PERSON</tk:FieldName>
+      <tk:NickName>Person</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>责任人</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>40</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="90" DefaultShow="All"/>
+      <tk:ListDetail Search="true">
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>APP_STATUS</tk:FieldName>
+      <tk:NickName>Status</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>应用状态</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>2</tk:Length>
+      <tk:CodeTable RegName="CD_APP_STATUS"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Combo" Order="100" DefaultShow="All"/>
+      <tk:ListDetail Search="true">
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>APP_PROTECT</tk:FieldName>
+      <tk:NickName>Protect</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>防护状态</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>2</tk:Length>
+      <tk:CodeTable RegName="CD_PROTECT"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Combo" Order="110" DefaultShow="All"/>
+      <tk:ListDetail Search="true">
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

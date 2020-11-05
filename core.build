@@ -1,0 +1,26 @@
+<project xmlns="http://nant.sf.net/release/0.91/nant.xsd" name="Hello" default="run">
+  <target name="run">
+    <delete file="Toolkit5.5.zip"/>
+    <zip zipfile="Toolkit5.5.zip">
+      <fileset>
+        <include name="Core/**.*"/>
+        <include name="Data/**.*"/>
+        <include name="CoreApp/**.*"/>
+        <include name="CoreData/**.*"/>
+        <include name="CoreWeb/**.*"/>
+        <include name="User/**.*"/>
+        <include name="CoreWebTest/**.*"/>
+        <exclude name="**/bin/debug/**"/>
+        <exclude name="**/bin/Release/**"/>
+        <exclude name="**/obj/**"/>
+        <exclude name="**/**.csproj.user"/>
+        <exclude name="**/*.pdb"/>
+        <exclude name="**/*.suo"/>
+        <exclude name="CoreWebTest/TestWeb/estemp/**.*"/>
+        <exclude name="CoreWebTest/TestWeb/Error/**.*"/>
+        <exclude name="CoreWebTest/**/node_modules/**.*"/>
+        <include name="Core.Toolkit5.5.sln"/>
+      </fileset>
+    </zip>
+  </target>
+</project>

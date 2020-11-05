@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>YJC.Toolkit2.snk</AssemblyOriginatorKeyFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YJC.Toolkit.Core" Version="5.5.6" />
+    <PackageReference Include="YJC.Toolkit.MetaData" Version="5.5.6" />
+    <PackageReference Include="YJC.Toolkit.Data" Version="5.5.12" />
+  </ItemGroup>
+</Project>

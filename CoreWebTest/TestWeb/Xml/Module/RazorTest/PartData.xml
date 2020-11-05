@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>测试用户</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:SingleXmlMetaData DataXml="UserManager/Part.xml" DisableAutoDetailLink="true">
+      </tk:SingleXmlMetaData>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:SingleDbSource>
+        <tk:Resolver>
+          <tk:RegResolver>Part</tk:RegResolver>
+        </tk:Resolver>
+      </tk:SingleDbSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:CompositePageMaker>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="List"/>
+          <tk:JsonMetaDataSetPageMaker/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style Post" Style="Update Insert" IsPost="false">
+          </tk:Condition>
+          <tk:JsonMetaDataSetPageMaker/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style Post" Style="Detail" IsPost="false">
+            <tk:QueryString Name="Type" Value="Data"/>
+          </tk:Condition>
+          <tk:JsonMetaDataSetPageMaker/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style Post" Style="Insert Update" IsPost="true"/>
+          <tk:PostPageMaker DestUrl="List"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="Delete"/>
+          <tk:PostPageMaker DestUrl="Custom">
+            <tk:CustomUrl>ListRefresh</tk:CustomUrl>
+          </tk:PostPageMaker>
+        </tk:Item>
+      </tk:CompositePageMaker>
+    </tk:PageMaker>
+    <tk:WebPage SupportLogOn="false"/>
+  </tk:Module>
+</tk:Toolkit>

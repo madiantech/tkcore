@@ -1,0 +1,115 @@
+#util-overlayer
+{
+	/*width: 100%;
+	height: 100%;
+	background: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: none;
+	z-index: 9990;*/
+}
+
+#util-dialog
+{
+	/*position: absolute;
+	top: -1000px;
+	left: -1000px;
+	width: 420px;
+	z-index: 9999;
+	font-size: 16px;*/
+}
+
+	#util-dialog .pdb-main
+	{
+		position: absolute;
+		height: 300px;
+		top: 9px;
+		left: 9px;
+		width: 400px;
+		z-index: 9999;
+		background-color: #fff;
+		overflow: hidden;
+	}
+
+		#util-dialog .pdb-main .pdb-title
+		{
+			overflow: hidden;
+			padding: 0;
+		}
+
+			#util-dialog .pdb-main .pdb-title span.close
+			{
+				float: right;
+				display: block;
+				line-height: 14px;
+				height: 14px;
+				font-size: 12px;
+				cursor: pointer;
+				padding-right: 15px;
+				margin: 5px;
+				background: url(images/dialog/dialog_bg_btn.gif) no-repeat right -48px;
+			}
+
+			#util-dialog .pdb-main .pdb-title h4
+			{
+				float: left;
+				font-size: 12px;
+				font-weight: bold;
+				line-height: 24px;
+				height: 24px;
+				text-indent: 10px;
+				padding: 0;
+				margin: 0;
+			}
+
+		#util-dialog .pdb-main .pdb-setting
+		{
+			padding: 5px 10px;
+		}
+
+		#util-dialog .pdb-main .pdb-content
+		{
+			background-color: #fff;
+			font-size: 12px;
+			line-height: 150%;
+			overflow: auto;
+		}
+
+		#util-dialog .pdb-main .pdb-bottom
+		{
+			/*height: 24px;
+			padding: 10px 20px;
+			overflow: hidden;*/
+			overflow: auto;
+		}
+
+		#util-dialog .pdb-main .pdb-bottom-text
+		{
+			height: 24px;
+			line-height: 24px;
+		}
+
+		#util-dialog .pdb-main .pdb-bottom-action
+		{
+			/*height: 24px;
+			line-height: 24px;
+			float: right;*/
+		}
+
+		#util-dialog .pdb-main .txt-loading-32
+		{
+			background: url(images/dialog/indicator_medium.gif) no-repeat center top;
+			height: 32px;
+			padding-top: 36px;
+			line-height: 20px;
+			text-align: center;
+			font-size: 14px;
+		}
+
+		#util-dialog .pdb-main .msg-info
+		{
+			border: none;
+		}

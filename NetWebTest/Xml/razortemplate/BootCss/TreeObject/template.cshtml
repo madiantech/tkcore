@@ -1,0 +1,100 @@
+﻿@inherits YJC.Toolkit.Razor.NormalCustomTemplate
+@using System.Data;
+@using System.Web;
+@using YJC.Toolkit.Web;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Razor;
+@{
+    Dictionary<string, string> queryString = Model.QueryString;
+    string source = Model.Source;
+    NormalTreeData pageData = ViewBag.PageData;
+}
+@section DefaultHeader {
+    <h1 class="ml15">@ViewBag.Title</h1>
+}
+@functions {
+    string GetRootUrl(string source)
+    {
+        string result = string.Format("CNewChild/~{0}.c", source);
+        return result.AppVirutalPath();
+    }
+    string GetDragAttr(NormalTreeData pageData)
+    {
+        if (pageData.CanMoveNode)
+            return "data-drag=\"true\"";
+        return string.Empty;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    @RenderLayoutPartial("../bin/css.cshtml", null)
+    <link rel="stylesheet" type="text/css" href="@("toolkitjs/v5/jstree/themes/default/style.min.css".AppVirutalPath())" />
+    <link rel="stylesheet" type="text/css" href="@("toolkitjs/v5/bootstrap/css/simple-sidebar.css".AppVirutalPath())" />
+    <style>
+        #treeContent
+        {
+            position: fixed;
+            bottom: 30px;
+            top: 0px;
+            left: 15px;
+            width: 250px;
+             @if (pageData.ShowTitle)
+            {
+            @:margin-top:70px;
+            }
+       }
+
+        #treeBar
+        {
+            position: fixed;
+            bottom: 0px;
+            height: 30px;
+            left: 15px;
+            width: 250px;
+            background: #ddd;
+        }
+    </style>
+</head>
+<body class="tk-dataPage" data-webPath="@HtmlUtil.AppVirtualPath">
+    @if (pageData.ShowTitle)
+    {
+        @RenderSectionOrDefault("Header", "DefaultHeader")
+    }
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div id="treeContent" class="tktree p10 oa bdc" @GetDragAttr(pageData) data-url="@ObjectExtension.AppVirutalPath(Model.ListUrl)" data-source="@Model.Source" data-selectFunc="Toolkit.tree.detailClick" data-firstFunc="Toolkit.tree._firstClick" data-initValue="@queryString.GetKeyValue("InitValue")" data-idName="@Model.IdField" data-detailUrl="@ObjectExtension.AppVirutalPath(Model.DetailUrl)">
+            </div>
+            <div id="treeBar" class="bdc pl5 pt5">
+                @if (pageData.ShowUpDownButton)
+                {
+                    <button type="button" id="moveUp" class="btn btn-info btn-xs" data-action="before"><i class="icon-angle-up"></i>上移</button>
+                    <button type="button" id="moveDown" class="btn btn-info btn-xs" data-action="after"><i class="icon-angle-down"></i>下移</button>
+                }
+                @if (pageData.ShowNewRootButton)
+                {
+                    <button type="button" class="btn btn-info btn-xs" data-dialog-url="@GetRootUrl(source)"><i class="icon-plus"></i>新建根节点</button>
+                }
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper bdc">
+            <div class="container-fluid" id="nodeDetail">
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    @RenderLayoutPartial("../bin/js.cshtml", null)
+    <script type="text/javascript" src="@("toolkitjs/v5/jstree/jstree.js".AppVirutalPath())"> </script>
+    <script type="text/javascript" src="@("toolkitjs/v5/toolkit/coreT/toolkit.tree.js".AppVirutalPath())"> </script>
+</body>
+</html>

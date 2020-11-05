@@ -1,0 +1,37 @@
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Core.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.MetaData.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Data.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.AdoData.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Cache.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.RedisCache.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.MsSqlClient.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.MySql.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.SqlClient.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Evaluator.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Web.Common.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.WebApp.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Razor.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Razor.Web.Common.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Razor.Web.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Excel.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Excel.Web.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.JWTLib.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.JWT.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.ToolApp.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.TestApp.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.ConsoleApp.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.UserIntf.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.SimpleWorkflow.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.SimpleWorkflow.Web.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.HtmlExtension.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Tenant.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.AliyunOSS.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.IM.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.DingTalk.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Weixin.Common.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Weixin.WeChat.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Weixin.WeChat.Data.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Weixin.WeChat.Web.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json
+dotnet nuget push ..\_lib\tk5.6\YJC.Toolkit.Weixin.WeCorp.5.6.0.nupkg -k oy2b5jdasw2tqefbns5qwd7r4yymxo3e3dv2ifgfzu72ne -s https://api.nuget.org/v3/index.json

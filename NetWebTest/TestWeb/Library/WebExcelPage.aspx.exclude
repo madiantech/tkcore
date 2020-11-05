@@ -1,0 +1,1 @@
+<%@ Page language="c#" Codebehind="WebExcelServlet.cs" AutoEventWireup="false" Inherits="YJC.Toolkit.Web.WebExcelServlet, YJC.Toolkit.Web.Excel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=dcd89483ee33cb8f" %>

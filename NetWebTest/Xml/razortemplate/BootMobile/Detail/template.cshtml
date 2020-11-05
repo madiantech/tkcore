@@ -1,0 +1,41 @@
+﻿@inherits YJC.Toolkit.Razor.BootcssDetailTemplate
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Web;
+@{
+    BootcssDetailData pageData = ViewBag.PageData;
+    bool showPicture = pageData.ShowPicture;
+}
+@section DefaultWeixin {
+    <div id="metaData" class="hide" data-toolbar="false" data-option="false"></div>
+}
+@section DefaultHeader {
+    @RenderRazorOutputData(pageData.Header, Model)
+}
+@section DefaultFooter {
+    @RenderRazorOutputData(pageData.Footer, Model)
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@HtmlUtil.GetTitle(pageData.TitleFormat, ViewBag.Title)</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    @RenderLayoutPartial("../bin/css.cshtml", null) 
+    @ViewBag.Script.CreateUserCss()
+</head>
+<body id="@HtmlUtil.GetPageId(Model)" data-webPath="@HtmlUtil.AppVirtualPath">
+    <div class="container">
+        @RenderSectionOrDefault("Weixin", "DefaultWeixin")
+        @RenderSectionOrDefault("Header", "DefaultHeader")
+        @if (showPicture) 
+        {
+            @RenderSectionIfDefined("Picture", "picture.cshtml", Model)
+        }
+        @RenderSectionIfDefined("Main", "main.cshtml", Model)
+        @RenderSectionOrDefault("Footer", "DefaultFooter")
+    </div>
+    @RenderLayoutPartial("../bin/js.cshtml", null)
+    @ViewBag.Script.CreateUserJavaScript()
+</body>
+</html>

@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 被2011 rel. 2 sp1 (TeaM DJiNN) 使用XMLSpy vTeaM DJiNN编辑的 (http://www.altova.com) by -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" elementFormDefault="qualified" xsi:noNamespaceSchemaLocation="C:\Users\lenovo\Desktop\100016\1.0\100016.xsd">
+	<xs:include schemaLocation="../../common/1.0/common.xsd"/>
+	<xs:element name="著录项目变更申报书">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="专利申请或专利"/>
+				<xs:element ref="变更依据"/>
+				<xs:element ref="变更内容"/>
+				<xs:element ref="变更后提交人"/>
+				<xs:element ref="附件清单"/>
+				<xs:element ref="当事人或代理机构签章"/>
+				<xs:element ref="专利局处理意见"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="专利申请或专利">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="申请号或专利号"/>
+				<xs:element ref="发明创造名称"/>
+				<xs:element ref="申请人或专利权人姓名或名称"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="申请人或专利权人姓名或名称" type="申请人或专利权人姓名或名称"/>
+	<xs:element name="变更依据">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="针对通知书"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="变更内容">
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="发明人变更" minOccurs="0"/>
+				<xs:element ref="申请人变更" minOccurs="0"/>
+				<xs:element ref="联系人变更" minOccurs="0"/>
+				<xs:element ref="代理机构变更" minOccurs="0"/>
+				<xs:element ref="代理人变更" minOccurs="0"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="发明人变更">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="变更项" type="变更项" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="申请人变更">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="变更项" type="变更项" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="联系人变更">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="变更项" type="变更项" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="代理机构变更">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="变更项" type="变更项" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="代理人变更">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="变更项" type="变更项" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="变更类型">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="委托代理机构变更">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="附加"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="委托代理机构不变更">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="附加"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="附件清单">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="分类附件" maxOccurs="unbounded" minOccurs="0"/>
+				<xs:element name="备案证明文件" type="备案证明文件" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="变更后提交人">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="注册代码"/>
+				<xs:element ref="注册名称"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="注册代码">
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="注册名称">
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="当事人或代理机构签章">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="签章"/>
+				<xs:element ref="签章日期"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="专利局处理意见">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="意见内容"/>
+				<xs:element ref="提出日期"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="分类附件" type="分类附件"/>
+	<xs:element name="针对通知书">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="附加"/>
+				<xs:element ref="专利局就上述专利申请或专利发出通知的名称"/>
+				<xs:element ref="发文序号"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="申请号或专利号" type="申请号"/>
+	<xs:element name="发明创造名称" type="专利名称"/>
+	<xs:element name="专利局就上述专利申请或专利发出通知的名称" type="通知书名称"/>
+	<xs:element name="发文序号" type="通知书发文序列号"/>
+	<xs:element name="签章" type="签章"/>
+	<xs:element name="签章日期">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="年"/>
+				<xs:element ref="月"/>
+				<xs:element ref="日"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="意见内容" type="审核意见"/>
+	<xs:element name="提出日期">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="年"/>
+				<xs:element ref="月"/>
+				<xs:element ref="日"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="变更项">
+		<xs:all>
+			<xs:element name="变更类型" type="变更类型" minOccurs="0"/>
+			<xs:element ref="变更项目序号" minOccurs="0"/>
+			<xs:element ref="变更项目名称" minOccurs="0"/>
+			<xs:element ref="变更项目代码" minOccurs="0"/>
+			<xs:element name="变更前" minOccurs="0"/>
+			<xs:element name="变更后" minOccurs="0"/>
+		</xs:all>
+		<xs:attribute name="顺序" type="xs:string"/>
+	</xs:complexType>
+	<xs:element name="变更项目序号">
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="变更项目名称">
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="变更项目代码">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="变更前">
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="变更后">
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="附加" type="附加"/>
+	<xs:element name="年" type="年"/>
+	<xs:element name="月" type="月"/>
+	<xs:element name="日" type="日"/>
+</xs:schema>

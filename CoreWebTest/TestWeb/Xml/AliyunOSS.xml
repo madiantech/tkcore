@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tk:Toolkit version="1.0" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.qdocuments.net schema\v5\AliyunOSS.xsd">
+  <tk:AliyunOSS DefaultBucketName="eam-cloud-media" TempBucketName="zy-temp" UseAliyunUploadMode="true">
+    <tk:Config>
+      <tk:Normal AccessKeyId="LTAINzKkXecrO0fV" AccessKeySecret="a6R0wheB5nCxiEtWFU9pKhRQGwW4By" EndPoint="http://oss-cn-hangzhou.aliyuncs.com"/>
+    </tk:Config>
+  </tk:AliyunOSS>
+</tk:Toolkit>

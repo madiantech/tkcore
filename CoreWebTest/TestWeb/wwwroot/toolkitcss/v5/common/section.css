@@ -1,0 +1,26 @@
+/* toolkit ui:breakcrumbs */
+.tk-breakcrumbs ul li { float:left; color:#000; line-height:20px; }
+.tk-breakcrumbs ul li a { color:#000; }
+
+/* toolkit ui:datafilter */			
+.tk-datafilter { text-align:center; }
+.tk-datafilter ul li { float:left; color:#000; margin-right:5px; line-height:20px; }
+.tk-datafilter ul li a { color:#000; }
+
+/* toolkit ui:datasearch */
+.tk-datasearch dl { display:block; float:left; padding-right:10px; }
+.tk-datasearch dl:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.tk-datasearch dl { zoom:1; *height:1%; }
+.tk-datasearch dt, .tk-datasearch dd { float:left; line-height:20px; height:22px; margin:1px 0; }
+.tk-datasearch dd label { display:inline-block; }
+.tk-datasearch dd input[type=text],
+.tk-datasearch dd input[type=password] { background-color:#fff; }
+.tk-datasearch dl dd span { display:block; }
+.tk-datasearch dl dd .dn,
+.tk-datasearch dl dd .hidden { display:none; }
+
+/* toolkit ui:datatab */
+.tk-datatab,.tk-headertab { border-bottom:solid 1px #fff; }
+.tk-datatab,.tk-headertab ul { padding-top:2px; height:23px; background:url(images/bg.png) repeat-x 0 -210px; border:solid 1px #6893CF; }
+.tk-datatab,.tk-headertab ul li { line-height:22px; height:22px; float:left; padding:0 10px; color:#15428B; cursor:pointer; }
+.tk-datatab,.tk-headertab ul li.on { background:#fff; font-weight:bold; border:solid 1px #6893CF; border-bottom:none; margin:1px 10px -1px; }

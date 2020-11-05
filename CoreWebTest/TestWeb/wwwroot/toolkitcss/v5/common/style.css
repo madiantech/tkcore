@@ -1,0 +1,24 @@
+@import url(frame.css);
+@import url(module.css);
+@import url(datalist.css);
+@import url(datatable.css);
+@import url(control.css);
+@import url(section.css);
+
+/* help */
+.img-iedevtoolbar { display:block; width:742px; height:84px; background:url(images/iedevtoolbar.jpg) no-repeat; }
+
+/* toolkit theme */
+.tk-body {
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#DFEAFA), to(#80A1CB));
+	background-image:-o-linear-gradient(top,#DFEAFA,#80A1CB);
+	background-image:-moz-linear-gradient(top,#DFEAFA,#80A1CB);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#DFEAFA',EndColorStr='#80A1CB');
+	-ms-filter-:"progid:DXImageTransform.Microsoft.gradient(startColorStr='#DFEAFA',EndColorStr='#80A1CB')";
+}
+input[type=text], input[type=password], textarea { border-color:#69c; }
+a.btn { color:#15428B; background-image:url(images/bg.png); }
+a.btn-submit, a.btn-action, a.btn-mini { border-color:#6893CF; }
+a.btn-link { background:none; }
+.titlecolor { color:#15428B; }
+.pop-search-list li span.selected { font-weight:bold; color:Black;}

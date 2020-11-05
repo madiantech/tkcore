@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:complexType name="DataRightType">
+    <xs:group ref="tk:DataRightGroup"/>
+  </xs:complexType>
+  <xs:group name="DataRightGroup">
+    <xs:choice>
+      <xs:element ref="tk:RegDataRight"/>
+      <xs:element ref="tk:OwnerDataRight"/>
+      <xs:element ref="tk:OwnerOrgDataRight"/>
+      <xs:element ref="tk:CompositeDataRight"/>
+      <xs:element ref="tk:EmptyDataRight"/>
+      <xs:element ref="tk:CompanyUserDataRight"/>
+      <xs:element ref="tk:CompanyOrgDataRight"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+    </xs:choice>
+  </xs:group>
+  <xs:element name="RegDataRight" type="xs:Name">
+    <xs:annotation>
+      <xs:documentation>根据配置的注册名实例化数据权限</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="_tk_OwnerRightType">
+    <xs:sequence>
+      <xs:element name="ErrorMessage" type="tk:MultiLanguageType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>错误时显示的消息</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="NickName" type="xs:Name" use="required">
+      <xs:annotation>
+        <xs:documentation>存储记录所有者的字段昵称</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="OwnerDataRight" type="tk:_tk_OwnerRightType">
+    <xs:annotation>
+      <xs:documentation>检查记录是否是本人的数据权限</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OwnerOrgDataRight" type="tk:_tk_OwnerRightType">
+    <xs:annotation>
+      <xs:documentation>检查记录是否是本组织的数据权限</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EmptyDataRight">
+    <xs:annotation>
+      <xs:documentation>空数据权限</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ErrorMessage" type="tk:MultiLanguageType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>错误时显示的消息</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="AllowAll" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否允许所有的记录。默认为false，即禁止所有的记录</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompositeDataRight">
+    <xs:annotation>
+      <xs:documentation>根据配置选择对应的数据权限</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="RightItem" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>根据不用的页面类型，指定不同的数据权限</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:group ref="tk:DataRightGroup"/>
+            <xs:attribute name="Style" type="tk:PageStyleIntf" use="required">
+              <xs:annotation>
+                <xs:documentation>指定的页面类型</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="HasRightIfNoItem" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>如果没有匹配的权限配置，标记是否有数据权限。默认为false，即无数据权限</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompanyUserDataRight" type="tk:_tk_OwnerRightType">
+    <xs:annotation>
+      <xs:documentation>提供该用户以及该用户所有下属用户的数据权限</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CompanyOrgDataRight" type="tk:_tk_OwnerRightType">
+    <xs:annotation>
+      <xs:documentation>提供该用户所有下属组织机构的数据权限</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,19 @@
+﻿@using System.Data;
+@using System.Collections.Generic;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    DataSet dataSet = Model;
+    DataRow dataRow = HtmlUtil.GetMainRow(Model, ViewBag);
+}
+
+@section ModuleButtons
+{
+    <div class="text-center clearfix mt5">
+        @BootcssUtil.CreateDetailButtons(dataSet, dataRow)
+    </div>
+}
+@RenderSectionIfDefined("Main", "../Detail/main.cshtml", Model)

@@ -1,0 +1,53 @@
+﻿@inherits YJC.Toolkit.Razor.NormalDetailTemplate
+@using System.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    DataSet dataSet = (DataSet)Model;
+    string tableName = ViewBag.MetaData.Table.TableName;
+    string picId = DataSetExtension.GetFieldValue<string>(dataSet, tableName, ViewBag.PageData.MainPicNickName);
+    DataTable picTable = dataSet.Tables[ViewBag.PageData.PictureTable];
+}
+@if (!string.IsNullOrEmpty(picId))
+{
+    if (picTable == null)
+    {
+        <div>
+            <img src="@HtmlUtil.GetDownloadUrl(picId, true, true)" class="img-responsive center" alt=""/>
+        </div>
+    }
+    else
+    {
+    <div id="dataPic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#dataPic" data-slide-to="0" class="active" />
+            @for (int i = 1; i <= picTable.Rows.Count; ++i)
+            {
+                <li data-target="#dataPic" data-slide-to="@i"/>
+            }
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="@HtmlUtil.GetDownloadUrl(picId, true, true)" class="img-responsive center" alt=""/>
+            </div>
+            @foreach (DataRow row in picTable.Rows)
+            {
+                <div class="item">
+                    <img class="img-responsive center" alt="" src="@HtmlUtil.GetDownloadUrl(DataSetExtension.GetString(row, ViewBag.PageData.PictureTableIdName), true, true)"/>
+                </div>
+            }
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#dataPic" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" />
+        </a>
+        <a class="right carousel-control" href="#dataPic" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" />
+        </a>
+    </div>
+    }
+}

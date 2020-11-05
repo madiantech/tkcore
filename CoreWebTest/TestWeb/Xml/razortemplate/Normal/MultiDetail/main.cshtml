@@ -1,0 +1,76 @@
+﻿@inherits YJC.Toolkit.Razor.MultiEditTemplatePage<TModel>
+@using System.Data;
+@using System.Collections.Generic;
+@using System.Linq;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    IDetailModel model = CreateModel<IDetailModel>(Model);
+    NormalMultiDetailData pageData = ViewBag.PageData;
+    HtmlAttribute attribute = pageData.DialogMode ? new HtmlAttribute("data-dialog-action", "close") : new HtmlAttribute("data-url", model.RetUrl);
+    HtmlAttribute retAttr = new HtmlAttribute("data-action", "return");
+    //DataTable operators = dataSet.Tables["DetailOperator"];
+
+    INormalMetaData metaData = ViewBag.MetaData;
+    var tableOutputs = from tableData in metaData.TableDatas
+                       let tableOutput = HtmlCommonUtil.GetTableOutput(tableData)
+                       select (TableData: tableData, Output: tableOutput);
+    var normalMeta = from item in tableOutputs
+                     where item.Output.IsSingle
+                     select item;
+    var listMeta = (from item in tableOutputs
+                    where !item.Output.IsSingle
+                    select item).ToArray();
+    //List<Tk5FieldInfoEx> fields = ViewBag.MetaData.Table.TableList;
+    IFieldValueProvider mainProvider = model.CreateMainObjectProvider(metaData.TableData);
+    int index = 0;
+}
+@section DefaultButtons
+    {
+    <div class="text-center clearfix mt5">
+        @Raw(BootcssUtil.CreateOperators(model.DetailOperators, mainProvider))
+        @Raw(BootcssCommonUtil.Button("<i class='icon-remove mr5'></i>" + pageData.CancelCaption, "", BootcssButton.Default, false, attribute, retAttr))
+    </div>
+}
+<form method="POST" id="PostForm" class="tk-dataform form-horizontal clearfix mb15" role="form">
+    @foreach (var item in normalMeta)
+    {
+        var tableData = item.TableData;
+        var tableString = RenderTable(tableData.TableName, Model);
+        if (tableString != null && !string.IsNullOrEmpty(tableString.Value))
+        {
+            @Raw(tableString.Value)
+            continue;
+        }
+        @Raw(item.Output.CreateDetailBodyHtml(tableData, model, pageData, 0))
+
+    }
+    @if (listMeta.Length > 0)
+    {
+        <ul class="nav nav-tabs" role="tablist">
+            @foreach (var item in listMeta)
+            {
+                var tableData = item.TableData;
+                var output = HtmlCommonUtil.GetTableOutput(tableData);
+                @Raw(output.CreateDetailHeadHtml(tableData, pageData))
+            }
+        </ul>
+        <div id="listData" class="pull-left w100p"></div>
+        @foreach (var item in listMeta)
+        {
+            var tableData = item.TableData;
+            var tableString = RenderTable(tableData.TableName, Model);
+            if (tableString != null && !string.IsNullOrEmpty(tableString.Value))
+            {
+                @Raw(tableString.Value)
+                continue;
+            }
+            @Raw(item.Output.CreateDetailBodyHtml(tableData, model, pageData, index++))
+        }
+    }
+</form>
+@RenderSectionOrDefault("ModuleButtons", "DefaultButtons")

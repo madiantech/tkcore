@@ -1,0 +1,57 @@
+﻿@inherits YJC.Toolkit.Razor.MultiEditTemplatePage<TModel>
+@using System.Data;
+@using System.Linq;
+@using System.Text;
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    IEditModel model = (IEditModel)Model;
+    NormalMultiDetailData pageData = ViewBag.PageData;
+    INormalTableData tableData = ViewBag.MetaData;
+    int index = ViewBag.Index;
+    IEnumerable<IFieldValueProvider> providers = model.CreateDataRowsProvider(tableData);
+    Tk5FieldInfoEx uploadField = (from field in tableData.DataList
+                                  where field.Upload != null
+                                  select field).FirstOrDefault();
+    var upload = uploadField.AssertUpload();
+    IUploadProcessor2 processor = upload.CreateUploadProcessor2();
+    var attrBuilder = CreateUploadAttribute(upload, processor);
+}
+@functions
+{
+    HtmlAttributeBuilder CreateUploadAttribute(Tk5UploadConfig upload, IUploadProcessor2 processor)
+    {
+        HtmlAttributeBuilder builder = new HtmlAttributeBuilder();
+        builder.Add("data-fileSize", upload.SizeField);
+        builder.Add("data-serverPath", upload.ServerPathField);
+        builder.Add("data-contentType", upload.MimeTypeField);
+        if (processor is IUploadExtension extension)
+        {
+            string uploadUrl = extension.UploadUrl;
+            if (!string.IsNullOrEmpty(uploadUrl))
+                builder.Add("data-url", uploadUrl);
+        }
+        return builder;
+    }
+}
+<div id="@tableData.TableName" data-loaded="true" class="hide" data-index="@index">
+    <div class="clearfix upload-content">
+        @foreach (var provider in providers)
+        {
+            string fileName = provider[uploadField.NickName].ToString();
+            <div class="upload-status-new table-row">
+                <div data-control="Upload1" @Raw(attrBuilder.CreateAttribute()) name="@uploadField.NickName" data-value="@(processor.CreateValue(upload, provider)?.ToJson())">
+                    <a href="@(processor.Display(upload, provider))" target="_blank" class="text-center" title="@fileName">
+                        <i class="file-icon glyphicon glyphicon-file"></i>
+                        <p>@fileName</p>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

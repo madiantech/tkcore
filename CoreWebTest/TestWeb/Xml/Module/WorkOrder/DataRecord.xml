@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<tk:Module>
+		<tk:Title>
+			<tk:Content>数据修改记录</tk:Content>
+		</tk:Title>
+		<tk:MetaData>
+			<tk:SingleXmlMetaData DataXml="WorkOrder/DataRecord.xml" ></tk:SingleXmlMetaData>
+		</tk:MetaData>
+		<tk:Source>
+			<tk:SingleDbSource OrderBy="ORDER BY SUR_ID DESC">
+				<tk:Resolver>
+					<tk:RegResolver>DataRecord</tk:RegResolver>
+				</tk:Resolver>
+				<tk:Operators>
+					<tk:StandardOperators>
+						<tk:Right>
+							<tk:SimpleListOperateRight></tk:SimpleListOperateRight>
+						</tk:Right>
+						<tk:Operator>
+							<tk:Caption>
+								<tk:Content></tk:Content>
+							</tk:Caption>
+						</tk:Operator>
+					</tk:StandardOperators>
+				</tk:Operators>
+			</tk:SingleDbSource>
+		</tk:Source>
+		<tk:PageMaker>
+			<tk:RazorModuleTemplatePageMaker ModuleTemplate="Single">
+				<tk:PageTemplate Style="List">
+					<tk:RazorData>
+						<tk:NormalListData OperatorPosition="None"/>
+					</tk:RazorData>
+				</tk:PageTemplate>
+			</tk:RazorModuleTemplatePageMaker>
+		</tk:PageMaker>
+	</tk:Module>
+</tk:Toolkit>

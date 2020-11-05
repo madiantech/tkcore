@@ -1,0 +1,51 @@
+﻿@inherits YJC.Toolkit.Razor.BootcssDetailTemplate
+@using System.Data;
+@using System.Collections.Generic;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    DataRow dataRow = HtmlUtil.GetMainRow(Model, ViewBag);
+    List<Tk5FieldInfoEx> fields = ViewBag.MetaData.Table.TableList;
+    int captionCol = ViewBag.PageData.CaptionColumn;
+    int dataCol = ViewBag.PageData.DataColumn;
+    bool showHint = ViewBag.PageData.AppendHint;
+    IFieldValueProvider provider = CreateProvider(dataRow, (DataSet)Model);
+}
+<form method="POST" id="PostForm" class="tk-dataform form-horizontal p5 mb15" role="form">
+    <ul class="list-group mt15">
+        @foreach (Tk5FieldInfoEx field in fields)
+    {
+            @{
+             string value = provider[field.NickName].ToString(); 
+             string fieldString = null;
+             if (!string.IsNullOrEmpty(value)) 
+             {
+                 fieldString = RenderFieldItem(dataRow, field);
+             }
+         }
+         if (fieldString != null){
+            @fieldString
+         }
+         else 
+         {
+         if(!string.IsNullOrEmpty(value))
+         {
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="@HtmlUtil.MergeClass(BootcssUtil.GetColClass(captionCol), "lv-vam pv1 control-label")">
+                        <b>@field.DisplayName</b>
+                    </div>
+                    @{
+                    string data = field.Detail(provider, showHint, false);
+                    }
+                    <div class="@HtmlUtil.MergeClass(BootcssUtil.GetColClass(dataCol), "pr5 lv-vam")">@data</div>
+                </div>
+            </li>
+        }
+        }
+    }
+    </ul>
+</form>

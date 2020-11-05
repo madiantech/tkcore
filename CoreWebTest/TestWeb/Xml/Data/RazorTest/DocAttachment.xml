@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="CS_DOC_ATTACHMENT">
+    <tk:TableDesc>
+      <tk:Content>财税附件</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="int" IsKey="true" IsEmpty="false">
+      <tk:FieldName>DA_ATT_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>DA_DOC_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>文档ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="20" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>DA_FILE_SIZE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>文件大小</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="30" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DA_CONTENT_TYPE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>文件类型</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="40" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DA_FILE_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>文件</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Upload" Order="50" DefaultShow="All"/>
+      <tk:Upload ServerPathField="ServerPath" MimeTypeField="ContentType" SizeField="FileSize" ContentField="FileId"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>DA_FILE_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>文件ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="60" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DA_SERVER_PATH</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>路径</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="70" DefaultShow="None"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

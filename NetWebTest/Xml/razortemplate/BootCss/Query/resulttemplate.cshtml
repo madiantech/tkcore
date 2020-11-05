@@ -1,0 +1,67 @@
+﻿@inherits YJC.Toolkit.Razor.NormalQueryResultTemplate
+@using System.Data;
+@using System.Collections.Specialized;
+@using System.Linq;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    DataSet dataSet = (DataSet)Model;
+    NormalQueryData pageData = (NormalQueryData)ViewBag.PageData;
+    Tk5ListTableData metaTable = ViewBag.MetaData.Table;
+    string tableName = metaTable.TableName;
+    List<Tk5FieldInfoEx> listFields = metaTable.TableList;
+    DataTable table = dataSet.Tables[tableName];
+    bool shrink = pageData.ShrinkMeta;
+    if (shrink) {
+        listFields = (from field in listFields
+                      join colunm in table.Columns.Cast<DataColumn>() on field.NickName equals colunm.ColumnName
+                      select field).ToList();
+    }
+    IFieldValueProvider provider = null;
+}
+<table id="_ResultTable" data-striped="true" data-locale="zh-CN">
+    <thead>
+        <tr>
+            @foreach (var field in listFields)
+            {
+                string alignClass = string.Empty;
+                Alignment align = Alignment.Left;
+                if (field.Extension != null)
+                    align = field.Extension.Align;
+                alignClass = align.ToString().ToLower();
+
+                <th data-sortable="@pageData.Sortable.ToString().ToLower()" data-halign="@pageData.HeadAlign" data-align="@align">@field.DisplayName</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (DataRow row in table.Rows)
+        {
+            @{
+            provider = CreateProvider(row, dataSet);
+            }
+            <tr>
+                @foreach (IFieldInfoEx field in listFields)
+                {
+                    Tk5FieldInfoEx fieldInfo = field.Convert<Tk5FieldInfoEx>();
+                    string fieldString = RenderFieldItem(row, fieldInfo);
+                    if (fieldString == null)
+                    {
+                        <td>@fieldInfo.DisplayValue(provider)</td>
+                    }
+                    else
+                    {
+                        @fieldString
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+@if (table.Rows.Count == 0)
+{
+    <div class="p30">@pageData.NoDataCaption</div>
+}

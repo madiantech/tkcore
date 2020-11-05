@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="UR_USERS_PART">
+    <tk:TableDesc>
+      <tk:Content>用户角色表</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="string" IsKey="true" IsEmpty="false">
+      <tk:FieldName>UP_USER_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>用户ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="int" IsKey="true" IsEmpty="false">
+      <tk:FieldName>UP_PART_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>角色</tk:Content>
+      </tk:DisplayName>
+      <tk:EasySearch RegName="PART"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="20" DefaultShow="All"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

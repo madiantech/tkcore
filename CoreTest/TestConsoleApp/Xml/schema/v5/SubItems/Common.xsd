@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:attributeGroup name="IOAttrGroup">
+    <xs:attribute name="Encrypt" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>是否进行加密</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="GZip" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>是否进行GZip压缩</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:simpleType name="BaseConditionUseType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Post"/>
+      <xs:enumeration value="QueryString"/>
+      <xs:enumeration value="Style"/>
+      <xs:enumeration value="StyleStartsWith"/>
+      <xs:enumeration value="True"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OutputConditionEnumType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="OutputType"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OutputDataType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Xml"/>
+      <xs:enumeration value="Json"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ConditionUseType">
+    <xs:union memberTypes="tk:BaseConditionUseType tk:OutputConditionEnumType"/>
+  </xs:simpleType>
+  <xs:complexType name="BaseConditionType">
+    <xs:sequence>
+      <xs:element name="QueryString" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>配置了QueryString查询方式后，此处确定匹配的值</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:attribute name="Name" type="xs:Name" use="required"/>
+          <xs:attribute name="Value" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="IsPost" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>配置了Post查询方式后，此处确定匹配的值</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Style" type="tk:PageStyleIntfList">
+      <xs:annotation>
+        <xs:documentation>配置了Style查询方式后，此处确定匹配的值，可以一次选填多个PageStyle</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="StartsWith" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>配置了StyleStartsWith查询方式后，此处填写Operation的起始值</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="OutputType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="String"/>
+      <xs:enumeration value="XmlReader"/>
+      <xs:enumeration value="ToolkitObject"/>
+      <xs:enumeration value="FileContent"/>
+      <xs:enumeration value="DataSet"/>
+      <xs:enumeration value="Object"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="OutputConditionType">
+    <xs:complexContent>
+      <xs:extension base="tk:BaseConditionType">
+        <xs:attribute name="SearchType" use="required">
+          <xs:annotation>
+            <xs:documentation>查询的方式，多种方式之间用空格隔开</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:list itemType="tk:ConditionUseType"/>
+          </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="OutputType" type="tk:OutputType">
+          <xs:annotation>
+            <xs:documentation>配置了Output查询方式后，此处确定匹配的值</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NormalConditionType">
+    <xs:complexContent>
+      <xs:extension base="tk:BaseConditionType">
+        <xs:attribute name="SearchType" use="required">
+          <xs:annotation>
+            <xs:documentation>查询的方式，多种方式之间用空格隔开</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:list itemType="tk:BaseConditionUseType"/>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:attributeGroup name="__tk_ContextGroup">
+    <xs:attribute name="Context" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>使用的DbContext的名称，如果不配置，使用Default的DbContext</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+</xs:schema>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="Common.xsd"/>
+  <xs:complexType name="TableOutputType">
+    <xs:group ref="tk:TableOutputGroup"/>
+  </xs:complexType>
+  <xs:group name="TableOutputGroup">
+    <xs:choice>
+      <!--<xs:element ref="tk:NormalOutput"/>-->
+      <xs:element ref="tk:TableOutput"/>
+      <xs:element ref="tk:TableNormalOutput"/>
+      <xs:element ref="tk:AttachmentOutput"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+    </xs:choice>
+  </xs:group>
+  <xs:group name="WorkflowTableOutputGroup">
+    <xs:choice>
+      <xs:element ref="tk:NormalOutput"/>
+      <xs:element ref="tk:TableOutput"/>
+      <xs:element ref="tk:TableNormalOutput"/>
+      <xs:element ref="tk:AttachmentOutput"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+    </xs:choice>
+  </xs:group>
+  <xs:element name="NormalOutput">
+    <xs:annotation>
+      <xs:documentation>单记录正常排列字段</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="tk:ColumnCountAttrGroup"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TableOutput" type="tk:BaseTableOutputType">
+    <xs:annotation>
+      <xs:documentation>多记录以Table方式排列字段</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="TableNormalOutput">
+    <xs:annotation>
+      <xs:documentation>多记录以单表的方式排列字段</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:BaseTableOutputType">
+          <xs:attributeGroup ref="tk:ColumnCountAttrGroup"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AttachmentOutput">
+    <xs:annotation>
+      <xs:documentation>针对多附件上传（专门存储附件的子表）</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="IsMultiple" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否允许选择多个文件，默认为false</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="DirectShowDetail" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>直接显示Detail的从表记录，而不是通过Ajax获取Detail记录</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="__tk_RazorContentType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="RazorFile"/>
+      <xs:enumeration value="Text"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="__tk_RazorOutputDataType">
+    <xs:simpleContent>
+      <xs:annotation>
+        <xs:documentation>ContentType的类型不同，其含义不同。如果是RazorFile则是Razor的文件名；如果是Text，则直接就是文本</xs:documentation>
+      </xs:annotation>
+      <xs:extension base="xs:string">
+        <xs:attribute name="ContentType" type="tk:__tk_RazorContentType" use="required">
+          <xs:annotation>
+            <xs:documentation>输出内容的方式。RazorFile使用指定的Razor文件输出内容。Text直接输出定义的文本</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BaseTableOutputType">
+    <xs:sequence>
+      <xs:element name="OtherNewButton" type="tk:__tk_RazorOutputDataType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>如果有其他新建按钮，可以在这里定义</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attributeGroup ref="tk:MultipleFixAttrGroup"/>
+    <xs:attribute name="DirectShowDetail" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>直接显示Detail的从表记录，而不是通过Ajax获取Detail记录</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>

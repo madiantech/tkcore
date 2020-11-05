@@ -1,0 +1,75 @@
+﻿@inherits YJC.Toolkit.Razor.NormalObjectListTemplate
+@using System.Data;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Web;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Razor;
+@{
+    NormalListData pageData = (NormalListData)ViewBag.PageData;
+    ObjectListModel listModel = (ObjectListModel)Model;
+}
+@section DefaultHeader {
+    @if (pageData.Header != null)
+    {
+        @RenderRazorOutputData(pageData.Header, Model)
+    }
+    else
+    {
+        <h1>@ViewBag.Title</h1>
+    }
+}
+@section DefaultFooter {
+    @RenderRazorOutputData(pageData.Footer, Model)
+}
+@section DefaultListButton {
+    @if (BootcssUtil.HasListButtons(listModel) || pageData.ShowExportExcel)
+    {
+        <div class="panel panel-info">
+            <div class="panel-body">
+                @if (BootcssUtil.HasListButtons(listModel))
+                {
+                    @BootcssUtil.CreateListButtons(listModel)
+                }
+                @if (pageData.ShowExportExcel)
+                {
+                    @BootcssCommonUtil.CreateExcelButton()
+                }
+            </div>
+        </div>
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    @RenderLayoutPartial("../bin/css.cshtml", null)
+    <link rel="stylesheet" type="text/css" href="@("toolkitcss/v5/commonM/datalist.css".AppVirutalPath())" />
+    @ViewBag.Script.CreateUserCss()
+</head>
+<body id="@HtmlUtil.GetDynamicPageId(listModel.CallerInfo)" class="tk-dataPage" data-webpath="@HtmlUtil.AppVirtualPath" data-dialog-height="@pageData.DialogHeight">
+    <div class="container-fluid">
+        @if (pageData.ShowTitle)
+        {
+            @RenderSectionOrDefault("Header", "DefaultHeader")
+        }
+        @*@RenderSectionIfDefined("Query", "query.cshtml", Model)*@
+        <div class="tk-datalist">
+            @if (pageData.OperatorPosition != OperatorPosition.None)
+            {
+                @RenderSectionOrDefault("ListButtons", "DefaultListButton")
+            }
+            <div id="listData">
+                @RenderSectionIfDefined("Main", "listmain.cshtml", Model)
+            </div>
+        </div>
+        @RenderSectionOrDefault("Footer", "DefaultFooter")
+    </div>
+    @RenderLayoutPartial("../bin/js.cshtml", null)
+    <script type="text/javascript" src="@("toolkitjs/v5/toolkit/coreT/toolkit.normallist.js?v=1".AppVirutalPath())"> </script>
+    @ViewBag.Script.CreateUserJavaScript()
+    @RenderSectionIfDefined("Script")
+</body>
+</html>

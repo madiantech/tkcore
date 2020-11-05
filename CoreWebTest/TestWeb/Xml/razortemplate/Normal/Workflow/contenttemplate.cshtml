@@ -1,0 +1,90 @@
+﻿@inherits YJC.Toolkit.Razor.MultiEditTemplatePage<TModel>
+@using System.Data;
+@using System.Collections.Generic;
+@using System.Linq;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@using YJC.Toolkit.SimpleWorkflow;
+@{
+    NormalDetailData pageData = (NormalDetailData)ViewBag.PageData;
+    IMultiEditModel model = CreateModel<IMultiEditModel>(Model);
+
+    INormalMetaData metaData = ViewBag.MetaData;
+    var tableOutputs = from tableData in metaData.TableDatas
+                       let tableOutput = WorkflowWebUtil.GetTableOutput(tableData)
+                       select (TableData: tableData, Output: tableOutput);
+
+    var normalMeta = from item in tableOutputs
+                     where item.Output.IsSingle
+                     select item;
+    var listMeta = (from item in tableOutputs
+                    where !item.Output.IsSingle
+                    select item).ToArray();
+    int index = 0;
+}
+<form method="POST" id="DetailForm" class="tk-dataform form-horizontal p5 mb15" role="form">
+    @foreach (var item in normalMeta)
+    {
+        var tableData = item.TableData;
+        var tableString = RenderTable(tableData.TableName, Model);
+        if (tableString != null && !string.IsNullOrEmpty(tableString.Value))
+        {
+            @Raw(tableString.Value)
+            continue;
+        }
+        @Raw(item.Output.CreateDetailBodyHtml(tableData, model, pageData, 0))
+    }
+    @if (listMeta.Length > 0)
+    {
+        <ul class="nav nav-tabs" role="tablist">
+            @foreach (var item in listMeta)
+            {
+                var tableData = item.TableData;
+                @Raw(item.Output.CreateDetailHeadHtml(tableData, pageData))
+            }
+        </ul>
+        <div id="listData" class="pull-left w100p"></div>
+        @foreach (var item in listMeta)
+        {
+            var tableData = item.TableData;
+            var tableString = RenderTable(tableData.TableName, Model);
+            if (tableString != null && !string.IsNullOrEmpty(tableString.Value))
+            {
+                @Raw(tableString.Value)
+                continue;
+            }
+            @Raw(item.Output.CreateDetailBodyHtml(tableData, model, pageData, index++))
+        }
+        @*<script type="text/javascript">
+              var tabNode=document.getElementById('@name2')
+              var tBody=tabNode.getElementsByTagName('tbody')[0]
+              var tRows = tBody.getElementsByTagName('tr')
+              var limitNum=10 // 默认首先仅展示10条
+              if (tRows.length > limitNum) {
+                  // 首先隐藏列
+                  for (var i = limitNum; i < tRows.length; i++) {
+                      tRows[i].style.display='none'
+                  }
+                  var bt = document.createElement('button');           //createElement生成button对象
+                  bt.type = "button"
+                  bt.className="btn btn-link"
+                  bt.innerHTML='更多<span class="caret" style="margin-left: 6px;"></span>'
+                  //<button type="button" class="btn btn-link">更多<span class="caret"></span></button>
+                  bt.onclick = function () {
+                      var trs=this.parentNode.getElementsByTagName('tbody')[0].getElementsByTagName('tr')
+                       //绑定点击事件 点击展示列 并删除该按钮
+                       for (var i = limitNum; i < trs.length; i++) {
+                          trs[i].style.display=''
+                      }
+                      //tabNode.removeChild(this)
+                      this.parentNode.removeChild(this)
+                   };
+                   tabNode.appendChild(bt);
+              }
+            </script>*@
+    }
+</form>

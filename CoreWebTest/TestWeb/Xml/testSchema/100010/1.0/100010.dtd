@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT 恢复权利请求书 (专利申请或专利 ,请求内容 ,请求恢复权利的理由  ,附件清单 ,申请人或代理机构签章 ,专利局处理意见 )>
+
+<!ELEMENT 专利申请或专利 (申请号或专利号 ,发明创造名称 )>
+<!ELEMENT 请求内容 (专利局发出通知的日期 ,专利局发出通知的名称 ,发文序号)>
+<!ELEMENT 请求恢复权利的理由 (#PCDATA )>
+<!ELEMENT 附件清单 (附件* )>
+<!ELEMENT 申请人或代理机构签章 (签章 ,签章日期 )>
+<!ELEMENT 专利局处理意见 (意见内容 ,提出日期 )>
+
+<!ELEMENT 申请号或专利号 (#PCDATA )>
+<!ELEMENT 发明创造名称 (#PCDATA )>
+
+<!ELEMENT 专利局发出通知的日期 (年, 月, 日)>
+<!ELEMENT 专利局发出通知的名称 (#PCDATA )>
+<!ELEMENT 发文序号 (#PCDATA )>
+
+<!ELEMENT 附件 (#PCDATA )>
+<!ATTLIST 附件
+	顺序 CDATA #REQUIRED
+>
+
+<!ELEMENT 签章 (#PCDATA )>
+<!ELEMENT 签章日期 (年, 月, 日)>
+<!ELEMENT 意见内容 (#PCDATA )>
+<!ELEMENT 提出日期 (年, 月, 日)>
+
+<!ELEMENT 年 (#PCDATA )>
+<!ELEMENT 月 (#PCDATA )>
+<!ELEMENT 日 (#PCDATA )>

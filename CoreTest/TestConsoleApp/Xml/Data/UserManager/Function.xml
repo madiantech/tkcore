@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="SYS_FUNCTION" NameField="Name">
+    <tk:TableDesc>
+      <tk:Content>系统功能</tk:Content>
+    </tk:TableDesc>
+    <tk:Tree LayerField="TreeLayer"/>
+    <tk:Field DataType="int" IsKey="true" IsEmpty="false">
+      <tk:FieldName>FN_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>功能ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="false">
+      <tk:FieldName>FN_SHORT_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>短名称</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="20" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="false">
+      <tk:FieldName>FN_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>功能名称</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="30" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>FN_URL</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>URL地址</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerLine"/>
+      <tk:Control Control="Text" Order="70" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>FN_PARENT_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>父功能</tk:Content>
+      </tk:DisplayName>
+      <tk:EasySearch RegName="FUNCTION"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Label" Order="50" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>FN_IS_LEAF</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>是否是叶节点</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="CheckBox" Order="60" DefaultShow="Detail"/>
+      <tk:Extension CheckValue="1" UnCheckValue="0"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>FN_TREE_LAYER</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>层</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="70" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>FN_REVERSE1</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>保留1</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>100</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="80" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>FN_REVERSE2</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>保留2</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>200</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="90" DefaultShow="None"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

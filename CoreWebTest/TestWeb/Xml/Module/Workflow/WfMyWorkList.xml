@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<tk:Module>
+		<tk:Title>
+			<tk:Content>子列表</tk:Content>
+		</tk:Title>
+		<tk:MetaData>
+			<tk:SingleXmlMetaData DataXml="Workflow/WorkflowInst.xml" DisableAutoDetailLink="true">
+				<tk:Override>
+					<tk:Field NickName="Name">
+						<tk:ListDetail>
+							<tk:ListDisplay>
+								<tk:LinkDisplay>
+									<tk:NormalDisplay/>
+									<tk:HrefDisplay Target="_blank">~/c/~source/C/WfStatus?WfId=*Id*</tk:HrefDisplay>
+								</tk:LinkDisplay>
+							</tk:ListDisplay>
+						</tk:ListDetail>
+					</tk:Field>
+				</tk:Override>
+			</tk:SingleXmlMetaData>
+		</tk:MetaData>
+		<tk:Source>
+			<tk:RegNameSource>WfMyWorkList</tk:RegNameSource>
+		</tk:Source>
+		<tk:PageMaker>
+			<tk:RazorModuleTemplatePageMaker ModuleTemplate="Single">
+				<tk:PageTemplate Style="List">
+					<tk:RazorData>
+						<tk:NormalListData OperatorPosition="None"/>
+					</tk:RazorData>
+				</tk:PageTemplate>
+			</tk:RazorModuleTemplatePageMaker>
+		</tk:PageMaker>
+	</tk:Module>
+</tk:Toolkit>

@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>YJC.Toolkit</RootNamespace>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>YJC.Toolkit2.snk</AssemblyOriginatorKeyFile>
+    <Version>5.6.0</Version>
+    <Authors>Chen Jiangyong</Authors>
+    <Company>Toolkit</Company>
+    <Product>Toolkit5.6</Product>
+    <AssemblyVersion>5.6.0.0</AssemblyVersion>
+    <FileVersion>5.6.0.0</FileVersion>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <AssemblyName>YJC.Toolkit.HtmlExtension</AssemblyName>
+  </PropertyGroup>
+
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\..\_lib\tk5.6\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\YJC.Toolkit.Core\YJC.Toolkit.Core.21.csproj" />
+    <ProjectReference Include="..\..\Core\YJC.Toolkit.MetaData\YJC.Toolkit.MetaData.21.csproj" />
+    <ProjectReference Include="..\YJC.Toolkit.Data\YJC.Toolkit.Data.21.csproj" />
+    <ProjectReference Include="..\YJC.Toolkit.Web.Common\YJC.Toolkit.Web.Common.21.csproj" />
+  </ItemGroup>
+</Project>

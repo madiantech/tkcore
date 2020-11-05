@@ -1,0 +1,52 @@
+﻿@inherits YJC.Toolkit.Razor.ToolkitTemplatePage<TModel>
+@using System.Data;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@using YJC.Toolkit.Data;
+@{
+    NormalDetailData pageData = (NormalDetailData)ViewBag.PageData;
+    bool showPicture = pageData.ShowPicture;
+    IDetailModel detailModel = CreateModel<IDetailModel>(Model);
+    string title = HtmlCommonUtil.GetTitle(pageData.TitleFormat, ViewBag.Title);
+}
+@section DefaultHeader {
+    @if (pageData.Header != null)
+    {
+        @RenderRazorOutputData(pageData.Header, Model)
+    }
+    else
+    {
+        <h5 class="text-orange">@title</h5>
+    }
+}
+@section DefaultFooter {
+    @RenderRazorOutputData(pageData.Footer, Model)
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    @*@RenderLayoutPartial("../bin/css.cshtml", null)*@
+    @RenderPart("@../Bin/css.cshtml")
+    @Raw(ViewBag.Script.CreateUserCss())
+</head>
+<body id="@ModelUtil.GetPageId(detailModel.PageStyle)" class="tk-dataPage" data-webpath="@HtmlCommonUtil.AppVirtualPath" data-dialog-height="@pageData.DialogHeight" data-source="@detailModel.Source">
+    <div class="container-fluid">
+        @if (pageData.ShowTitle)
+        {
+            @RenderSectionOrDefault("Header", "DefaultHeader")
+        }
+        @RenderSectionIfDefined("Main", "@main.cshtml", Model)
+        @RenderSectionOrDefault("Footer", "DefaultFooter")
+    </div>
+    @*@RenderLayoutPartial("../bin/js.cshtml", null)*@
+    @RenderPart("@../Bin/js.cshtml")
+    <script type="text/javascript" src="@("toolkitjs/v5/toolkit/coreT/toolkit.detail.js".AppVirutalPath())"></script>
+    @Raw(ViewBag.Script.CreateUserJavaScript())
+    @RenderSectionIfDefined("Script")
+</body>
+</html>

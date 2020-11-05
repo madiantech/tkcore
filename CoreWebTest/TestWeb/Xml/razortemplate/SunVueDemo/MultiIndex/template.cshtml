@@ -1,0 +1,22 @@
+﻿@inherits YJC.Toolkit.Razor.ToolkitTemplatePage<TModel>
+@using System.Data;
+@using System.Collections.Generic;
+@using System.Linq;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    INormalMetaData metaData = ViewBag.MetaData;
+    var tableNames = (from item in metaData.TableDatas
+                      select item.TableName).ToList();
+    string mainName = tableNames[0];
+    tableNames.RemoveAt(0);
+    string json = tableNames.WriteJson();
+}
+export default {
+  tableName: '@mainName',
+  subTableNames: @Raw(json)
+}

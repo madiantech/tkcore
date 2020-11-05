@@ -1,0 +1,30 @@
+﻿@inherits YJC.Toolkit.Razor.NormalCustomTemplate
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@using System.Collections.Generic;
+@using System.Linq;
+@{
+    Dictionary<string, string> data = Model;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>首页</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+    <link rel="stylesheet" type="text/css" href="@("toolkitjs/v5/bootstrap/css/bootstrap.min.css".AppVirutalPath())" />
+    <link rel="stylesheet" type="text/css" href="@("toolkitjs/v5/bootstrap/css/font-awesome.min.css".AppVirutalPath())" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1>@data["Title"]</h1>
+            <p>@data["Description"]</p>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="@("toolkitjs/v5/lib/jquery-1.11.1.min.js".AppVirutalPath())"></script>
+    <script type="text/javascript" src="@("toolkitjs/v5/bootstrap/js/bootstrap.min.js".AppVirutalPath())"></script>
+</body>
+</html>

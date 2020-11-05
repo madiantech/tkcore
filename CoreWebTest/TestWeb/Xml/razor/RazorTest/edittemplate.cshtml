@@ -1,0 +1,47 @@
+﻿@inherits YJC.Toolkit.Razor.TemplatePage<TModel>
+@using System.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Data;
+@{
+    INormalMetaData metaData = ViewBag.MetaData;
+    IEnumerable<IFieldInfoEx> fields = metaData.TableData.DataList;
+    List<List<IFieldInfoEx>> list = new List<List<IFieldInfoEx>>();
+    DataSet dataSet = (DataSet)Model;
+    DataRow infoRow = dataSet.GetRow("Info");
+    string url = "'c/xml/" + infoRow.GetString("Style") + "/" + infoRow.GetString("Source") + "'";
+    int index = 0;
+    List<IFieldInfoEx> subList = null;
+    foreach (var field in fields)
+    {
+        if (index % 2 == 0)
+        {
+            subList = new List<IFieldInfoEx>();
+            list.Add(subList);
+        }
+        subList.Add(field);
+        ++index;
+    }
+}
+<section>
+    <el-form label-position='left' label-width='80px'>
+        @foreach (var subItemList in list)
+        {
+            <el-row gutter='20'>
+                @foreach (var field in subItemList)
+                {
+                    <tk-input @@input='input' v-model='model.@field.NickName' name='@field.NickName' caption='@field.DisplayName' span='12'> </tk-input>
+                }
+            </el-row>
+
+        }
+    </el-form>
+    <section class="flexRow">
+        <section class="listOpreatorBox">
+            <section>
+                <ul class="flexRow flexRight"><li><a href="#" v-tk-post="@url" class="tk-btn tk-info">提交</a></li></ul>
+            </section>
+        </section>
+    </section>
+</section>

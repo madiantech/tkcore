@@ -1,0 +1,1 @@
+<%@ Page Language="c#" CodeBehind="WebUpdateXmlServlet.cs" AutoEventWireup="false" Inherits="YJC.Toolkit.Web.Page.WebUpdateXmlServlet, YJC.Toolkit.WebApp, Version=5.5.0.0, Culture=neutral, PublicKeyToken=DCD89483EE33CB8F" %>

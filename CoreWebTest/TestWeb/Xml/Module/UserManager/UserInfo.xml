@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>个人信息</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:SingleXmlMetaData DataXml="UserManager/User.xml" ColumnCount="3">
+        <tk:Override>
+          <tk:Field NickName="OrgId" Control="Label"/>
+        </tk:Override>
+        <tk:Except>
+          <tk:DelField NickName="Active"/>
+          <tk:DelField NickName="Out"/>
+          <tk:DelField NickName="OutDate"/>
+          <tk:DelField NickName="Admin"/>
+          <tk:DelField NickName="InDate"/>
+        </tk:Except>
+      </tk:SingleXmlMetaData>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:SingleDbSource DisablePage="List Insert Delete">
+        <tk:Resolver>
+          <tk:RegResolver>UserInfo</tk:RegResolver>
+        </tk:Resolver>
+        <tk:DetailOperators>
+          <tk:StandardOperators>
+            <tk:Right>
+              <tk:EmptyOperateRight/>
+            </tk:Right>
+            <tk:UpdateOperator/>
+            <tk:Operator IconClass="icon-key" Id="UpdatePasswd" Info="Dialog">
+              <tk:Caption>
+                <tk:Content>修改密码</tk:Content>
+              </tk:Caption>
+              <tk:Content>~/c/xml/update/UserManager/ChangeSelfPasswd</tk:Content>
+            </tk:Operator>
+          </tk:StandardOperators>
+        </tk:DetailOperators>
+      </tk:SingleDbSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:RazorModuleTemplatePageMaker ModuleTemplate="Single">
+        <tk:PageTemplate Style="Update">
+          <tk:RetUrl Style="Detail"/>
+        </tk:PageTemplate>
+        <tk:PageTemplate Style="Detail">
+          <tk:RetUrl Style="Custom">
+            <tk:CustomUrl NeedParse="true">{HomePage}</tk:CustomUrl>
+          </tk:RetUrl>
+        </tk:PageTemplate>
+        <tk:PostPageMaker Style="Update" DestUrl="Detail"/>
+      </tk:RazorModuleTemplatePageMaker>
+    </tk:PageMaker>
+  </tk:Module>
+</tk:Toolkit>

@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="Common.xsd"/>
+  <xs:include schemaLocation="FieldCommon.xsd"/>
+  <xs:include schemaLocation="DataRight.xsd"/>
+  <xs:include schemaLocation="TableResolver.xsd"/>
+  <xs:include schemaLocation="OperateRight.xsd"/>
+  <xs:include schemaLocation="Tree.xsd"/>
+  <!--<xs:include schemaLocation="MobileSource.xsd"/>-->
+  <xs:group name="SourceElementGroup">
+    <xs:choice>
+      <xs:element ref="tk:StaticSource"/>
+      <xs:element ref="tk:MarcoSource"/>
+      <xs:element ref="tk:SqlSource">
+        <xs:annotation>
+          <xs:documentation>根据若干条Sql来获取Source</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="tk:RegNameSource"/>
+      <xs:element ref="tk:EmptySource"/>
+      <xs:element ref="tk:EmptyObjectSource"/>
+      <xs:element ref="tk:CompositeSource"/>
+      <xs:element ref="tk:SwitchFieldSource"/>
+      <xs:element ref="tk:ChangeStatusSource"/>
+      <xs:element ref="tk:DbListSource"/>
+      <xs:element ref="tk:SingleDbDetailSource"/>
+      <xs:element ref="tk:SingleDbEditSource"/>
+      <xs:element ref="tk:SingleDbInsertSource"/>
+      <xs:element ref="tk:SingleDbDeleteSource"/>
+      <xs:element ref="tk:SingleDbSource"/>
+      <xs:element ref="tk:SingleDbDetailListSource"/>
+      <xs:element ref="tk:SingleDbDelInsSource"/>
+      <xs:element ref="tk:MultipleDbDetailSource"/>
+      <xs:element ref="tk:MultipleDbInsertSource"/>
+      <xs:element ref="tk:MultipleDbEditSource"/>
+      <xs:element ref="tk:MultipleDbDeleteSource"/>
+      <xs:element ref="tk:MasterDetailDbSource"/>
+      <xs:element ref="tk:DbDetailTableMaintainSource"/>
+      <xs:element ref="tk:DbDetailListSource"/>
+      <xs:element ref="tk:MultipleMDSource"/>
+      <xs:element ref="tk:StdCodeTableSource"/>
+      <xs:element ref="tk:QuerySource"/>
+      <xs:element ref="tk:TreeSource"/>
+      <xs:element ref="tk:SingleDbTreeSource"/>
+      <xs:element ref="tk:InsertObjectSource"/>
+      <xs:element ref="tk:UpdateObjectSource"/>
+      <xs:element ref="tk:DetailObjectSource"/>
+      <xs:element ref="tk:DeleteObjectSource"/>
+      <xs:element ref="tk:ListObjectSource"/>
+      <xs:element ref="tk:SingleObjectSource"/>
+      <xs:element ref="tk:SingleTreeObjectSource"/>
+      <xs:element ref="tk:SimpleResolverSource"/>
+      <xs:any namespace="##local" processContents="lax" maxOccurs="unbounded"/>
+      <!--<xs:element ref="tk:ListViewSource"/>-->
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="SourceType">
+    <xs:annotation>
+      <xs:documentation>该类型为动态节点，可根据配置工厂实际情况，自由调整</xs:documentation>
+    </xs:annotation>
+    <xs:group ref="tk:SourceElementGroup"/>
+  </xs:complexType>
+  <!--Attribute Group定义 -->
+  <xs:attributeGroup name="__tk_ListAttrGroup">
+    <xs:attribute name="PageSize" type="xs:unsignedInt">
+      <xs:annotation>
+        <xs:documentation>每页显示的数据条数</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="SortQuery" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>对查询结果进行排序，默认为true</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="OrderBy" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>排序方式，需要添加关键字ORDER BY</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attributeGroup ref="tk:__tk_MetaDataGroup"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="__tk_MetaDataGroup">
+    <xs:attribute name="UseMetaData" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>是否使用MetaData，默认为true。当设为true时，将只适用MetaData配置的字段提交</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="__tk_DbSourceAttrGroup">
+    <xs:attributeGroup ref="tk:__tk_ContextGroup"/>
+    <xs:attribute name="SupportData" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>是否支持数据权限，默认为false。如果该开关关闭，即使配置的数据权限也无用</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--Type 类型定义-->
+  <xs:complexType name="SingleDbSourceType">
+    <xs:sequence>
+      <xs:element ref="tk:Resolver"/>
+      <xs:element ref="tk:DataRight" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="tk:__tk_DbSourceAttrGroup"/>
+  </xs:complexType>
+  <xs:complexType name="SingleMetaDbSourceType">
+    <xs:complexContent>
+      <xs:extension base="tk:SingleDbSourceType">
+        <xs:attributeGroup ref="tk:__tk_MetaDataGroup"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="__tk_SingleDbSourceType">
+    <xs:complexContent>
+      <xs:extension base="tk:SingleDbSourceType">
+        <xs:sequence>
+          <xs:group ref="tk:__tk_ListGroup"/>
+          <xs:element ref="tk:DetailOperators" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="tk:__tk_ListAttrGroup"/>
+        <xs:attribute name="DisablePage" type="tk:DefaultShowType">
+          <xs:annotation>
+            <xs:documentation>需要禁止的Page，增强Source的安全性</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MultipleDbSourceType">
+    <xs:sequence>
+      <xs:element name="MainResolver" type="tk:ResolverType"/>
+      <xs:element name="ChildTable" type="tk:__tk_FullChildTableType" maxOccurs="unbounded"/>
+      <xs:element ref="tk:DataRight" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="tk:__tk_DbSourceAttrGroup"/>
+  </xs:complexType>
+  <xs:complexType name="MultipleMetaDbSourceType">
+    <xs:complexContent>
+      <xs:extension base="tk:MultipleDbSourceType">
+        <xs:attributeGroup ref="tk:__tk_MetaDataGroup"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="UpdateModeType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="OneRow"/>
+      <xs:enumeration value="DelIns"/>
+      <xs:enumeration value="Merge"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="__tk_ChildTableType">
+    <xs:sequence>
+      <xs:element ref="tk:Resolver"/>
+      <xs:element ref="tk:Relation"/>
+      <xs:element ref="tk:Operators" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="__tk_FullChildTableType">
+    <xs:complexContent>
+      <xs:extension base="tk:__tk_ChildTableType">
+        <xs:attribute name="UpdateMode" type="tk:UpdateModeType">
+          <xs:annotation>
+            <xs:documentation>在修改模式下，TableResolver的UpdateMode属性的值。默认为Merge</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="__tk_ObjectSourceType">
+    <xs:choice>
+      <xs:element name="RegNameObjectSource"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="__tk_NormalObjectSourceType">
+    <xs:sequence>
+      <xs:element name="ObjectSource" type="tk:__tk_ObjectSourceType"/>
+    </xs:sequence>
+    <xs:attribute name="UseMetaData" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>是否读取MetaData</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ObjectName" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>Object在MetaData中的表名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:group name="__tk_ListGroup">
+    <xs:sequence>
+      <xs:element ref="tk:TabSheets" minOccurs="0"/>
+      <xs:element name="FilterSql" type="tk:MarcoConfigItem" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>固有的过滤条件</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="tk:Operators" minOccurs="0"/>
+    </xs:sequence>
+  </xs:group>
+  <!--基本元素定义-->
+  <xs:element name="Resolver" type="tk:ResolverType">
+    <xs:annotation>
+      <xs:documentation>单表的Resolver</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DataRight" type="tk:DataRightType">
+    <xs:annotation>
+      <xs:documentation>数据权限</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Operators" type="tk:OperateRightConfig">
+    <xs:annotation>
+      <xs:documentation>列表的操作权限（如新建，修改，删除等操作的配置）</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DetailOperators" type="tk:OperateRightConfig">
+    <xs:annotation>
+      <xs:documentation>Detail页面的操作权限（如修改等操作的配置）</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Relation">
+    <xs:annotation>
+      <xs:documentation>与主表关系</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="MasterFields" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>主表字段，如果多个字段，用,隔开</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="DetailFields" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>从表字段，如果多个字段，用,隔开</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="FilterSql" type="tk:MarcoConfigItem" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>过滤条件</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="ManyToMany" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>多对多定义，关系可以直接穿越多对多表，选取对应的子记录。但是配置该模块后，Relation的模式自动变为OnlyFill</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attribute name="TableName" type="xs:Name" use="required">
+              <xs:annotation>
+                <xs:documentation>多对多表名</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="MasterField" type="xs:Name" use="required">
+              <xs:annotation>
+                <xs:documentation>多对多表中，主表对应的字段名</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="DetailField" type="xs:Name" use="required">
+              <xs:annotation>
+                <xs:documentation>多对多表中，从表对应的字段名</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Name" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>Relation唯一的名称</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Type" default="MasterRelation">
+        <xs:annotation>
+          <xs:documentation>关系类型</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="DetailValue"/>
+            <xs:enumeration value="DetailRelation"/>
+            <xs:enumeration value="MasterValue"/>
+            <xs:enumeration value="MasterRelation"/>
+            <xs:enumeration value="OnlyFill"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Top" type="xs:unsignedInt">
+        <xs:annotation>
+          <xs:documentation>最多选的数据，默认为0</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="OrderBy" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>排序方式，需要添加关键字ORDER BY</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TabSheets">
+    <xs:annotation>
+      <xs:documentation>如果列表有多个条件，可以配置该模块</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="TabSheet" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Caption" type="tk:MultiLanguageType"/>
+              <xs:element name="Condition" type="tk:MarcoConfigItem" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="Id" type="xs:token" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CodeTabSheet">
+          <xs:complexType>
+            <xs:attribute name="CodeRegName" type="xs:Name" use="required"/>
+            <xs:attribute name="NickName" type="xs:Name" use="required"/>
+            <xs:attribute name="NeedAllTab" type="xs:boolean"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <!--基本Source类型-->
+  <xs:element name="StaticSource" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>配置一段静态文本作为数据源</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SqlSource">
+    <xs:annotation>
+      <xs:documentation>执行配置的Sql语句来获取数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Sql" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>要执行的SQL语句，支持宏定义</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:complexContent>
+              <xs:extension base="tk:MarcoConfigItem">
+                <xs:attribute name="TableName" type="xs:Name" use="required">
+                  <xs:annotation>
+                    <xs:documentation>填充到DataSet的表名</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+              </xs:extension>
+            </xs:complexContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SuccessMessage" type="tk:MultiLanguageType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>成功执行Sql后，需要显示的信息</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attributeGroup ref="tk:__tk_ContextGroup"/>
+      <xs:attribute name="UseCallerInfo" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否在结果集中添加附加信息</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RssSource">
+    <xs:annotation>
+      <xs:documentation>提取配置的RSS数据地址来获取数据的数据源，</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Url" type="xs:anyURI" use="required">
+        <xs:annotation>
+          <xs:documentation>RSS数据源的Url地址</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="EncodingName" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>数据源的字符编码，不填为UTF8</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegNameSource" type="xs:Name">
+    <xs:annotation>
+      <xs:documentation>根据配置的注册名实例化相应的数据源</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MarcoSource" type="tk:MarcoConfigItem">
+    <xs:annotation>
+      <xs:documentation>配置一段可能带有宏文本作为数据源</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EmptySource">
+    <xs:annotation>
+      <xs:documentation>空数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="UseCallerInfo" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否在结果集中添加附加信息</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmptyObjectSource">
+    <xs:annotation>
+      <xs:documentation>空对象数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="UseCallerInfo" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否在结果集中添加附加信息</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <!--组合Source类型-->
+  <xs:element name="CompositeSource">
+    <xs:annotation>
+      <xs:documentation>根据具体条件来选择相应配置的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Item" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Condition" type="tk:NormalConditionType"/>
+              <xs:group ref="tk:SourceElementGroup"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!--单表Source类型-->
+  <xs:element name="StdCodeTableSource">
+    <xs:annotation>
+      <xs:documentation>维护标准代码表的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="AutoKeyCreator" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>主键生成配置，如果不配置，就手工录入 </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attribute name="Length" type="xs:unsignedInt">
+              <xs:annotation>
+                <xs:documentation>主键的长度，适合于字符串</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="PaddingChar" type="tk:Character">
+              <xs:annotation>
+                <xs:documentation>如果生成的主键长度比Length小，用此Char填充。默认为0</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="PaddingPosition">
+              <xs:annotation>
+                <xs:documentation>填充Char的位置，默认为Left</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="Left"/>
+                  <xs:enumeration value="Right"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="TableName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>当UseQueryString为false时，配置为表名，通常以CD_开始。当UseQueryString为true时，配置为QueryString的Name。</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="UseQueryString" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>表名是根据配置还是读取自QueryString的开关，默认为false。</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attributeGroup ref="tk:__tk_ContextGroup"/>
+      <xs:attribute name="AutoPinyin" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否配置生成拼音的功能，即给所有的没有拼音的记录自动生成拼音，默认为true</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SwitchFieldSource">
+    <xs:annotation>
+      <xs:documentation>对某表的某字段值进行开关切换的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tk:Resolver"/>
+        <xs:element name="SwitchValue">
+          <xs:annotation>
+            <xs:documentation>切换信息的定义</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ErrorMessage" type="tk:MultiLanguageType" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>NullValueProcess选择ThrowException时的显示的错误消息</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="NickName" type="xs:Name" use="required">
+              <xs:annotation>
+                <xs:documentation>需要切换值的字段昵称</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="OpenValue" type="xs:string" default="1">
+              <xs:annotation>
+                <xs:documentation>打开的值，默认为1</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="CloseValue" type="xs:string" default="0">
+              <xs:annotation>
+                <xs:documentation>关闭的值，默认为0</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="NullValueProcess">
+              <xs:annotation>
+                <xs:documentation>字段为Null时的处理方式，默认用OpenValue打开。也可以选择抛出错误</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="OpenValue"/>
+                  <xs:enumeration value="ThrowException"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="UpdateTrackField" type="xs:boolean">
+              <xs:annotation>
+                <xs:documentation>是否更新表的UpdateId和UpdateDate字段内容，默认为false，不更新</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attributeGroup ref="tk:__tk_ContextGroup"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeStatusSource">
+    <xs:annotation>
+      <xs:documentation>对某表的某字段值进行更新的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tk:Resolver"/>
+        <xs:element name="Status" type="tk:MarcoConfigItem"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="tk:__tk_ContextGroup"/>
+      <xs:attribute name="NickName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>需要切换值的字段昵称</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="UpdateTrackField" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否更新表的UpdateId和UpdateDate字段内容，默认为false，不更新</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DbListSource">
+    <xs:annotation>
+      <xs:documentation>单表的列表数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:SingleDbSourceType">
+          <xs:group ref="tk:__tk_ListGroup"/>
+          <xs:attributeGroup ref="tk:__tk_ListAttrGroup"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SingleDbEditSource">
+    <xs:annotation>
+      <xs:documentation>提供对单表的Insert和Update操作的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:SingleMetaDbSourceType">
+          <xs:attribute name="UpdateMode" type="tk:UpdateModeType">
+            <xs:annotation>
+              <xs:documentation>在修改模式下，TableResolver的UpdateMode属性的值。默认为OneRow</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SingleDbDetailSource">
+    <xs:annotation>
+      <xs:documentation>提供对单表的Detail数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:SingleMetaDbSourceType">
+          <xs:sequence>
+            <xs:element ref="tk:DetailOperators" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SingleDbDelInsSource">
+    <xs:annotation>
+      <xs:documentation>从表中选出数据后全部删除，再全部插入提交的数据源。适用于多对多关系的连接表操作</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:SingleDbSourceType">
+          <xs:sequence>
+            <xs:element name="FilterSql" type="tk:MarcoConfigItem" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SingleDbInsertSource" type="tk:SingleMetaDbSourceType">
+    <xs:annotation>
+      <xs:documentation>提供对单表的Insert在Get的时候的数据源</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SingleDbDeleteSource" type="tk:SingleDbSourceType">
+    <xs:annotation>
+      <xs:documentation>提供对单表的Delete数据源</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SingleDbSource" type="tk:__tk_SingleDbSourceType">
+    <xs:annotation>
+      <xs:documentation>将List，Detail，Edit的单表操作的Source整合在一起，完成整个单表的增删改查工作的数据源</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SingleDbDetailListSource">
+    <xs:annotation>
+      <xs:documentation>提供对单表增删改，Detail含有子表的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:__tk_SingleDbSourceType">
+          <xs:sequence>
+            <xs:element name="ChildTable" type="tk:__tk_ChildTableType" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>从表</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="FillDetailData" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>在Detail时，直接填充数据，默认为false</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SimpleResolverSource">
+    <xs:annotation>
+      <xs:documentation>通过TableResolver获取整个表数据，支持解码的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tk:Resolver"/>
+        <xs:element name="FilterSql" type="tk:MarcoConfigItem" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>固有的过滤条件</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="OrderBy" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>排序方式，需要添加关键字ORDER BY</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="UseCallerInfo" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否在结果集中添加附加信息</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attributeGroup ref="tk:__tk_ContextGroup"/>
+    </xs:complexType>
+  </xs:element>
+  <!--树形Source类型-->
+  <xs:element name="SingleDbTreeSource">
+    <xs:annotation>
+      <xs:documentation>提供对单表Tree模型的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:SingleMetaDbSourceType">
+          <xs:sequence>
+            <xs:element ref="tk:DetailOperators" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TreeSource">
+    <xs:annotation>
+      <xs:documentation>树形结构的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Tree" type="tk:TreeConfigType"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="tk:__tk_ContextGroup"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TreeOperationSource">
+    <xs:annotation>
+      <xs:documentation>支持树节点的移动，拖动，新建子节点等操作的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Tree" type="tk:TreeConfigType"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="tk:__tk_ContextGroup"/>
+    </xs:complexType>
+  </xs:element>
+  <!--多表Source类型-->
+  <xs:element name="MultipleDbInsertSource">
+    <xs:annotation>
+      <xs:documentation>提供对多表的Insert在Get的时候的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tk:Resolver" maxOccurs="unbounded"/>
+        <xs:element ref="tk:DataRight" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="tk:__tk_DbSourceAttrGroup"/>
+      <xs:attributeGroup ref="tk:__tk_MetaDataGroup"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MultipleDbEditSource" type="tk:MultipleMetaDbSourceType">
+    <xs:annotation>
+      <xs:documentation>提供对多表的Insert和Update的数据源</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MultipleDbDeleteSource" type="tk:MultipleDbSourceType">
+    <xs:annotation>
+      <xs:documentation>提供对多表的Delete数据源</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MultipleDbDetailSource">
+    <xs:annotation>
+      <xs:documentation>提供对多表的Detail数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:MultipleMetaDbSourceType">
+          <xs:sequence>
+            <xs:element ref="tk:DetailOperators" minOccurs="0"/>
+          </xs:sequence>
+          <xs:attribute name="FillDetailData" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>在Detail时，直接填充数据，默认为false</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MasterDetailDbSource">
+    <xs:annotation>
+      <xs:documentation>提供对主从表的增删改查的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="MasterResolver" type="tk:ResolverType"/>
+        <xs:element name="Detail" type="tk:__tk_FullChildTableType"/>
+        <xs:element ref="tk:DataRight" minOccurs="0"/>
+        <xs:group ref="tk:__tk_ListGroup"/>
+        <xs:element ref="tk:DetailOperators" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="tk:__tk_DbSourceAttrGroup"/>
+      <xs:attributeGroup ref="tk:__tk_ListAttrGroup"/>
+      <xs:attribute name="DisablePage" type="tk:DefaultShowType">
+        <xs:annotation>
+          <xs:documentation>需要禁止的Page，增强Source的安全性</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DbDetailTableMaintainSource">
+    <xs:annotation>
+      <xs:documentation>单独维护整个子表的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:SingleMetaDbSourceType">
+          <xs:attribute name="ParentKey" type="xs:Name" use="required">
+            <xs:annotation>
+              <xs:documentation>子表与主表相关联的字段昵称</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="UpdateMode" type="tk:UpdateModeType">
+            <xs:annotation>
+              <xs:documentation>修改数据的模式，默认为Merge</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="QueryStringName" type="xs:Name">
+            <xs:annotation>
+              <xs:documentation>主表在QueryString传递主键值的名称，如果没配置以ParentKey值为准</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DbDetailListSource">
+    <xs:annotation>
+      <xs:documentation>在Detail页面下，用列表的方式显示子表的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:SingleDbSourceType">
+          <xs:sequence>
+            <xs:element name="ChildTable" type="tk:__tk_FullChildTableType" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>与主表关联的子表配置</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="PageSize" type="xs:unsignedInt"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MultipleMDSource">
+    <xs:annotation>
+      <xs:documentation>提供对单主表，多从表的增删改查的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:__tk_SingleDbSourceType">
+          <xs:sequence>
+            <xs:element name="ChildTable" type="tk:__tk_FullChildTableType" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>与主表关联的子表配置</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <!--对象Source类型-->
+  <xs:element name="ListObjectSource">
+    <xs:annotation>
+      <xs:documentation>提供对象列表时的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:__tk_NormalObjectSourceType">
+          <xs:sequence>
+            <xs:element name="Operators" type="tk:ObjectOperateRightConfig" minOccurs="0"/>
+          </xs:sequence>
+          <xs:attribute name="PageSize" type="xs:unsignedInt"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertObjectSource" type="tk:__tk_NormalObjectSourceType">
+    <xs:annotation>
+      <xs:documentation>提供对象新建时的Get和Post数据源</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="UpdateObjectSource" type="tk:__tk_NormalObjectSourceType">
+    <xs:annotation>
+      <xs:documentation>提供对象修改时的Get和Post数据源</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DetailObjectSource">
+    <xs:annotation>
+      <xs:documentation>提供对象查看时的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:__tk_NormalObjectSourceType">
+          <xs:sequence>
+            <xs:element name="DetailOperators" type="tk:ObjectOperateRightConfig" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteObjectSource" type="tk:__tk_NormalObjectSourceType">
+    <xs:annotation>
+      <xs:documentation>提供对象删除时的数据源</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SingleObjectSource">
+    <xs:annotation>
+      <xs:documentation>将List，Detail，Edit的单个对象操作的数据源整合在一起的数据源，完成对象的增删改工作</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:__tk_NormalObjectSourceType">
+          <xs:sequence>
+            <xs:element name="ListObjectSource" type="tk:__tk_ObjectSourceType" minOccurs="0"/>
+            <xs:element name="Operators" type="tk:ObjectOperateRightConfig" minOccurs="0"/>
+            <xs:element name="DetailOperators" type="tk:ObjectOperateRightConfig" minOccurs="0"/>
+          </xs:sequence>
+          <xs:attribute name="PageSize" type="xs:unsignedInt"/>
+          <xs:attribute name="DisablePage" type="tk:DefaultShowType">
+            <xs:annotation>
+              <xs:documentation>需要禁止的Page，增强Source的安全性</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SingleTreeObjectSource">
+    <xs:annotation>
+      <xs:documentation>提供对对象Tree模型的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:__tk_NormalObjectSourceType">
+          <xs:sequence>
+            <xs:element name="Tree" type="tk:TreeConfigType"/>
+            <xs:element name="DetailOperators" type="tk:ObjectOperateRightConfig" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QuerySource">
+    <xs:annotation>
+      <xs:documentation>根据查询条件，生成查询结果的数据源。这里只需要配置计算结果的数据源</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="CalcSource">
+          <xs:annotation>
+            <xs:documentation>计算结果的Source</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:group ref="tk:SourceElementGroup"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,50 @@
+﻿@inherits YJC.Toolkit.Razor.ToolkitTemplatePage<TModel>
+@using System.Data;
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    INormalMetaData metaData = ViewBag.MetaData;
+    INormalTableData table = metaData.TableData;
+    IEnumerable<Tk5FieldInfoEx> fields = table.DataList;
+}
+    <template>
+        <el-dialog title="详情" :visible.sync="dialogVisible" width="30%">
+            <el-form :model="data" label-width="80px">
+                @foreach (var field in fields)
+                {
+                <el-form-item label="@Raw(field.DisplayName)">
+                    {{data.@field.NickName}}
+                </el-form-item>
+                }
+            </el-form>
+        </el-dialog>
+    </template>
+<script>
+export default {
+  props: {
+    visible: {
+      type: Boolean,
+      default: false
+    },
+    data: {
+      type: Object,
+      default: () => { }
+    }
+  },
+  computed: {
+    dialogVisible: {
+      get () {
+        return this.visible
+      },
+      set (val) {
+        this.$emit('update:visible', val)
+      }
+    }
+  },
+}
+</script>

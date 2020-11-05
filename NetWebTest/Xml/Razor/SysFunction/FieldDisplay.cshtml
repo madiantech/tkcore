@@ -1,0 +1,21 @@
+﻿@inherits YJC.Toolkit.Razor.NormalMultiEditTemplate
+@using YJC.Toolkit.Web;
+@using YJC.Toolkit.Sys;
+@{ 
+    short charactor = ObjectExtension.Value<short>(Model.Row["Character"]);
+    short display = ObjectExtension.Value<short>(Model.Row["Display"]);
+    string disableString = string.Empty;
+    if (charactor == 2 || charactor == 3)
+    {
+        display = 1;
+        disableString = "disabled";
+    }
+    string checkString = display == 1 ? "checked" : string.Empty;
+}
+<td>
+    <div class="form-group mb1">
+        <span class="tk-control db">
+            <input type="checkbox" class="vam" data-uncheck-value="0" name="Display" value="1" @checkString @disableString>
+        </span>
+    </div>
+</td>

@@ -1,0 +1,9 @@
+﻿@using System.Data;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Web;
+@using YJC.Toolkit.Sys;
+@{
+    IFieldValueProvider provider = Model.Provider;
+}
+<td class="text-nowrap text-center"><label><input type="checkbox" value="@provider["Id"]" />glq</label></td>

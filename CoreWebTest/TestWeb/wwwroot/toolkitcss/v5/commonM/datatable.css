@@ -1,0 +1,164 @@
+/* toolkit ui:datatable (datadetail / dataform) */
+.tk-datadetail
+{
+}
+
+.tk-dataform
+{
+}
+
+.tk-datatable
+{
+    line-height: 1;
+    float: left;
+    width: 100%;
+}
+
+    .tk-datatable div.tk-column
+    {
+        float: left;
+        width: 100%;
+        min-height: 24px;
+    }
+
+        .tk-datatable div.tk-column.form-group
+        {
+            margin-bottom: 0;
+        }
+
+.column2 div.tk-column
+{
+    width: 50%;
+}
+
+.column3 div.tk-column
+{
+    width: 33.33%;
+}
+
+.column4 div.tk-column
+{
+    width: 25%;
+}
+
+.column5 div.tk-column
+{
+    width: 20%;
+}
+
+.tk-datatable div.dc-all
+{
+    width: 100%;
+}
+/*column*/
+.column2 div.dc-2
+{
+    width: 100%;
+}
+
+.column3 div.dc-2
+{
+    width: 66.66%;
+}
+
+.column3 div.dc-3
+{
+    width: 100%;
+}
+
+.column3 div.dc-4
+{
+    width: 100%;
+}
+
+.column4 div.dc-2
+{
+    width: 50%;
+}
+
+.column4 div.dc-3
+{
+    width: 75%;
+}
+
+.column4 div.dc-4
+{
+    width: 100%;
+}
+
+.column5 div.dc-2
+{
+    width: 40%;
+}
+
+.column5 div.dc-3
+{
+    width: 60%;
+}
+
+.column5 div.dc-4
+{
+    width: 80%;
+}
+
+.tk-column .form-group
+{
+    margin-bottom: 0px;
+}
+
+.tk-column .form-control
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.tk-datatable dl dt
+{
+    width: 95px;
+    display: block;
+    float: left;
+    padding: 3px 0;
+    line-height: 34px;
+    text-align: right;
+}
+
+.tk-datatable dl dd
+{
+    margin-left: 110px;
+    margin-right: 20px;
+    padding: 3px 0;
+    line-height: 34px;
+    min-height: 34px;
+}
+
+.tk-datatable dl.nocaption dd
+{
+    margin-left: 20px;
+}
+
+.tk-datatable dl dd .input-group
+{
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.tk-datatable dl dd .switch
+{
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+
+.tk-datatable dl dd span.tk-control
+{
+    min-height: 36px;
+    display: block;
+}
+
+.tk-datatable dl dd .detail-content
+{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    min-height: 34px;
+}
+

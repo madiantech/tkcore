@@ -1,0 +1,52 @@
+﻿@inherits YJC.Toolkit.Razor.BootcssListTemplate
+@using System.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    DataSet dataSet = (DataSet)Model;
+    DataRow countRow = dataSet.GetRow("Count");
+    string url = dataSet.GetFieldValue<string>("URL", "DSelfURL");
+    string condition = dataSet.GetFieldValue<string>("Sort", "SqlCon");
+    string tableName = ViewBag.MetaData.Table.TableName;
+    ITableSchemeEx scheme = ViewBag.MetaData.GetTableScheme(tableName);
+    BootcssListData pageData = ViewBag.PageData;
+    IList<BootcssListFieldConfig> listFields = pageData.ListFields;
+    DataDirection direction = pageData.Direction;
+}
+@if (countRow.GetValue<int>("TotalCount") == 0)
+{
+    <ul id="pageList" class="list-group" data-condition="@condition" data-url="@url" data-page="0">
+        <li class="list-group-item">@pageData.NoDataCaption</li>
+    </ul>
+}
+else
+{
+    @if (direction == DataDirection.Head)
+        @RenderSectionIfDefined("PageNumber", "pagenumber.cshtml", Model)
+    <ul id="pageList" class="@HtmlUtil.MergeClass("list-group", pageData.ShowBorder ? "" : "noshadow")"  data-totalcount="@countRow.GetString("TotalCount")" data-totalpage="@countRow.GetString("TotalPage")" data-page="@countRow.GetString("CurrentPage")" data-url="@url" data-condition="@condition" data-tab="@HtmlUtil.GetSelectedTab(dataSet)" data-direction="@direction.ToString().ToLower()">
+        @if (pageData.ShowListHeader)
+        {
+            @if (IsSectionDefined("ListHeader"))
+                @RenderSection("ListHeader")
+            else 
+            {
+                <li class="list-group-item">
+                    <div class="row">
+                        @foreach (BootcssListFieldConfig field in listFields)
+                        {     
+                            @{ 
+                                IFieldInfoEx fieldInfo = scheme[field.NickName].Convert<IFieldInfoEx>(); 
+                            }
+                            <div class="@HtmlUtil.MergeClass(BootcssUtil.GetColClass(field.Col), "lv-vam list-head", field.Class)">@fieldInfo.DisplayName</div>
+                        }
+                    </div>
+                </li>
+            }
+        }
+        @RenderLayoutPartial("listmain.cshtml", Model)
+    </ul>
+    @if (direction == DataDirection.Foot)
+        @RenderSectionIfDefined("PageNumber", "pagenumber.cshtml", Model)
+}

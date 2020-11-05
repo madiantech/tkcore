@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:attributeGroup name="__tk_DialogMode">
+    <xs:attribute name="Mode">
+      <xs:annotation>
+        <xs:documentation>显示的模式，Normal为跳转到另外一页显示详细信息。Dialog为用对话框显示详细信息。默认为Normal</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="Normal"/>
+          <xs:enumeration value="Dialog"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="DialogTitle" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Dialog模式下，可以设定对话框显示的标题。支持*Name*的变量结构</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:complexType name="FieldDisplayType">
+    <xs:annotation>
+      <xs:documentation>显示的元素组</xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:group ref="tk:CoreDisplayGroup"/>
+      <xs:element ref="tk:LinkDisplay"/>
+      <xs:element ref="tk:ConditionDisplay"/>
+      <xs:element ref="tk:AutoDisplay"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:group name="DisplayGroup">
+    <xs:annotation>
+      <xs:documentation>显示的元素组</xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:group ref="tk:CoreDisplayGroup"/>
+      <xs:element ref="tk:LinkDisplay"/>
+      <xs:element ref="tk:ConditionDisplay"/>
+      <xs:element ref="tk:AutoDisplay"/>
+    </xs:choice>
+  </xs:group>
+  <xs:group name="CoreDisplayGroup">
+    <xs:annotation>
+      <xs:documentation>显示核心数据，一个字段只能配置一个这样的Display</xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:element ref="tk:StaticDisplay"/>
+      <xs:element ref="tk:NormalDisplay"/>
+      <xs:element ref="tk:DoubleDisplay"/>
+      <xs:element ref="tk:DecoderDisplay"/>
+      <xs:element ref="tk:MultipleDecoderDisplay"/>
+      <xs:element ref="tk:DateTimeDisplay"/>
+      <xs:element ref="tk:DateDisplay"/>
+      <xs:element ref="tk:TimeDisplay"/>
+      <xs:element ref="tk:AbbrDisplay"/>
+      <xs:element ref="tk:CheckedDisplay"/>
+      <xs:element ref="tk:MaskDisplay"/>
+      <xs:element ref="tk:MailToDisplay"/>
+      <xs:element ref="tk:HttpDisplay"/>
+      <xs:element ref="tk:UploadDisplay"/>
+      <xs:element ref="tk:RegDisplay">
+        <xs:annotation>
+          <xs:documentation>根据配置的注册名实例化Display</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EvaluatorDisplay" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>通过Evaluator计算得到显示的结果，有value（当前值）和row（当前行）两个上下文变量</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="tk:ListRefDisplay"/>
+      <xs:element ref="tk:DoubleColorDisplay"/>
+      <xs:element ref="tk:UploadImgDisplay"/>
+      <xs:element ref="tk:RelativeDateDisplay"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+    </xs:choice>
+  </xs:group>
+  <xs:group name="DecorateDisplayGroup">
+    <xs:annotation>
+      <xs:documentation>对显示的内容进行进一步装饰，可以多个叠加使用</xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:element ref="tk:HrefDisplay"/>
+      <xs:element ref="tk:HtmlColorDisplay"/>
+      <xs:element ref="tk:HtmlFontStyleDisplay"/>
+      <xs:element ref="tk:HtmlClassDisplay"/>
+      <xs:element ref="tk:FormatDisplay"/>
+      <xs:element ref="tk:AppendHintDisplay"/>
+      <xs:element ref="tk:DialogHrefDisplay"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+    </xs:choice>
+  </xs:group>
+  <xs:element name="LinkDisplay">
+    <xs:annotation>
+      <xs:documentation>链接一个核心数据显示和多个装饰Display</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="tk:CoreDisplayGroup"/>
+        <xs:group ref="tk:DecorateDisplayGroup" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConditionDisplay">
+    <xs:annotation>
+      <xs:documentation>根据条件决定使用相应Display进行显示</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>多个条件项</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Condition" type="tk:MarcoConfigItem">
+                <xs:annotation>
+                  <xs:documentation>条件，通过Evaluator计算得到显示的结果，有value（当前值）和row（当前行）两个上下文变量</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:group ref="tk:DisplayGroup"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Otherwise">
+          <xs:complexType>
+            <xs:group ref="tk:DisplayGroup"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StaticDisplay">
+    <xs:annotation>
+      <xs:documentation>显示静态文本，无视字段的数值</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="EscapeString" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>对显示内容进行转义，防止脚本注入，默认为true</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NormalDisplay">
+    <xs:annotation>
+      <xs:documentation>正常显示</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="EscapeString" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>对显示内容进行转义，防止脚本注入，默认为true</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DoubleDisplay">
+    <xs:annotation>
+      <xs:documentation>数字显示</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Format" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>浮点数显示的格式，默认为0.00</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DecoderDisplay" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>EasySearch和CodeTable显示</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MultipleDecoderDisplay" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>MultipleEasySearch和CheckBoxList显示</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DateTimeDisplay">
+    <xs:annotation>
+      <xs:documentation>日期时间显示</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Format" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>日期时间显示的格式，默认为yyyy-MM-dd HH:mm</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DateDisplay">
+    <xs:annotation>
+      <xs:documentation>日期显示</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Format" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>日期显示的格式，默认为yyyy-MM-dd</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TimeDisplay">
+    <xs:annotation>
+      <xs:documentation>时间显示</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Format" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>时间显示的格式，默认为HH:mm</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AbbrDisplay">
+    <xs:annotation>
+      <xs:documentation>内容简写显示</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="DisplayMode">
+        <xs:annotation>
+          <xs:documentation>定义显示缩略显示的方式。默认为End，即在最后显示...。如果是Middle，在中间显示...</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="End"/>
+            <xs:enumeration value="Middle"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="MaxLength" type="xs:unsignedInt">
+        <xs:annotation>
+          <xs:documentation>显示内容的最大长度，超过这个长度，将显示缩略符号，否则显示原内容，默认为30</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="EndLength" type="xs:unsignedInt">
+        <xs:annotation>
+          <xs:documentation>选择Middle模式时，尾部的长度，默认为2</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="AbbrString" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>缩略符的样式。默认为...</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckedDisplay">
+    <xs:annotation>
+      <xs:documentation>布尔显示，显示打勾，打叉</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="CheckValue" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>打勾时的值，默认为1</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="UncheckValue" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>打叉时的值，默认为0</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MaskDisplay">
+    <xs:annotation>
+      <xs:documentation>加密显示内容</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="DisplayMode">
+        <xs:annotation>
+          <xs:documentation>加密显示类型。All全显示*；Head前部显示内容；后面显示*；Middle两头显示内容，中间显示*；End后部显示内容，前面显示*。默认为All</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="All"/>
+            <xs:enumeration value="Head"/>
+            <xs:enumeration value="Middle"/>
+            <xs:enumeration value="End"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FixLength" type="xs:unsignedInt">
+        <xs:annotation>
+          <xs:documentation>显示内容的长度，如果为0，则按照字符串的长度显示。默认值为0</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="HeadLength" type="xs:unsignedInt">
+        <xs:annotation>
+          <xs:documentation>模式为Head和Middle时，前部内容显示的长度，默认为2</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="EndLength" type="xs:unsignedInt">
+        <xs:annotation>
+          <xs:documentation>模式为End和Middle时，后部内容显示的长度，默认为2</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="MaskChar">
+        <xs:annotation>
+          <xs:documentation>屏蔽内容字符，默认为*</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MailToDisplay" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>数据是邮箱地址，可以用这个配置，将显示发邮件的超链</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="HttpDisplay">
+    <xs:annotation>
+      <xs:documentation>数据是http地址，可以用这个配置，将显示地址的超链</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Target" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>如果需要跳转到新的页面，需要填写_blank，默认为_blank</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadDisplay" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>显示Upload的信息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RegDisplay" type="xs:Name">
+    <xs:annotation>
+      <xs:documentation>Display的插件注册名</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="HrefDisplay">
+    <xs:annotation>
+      <xs:documentation>链接显示</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:anyURI">
+          <xs:attribute name="Base" type="xs:Name">
+            <xs:annotation>
+              <xs:documentation>Host名称，如果连接地址为相对地址，可以和Application.xml配置的Host链接为完整地址</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="Target" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>如果需要跳转到新的页面，需要填写_blank</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HtmlColorDisplay">
+    <xs:annotation>
+      <xs:documentation>对显示加注Html的颜色</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Color" type="xs:string" use="required">
+        <xs:annotation>
+          <xs:documentation>字体的颜色。以.开始表示对应css的颜色class，以#开始，表示颜色的rgb值。其他值都是假定Html的颜色名称，如red,green等</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HtmlFontStyleDisplay">
+    <xs:annotation>
+      <xs:documentation>用Html的方式设置显示的文字字体</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Style" use="required">
+        <xs:annotation>
+          <xs:documentation>字体的Style</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Bold"/>
+            <xs:enumeration value="Italic"/>
+            <xs:enumeration value="Strikeout"/>
+            <xs:enumeration value="Underline"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FormatDisplay" type="tk:MarcoConfigItem">
+    <xs:annotation>
+      <xs:documentation>用{0}替代要叠加的值，其他部分为静态文本。没开启宏时，直接写{0}，如果开启宏，要写{{0}}</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AppendHintDisplay">
+    <xs:annotation>
+      <xs:documentation>在显示的内容添加配置的Hint</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Position">
+        <xs:annotation>
+          <xs:documentation>设置Hint显示的位置，默认为End</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Head"/>
+            <xs:enumeration value="End"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Seperator" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>设置显示内容与Hint之间的间隔，默认为一个空格</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HtmlClassDisplay">
+    <xs:annotation>
+      <xs:documentation>在显示内容加一层外层并配置以相应的Class或者Style，以达到相应的显示目的</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="ElementType">
+        <xs:annotation>
+          <xs:documentation>使用Span或者Div作为外包内部的Html元素。默认值为Span</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Span"/>
+            <xs:enumeration value="Div"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Class" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>需要配置的Class名称，多个用空格分隔</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Style" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>直接配置元素的Style，省去定义Class</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListRefDisplay">
+    <xs:annotation>
+      <xs:documentation>List页面给相应的字段提供详细信息的链接</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:group ref="tk:DisplayGroup"/>
+      <xs:attributeGroup ref="tk:__tk_DialogMode"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AutoDisplay">
+    <xs:annotation>
+      <xs:documentation>自动根据配置调用相应的Display进行显示，和不配置相当</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Style">
+        <xs:annotation>
+          <xs:documentation>显示页面的Style，默认Detail适配List和Detail页面。如果是Insert和Update页面需要设置为Edit</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Detail"/>
+            <xs:enumeration value="Edit"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadImgDisplay">
+    <xs:annotation>
+      <xs:documentation>将Upload的地址显示为图片的Display</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Class">
+        <xs:annotation>
+          <xs:documentation>设定img标签的html class属性</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DoubleColorDisplay">
+    <xs:annotation>
+      <xs:documentation>当浮点高于或低于某个基准值时，以指定的颜色来显示</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="BaseValue" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>基准值，默认为0</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="HighColor" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>高于基准值时，字体的颜色如不指定，则没有颜色。以.开始表示对应css的颜色class，以#开始，表示颜色的rgb值。其他值都是假定Html的颜色名称，如red,green等</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="LowColor" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>高于基准值时，字体的颜色如不指定，则没有颜色。颜色描述同HighColor</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="EqualColor" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>等于基准值时，字体的颜色如不指定，则没有颜色。颜色描述同HighColor</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Format" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>浮点数显示的格式，默认为0.00</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RelativeDateDisplay">
+    <xs:annotation>
+      <xs:documentation>根据当前日期和显示日期比较，酌情显示今天，明天，昨天，上溯一周内显示星期几，其他按照yy-MM-dd显示</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Format" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>日期显示的格式，默认为yy-MM-dd</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DialogHrefDisplay">
+    <xs:annotation>
+      <xs:documentation>采用data-url的方式生成链接地址，在链接跳转时，会自动添加RetUrl参数。采用data-dialog-url的方式添加链接，会以对话框形式显示链接地址内容</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:anyURI">
+          <xs:attributeGroup ref="tk:__tk_DialogMode"/>
+          <xs:attribute name="Target" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>如果需要跳转到新的页面，需要填写_blank</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

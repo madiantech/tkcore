@@ -1,0 +1,26 @@
+﻿@inherits YJC.Toolkit.Razor.BootcssCustomTemplate
+@using YJC.Toolkit.Web;
+@section DefaultWeixin {
+    <div id="metaData" class="hide" data-toolbar="false" data-option="false"></div>
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    @RenderLayoutPartial("../bin/css.cshtml", null)
+    @ViewBag.Script.CreateUserCss()
+</head>
+<body data-webPath="@HtmlUtil.AppVirtualPath">
+    <div class="container">
+        @RenderSectionOrDefault("Weixin", "DefaultWeixin")
+        @RenderSectionIfDefined("Header")
+        @RenderSectionIfDefined("Main")
+        @RenderSectionIfDefined("Footer")
+    </div>
+    @RenderLayoutPartial("../bin/js.cshtml", null)
+    @ViewBag.Script.CreateUserJavaScript()
+</body>
+</html>

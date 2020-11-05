@@ -1,0 +1,94 @@
+﻿@inherits YJC.Toolkit.Razor.NormalQueryConditionTemplate
+@using System.Data;
+@using System.Linq;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    DataSet dataSet = (DataSet)Model;
+    NormalQueryData pageData = (NormalQueryData)ViewBag.PageData;
+    bool hideCaption = pageData.HideCaption;
+    var queryFields = ViewBag.MetaData.Table.QueryFields;
+    DataRow queryRow = dataSet.GetRow("Condition");
+    IFieldValueProvider queryProvider = new DataRowFieldValueProvider(queryRow, dataSet);
+    string json = ViewBag.MetaData.Table.JsonFields;
+    string title = ViewBag.Title;
+    bool export = pageData.Export;
+}
+@section DefaultHeader {
+    @if (pageData.Header != null)
+    {
+        @RenderRazorOutputData(pageData.Header, Model)
+    }
+    else
+    {
+        <h1>@title</h1>
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    @RenderLayoutPartial("../bin/css.cshtml", null)
+    <link rel="stylesheet" type="text/css" href="@("toolkitjs/v5/boottable/bootstrap-table.min.css".AppVirutalPath())" />
+    @ViewBag.Script.CreateUserCss()
+    <style>
+        .mt-10 {
+            margin-top: -10px;
+        }
+
+        .ztop {
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body id="WebQueryPage" class="tk-dataPage" data-webpath="@HtmlUtil.AppVirtualPath">
+    <br />
+    <div class="container-fluid">
+        @if (pageData.ShowTitle)
+        {
+            @RenderSectionOrDefault("Header", "DefaultHeader")
+        }
+        <form class="@HtmlUtil.MergeClass("form-inline tk-datasearch", export ? "pa ztop" : string.Empty)" id="QueryForm" data-check="false" data-post="@StringUtil.EscapeHtmlAttribute(json)">
+            @foreach (Tk5FieldInfoEx field in queryFields)
+            {
+                string fieldString = RenderFieldItem(queryRow, field);
+                if (fieldString != null)
+                {
+                    @fieldString
+                }
+                else
+                {
+                    <div class="form-group">
+                        @if (!hideCaption || (hideCaption && field.PlaceHolder))
+                        {
+                            <label for="@field.NickName">@field.DisplayName</label>
+                        }
+                        @field.SearchControlHtml(queryProvider)
+                    </div>
+                }
+            }
+            <button class="btn btn-default" id="btn-search">@pageData.ButtonCaption</button>
+        </form>
+
+        <div id="resultTable" class="@(export ? "mt-10" : "mt20")" data-export="@export" data-response="@pageData.ResponseFunc">
+        </div>
+    </div>
+    @RenderLayoutPartial("../bin/js.cshtml", null)
+    <script type="text/javascript" src="@("toolkitjs/v5/boottable/bootstrap-table.min.js".AppVirutalPath())"></script>
+    <script type="text/javascript" src="@("toolkitjs/v5/boottable/locale/bootstrap-table-zh-CN.min.js".AppVirutalPath())"></script>
+    @if (export)
+    {
+        <script type="text/javascript" src="@("toolkitjs/v5/boottable/extensions/export/bootstrap-table-export.min.js".AppVirutalPath())"></script>
+        <script type="text/javascript" src="@("toolkitjs/v5/boottable/extensions/export/tableExport.js".AppVirutalPath())"></script>
+    }
+    <script type="text/javascript" src="@("toolkitjs/v5/toolkit/coreT/toolkit.query.js".AppVirutalPath())"></script>
+    @ViewBag.Script.CreateUserJavaScript()
+    @RenderSectionIfDefined("Script")
+</body>
+</html>

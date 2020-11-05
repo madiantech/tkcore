@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:element name="OutputRedirector" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>将Source返回值直接作为Url重定向</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="UrlRedirector">
+    <xs:annotation>
+      <xs:documentation>根据配置的Url进行重定向</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Url" type="xs:anyURI" use="required">
+        <xs:annotation>
+          <xs:documentation>需要跳转的Url</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RetUrlRedirector" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>根据QueryString的RetUrl进行重定向，如果没有重定向到首页</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:group name="SimpleRedirectorGroup">
+    <xs:choice>
+      <xs:element ref="tk:OutputRedirector"/>
+      <xs:element ref="tk:RetUrlRedirector"/>
+      <xs:element ref="tk:UrlRedirector"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="SimpleRedirectorType">
+    <xs:annotation>
+      <xs:documentation>该类型为动态节点，可根据配置工厂实际情况，自由调整</xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:group ref="tk:SimpleRedirectorGroup"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="RedirectorType">
+    <xs:choice>
+      <xs:group ref="tk:SimpleRedirectorGroup"/>
+    </xs:choice>
+  </xs:complexType>
+</xs:schema>

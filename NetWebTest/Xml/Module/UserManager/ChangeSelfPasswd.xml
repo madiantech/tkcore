@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>密码</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:SingleClassMetaData ClassRegName="PasswordData" ColumnCount="1" JsonDataType="Object"/>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:UpdateObjectSource>
+        <tk:ObjectSource>
+          <tk:RegNameObjectSource>ChangeSelfPassword</tk:RegNameObjectSource>
+        </tk:ObjectSource>
+      </tk:UpdateObjectSource>
+    </tk:Source>
+    <tk:PostObjectCreator>
+      <tk:CustomJsonObjectCreator RegTypeName="PasswordData" LocalName="PasswordData"/>
+    </tk:PostObjectCreator>
+    <tk:PageMaker>
+      <tk:PostRazorPageMaker DestUrl="Custom" Template="NormalObjectEdit">
+        <tk:RazorData>
+          <tk:NormalEditData ShowTitle="false" SaveButtonCaption="修改密码" DialogMode="true"/>
+        </tk:RazorData>
+        <tk:CustomUrl>CloseDialog</tk:CustomUrl>
+        <tk:AlertMessage>
+          <tk:Content>密码已修改</tk:Content>
+        </tk:AlertMessage>
+      </tk:PostRazorPageMaker>
+    </tk:PageMaker>
+  </tk:Module>
+</tk:Toolkit>

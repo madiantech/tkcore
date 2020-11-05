@@ -1,0 +1,43 @@
+﻿@inherits YJC.Toolkit.Razor.BootcssListTemplate
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@using YJC.Toolkit.Razor;
+@{
+    BootcssListData pageData = ViewBag.PageData;
+}
+@section DefaultWeixin {
+    <div id="metaData" class="hide" data-toolbar="false" data-option="false"></div>
+}
+@section DefaultHeader {
+    @RenderRazorOutputData(pageData.Header, Model)
+}
+@section DefaultFooter {
+    @RenderRazorOutputData(pageData.Footer, Model)
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    @RenderLayoutPartial("../bin/css.cshtml", null) 
+    @ViewBag.Script.CreateUserCss()
+</head>
+<body id="@HtmlUtil.GetPageId(Model)" data-webPath="@HtmlUtil.AppVirtualPath">
+    <div class="container">
+        @RenderSectionOrDefault("Weixin", "DefaultWeixin")
+        @RenderSectionOrDefault("Header", "DefaultHeader")
+        @RenderSectionIfDefined("Query", "query.cshtml", Model)
+        <div class="tk-datalist">
+            <div id="listData">
+                @RenderSectionIfDefined("Main", "main.cshtml", Model)
+            </div>
+        </div>
+        @RenderSectionOrDefault("Footer", "DefaultFooter")
+    </div>
+    @RenderLayoutPartial("../bin/js.cshtml", null)
+    <script type="text/javascript" src="@("toolkitjs/v5/toolkit/coreT/toolkit.list.js".AppVirutalPath())"> </script>
+    @ViewBag.Script.CreateUserJavaScript()
+</body>
+</html>

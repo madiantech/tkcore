@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="CS_DOCUMENT" NameField="Title">
+    <tk:TableDesc>
+      <tk:Content>财税文档</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="int" IsKey="true" IsEmpty="false">
+      <tk:FieldName>DOC_DOC_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>文档ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DOC_NUMBER</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>文件文号</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>80</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="21" DefaultShow="All"/>
+      <tk:ListDetail ListWidth="220"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DOC_CATELOG</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>种类</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>5</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="11" DefaultShow="All"/>
+      <tk:ListDetail Search="true" ListWidth="120"/>
+      <tk:Edit>
+        <tk:DefaultValue>04</tk:DefaultValue>
+        <tk:Attribute Name="data-auto-query" Value="true"/>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DOC_TITLE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>标题</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="20" DefaultShow="All"/>
+      <tk:ListDetail Search="true">
+      </tk:ListDetail>
+    </tk:Field>
+    <tk:Field DataType="Date">
+      <tk:FieldName>DOC_PUB_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>编辑日期</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Date" Order="100" DefaultShow="All"/>
+      <!--<tk:ListDetail Search="true" Span="true"/>-->
+      <tk:ListDetail ListWidth="100"/>
+      <tk:Edit>
+        <tk:DefaultValue NeedParse="true">{Today}</tk:DefaultValue>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>DOC_SORT_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>内部排序ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="60" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DOC_ORGIN_ORG</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>发文单位</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>120</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="13" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="Date">
+      <tk:FieldName>DOC_ORGIN_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>发文日期</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Date" Order="62" DefaultShow="All"/>
+      <tk:ListDetail ListWidth="100"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DOC_SUB_TITLE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>副标题</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="90" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DOC_SOURCE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>来源</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="100" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DOC_KEY_WORD</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>关键词</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="90" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DOC_PREV_CONTENT</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>内容缩略</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="120" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="text">
+      <tk:FieldName>DOC_CONTENT</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>内容</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerLine" UnitNum="1"/>
+      <tk:Control Control="RichText" Order="130" DefaultShow="AllNoList"/>
+      <tk:ListDetail TextHead="true"/>
+      <tk:Edit>
+        <tk:Attribute Name="Rows" Value="20"/>
+        <tk:Attribute Name="data-useRelative" Value="true"/>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>DOC_PIC_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>主图片ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="140" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>DOC_SHORT_PIC_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>主图片低分辨ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="150" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>DOC_PREV_PIC_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>主图片缩略ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="160" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>DOC_HAS_OTHER_PIC</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>是否有其他图片</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="CheckBox" Order="170" DefaultShow="None"/>
+      <tk:Extension CheckValue="1" UnCheckValue="0"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DOC_AUTHOR</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>作者</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="180" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="short" IsEmpty="false">
+      <tk:FieldName>DOC_VERIFY_FLAG</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>审核标记</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="101" DefaultShow="All"/>
+      <tk:Edit>
+        <tk:DefaultValue>0</tk:DefaultValue>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>DOC_MASS_FLAG</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>群发标志</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="210" DefaultShow="List"/>
+      <tk:Extension CheckValue="1" UnCheckValue="0"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>DOC_MASS_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>群发关联ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="220" DefaultShow="List"/>
+    </tk:Field>
+    <tk:Field DataType="Date">
+      <tk:FieldName>DOC_MASS_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>群发日期</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="230" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>DOC_SOURCE_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>源文件ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="235" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime">
+      <tk:FieldName>DOC_CREATE_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>创建日期</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="200" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DOC_CREATE_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>创建人</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:EasySearch RegName="USER"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="210" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime">
+      <tk:FieldName>DOC_UPDATE_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>修改日期</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="220" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>DOC_UPDATE_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>修改人</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:EasySearch RegName="USER"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="230" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>DOC_ACCESS_COUNT</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>访问次数</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="240" DefaultShow="None"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

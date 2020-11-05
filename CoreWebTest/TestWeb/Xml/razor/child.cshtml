@@ -1,0 +1,12 @@
+﻿@using System.Data
+@using YJC.Toolkit.MetaData
+@{
+    DataSet ds = Model;
+    INormalMetaData metaData = ViewBag.MetaData as INormalMetaData;
+    INormalTableData table = metaData.TableData;
+    IEnumerable<Tk5FieldInfoEx> normalFields = table.DataList;
+    DataRow row = ds.Tables[table.TableName].Rows[0];
+}
+<div>
+    <b>Name:</b><span>@row["Name"].ToString()</span>
+</div>

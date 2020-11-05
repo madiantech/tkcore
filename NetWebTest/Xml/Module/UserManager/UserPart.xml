@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>用户角色分配</tk:Content>
+    </tk:Title>
+    <tk:Source>
+      <tk:CompositeSource>
+        <tk:Item>
+          <tk:Condition SearchType="Post" IsPost="false"/>
+          <tk:SqlSource UseCallerInfo="true">
+            <tk:Sql TableName="Part">SELECT PART_ID Id, PART_NAME Name FROM UR_PART</tk:Sql>
+            <tk:Sql TableName="UserPart" SQLInject="true" NeedParse="true">SELECT UP_PART_ID PartId FROM UR_USERS_PART WHERE UP_USER_ID = {#UserId}</tk:Sql>
+          </tk:SqlSource>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Post" IsPost="true"/>
+          <tk:SingleDbDelInsSource>
+            <tk:Resolver>
+              <tk:RegResolver>UserPart</tk:RegResolver>
+            </tk:Resolver>
+            <tk:FilterSql NeedParse="true" SQLInject="true">UP_USER_ID = {#UserId}</tk:FilterSql>
+          </tk:SingleDbDelInsSource>
+        </tk:Item>
+      </tk:CompositeSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:PostRazorPageMaker DestUrl="Custom" Template="NormalCustom" RazorFile="UserManager/UserPart.cshtml">
+        <tk:Script>userjs/UserManager/userpart.js</tk:Script>
+        <tk:CustomUrl>CloseDialog</tk:CustomUrl>
+        <tk:AlertMessage>
+          <tk:Content>角色已设置</tk:Content>
+        </tk:AlertMessage>
+      </tk:PostRazorPageMaker>
+    </tk:PageMaker>
+  </tk:Module>
+</tk:Toolkit>

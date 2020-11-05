@@ -1,0 +1,1 @@
+<%@ Page language="c#" Codebehind="WeAuthServlet.cs" AutoEventWireup="false" Inherits="YJC.Toolkit.Weixin.Web.WeAuthServlet, YJC.Toolkit.Weixin.Web, Version=5.0.0.0, Culture=neutral, PublicKeyToken=dcd89483ee33cb8f" %>

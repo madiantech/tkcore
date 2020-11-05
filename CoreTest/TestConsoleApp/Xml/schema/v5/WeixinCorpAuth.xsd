@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (mitu) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="WeixinItems/WeixinCommon.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="State" type="tk:StateType">
+          <xs:annotation>
+            <xs:documentation>常规微信企业号状态地址转换配置</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="DetailState">
+          <xs:annotation>
+            <xs:documentation>带有Id的微信企业号状态地址转换配置</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:complexContent>
+              <xs:extension base="tk:StateType">
+                <xs:attribute name="IdName" type="xs:Name" use="required"/>
+              </xs:extension>
+            </xs:complexContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+      <xs:attribute name="version" use="required" fixed="5.0"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="StateType">
+    <xs:attribute name="Key" type="xs:ID" use="required">
+      <xs:annotation>
+        <xs:documentation>状态名称定义，保证系统唯一</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Url" type="xs:anyURI" use="required">
+      <xs:annotation>
+        <xs:documentation>需要转换成的Url地址，可以使用~作为网站绝对地址的起始标志。</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="AppId" type="xs:unsignedInt" use="required">
+      <xs:annotation>
+        <xs:documentation>企业应用Id</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (DataNew) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="SubItems/WfCommon.xsd"/>
+  <xs:include schemaLocation="SubItems/MetaData.xsd"/>
+  <xs:include schemaLocation="SubItems/PageMakerCommon.xsd"/>
+  <xs:include schemaLocation="SubItems/RazorData.xsd"/>
+  <xs:simpleType name="__tk_UpdateStatus">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Insert"/>
+      <xs:enumeration value="Update"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FillMode" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Content的填充格式，默认为All</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:NMTOKEN">
+              <xs:enumeration value="None"/>
+              <xs:enumeration value="MainOnly"/>
+              <xs:enumeration value="All"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="Table" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>参与Process的数据表配置</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:complexContent>
+              <xs:extension base="tk:BaseTableType">
+                <xs:sequence>
+                  <xs:element name="TableResolver" type="tk:ResolverType">
+                    <xs:annotation>
+                      <xs:documentation>对应提交数据表的配置</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="DefaultValue" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                      <xs:documentation>设定默认值，此处只针对工作流来处理，将无视DataXml配置中的DefaultValue</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                      <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                          <xs:attribute name="NickName" type="xs:Name" use="required">
+                            <xs:annotation>
+                              <xs:documentation>字段的昵称</xs:documentation>
+                            </xs:annotation>
+                          </xs:attribute>
+                        </xs:extension>
+                      </xs:simpleContent>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+                <xs:attribute name="Action" type="tk:__tk_UpdateStatus" use="required">
+                  <xs:annotation>
+                    <xs:documentation>使用元数据中配置的那种页面类型的控件风格显示（这里仅支持Insert和Update）</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="Status" type="tk:__tk_UpdateStatus">
+                  <xs:annotation>
+                    <xs:documentation>TableResolver采用Insert或者Update的方式来处理提交的表数据。如果不填写，Status将采用Action配置的值</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="UpdateMode">
+                  <xs:annotation>
+                    <xs:documentation>当Status为Update模式时，选定TableResolver的Update模式，默认为OneRow</xs:documentation>
+                  </xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                      <xs:enumeration value="OneRow"/>
+                      <xs:enumeration value="Merge"/>
+                      <xs:enumeration value="DelIns"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="IsFix" type="xs:boolean">
+                  <xs:annotation>
+                    <xs:documentation>多条记录时，是否允许增减记录，默认为false，允许增减。</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+              </xs:extension>
+            </xs:complexContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PageMaker" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>自定义页面的配置</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PageData" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>页面数据</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element ref="tk:NormalMultiEditData"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="RazorFile" type="xs:anyURI" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>自定义Razor文件</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Script" type="tk:UserScriptType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>配置自定义的css以及js文件</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Content" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>需要向WorkflowContent添加的配置</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Resolver" type="tk:ResolverType">
+                <xs:annotation>
+                  <xs:documentation>获得数据的TableResolver</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Record" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>相关的记录</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Key" maxOccurs="unbounded">
+                      <xs:annotation>
+                        <xs:documentation>获取记录的字段值</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Value" type="xs:string">
+                            <xs:annotation>
+                              <xs:documentation>字段的值，Evaluate表达式</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="NickName" type="xs:Name" use="required">
+                          <xs:annotation>
+                            <xs:documentation>表字段昵称</xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="required" fixed="2.0"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

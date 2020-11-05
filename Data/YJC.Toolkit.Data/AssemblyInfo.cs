@@ -1,0 +1,69 @@
+﻿using System;
+using System.Reflection;
+using System.Resources;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using YJC.Toolkit.Data;
+using YJC.Toolkit.Data.Constraint;
+using YJC.Toolkit.Decoder;
+using YJC.Toolkit.Log;
+using YJC.Toolkit.MetaData;
+using YJC.Toolkit.Right;
+using YJC.Toolkit.Sys;
+
+// 有关程序集的常规信息通过以下
+// 特性集控制。更改这些特性值可修改
+// 与程序集关联的信息。
+
+[assembly: AssemblyCulture("")]
+[assembly: CLSCompliant(true)]
+[assembly: InternalsVisibleTo("YJC.Toolkit.AdoData, PublicKey=00240000048000009400000006020000"
+    + "00240000525341310004000001000100CFD581E82257611BA519160619FD26B7"
+    + "FAB3EE8B69D29E3662F2D0FA16D0CCFF5483F375BE6BA603B06479B3AB4D6FDB"
+    + "1D1CF6C3D6195AE980783ACD2267064A4366B9A3CD10DFC29BFF259058D07085"
+    + "4807DFE5A9DD79F49F58245DDAB1573D8BC42F18479F224B3525EB104AEE31E9"
+    + "973CA69E2285F9F991D65BE62AC07AE8")]
+[assembly: InternalsVisibleTo("YJC.Toolkit.WebApp, PublicKey=00240000048000009400000006020000"
+    + "00240000525341310004000001000100CFD581E82257611BA519160619FD26B7"
+    + "FAB3EE8B69D29E3662F2D0FA16D0CCFF5483F375BE6BA603B06479B3AB4D6FDB"
+    + "1D1CF6C3D6195AE980783ACD2267064A4366B9A3CD10DFC29BFF259058D07085"
+    + "4807DFE5A9DD79F49F58245DDAB1573D8BC42F18479F224B3525EB104AEE31E9"
+    + "973CA69E2285F9F991D65BE62AC07AE8")]
+[assembly: InternalsVisibleTo("YJC.Toolkit.Web.Common, PublicKey=00240000048000009400000006020000"
+    + "00240000525341310004000001000100CFD581E82257611BA519160619FD26B7"
+    + "FAB3EE8B69D29E3662F2D0FA16D0CCFF5483F375BE6BA603B06479B3AB4D6FDB"
+    + "1D1CF6C3D6195AE980783ACD2267064A4366B9A3CD10DFC29BFF259058D07085"
+    + "4807DFE5A9DD79F49F58245DDAB1573D8BC42F18479F224B3525EB104AEE31E9"
+    + "973CA69E2285F9F991D65BE62AC07AE8")]
+[assembly: InternalsVisibleTo("YJC.Toolkit.EntityData, PublicKey=00240000048000009400000006020000"
+    + "00240000525341310004000001000100CFD581E82257611BA519160619FD26B7"
+    + "FAB3EE8B69D29E3662F2D0FA16D0CCFF5483F375BE6BA603B06479B3AB4D6FDB"
+    + "1D1CF6C3D6195AE980783ACD2267064A4366B9A3CD10DFC29BFF259058D07085"
+    + "4807DFE5A9DD79F49F58245DDAB1573D8BC42F18479F224B3525EB104AEE31E9"
+    + "973CA69E2285F9F991D65BE62AC07AE8")]
+[assembly: Initialization(typeof(DataInitialization))]
+[assembly: AssemblyPlugInFactory(typeof(DbProviderPlugInFactory))]
+[assembly: AssemblyPlugInFactory(typeof(SqlProviderPlugInFactory))]
+[assembly: AssemblyPlugInFactory(typeof(SourceConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(SourcePlugInFactory))]
+[assembly: AssemblyPlugInFactory(typeof(LogPlugInFactory))]
+[assembly: AssemblyPlugInFactory(typeof(LogConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(LogDataPickerConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(ColumnRightConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(DataRightConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(CodeTablePlugInFactory))]
+[assembly: AssemblyPlugInFactory(typeof(EasySearchPlugInFactory))]
+[assembly: AssemblyPlugInFactory(typeof(ConstraintConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(ObjectSourcePlugInFactory))]
+[assembly: AssemblyPlugInFactory(typeof(ObjectOperateRightConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(ObjectOperatorsConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(TreePlugInFactory))]
+[assembly: AssemblyPlugInFactory(typeof(OperatorConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(DisplayPlugInFactory))]
+[assembly: AssemblyPlugInFactory(typeof(CoreDisplayConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(DecorateDisplayConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(ListSearchConfigFactory))]
+[assembly: AssemblyPlugInFactory(typeof(TableOutputConfigFactory))]
+//[assembly: AssemblyPlugInFactory(typeof())]
+//[assembly: AssemblyPlugInFactory(typeof())]
+//[assembly: AssemblyPlugInFactory(typeof())]

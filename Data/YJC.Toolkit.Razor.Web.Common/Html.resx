@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CheckBox" xml:space="preserve">
+    <value>&lt;div class="checkbox"&gt;
+    &lt;input  {0} /&gt; 
+    &lt;label class="checkbox-label"&gt;{1}&lt;/label&gt; 
+&lt;/div&gt;</value>
+  </data>
+  <data name="CheckBoxListItem" xml:space="preserve">
+    <value>&lt;div class="checkbox"&gt; 
+    &lt;input type="checkbox" class="cbl-item checkbox-label"  {0} /&gt; 
+    &lt;label class="checkbox-label"&gt;{1}&lt;/label&gt; 
+&lt;/div&gt;</value>
+  </data>
+  <data name="Datetime" xml:space="preserve">
+    <value>&lt;div class="input-group date" {0}&gt;
+  &lt;input {1}&gt;
+{4}
+  &lt;span class="input-group-addon"&gt;&lt;i class="glyphicon glyphicon-{2}"&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;/div&gt;{3}</value>
+  </data>
+  <data name="DateTimeDelete" xml:space="preserve">
+    <value>&lt;span class="input-group-addon"&gt;&lt;i class="glyphicon glyphicon-remove"&gt;&lt;/i&gt;&lt;/span&gt;</value>
+  </data>
+  <data name="EasySearch" xml:space="preserve">
+    <value>&lt;div class="input-group" data-control="EasySearch" data-url="{3}" data-dialog-url="{4}"&gt;
+  &lt;input {0} /&gt;
+  &lt;input {1} /&gt;
+  &lt;span class="input-group-btn"&gt;
+    &lt;button class="btn btn-default" type="button"&gt;&lt;i class="glyphicon glyphicon-search"&gt;&lt;/i&gt;&lt;/button&gt;
+  &lt;/span&gt;
+&lt;/div&gt;{2}</value>
+  </data>
+  <data name="InputHintAfter" xml:space="preserve">
+    <value>&lt;div class="input-group"&gt;
+  &lt;input {0}/&gt;
+  &lt;span class="input-group-addon"&gt;{2}&lt;/span&gt;
+&lt;/div&gt;{1}</value>
+  </data>
+  <data name="InputHintBefore" xml:space="preserve">
+    <value>&lt;div class="input-group"&gt;
+  &lt;span class="input-group-addon"&gt;{2}&lt;/span&gt;
+  &lt;input {0}/&gt;
+&lt;/div&gt;{1}</value>
+  </data>
+  <data name="MenuOperator" xml:space="preserve">
+    <value>&lt;div class="btn-group"&gt;
+  &lt;a class="nouline cp dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
+    {1} &lt;span class="caret"&gt;&lt;/span&gt;
+  &lt;/a&gt;
+  &lt;ul class="dropdown-menu"&gt;
+{0}
+  &lt;/ul&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="MultiEasySearchItem" xml:space="preserve">
+    <value>&lt;span class="{0} easysearch-checked rad3" {2}&gt;
+  &lt;em&gt;{1}&lt;/em&gt;
+  &lt;button class="close easysearch-close" aria-hidden="true" title="删除" type="button"&gt;×&lt;/button&gt;
+&lt;/span&gt;</value>
+  </data>
+  <data name="MultipleEasySearch" xml:space="preserve">
+    <value>&lt;span class="multiple-easysearch"&gt;
+&lt;div class="fl multi-data"&gt;
+{0}
+&lt;/div&gt;
+&lt;div class="input-group fr pl10" data-control="MultipleEasySearch" data-url="{3}" data-dialog-url="{4}"&gt;
+  &lt;input {1} /&gt;
+  &lt;span class="input-group-btn"&gt;
+    &lt;button class="btn btn-default" type="button"&gt;&lt;i class="glyphicon glyphicon-search"&gt;&lt;/i&gt;&lt;/button&gt;
+  &lt;/span&gt;
+&lt;/div&gt;{2}
+&lt;/span&gt;</value>
+  </data>
+  <data name="Switcher" xml:space="preserve">
+    <value>&lt;div class="switch text-right" data-control="CheckBox"&gt;
+    &lt;input data-on-text="&lt;i class='icon-ok icon-white'&gt;&lt;/i&gt;" data-off-text="&lt;i class='icon-remove'&gt;&lt;/i&gt;" {0} /&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="TileOperator" xml:space="preserve">
+    <value>&lt;ul class="operator"&gt;{0}&lt;/ul&gt;</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>&lt;div {0}&gt;
+  &lt;input type="file" capture="camera" /&gt;
+  &lt;div class="upload-status"&gt;
+    &lt;div class="upload-info detail-content"&gt;&lt;/div&gt;
+    &lt;div class="upload-image"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;{1}</value>
+  </data>
+</root>

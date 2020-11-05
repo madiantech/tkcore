@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>用户</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:SingleXmlMetaData DataXml="UserManager/User.xml"/>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:SingleDbSource>
+        <tk:Resolver>
+          <tk:RegResolver>User</tk:RegResolver>
+        </tk:Resolver>
+        <tk:Operators>
+          <tk:SubFuncOperators FunctionKey="Users" Page="List"/>
+        </tk:Operators>
+        <tk:DetailOperators>
+          <tk:SubFuncOperators FunctionKey="Users" Page="Detail"/>
+        </tk:DetailOperators>
+      </tk:SingleDbSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:RazorModuleTemplatePageMaker ModuleTemplate="Single"/>
+      			<!--<tk:CompositePageMaker>
+				<tk:Item>
+					<tk:Condition SearchType="Style Post" Style="Update Insert" IsPost="false"/>
+					<tk:RazorPageTemplatePageMaker PageTemplate="Edit"/>
+				</tk:Item>
+				<tk:Item>
+					<tk:Condition SearchType="Style" Style="Detail"/>
+					<tk:RazorPageTemplatePageMaker PageTemplate="Detail"/>
+				</tk:Item>
+				<tk:Item>
+					<tk:Condition SearchType="Style" Style="List"/>
+					<tk:RazorPageTemplatePageMaker PageTemplate="List"/>
+				</tk:Item>
+				<tk:Item>
+					<tk:Condition SearchType="StyleStartsWith" StartsWith="DetailList"/>
+					<tk:RazorPageTemplatePageMaker PageTemplate="DetailList"/>
+				</tk:Item>
+			</tk:CompositePageMaker>-->
+    </tk:PageMaker>
+  </tk:Module>
+</tk:Toolkit>

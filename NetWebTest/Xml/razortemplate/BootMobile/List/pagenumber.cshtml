@@ -1,0 +1,58 @@
+﻿@inherits YJC.Toolkit.Razor.BootcssListTemplate
+@using System.Data;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    bool useGetMore = ViewBag.PageData.UseGetMoreButton;
+    DataSet dataSet = (DataSet)Model;
+    DataRow countRow = dataSet.GetRow("Count");
+    int currentPage = countRow.GetValue<int>("CurrentPage");
+    int totalPage = countRow.GetValue<int>("TotalPage");
+}
+@functions {
+    string GetPageTitle(int i)
+    {
+        return string.Format("查看第{0}页", i);
+    }
+
+    string IsActive(int index, int currentPage)
+    {
+        if (index == currentPage)
+            return " class=\"active\"";
+        else
+            return string.Empty;
+    }
+}
+@if (useGetMore)
+{
+    @if (totalPage > currentPage){
+        @BootcssUtil.Button(ViewBag.PageData.GetMoreButtonCaption, "mb15", BootcssButton.Default, true, new HtmlAttribute("id", "btn-getmore"))
+    }
+}
+else if (totalPage > 0)
+{
+    @{
+        int pageNumberCount = ViewBag.PageData.PageNumberCount;
+        int startPage = currentPage == 0 ? 0 : ((int)Math.Ceiling((currentPage + 1) / (double)pageNumberCount) - 1) * pageNumberCount;
+        int endPage = startPage <= (totalPage - pageNumberCount) ? startPage + pageNumberCount : totalPage + 1;
+        int firstPage = startPage < pageNumberCount ? 0 : startPage - pageNumberCount;
+        int lastPage = endPage + 1 > totalPage ? totalPage : endPage;
+    }
+    <div class="text-center">
+        <ul class="pagination">
+            @if (totalPage >= pageNumberCount)
+            {
+                <li @IsActive(startPage, 0)><a href="#" data-page="@(firstPage + 1)" title="翻上">&lt;</a></li>
+            }
+            @for (int i = startPage; i < endPage; ++i)
+            {
+                <li @IsActive(i, currentPage)><a href="#" data-page="@(i + 1)" title="@GetPageTitle(i + 1)">@(i + 1)</a></li>
+            }
+            @if (totalPage >= pageNumberCount)
+            {
+                <li @IsActive(lastPage, totalPage)><a href="#" data-page="@(lastPage + 1)" title="翻下">></a></li>
+            }
+        </ul>
+    </div>
+}

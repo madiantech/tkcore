@@ -1,0 +1,82 @@
+﻿@inherits YJC.Toolkit.Razor.MultiEditTemplatePage<TModel>
+@using System.Data;
+@using System.Linq;
+@using System.Text;
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    IMultiEditModel model = CreateModel<IMultiEditModel>(Model);
+    NormalMultiEditData pageData = ViewBag.PageData;
+    HtmlAttribute attribute = new HtmlAttribute("data-url", WebUtil.ResolveUrl("~/c/plugin/c/WfMyWork"));
+    HtmlAttribute retAttr = new HtmlAttribute("data-action", "return");
+    IEnumerable<IFieldValueProvider> operators = model.CreateDataRowsProvider("_Operation");
+    IFieldValueProvider workflow = model.CreateMainObjectProvider("WF_WORKFLOW_INST");
+}
+@section DefaultButtons
+    {
+    <div class="text-center cl">
+        @foreach (var item in operators)
+        {
+            HtmlAttribute idAttr = new HtmlAttribute("data-wf-id", workflow["Id"]);
+            if (item["OperationType"].ToString() == "UI")
+            {
+                HtmlAttribute typeAttr = new HtmlAttribute("data-oper-type", "UI");
+                if (item["ContainsSave"].ToString() == "true")
+                {
+                    @Raw(BootcssCommonUtil.Button("保存", "auto-disabled m5", BootcssButton.Primary, false, typeAttr, idAttr, new HtmlAttribute("data-save", "new")))
+                }
+                @Raw(BootcssCommonUtil.Button(item["ButtonCaption"].ToString(), "auto-disabled m5", BootcssButton.Primary, false, typeAttr, idAttr))
+            }
+            else if (item["OperationType"].ToString() == "NonUI")
+            {
+                HtmlAttribute typeAttr = new HtmlAttribute("data-oper-type", "NonUI");
+                HtmlAttribute plugAttr = new HtmlAttribute("data-content", item["PlugIn"].ToString());
+                HtmlAttribute confirmAttr = null;
+                if (item["NeedPrompt"].ToString() == "true")
+                {
+                    confirmAttr = new HtmlAttribute("data-confirm", "确认该操作？");
+                }
+                @Raw(BootcssCommonUtil.Button(item["ButtonCaption"].ToString(), "auto-disabled m5", BootcssButton.Info, false, typeAttr, plugAttr, idAttr, confirmAttr))
+            }
+        }
+        @Raw(BootcssCommonUtil.Button(pageData.CancelCaption, "m5", BootcssButton.Default, false, attribute, retAttr))
+    </div>
+}
+
+@functions
+{
+    string GetJson(IEnumerable<INormalTableData> tables)
+    {
+        var jsonfields = from item in tables select item.JsonFields;
+        var json = string.Format("{{\"Tables\":[{0}]}}", string.Join(",", jsonfields));
+        return StringUtil.EscapeHtmlAttribute(json);
+    }
+}
+@{
+    INormalMetaData metaData = ViewBag.MetaData;
+    IEnumerable<INormalTableData> tables = metaData.TableDatas;
+    bool showCaption = pageData.ShowCaption;
+    string dataClass = showCaption ? string.Empty : "class=\"nocaption\"";
+    IFieldValueProvider contentData = model.CreateMainObjectProvider("_Content_Data");
+}
+<div id="_workflow_content" data-url="@Raw(StringUtil.EscapeHtmlAttribute(contentData["ContentUrl"].ToString()))">
+</div>
+<form action="@pageData.FormAction" method="POST" id="PostForm" class="tk-dataform p5 mb15" role="form" data-check="true" data-post="@Raw(GetJson(tables))">
+    @foreach (INormalTableData tableData in tables)
+    {
+        var tableString = RenderTable(tableData.TableName, Model);
+        if (tableString != null && !string.IsNullOrEmpty(tableString.Value))
+        {
+            @Raw(tableString.Value)
+            continue;
+        }
+        var output = HtmlCommonUtil.GetTableOutput(tableData);
+        @Raw(output.CreateEditHtml(tableData, model, pageData))
+    }
+</form>
+@RenderSectionOrDefault("ModuleButtons", "DefaultButtons")

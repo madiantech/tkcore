@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>系统登录</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:SingleClassMetaData ClassRegName="LogOnData" ColumnCount="1" JsonDataType="Object"/>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:InsertObjectSource>
+        <tk:ObjectSource>
+          <tk:RegNameObjectSource>SimpleLogOn</tk:RegNameObjectSource>
+        </tk:ObjectSource>
+      </tk:InsertObjectSource>
+    </tk:Source>
+    <tk:PostObjectCreator>
+      <tk:CustomJsonObjectCreator RegTypeName="LogOnData" LocalName="LogOnData"/>
+    </tk:PostObjectCreator>
+    <tk:PageMaker>
+      <tk:CompositePageMaker>
+        <tk:Item>
+          <tk:Condition SearchType="Post" IsPost="true"/>
+          <tk:JsonObjectPageMaker/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Post" IsPost="false"/>
+          <tk:FreeRazorPageMaker RazorFile="Razor/UserManager/Logon.cshtml"/>
+        </tk:Item>
+      </tk:CompositePageMaker>
+    </tk:PageMaker>
+    <tk:WebPage SupportLogOn="false"/>
+  </tk:Module>
+</tk:Toolkit>

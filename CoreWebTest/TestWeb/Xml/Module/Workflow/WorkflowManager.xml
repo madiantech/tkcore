@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<tk:Module>
+		<tk:Title>
+			<tk:Content>流程管理</tk:Content>
+		</tk:Title>
+		<tk:MetaData>
+			<tk:SingleXmlMetaData DataXml="Workflow/WorkflowInst.xml" DisableAutoDetailLink="true">
+				<tk:Override>
+					<tk:Field NickName="Name">
+						<tk:ListDetail>
+							<tk:ListDisplay>
+								<tk:ConditionDisplay>
+									<tk:Item>
+										<tk:Condition>FieldValueProviderHelper.GetValue(row, 'StepType')==3 || FieldValueProviderHelper.GetValue(row, 'StepType')==6</tk:Condition>
+										<tk:LinkDisplay>
+											<tk:NormalDisplay/>
+											<tk:DialogHrefDisplay Mode="Dialog">~/c/~source/C/WfViewContent?WfId=*Id*</tk:DialogHrefDisplay>
+										</tk:LinkDisplay>
+									</tk:Item>
+									<tk:Otherwise>
+										<tk:NormalDisplay/>
+									</tk:Otherwise>
+								</tk:ConditionDisplay>
+							</tk:ListDisplay>
+						</tk:ListDetail>
+					</tk:Field>
+					<tk:Field NickName="StepType" Control="Combo">
+						<tk:DisplayName>
+							<tk:Content>步骤类型</tk:Content>
+						</tk:DisplayName>
+						<tk:CodeTable RegName="StepType"/>
+						<tk:ListDetail>
+							<tk:ListDisplay>
+								<tk:DecoderDisplay/>
+							</tk:ListDisplay>
+						</tk:ListDetail>
+					</tk:Field>
+				</tk:Override>
+			</tk:SingleXmlMetaData>
+		</tk:MetaData>
+		<tk:Source>
+			<tk:DbListSource UseMetaData="true" OrderBy="ORDER BY WI_ID DESC">
+				<tk:Resolver>
+					<tk:RegResolver>WorkflowInstWeb</tk:RegResolver>
+				</tk:Resolver>
+				<tk:Operators>
+					<tk:EmptyOperators/>
+					<!--	<tk:StandardOperators>
+						<tk:Right>
+							<tk:SubFuncOperateRight FunctionKey="WorkflowManager"/>
+						</tk:Right>
+						<tk:Operator Id="Restart" Info="AjaxUrl" Position="Row">
+							<tk:Caption>
+								<tk:Content>重启</tk:Content>
+							</tk:Caption>
+							<tk:Content NeedParse="true">~/source/C/RestartWorkFlow.c?WfId=*Id*</tk:Content>
+							<tk:ConfirmData>
+								<tk:Content>确认要终止此次流程，重新开始？</tk:Content>
+							</tk:ConfirmData>
+						</tk:Operator>
+					</tk:StandardOperators>-->
+				</tk:Operators>
+			</tk:DbListSource>
+		</tk:Source>
+		<tk:PageMaker>
+			<tk:RazorModuleTemplatePageMaker ModuleTemplate="Single">
+				<tk:PageTemplate Style="List">
+					<tk:RazorData>
+						<tk:NormalListData DialogHeight="700" OperatorPosition="None"/>
+					</tk:RazorData>
+					<tk:Script>usercss/workflow/dialogwidth.css</tk:Script>
+				</tk:PageTemplate>
+			</tk:RazorModuleTemplatePageMaker>
+		</tk:PageMaker>
+	</tk:Module>
+</tk:Toolkit>

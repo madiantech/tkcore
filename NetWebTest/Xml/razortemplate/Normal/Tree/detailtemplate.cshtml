@@ -1,0 +1,20 @@
+﻿@using System.Data;
+@using System.Collections.Generic;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    IDetailModel model = CreateModel<IDetailModel>(Model);
+    INormalMetaData metaData = ViewBag.MetaData;
+    IFieldValueProvider provider = model.CreateMainObjectProvider(metaData.TableData);
+}
+
+@section ModuleButtons
+{
+    <div class="text-center clearfix mt5">
+        @BootcssCommonUtil.CreateOperators(model.DetailOperators, provider)
+    </div>
+}
+@RenderSectionIfDefined("Main", "../Detail/main.cshtml", Model)

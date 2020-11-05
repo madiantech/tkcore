@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>测试应用</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:SingleXmlMetaData DataXml="Test1/App.xml"/>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:SingleDbSource>
+        <tk:Resolver>
+          <!--<tk:RegResolver>App</tk:RegResolver>-->
+          <tk:MetaDataResolver AutoUpdateKey="true">
+            <tk:Scheme>
+              <tk:Tk5DataXml FileName="Test1/App.xml"/>
+            </tk:Scheme>
+          </tk:MetaDataResolver>
+        </tk:Resolver>
+      </tk:SingleDbSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <!--<tk:RazorModuleTemplatePageMaker ModuleTemplate="Single" />-->
+      <tk:JsonDataSetPageMaker/>
+    </tk:PageMaker>
+  </tk:Module>
+</tk:Toolkit>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../bin/AppCommon.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Application">
+          <xs:annotation>
+            <xs:documentation>系统全局配置</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attributeGroup ref="tk:AppAttrGroup"/>
+            <xs:attribute name="Single" type="xs:boolean">
+              <xs:annotation>
+                <xs:documentation>true时，只能运行一个程序。false时，不限制程序的实例个数</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="UseWorkThread">
+              <xs:annotation>
+                <xs:documentation>是否启用工作线程，默认不启用</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Debug" type="tk:DebugType">
+          <xs:annotation>
+            <xs:documentation>调试信息配置</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="tk:Databases"/>
+        <xs:element ref="tk:SecretKey"/>
+        <xs:element ref="tk:Hosts" minOccurs="0"/>
+        <xs:element ref="tk:DefaultConfig" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>配置全局缺省的参数</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="required" fixed="5.0">
+        <xs:annotation>
+          <xs:documentation>版本号</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DefaultConfig">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="ReadSettings" type="tk:ReadSettingsType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>默认对象读取配置</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="WriteSettings" type="tk:WriteSettingsType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>默认对象写入配置</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

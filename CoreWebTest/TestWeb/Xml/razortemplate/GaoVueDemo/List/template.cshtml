@@ -1,0 +1,124 @@
+﻿@inherits YJC.Toolkit.Razor.ToolkitTemplatePage<TModel>
+@using System.Data;
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    IListMetaData metaData = ViewBag.MetaData;
+    IEnumerable<IFieldInfoEx> fields = metaData.TableData.DataList;
+    ListVueOperator model = Model as ListVueOperator;
+}
+<template>
+
+    <div class="app-container mq-list-page">
+
+        <!--TAB切换区域-->
+        @*<el-tabs v-model="activeTabName" @@tab-click="handleTabClick">
+                <el-tab-pane label="用户管理" name="first" />
+                <el-tab-pane label="配置管理" name="second" />
+            </el-tabs>*@
+
+        <!--查询条件区域-->
+        <div class="section-condition">
+
+            <div class="fields-wrapper">
+                <el-form ref="first" :inline="true" :model="condition" label-width="100px">
+
+                    <!-- 搜索条件字段 -->
+                    <el-form-item label="姓名" prop="Name" class="field-item">
+                        <el-input v-model="condition.Name" placeholder="姓名" />
+                    </el-form-item>
+                    <el-form-item label="描述" prop="Description" class="field-item">
+                        <el-input v-model="condition.Description" placeholder="描述" />
+                    </el-form-item>
+
+                    <!-- 搜索条件按钮 -->
+                    <el-form-item v-if="settings.conditionButtonPosition ==='inline'" class="field-item">
+                        <el-checkbox v-model="isEqual">精确查询</el-checkbox>
+                        <el-button type="primary" icon="el-icon-search" @@click="handleSearch">查询</el-button>
+                        <el-button v-if="settings.conditionResetButtonVisible" icon="el-icon-delete" @@click="handleReset('first')">
+                            重置
+                        </el-button>
+                    </el-form-item>
+                </el-form>
+
+                <!-- 搜索条件按钮 -->
+                <div v-if="settings.conditionButtonPosition !=='inline'" class="buttons-wrapper">
+                    <el-checkbox v-model="isEqual">精确查询</el-checkbox>
+                    <el-button type="primary" icon="el-icon-search" @@click="handleSearch">查询</el-button>
+                    <el-button v-if="settings.conditionResetButtonVisible" icon="el-icon-delete" @@click="handleReset('second')">
+                        重置
+                    </el-button>
+                </div>
+            </div>
+        </div>
+
+        <!--全局操作按钮区域-->
+        <div shadow="always" class="section-global-button">
+            <!--TODO:全局操作栏按钮平铺，下拉，混合-->
+            @Raw(OperatorUtil.ListGlobalOperator(model.GlobalOperators, metaData))
+        </div>
+
+        <!--数据显示区域-->
+        <div class="section-datatable">
+            <el-table ref="table"
+                      v-loading="dataLoading"
+                      class="table" :header-cell-class-name="handleTheadAddClass"
+                      data-url="/c/xml/list/@(model.Source)"
+                      data-table-name="@metaData.TableData.TableName"
+                      :data="dataset" element-loading-text="Loading" border fit highlight-current-row
+                      stripe @@sort-change="handleSortChange">
+                @foreach (Tk5FieldInfoEx field in fields)
+                {
+                    string sortable = "sortable=\"custom\"";
+                    if (field.ListDetail?.TextHead == true)
+                    {
+                        sortable = "";
+                    }
+                    <el-table-column label="@Raw(field.DisplayName)" prop="@field.NickName" @sortable>
+                        <template slot-scope="scope">
+                            @if (field.NickName == metaData.TableData.NameField.NickName)
+                            {
+                                <div v-tk-drawer-url="{url:'detail?@OperatorUtil.AppendKey(metaData)',title:'查看详情',width:'40%',height:300,parseSource:scope.row,closeOnClick:true}" v-html="scope.row.@field.NickName" />
+                            }
+                            else
+                            {
+                                <div v-html="scope.row.@field.NickName" />
+                            }
+                        </template>
+                    </el-table-column>
+                }
+                <el-table-column class-name="action-col" label="操作" align="center">
+                    <!--TODO:操作栏按钮平铺，下拉，混合-->
+                    <template slot-scope="scope">
+                        @Raw(OperatorUtil.ListRowOperator(model.RowOperators, metaData))
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+
+        <!--翻页-->
+        <div class="section-pagination">
+            <el-pagination background :hide-on-single-page="false" :current-page="pagination.currentPage" :page-sizes="pagination.pageSizes"
+                           :page-size="pagination.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="pagination.total"
+                           @@size-change="handleSizeChange" @@current-change="handleCurrentChange" />
+        </div>
+
+        <!--modal形式打开的修改页面-->
+        <dialog-wrapper :visible="dialogVisible" :url="dialogUrl" :width="dialogWidth" :title="dialogTitle" :height="dialogHeight"
+                        :close-on-click-modal="dialogCloseOnClickModal"
+                        @@form-closed="handleDialogClosed" />
+
+        <!--右侧抽屉形式打开的修改页面-->
+        <drawer-wrapper :visible="drawerVisible" :url="drawerUrl" :width="drawerWidth" :title="drawerTitle"
+                        :close-on-click-modal="drawerCloseOnClickModal"
+                        @@form-closed="handleDrawerClosed" />
+    </div>
+</template>
+
+<script src="./list-js.js"></script>
+<style lang="scss" src="./list-css.scss"></style>

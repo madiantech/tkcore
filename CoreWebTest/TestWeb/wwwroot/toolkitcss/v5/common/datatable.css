@@ -1,0 +1,85 @@
+/* toolkit ui:datatable (datadetail / dataform) */
+.tk-datadetail {}
+.tk-dataform {}
+.tk-datatable {}
+/* datatable */
+.tk-datatable dl { float:left; width:100%; min-height:24px; }
+.tk-datatable dl dt { width:95px; display:block; float:left; padding:2px 0; line-height:20px; }
+.tk-datatable dl dd { margin-left:100px; margin-right:20px; padding:2px 0; line-height:20px; min-height:20px; }
+.tk-datatable dl dd span { display:block; }
+.tk-datatable dl dd span.tk-control { min-height:20px; }
+.tk-datatable dl dd span label { display:block; margin-right:5px; float:left; }
+.tk-datatable dl dd span.ico { width:16px; height:16px; padding:1px 1px 1px 2px; border:solid 1px #69c; border-left:0; float:right; background:#fff url(images/bg.png) no-repeat  0 -192px; margin-right:0; cursor:pointer; }
+.tk-datatable dl dd span.mr20 { margin-right:22px; }
+.tk-datatable dl dd span input[type=text],
+.tk-datatable dl dd span input[type=password] { background-color:#fff; }
+.tk-datatable dl dd span input[type=text],
+.tk-datatable dl dd span input[type=password],
+.tk-datatable dl dd span textarea,
+.tk-datatable dl dd span select { width:100%; display:block; }
+.tk-datatable dl dd span textarea { height:100%; }
+.tk-datatable dl dd span .dn,
+.tk-datatable dl dd span .hidden { display:none; }
+dl.row2 div, dl.row2 span { height:42px; }
+dl.row3 div, dl.row3 span { height:66px; }
+dl.row4 div, dl.row4 span { height:90px; }
+dl.row5 div, dl.row5 span { height:114px; }
+.column2 dl { width:50%; }
+.column3 dl { width:33.33%; }
+.column4 dl { width:25%; }
+.column5 dl { width:20%; }
+.columnh dl { float:none; }
+.columnh dl dd { float:left; margin-left:5px; margin-right:0; }
+.tk-datatable dl.dc-all { width:100%; }
+/*column*/
+.column3 dl.dc-2 { width:66.66%; }
+.column3 dl.dc-3 { width:100%; }
+.column3 dl.dc-4 { width:100%; }
+.column4 dl.dc-2 { width:50%; }
+.column4 dl.dc-3 { width:75%; }
+.column4 dl.dc-4 { width:100%; }
+.column5 dl.dc-2 { width:40%; }
+.column5 dl.dc-3 { width:60%; }
+.column5 dl.dc-4 { width:80%; }
+/* toolkit ui:dataform */		
+.tk-dataform .list-table { overflow-x:auto; }
+.tk-dataform .list-table th { cursor:default; }
+.tk-dataform .list-table th div { padding-left:0; text-align:center; }
+.tk-dataform .list-table td { padding:2px 5px; height:auto; border-bottom:solid 1px #ddd; }
+.tk-dataform .list-table td input[type=text],
+.tk-dataform .list-table td input[type=password],
+.tk-dataform .list-table td textarea,
+.tk-dataform .list-table td select { width:100%; display:block; }
+.tk-dataform .list-table td span { display:block; overflow:visible; }
+.tk-dataform .list-table td span.ico { width:16px; height:16px; padding:1px 1px 1px 2px; border:solid 1px #69c; border-left:0; float:right; background:#fff url(images/bg.png) no-repeat  0 -192px; margin-right:0; cursor:pointer; }
+.tk-dataform .list-table td span.mr20 { margin-right:22px; }
+.tk-dataform .list-table col.subforms { background-color:#e9e9e9; }
+.tk-dataform .list-table .subforms tr:hover td { background-color:#ddd; }
+.tk-dataform .list-table .subforms tr.selected:hover td { background-color:#A7CDF0; }
+.tk-dataform .list-table td div.tk-datatable { width:auto; height:auto; line-height:20px; padding:5px; margin:2px 2px 2px 0; background-color:#fff; }
+.tk-dataform .list-table td div.tk-datatable-more { padding:0 5px; width:200px; }
+.tk-dataform .list-table td div.tk-datatable-more a { color:#00f; }
+.tk-dataform .list-table td.collapse div.tk-datatable { height:48px; overflow:hidden; }
+.tk-dataform .list-table .tk-datatable dl { min-width:250px; }
+.tk-dataform .list-table .tk-datatable dl dt { width:75px; overflow:hidden; }
+.tk-dataform .list-table .tk-datatable dl dd { margin-left:80px; margin-right:10px; }
+/* toolkit ui:dataform long */
+.tk-dataform-long { margin-bottom:45px; }
+.tk-dataform-long .mod-footer { position:fixed; left:0; right:0; bottom:0; }
+
+/* required */
+.required dt { background:url(images/bg_icon.png) no-repeat right -258px; }
+.required .tk-control,
+.required .ctrl-text input,
+.required .ctrl-text textarea,
+.required .ctrl-search .mr20,
+.required .ctrl-search .mr20 input[type=text],
+.required .tk-control select { background-color:#ffd !important; }
+
+/* error */
+.error .tk-control,
+.error .ctrl-search .mr20 input[type=text] { background-color:#ff9 !important; }
+.error .ctrl-text input,
+.error .ctrl-text textarea,
+.error .ctrl-search .mr20,
+.error .tk-control select { background-color:#ff9 !important; border-color:#f00 !important; }

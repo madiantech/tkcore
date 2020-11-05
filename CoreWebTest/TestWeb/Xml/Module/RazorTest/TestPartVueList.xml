@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>测试用户</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:SingleXmlMetaData DataXml="UserManager/Part.xml">
+        <tk:Override>
+          <tk:Field NickName="Name">
+            <tk:ListDetail>
+              <tk:ListDisplay>
+                <tk:EvaluatorDisplay><![CDATA['<a v-tk-push="\'/c/xml/detail/RazorTest/TestPartVueList?Type=Info&amp;Id='+ FieldValueProviderHelper.GetStringValue(row, 'Id') + '\'" href=\'#\'>'  + value +  '</a>']]></tk:EvaluatorDisplay>
+              </tk:ListDisplay>
+            </tk:ListDetail>
+          </tk:Field>
+        </tk:Override>
+      </tk:SingleXmlMetaData>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:CompositeSource>
+        <tk:Item>
+          <tk:Condition SearchType="Style QueryString" Style="List Update Insert Detail">
+            <tk:QueryString Name="Type" Value="Frame"/>
+          </tk:Condition>
+          <tk:EmptySource UseCallerInfo="true"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style QueryString" Style="List">
+            <tk:QueryString Name="Type" Value="Data"/>
+          </tk:Condition>
+          <tk:DbListSource>
+            <tk:Resolver>
+              <tk:RegResolver>Part</tk:RegResolver>
+            </tk:Resolver>
+            <tk:Operators>
+              <!--<tk:SubFuncOperators FunctionKey="Part" Page="List"/>-->
+              <tk:SimpleListOperators/>
+            </tk:Operators>
+          </tk:DbListSource>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="List"/>
+          <tk:EmptySource/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style QueryString" Style="Detail Update Insert">
+            <tk:QueryString Name="Type" Value="Info"/>
+          </tk:Condition>
+          <PageInfoSource/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style QueryString Post" Style="Detail Update" IsPost="false">
+            <tk:QueryString Name="Type" Value="Data"/>
+          </tk:Condition>
+          <tk:SingleDbDetailSource>
+            <tk:Resolver>
+              <tk:RegResolver>Part</tk:RegResolver>
+            </tk:Resolver>
+          </tk:SingleDbDetailSource>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style QueryString Post" Style="Insert" IsPost="false">
+            <tk:QueryString Name="Type" Value="Data"/>
+          </tk:Condition>
+          <tk:SingleDbInsertSource>
+            <tk:Resolver>
+              <tk:RegResolver>Part</tk:RegResolver>
+            </tk:Resolver>
+          </tk:SingleDbInsertSource>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style Post" Style="Insert Update" IsPost="true"/>
+          <tk:SingleDbEditSource>
+            <tk:Resolver>
+              <tk:RegResolver>Part</tk:RegResolver>
+            </tk:Resolver>
+          </tk:SingleDbEditSource>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="Delete"></tk:Condition>
+          <tk:SingleDbDeleteSource>
+            <tk:Resolver>
+              <tk:RegResolver>Part</tk:RegResolver>
+            </tk:Resolver>
+          </tk:SingleDbDeleteSource>
+        </tk:Item>
+      </tk:CompositeSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:CompositePageMaker>
+        <tk:Item>
+          <tk:Condition SearchType="Style QueryString" Style="List">
+            <tk:QueryString Name="Type" Value="Frame"/>
+          </tk:Condition>
+          <tk:FreeRazorPageMaker FileName="RazorTest/template.cshtml"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style QueryString" Style="Update Insert">
+            <tk:QueryString Name="Type" Value="Frame"/>
+          </tk:Condition>
+          <tk:FreeRazorPageMaker FileName="RazorTest/edittemplate.cshtml"/>
+        </tk:Item>
+                <tk:Item>
+          <tk:Condition SearchType="Style QueryString" Style="Detail">
+            <tk:QueryString Name="Type" Value="Frame"/>
+          </tk:Condition>
+          <tk:FreeRazorPageMaker FileName="RazorTest/detailtemplate.cshtml"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style QueryString" Style="List">
+            <tk:QueryString Name="Type" Value="Data"/>
+          </tk:Condition>
+          <tk:ListJsonMetaDataSetPageMaker/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="List"/>
+          <tk:FreeRazorPageMaker FileName="RazorTest/listindex.cshtml"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style QueryString" Style="Detail Update Insert">
+            <tk:QueryString Name="Type" Value="Info"/>
+          </tk:Condition>
+          <tk:JsonObjectPageMaker/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style QueryString Post" Style="Update Insert" IsPost="false">
+            <tk:QueryString Name="Type" Value="Data"/>
+          </tk:Condition>
+          <tk:JsonMetaDataSetPageMaker/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style QueryString Post" Style="Detail" IsPost="false">
+            <tk:QueryString Name="Type" Value="Data"/>
+          </tk:Condition>
+          <tk:DetailJsonMetaDataSetPageMaker/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style Post" Style="Insert Update" IsPost="true"/>
+          <tk:PostPageMaker DestUrl="List" />
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="Delete"></tk:Condition>
+          <tk:PostPageMaker DestUrl="Custom">
+            <tk:CustomUrl>ListRefresh</tk:CustomUrl>
+          </tk:PostPageMaker>
+        </tk:Item>
+      </tk:CompositePageMaker>
+    </tk:PageMaker>
+    <tk:WebPage SupportLogOn="false"/>
+  </tk:Module>
+</tk:Toolkit>

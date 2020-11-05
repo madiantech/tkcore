@@ -1,0 +1,33 @@
+﻿@inherits YJC.Toolkit.Razor.TemplatePage<TModel>
+@using System.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Web;
+@{
+    dynamic info = Model;
+    PageInfo page = info.Info;
+    string url = string.Format("/js/{0}/list/{1}?Model={2}&Template={3}",
+    page.ModuleCreator, page.Source, info.Model, info.Template);
+    if (info.Id != null)
+    {
+        url += string.Format("&Id={0}&_={1}", info.Id, info.Ticks);
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>tkadmin</title>
+</head>
+<body>
+    <noscript>
+        <strong>We're sorry but tkadmin doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <script type="text/javascript" src="@url"></script>
+</body>
+</html>

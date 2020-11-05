@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="UR_PART" NameField="Name">
+    <tk:TableDesc>
+      <tk:Content>角色表</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="int" IsKey="true" IsEmpty="false">
+      <tk:FieldName>PART_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>角色ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="false">
+      <tk:FieldName>PART_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>名称</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>100</tk:Length>
+      <tk:Layout Layout="PerLine"/>
+      <tk:Control Control="Text" Order="20" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>PART_DESC</tk:FieldName>
+      <tk:NickName>Description</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>描述</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>500</tk:Length>
+      <tk:Layout Layout="PerLine"/>
+      <tk:Control Control="Text" Order="30" DefaultShow="All"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

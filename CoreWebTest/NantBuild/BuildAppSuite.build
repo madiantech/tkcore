@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://nant.sf.net/release/0.91/nant.xsd" default="run" name="Hello">
+  <property name="TempPath" value="AppSuite2"/>
+  <property name="ZipFile" value="AppTool5_5.zip"/>
+  <property name="DestPath" value="../../../../VS2014/ToolkitSuite/_Deploy/AppFile/AppData/"/>
+  <property name="ErrorPath" value="${path::combine(TempPath, 'Error')}"/>
+  <target name="run">
+    <delete dir="${TempPath}" includeemptydirs="true"/>
+    <copy includeemptydirs="true" todir="${TempPath}" overwrite="true">
+      <fileset basedir="../TestWeb">
+        <include name="Program.cs"/>
+        <include name="Startup.cs"/>
+        <include name="appsettings*.json"/>
+        <include name=".vscode\**.*"/>
+        <include name="Xml\schema\bin\**.*"/>
+        <include name="Xml\schema\v5\**.*"/>
+        <include name="Xml\razortemplate\Normal\**.*"/>
+        <include name="Properties\*.json"/>
+        <include name="wwwroot\toolkitcss\v5\**.*"/>
+        <include name="wwwroot\toolkitjs\v5\**.*"/>
+        <include name="wwwroot\favicon.ico"/>
+        <exclude name="Xml\razor\_temp\**.*"/>
+        <exclude name="**.7z"/>
+        <exclude name="WebSite\toolkitjs\v5\lib\bootbox.js"/>
+        <exclude name="Xml\razortemplate\Normal\Workflow\**.*"/>
+      </fileset>
+    </copy>
+    <mkdir dir="${ErrorPath}"/>
+    <copy file="AppSuiteFile/seed.ini" todir="${ErrorPath}" overwrite="true" />
+    <copy file="AppSuiteFile/ToolkitWeb.csproj" todir="${TempPath}" overwrite="true" />
+    <copy todir="${TempPath}/Xml" overwrite="true">
+      <fileset basedir="AppSuiteFile">
+        <include name="*.xml" />
+      </fileset>
+    </copy>
+    <delete file="${ZipFile}"/>
+    <zip includeemptydirs="false" zipfile="${ZipFile}">
+      <fileset basedir="${TempPath}">
+        <include name="**.*"/>
+      </fileset>
+    </zip>
+    <delete dir="${TempPath}" includeemptydirs="true"/>
+    <copy file="${ZipFile}" todir="${DestPath}" overwrite="true" />
+  </target>
+</project>

@@ -1,0 +1,72 @@
+﻿@inherits YJC.Toolkit.Razor.NormalObjectEditTemplate
+@using System.Data;
+@using System.Collections.Generic;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@functions {
+    string GetJson(Tk5NormalTableData table)
+    {
+        var json = string.Format("{{\"Tables\":[{0}]}}", table.JsonFields);
+        return StringUtil.EscapeHtmlAttribute(json);
+    }
+}
+@{
+    EditObjectModel model = Model as EditObjectModel;
+    ObjectContainer mainObject = model.Object;// HtmlUtil.GetMainObject(Model, ViewBag);
+
+    Tk5NormalTableData table = ViewBag.MetaData.Table;
+    List<Tk5FieldInfoEx> hiddenFields = table.HiddenList;
+    List<Tk5FieldInfoEx> normalFields = table.TableList;
+    BootcssEditData pageData = ViewBag.PageData;
+    bool showCaption = pageData.ShowCaption;
+    int captionCol = pageData.CaptionColumn;
+    int dataCol = pageData.DataColumn;
+    string dataClass = showCaption ? "pr5" : "ph5";
+}
+<form action="@pageData.FormAction" method="POST" id="PostForm" class="tk-dataform form-horizontal p1 mb15" role="form" data-post="@GetJson(table)">
+    <div id="@table.TableName" class="tk-datatable table-row">
+        <div class="hide">
+            @foreach (Tk5FieldInfoEx field in hiddenFields)
+            {
+                @RenderHidden(mainObject, field, true)
+            }
+        </div>
+        <div class="p10">
+            @foreach (Tk5FieldInfoEx field in normalFields)
+            {
+                @{
+                string fieldString = RenderFieldItem(mainObject, field);
+                }
+                if (fieldString != null)
+                {
+                    @fieldString
+                }
+                else
+                {
+                    <div class="form-group">
+                        @if (showCaption)
+                        {
+                            @field.EditCaption(captionCol, "pv1 text-right control-label lv-vam")
+                        }
+                        <div class="@HtmlUtil.MergeClass(BootcssUtil.GetColClass(dataCol), "lv-vam", dataClass)">
+                            <span class="tk-control">
+                                @field.Control(mainObject, model.CodeTables, true)
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    @if (IsSectionDefined("ModuleButtons"))
+    {
+        @RenderSection("ModuleButtons")
+    }
+    else
+    {
+        @BootcssUtil.Button(pageData.SaveButtonCaption, "btn-submit", BootcssButton.Primary, true)
+    }
+</form>

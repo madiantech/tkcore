@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="Company">
+    <tk:TableDesc>
+      <tk:Content>公司代码表</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="int" IsKey="true" IsEmpty="false">
+      <tk:FieldName>COM_COMPANY_ID</tk:FieldName>
+      <tk:NickName>CompanyId</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>系统代码</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="false">
+      <tk:FieldName>COM_TCODE</tk:FieldName>
+      <tk:NickName>Tcode</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>代码</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>20</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="20" DefaultShow="All"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="false">
+      <tk:FieldName>COM_TNAME</tk:FieldName>
+      <tk:NickName>Tname</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>简称</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>30</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="30" DefaultShow="All"/>
+      <tk:ListDetail>
+        <tk:Link Target="_blank">~/cc-echart/companyInfo-main.html?Tcode=*Tcode*</tk:Link>
+      </tk:ListDetail>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

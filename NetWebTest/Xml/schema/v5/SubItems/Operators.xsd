@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (DataNew) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="OperatorCommon.xsd"/>
+  <xs:include schemaLocation="WorkflowOperators.xsd"/>
+  <xs:complexType name="_tk_OperatorType">
+    <xs:sequence>
+      <xs:element name="Caption" type="tk:MultiLanguageType">
+        <xs:annotation>
+          <xs:documentation>Operator的显示内容（即按钮标题）</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Content" type="tk:MarcoConfigItem" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Operator的链接地址或者JS函数</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ConfirmData" type="tk:MultiLanguageType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>在执行操作前可以弹出对话框询问，此为询问的信息，如果是JS，此项无效</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DialogTitle" type="tk:MarcoConfigItem" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>如果显示对话框，对话框的Title定义。如不定义，即为Caption</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:token">
+      <xs:annotation>
+        <xs:documentation>Operator的Key</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Position">
+      <xs:annotation>
+        <xs:documentation>Operator的位置，默认为Row，即通过DataRow来确定。Global不需要通过DataRow，为全局性的操作。</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="Row"/>
+          <xs:enumeration value="Global"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Info" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>附加信息。附加信息中包含Insert则生成Insert链接地址。包含Update则生成Update链接地址。包含Delete则生成Delete链接地址。包含JS，则认为Content内容为js，onclick时调用js而非链接。包含Dialog，则用Dialog方式打开链接。包含AjaxUrl，则用AjaxGet调用地址，并根据返回内容做出相应处理。包含Post，则在AjaxUrl提交时，使用Post方法。包含_blank，则正常链接打开时将新建一个窗口，而不是在原窗口打开。</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IconClass" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>按钮的图标，必须定义对应css的Class才有效。系统支持Font Awesome的图标，以及Bootstrap内置图标</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="UseKey" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>是否在QueryString中添加Key的信息，默认为false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="_tk_DialogOperator">
+    <xs:complexContent>
+      <xs:extension base="tk:_tk_BaseOperator">
+        <xs:attributeGroup ref="tk:DialogMode"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="_tk_BaseDeleteOperator">
+    <xs:sequence>
+      <xs:element name="Caption" type="tk:MultiLanguageType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>重载的按钮文字，如果不配置将采用默认的文字</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ConfirmData" type="tk:MultiLanguageType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>默认的提示文字，如果不配置将采用默认文字</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:group name="_tk_OperatorGroup">
+    <xs:choice>
+      <xs:element ref="tk:Operator"/>
+      <xs:element ref="tk:InsertOperator"/>
+      <xs:element ref="tk:UpdateOperator"/>
+      <xs:element ref="tk:DeleteOperator"/>
+      <xs:element ref="tk:UpdateTreeNodeOperator"/>
+      <xs:element ref="tk:DeleteTreeNodeOperator"/>
+      <xs:element ref="tk:InsertChildTreeNodeOperator"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+      <xs:element ref="tk:WfCreateOperator"/>
+    </xs:choice>
+  </xs:group>
+  <xs:element name="DeleteOperator">
+    <xs:annotation>
+      <xs:documentation>删除操作</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:_tk_BaseDeleteOperator">
+          <xs:attribute name="UseAjax" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>是否采用Ajax Get的方式提交请求，默认为true</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteTreeNodeOperator">
+    <xs:annotation>
+      <xs:documentation>删除树节点操作</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:_tk_BaseDeleteOperator">
+          <xs:attribute name="IconClass" type="xs:Name">
+            <xs:annotation>
+              <xs:documentation>重载的小图标，如果不配置将采用默认图标</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertOperator" type="tk:_tk_DialogOperator">
+    <xs:annotation>
+      <xs:documentation>新建操作</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="InsertChildTreeNodeOperator" type="tk:_tk_DialogOperator">
+    <xs:annotation>
+      <xs:documentation>新建树的子节点操作</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="UpdateOperator" type="tk:_tk_DialogOperator">
+    <xs:annotation>
+      <xs:documentation>修改操作</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="UpdateTreeNodeOperator" type="tk:_tk_DialogOperator">
+    <xs:annotation>
+      <xs:documentation>修改树节点操作</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Operator" type="tk:_tk_OperatorType">
+    <xs:annotation>
+      <xs:documentation>标准操作定义</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

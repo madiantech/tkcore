@@ -1,0 +1,41 @@
+﻿@inherits YJC.Toolkit.Razor.TemplatePage<TModel>
+@using YJC.Toolkit.Sys;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>tool-kit-admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tool-kit-dev@1.0.10/dist/tk.min.css" rel=stylesheet />
+    <link href="@("toolkitjs/v6/tk.min.css".AppVirutalPath())" rel=stylesheet>>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/javascript" src="@("toolkitjs/v6/tk.min.js".AppVirutalPath())"></script>
+</body>
+<script>
+    const tKRouter = new TKRouter()
+    const option = {
+        query: {
+            pageType: 'list',
+            dataUrl: '/c/xml/list/RazorTest/TestPartVueList?Type=Data',
+            tempUrl: '/c/xml/list/RazorTest/TestPartVueList?Type=Frame',
+            // dataUrl: 'list/razortest_testvuelist',
+            // tempUrl: 'list/razortest_testvuelist',
+            dataConf: {
+                structure: 'UR_PART',
+                params: {
+                    page: {},
+                    model: {},
+                }
+            },
+            tempConf: {
+                structure: '',
+                params: {
+                }
+            }
+        }
+    }
+    tKRouter.doRouter(option)
+</script>
+</html>

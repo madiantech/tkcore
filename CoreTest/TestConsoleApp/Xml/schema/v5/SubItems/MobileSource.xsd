@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:element name="ListViewSource">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tk:ListView" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListView">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Caption" type="tk:MultiLanguageType" minOccurs="0"/>
+        <xs:element name="ListItem" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Caption" type="tk:MultiLanguageType"/>
+              <xs:element name="Url" type="xs:anyURI"/>
+            </xs:sequence>
+            <xs:attribute name="Icon" type="xs:anyURI"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

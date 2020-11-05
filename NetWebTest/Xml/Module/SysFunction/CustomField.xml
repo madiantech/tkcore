@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>自定义录入表</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:DetailMetaData IsFix="true" ListStyle="Table">
+        <tk:SingleXmlMetaData DataXml="SysFunction/CustomField.xml" DisableAutoDetailLink="true"/>
+      </tk:DetailMetaData>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:CompositeSource>
+        <tk:Item>
+          <tk:Condition SearchType="Post" IsPost="false"/>
+          <tk:SqlSource UseCallerInfo="true">
+            <tk:Sql TableName="SYS_CUSTOM_FIELD" NeedParse="true" SQLInject="true">SELECT CF_TABLE_ID TableId, CT_FIELD_NAME FieldName, CF_DISPLAY_NAME DisplayName, CF_CONTROL Control, CF_ORDER FieldOrder, CF_DISPLAY Display, CF_CHARACTER Character, CF_QUERY Query FROM SYS_CUSTOM_FIELD WHERE (CF_CHARACTER != 9 AND CF_CHARACTER != 1) AND CF_TABLE_ID = {#TableId} ORDER BY CF_ORDER</tk:Sql>
+            <tk:Sql TableName="CD_TK_CONTROL">SELECT CODE_VALUE Value, CODE_NAME Name, CODE_DEL Del FROM CD_TK_CONTROL ORDER BY CODE_SORT</tk:Sql>
+          </tk:SqlSource>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Post" IsPost="true"/>
+          <tk:SingleDbEditSource UpdateMode="Merge">
+            <tk:Resolver>
+              <tk:RegResolver>CustomField</tk:RegResolver>
+            </tk:Resolver>
+          </tk:SingleDbEditSource>
+        </tk:Item>
+      </tk:CompositeSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:PostRazorPageMaker DestUrl="Custom" Template="NormalMultiEdit" RazorFile="SysFunction/CustomField.cshtml">
+        <tk:RazorData>
+          <tk:NormalMultiEditData>
+            <tk:RazorField NickName="SYS_CUSTOM_FIELD.Display" ContentType="RazorFile">FieldDisplay.cshtml</tk:RazorField>
+            <tk:RazorField NickName="SYS_CUSTOM_FIELD.DisplayName" ContentType="RazorFile">FieldName.cshtml</tk:RazorField>
+            <tk:RazorField NickName="SYS_CUSTOM_FIELD.Control" ContentType="RazorFile">FieldControl.cshtml</tk:RazorField>
+            <tk:RazorField NickName="SYS_CUSTOM_FIELD.Query" ContentType="RazorFile">FieldQuery.cshtml</tk:RazorField>
+          </tk:NormalMultiEditData>
+        </tk:RazorData>
+        <tk:CustomUrl>~/Library/WebListXmlPage.tkx?Source=SysFunction/CustomTable</tk:CustomUrl>
+      </tk:PostRazorPageMaker>
+    </tk:PageMaker>
+  </tk:Module>
+</tk:Toolkit>

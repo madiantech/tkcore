@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (DataNew) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="FieldCommon.xsd"/>
+  <xs:simpleType name="Alignment">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="center"/>
+      <xs:enumeration value="left"/>
+      <xs:enumeration value="right"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LayoutType">
+    <xs:attribute name="Layout" type="tk:FieldLayoutType">
+      <xs:annotation>
+        <xs:documentation>字段的布局，默认为PerUnit</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="UnitNum" type="xs:unsignedInt">
+      <xs:annotation>
+        <xs:documentation>如果布局是PerUnit，此为Unit的数量，默认为1</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ListDetailType">
+    <xs:attribute name="ListWidth" type="xs:unsignedInt">
+      <xs:annotation>
+        <xs:documentation>将根据此值来设置列表时的宽度</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TextHead" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>配置为true时，此列将无法排序，主要针对Text等数据库无法排序的字段类型，默认为false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Span" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>配置为true时，将按照区间段进行查询，默认为false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="SortField" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>排序时，可以使用配置的字段，而非当前字段本身。例如创建时间和主键ID的排序顺序一致，可以在此配置为主键ID的字段名，这样可以提高排序的性能</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Search">
+      <xs:annotation>
+        <xs:documentation>配置为true时，该字段将可以搜索，默认为false。配置为only时，该字段仅产于搜索，不出现在列表中</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+          <xs:enumeration value="only"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="EditType">
+    <xs:sequence>
+      <xs:element name="DefaultValue" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>新建时，默认的缺省值</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Updating" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>新建和修改时，自动给字段赋相应的值</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="UpdateKind" use="required">
+                <xs:simpleType>
+                  <xs:restriction base="xs:NMTOKEN">
+                    <xs:enumeration value="Insert"/>
+                    <xs:enumeration value="InsUpd"/>
+                    <xs:enumeration value="Update"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Xml\schema\v5\RazorItems\**" />
+    <EmbeddedResource Remove="Xml\schema\v5\RazorItems\**" />
+    <None Remove="Xml\schema\v5\RazorItems\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CoreApp\YJC.Toolkit.Core.ConsoleApp\YJC.Toolkit.Core.ConsoleApp.csproj" />
+    <ProjectReference Include="..\..\CoreData\YJC.Toolkit.Evaluator\YJC.Toolkit.Evaluator.csproj" />
+    <ProjectReference Include="..\..\Core\YJC.Toolkit.Core\YJC.Toolkit.Core.csproj" />
+    <ProjectReference Include="..\..\Core\YJC.Toolkit.MetaData\YJC.Toolkit.MetaData.csproj" />
+    <ProjectReference Include="..\..\Data\JoseJWT\YJC.Toolkit.JWTLib.csproj" />
+    <ProjectReference Include="..\..\Data\YJC.Toolkit.AdoData\YJC.Toolkit.AdoData.csproj" />
+    <ProjectReference Include="..\..\Data\YJC.Toolkit.Data\YJC.Toolkit.Data.csproj" />
+    <ProjectReference Include="..\..\Data\YJC.Toolkit.SqlClient\YJC.Toolkit.SqlClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.en.resx">
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources - 复制.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

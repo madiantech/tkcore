@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (DataNew) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <!--<xs:include schemaLocation="PageMakerCommon.xsd"/>-->
+  <xs:include schemaLocation="RazorPageMaker.xsd"/>
+  <xs:include schemaLocation="NewRazorPageMaker.xsd"/>
+  <!--    <xs:redefine schemaLocation="PageMakerCommon.xsd">
+    <xs:attributeGroup name="PostAttrGroup">
+      <xs:attribute use="required" name="DestUrl"  type="tk:PageStyleType"/>
+      <xs:attribute name="DataType" type="tk:OutputDataType" />
+      <xs:attribute name="UseRetUrlFirst" type="xs:boolean" default="true" />
+    </xs:attributeGroup>
+  </xs:redefine>-->
+  <xs:complexType name="_tk_ObjectMakerType">
+    <xs:attribute name="GZip" type="tk:ConfigType"/>
+    <xs:attribute name="Encrypt" type="tk:ConfigType"/>
+  </xs:complexType>
+  <xs:element name="JsonDataSetPageMaker" type="tk:_tk_ObjectMakerType">
+    <xs:annotation>
+      <xs:documentation>将DataSet或者类DataSet的Xml输出为Json（DataSet，XmlReader，String，其中String为Xml结构）</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="JsonObjectPageMaker">
+    <xs:annotation>
+      <xs:documentation>将任意Toolkit对象输出为Json</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:_tk_ObjectMakerType">
+          <xs:sequence>
+            <xs:element ref="tk:WriteSettings" minOccurs="0"/>
+          </xs:sequence>
+          <xs:attribute name="ModelName" type="xs:Name"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JsonpObjectPageMaker">
+    <xs:annotation>
+      <xs:documentation>将任意Toolkit对象输出为Jsonp，允许跨域访问</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tk:WriteSettings" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="ModelName" type="xs:Name"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SourceOutputPageMaker">
+    <xs:annotation>
+      <xs:documentation>将内容直接输出（只支持String模式）</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="ContentType" type="xs:token">
+        <xs:annotation>
+          <xs:documentation>输出内容的格式，默认为text/html</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Encoding" type="xs:token">
+        <xs:annotation>
+          <xs:documentation>输出的Encoding，默认为utf-8</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WebFilePageMaker">
+    <xs:annotation>
+      <xs:documentation>将内容用文件的格式输出（输出结果必须为FileContent类型）</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Disposition">
+        <xs:annotation>
+          <xs:documentation>文件输出的格式，默认为Attachment</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Attachment"/>
+            <xs:enumeration value="Inline"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="XmlPageMaker">
+    <xs:annotation>
+      <xs:documentation>将DataSet或者类DataSet的Xml输出为Xml（DataSet，XmlReader，String，Toolkit对象）</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:_tk_ObjectMakerType">
+          <xs:sequence>
+            <xs:element ref="tk:WriteSettings" minOccurs="0"/>
+          </xs:sequence>
+          <xs:attribute name="Root" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>根节点，当OutputType为ToolkitObject有效</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="ModelName" type="xs:Name"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SimpleXsltPageMaker">
+    <xs:annotation>
+      <xs:documentation>将结果进行xslt转换后再输出（DataSet，XmlReader，String，Toolkit对象）</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="UseXsltArgs" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否使用Xslt全局参数，默认为False。如果为True，将输出IsPost参数，同时开放MetaData的输入</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="ContentType" type="xs:token">
+        <xs:annotation>
+          <xs:documentation>输出内容的格式，默认为text/html</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Encoding" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>输出内容的编码，默认为utf-8</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="XsltFile" type="xs:string" use="required">
+        <xs:annotation>
+          <xs:documentation>Xslt文件名，需要包含相对路径</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Position" type="tk:FilePosition">
+        <xs:annotation>
+          <xs:documentation>文件相对位置，默认为Xml</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegPageMaker" type="xs:Name">
+    <xs:annotation>
+      <xs:documentation>根据配置的注册名实例化PageMaker</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CompositePageMaker">
+    <xs:annotation>
+      <xs:documentation>根据具体条件来选择相应配置的PageMaker</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Item" type="tk:CompositePageMakerItemType" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="CompositePageMakerItemType">
+    <xs:sequence>
+      <xs:element ref="tk:Condition"/>
+      <xs:group ref="tk:SimplePageMakerGroup"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:group name="SimplePageMakerGroup">
+    <xs:choice>
+      <xs:element ref="tk:XmlPageMaker"/>
+      <xs:element ref="tk:JsonDataSetPageMaker"/>
+      <xs:element ref="tk:JsonObjectPageMaker"/>
+      <xs:element ref="tk:SourceOutputPageMaker"/>
+      <xs:element ref="tk:SimpleXsltPageMaker"/>
+      <xs:element ref="tk:WebFilePageMaker"/>
+      <xs:element ref="tk:RegPageMaker"/>
+      <xs:element ref="tk:CompositePageMaker"/>
+      <xs:element ref="tk:MetaDataPageMaker"/>
+      <xs:element ref="tk:WebSourceXsltPageMaker"/>
+      <xs:element ref="tk:PostPageMaker"/>
+      <xs:element ref="tk:JsonResultPageMaker"/>
+      <xs:element ref="tk:RazorPageMaker"/>
+      <xs:element ref="tk:PostRazorPageMaker"/>
+      <xs:element ref="tk:ListRazorPageMaker"/>
+      <xs:element ref="tk:SingleRazorPageMaker"/>
+      <xs:element ref="tk:FreeRazorPageMaker"/>
+      <xs:element ref="tk:SingleDialogRazorPageMaker"/>
+      <xs:element ref="tk:FilePageMaker"/>
+      <xs:element ref="tk:MarcoTextPageMaker"/>
+      <xs:element ref="tk:SingleDialogTreeRazorPageMaker"/>
+      <xs:element ref="tk:JsonpObjectPageMaker"/>
+      <xs:element ref="tk:JsonpDataSetPageMaker"/>
+      <xs:element ref="tk:SingleDialogObjectRazorPageMaker"/>
+      <xs:element ref="tk:SingleObjectRazorPageMaker"/>
+      <xs:element ref="tk:SingleDialogObjectTreeRazorPageMaker"/>
+      <xs:element ref="tk:MasterDetailRazorPageMaker"/>
+      <xs:element ref="tk:ExceptionRazorPageMaker"/>
+      <xs:element ref="tk:TreePostPageMaker"/>
+      <xs:element ref="tk:MasterDetailTreeRazorPageMaker"/>
+      <xs:element ref="tk:SingleTreeRazorPageMaker"/>
+      <xs:element ref="tk:ExportExcelPageMaker"/>
+      <xs:any namespace="##local" processContents="lax" maxOccurs="unbounded"/>
+      <xs:element ref="tk:QueryRazorPageMaker"/>
+      <xs:element ref="tk:SingleDetailListRazorPageMaker"/>
+      <xs:element ref="tk:SingleDialogDetailListRazorPageMaker"/>
+      <xs:element ref="tk:RazorStylePageMaker"/>
+      <xs:element ref="tk:RazorPageTemplatePageMaker"/>
+      <xs:element ref="tk:RazorModuleTemplatePageMaker"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="SimplePageMakerType">
+    <xs:annotation>
+      <xs:documentation>该类型为动态节点，可根据配置工厂实际情况，自由调整</xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:group ref="tk:SimplePageMakerGroup"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="PageMakerType">
+    <xs:group ref="tk:SimplePageMakerGroup"/>
+  </xs:complexType>
+  <xs:element name="WriteSettings" type="tk:WriteSettingsType">
+    <xs:annotation>
+      <xs:documentation>Xml输出参数，当OutputType为ToolkitObject有效</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MetaDataPageMaker">
+    <xs:annotation>
+      <xs:documentation>如果配置了MetaData，将以Xml或Json的方式显示MetaData的内容</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="DataType" type="tk:OutputDataType">
+        <xs:annotation>
+          <xs:documentation>返回的数据格式，默认为Xml</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WebSourceXsltPageMaker">
+    <xs:annotation>
+      <xs:documentation>Get下使用XsltPageMaker，而Post下使用JsonObjectPageMaker</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="UseXsltArgs" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否使用Xslt全局参数，默认为False。如果为True，将输出IsPost参数，同时开放MetaData的输入</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="XsltFile" type="xs:string" use="required">
+        <xs:annotation>
+          <xs:documentation>Xslt文件名，需要包含相对路径</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Condition" type="tk:OutputConditionType">
+    <xs:annotation>
+      <xs:documentation>匹配条件</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PostPageMaker" type="tk:PostPageMakerType">
+    <xs:annotation>
+      <xs:documentation>专门处理数据提交的PageMaker。当结果数据为KeyData时，根据配置得到返回地址。如果是错误信息直接输出。</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="JsonResultPageMaker">
+    <xs:annotation>
+      <xs:documentation>将DataSet或者XmlReader输出为Json，同时附着输出结果（DataSet，XmlReader）</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:_tk_ObjectMakerType">
+          <xs:choice>
+            <xs:element name="Result" type="tk:ActionResultType" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>输出结果</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="TableMapping" minOccurs="0" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="RemoveField" type="xs:Name" maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:attribute name="TableName" type="xs:Name" use="required"/>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="RemoveTable" type="xs:Name" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:choice>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TreePostPageMaker" type="tk:PostPageMakerType">
+    <xs:annotation>
+      <xs:documentation>针对Tree结构，类似于PostPageMaker，但返回地址针对Tree结构进行了优化</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="FilePageMaker">
+    <xs:annotation>
+      <xs:documentation>直接将配置的文件内容输出的PageMaker</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="FileName" type="xs:anyURI" use="required">
+        <xs:annotation>
+          <xs:documentation> 文件名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Position" type="tk:FilePosition">
+        <xs:annotation>
+          <xs:documentation>文件相对位置，默认为Xml</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="IsMarco" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>标记文件是否是宏文本</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="FileEncoding" type="xs:token">
+        <xs:annotation>
+          <xs:documentation>文件的Encoding，默认为utf-8</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Encoding" type="xs:token">
+        <xs:annotation>
+          <xs:documentation>输出的Encoding，默认为utf-8</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MarcoTextPageMaker">
+    <xs:annotation>
+      <xs:documentation>将定义的宏文本输出的PageMaker</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:MarcoConfigItem">
+          <xs:attribute name="Encoding" type="xs:token">
+            <xs:annotation>
+              <xs:documentation>输出的Encoding，默认为utf-8</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="ContentType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>输出的ContentType，默认为text/html</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="__ExcelContentType">
+    <xs:attribute name="FontName" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>默认的字体，如果不配置，字体名称为"宋体"</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="FontSize" type="xs:unsignedInt">
+      <xs:annotation>
+        <xs:documentation>默认的字号，如果不配置，默认为10</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="FontBold" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>默认是否为粗体。如果不配置，表头默认为True，内容默认为False</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Align" type="tk:AlignType">
+      <xs:annotation>
+        <xs:documentation>默认的对其方式，如果不配置，表头默认为Center，内容默认为Right</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="PostPageMakerType">
+    <xs:group ref="tk:PostElementGroup"/>
+    <xs:attributeGroup ref="tk:PostAttrGroup"/>
+  </xs:complexType>
+  <xs:element name="JsonpDataSetPageMaker" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>将DataSet或者类DataSet的Xml输出为Jsonp，允许跨域访问（DataSet，XmlReader，String，其中String为Xml结构）</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ExportExcelPageMaker">
+    <xs:annotation>
+      <xs:documentation>将结果内容输出成Excel格式的文件（DataSet，ObjectListModel对象）</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Header" type="tk:__ExcelContentType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>表头的参数配置</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Content" type="tk:__ExcelContentType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>内容的参数配置</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="UseBorder" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否包含边框，默认为True</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>分配角色权限</tk:Content>
+    </tk:Title>
+    <tk:Source>
+      <tk:CompositeSource>
+        <tk:Item>
+          <tk:Condition SearchType="Post" IsPost="false"/>
+          <tk:SqlSource UseCallerInfo="true">
+            <tk:Sql TableName="Function">SELECT FN_ID Id, FN_NAME Name, FN_PARENT_ID ParentId, FN_TREE_LAYER TreeLayer FROM SYS_FUNCTION</tk:Sql>
+            <tk:Sql TableName="SubFunc">SELECT SF_ID Id, SF_FN_ID FnId, SF_NAME Name, SF_NAME_ID NameId, SF_ORDER OperOrder FROM SYS_SUB_FUNC</tk:Sql>
+            <tk:Sql TableName="PartFunc" SQLInject="true" NeedParse="true">SELECT PF_FN_ID FuncId FROM SYS_PART_FUNC WHERE PF_PART_ID = {#Id}</tk:Sql>
+            <tk:Sql TableName="PartSubFunc" SQLInject="true" NeedParse="true">SELECT PSF_SF_ID SubFuncId FROM SYS_PART_SUB_FUNC WHERE PSF_PART_ID = {#Id}</tk:Sql>
+          </tk:SqlSource>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Post" IsPost="true"/>
+          <tk:RegNameSource>PartRight</tk:RegNameSource>
+        </tk:Item>
+      </tk:CompositeSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:CompositePageMaker>
+        <tk:Item>
+          <tk:Condition SearchType="Post" IsPost="false"/>
+          <tk:FreeRazorPageMaker FileName="UserManager/TreePartRight.cshtml"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Post" IsPost="true"/>
+          <tk:PostPageMaker DestUrl="Custom">
+            <tk:CustomUrl>CloseDialog</tk:CustomUrl>
+            <tk:AlertMessage>
+              <tk:Content>权限已设置</tk:Content>
+            </tk:AlertMessage>
+          </tk:PostPageMaker>
+        </tk:Item>
+      </tk:CompositePageMaker>
+    </tk:PageMaker>
+  </tk:Module>
+</tk:Toolkit>

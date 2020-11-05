@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (mitu) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:attributeGroup name="NameAttrGrp">
+    <xs:attribute name="Name" type="xs:Name" use="required">
+      <xs:annotation>
+        <xs:documentation>内部标识名称，要求同级保证唯一性</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="DisplayName" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>显示的名称</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:complexType name="BaseStepType">
+    <xs:attributeGroup ref="NameAttrGrp"/>
+    <xs:attribute name="Width" type="xs:unsignedInt" use="required" fixed="100"/>
+    <xs:attribute name="Height" type="xs:unsignedInt" use="required" fixed="40"/>
+    <xs:attribute name="Top" type="xs:unsignedInt" use="required"/>
+    <xs:attribute name="Left" type="xs:unsignedInt" use="required"/>
+  </xs:complexType>
+  <xs:element name="Workflow">
+    <xs:annotation>
+      <xs:documentation>根节点，工作流配置定义</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Id" type="xs:unsignedInt" use="required"/>
+      <xs:attributeGroup ref="NameAttrGrp"/>
+      <xs:attribute name="Retrievable" type="xs:boolean"/>
+      <xs:attribute name="Description" type="xs:string" use="required"/>
+      <xs:attribute name="Priority" use="required"/>
+      <xs:attribute name="MainTableColumnPrefix" type="xs:string"/>
+      <xs:attribute name="OtherColumnOne" type="xs:Name"/>
+      <xs:attribute name="OtherColumnOneDisplayName" type="xs:string"/>
+      <xs:attribute name="OtherColumnTwo" type="xs:Name"/>
+      <xs:attribute name="OtherColumnTwoDisplayName" type="xs:string"/>
+      <xs:attribute name="ContentXml" type="xs:anyURI"/>
+      <xs:attribute name="IsSaveContent" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

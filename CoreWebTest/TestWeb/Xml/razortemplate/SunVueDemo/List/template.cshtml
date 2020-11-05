@@ -1,0 +1,83 @@
+﻿@inherits YJC.Toolkit.Razor.ToolkitTemplatePage<TModel>
+@using System.Data;
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    IListMetaData metaData = ViewBag.MetaData;
+    IEnumerable<IFieldInfoEx> fields = metaData.TableData.DataList;
+    ListVueOperator model = Model as ListVueOperator;
+}
+<template>
+    <div>
+        <div class="filter-content">
+            <!-- 搜索条件 -->
+            <el-input size="medium"
+                      class="filter-item"
+                      v-model="Condition.Id"
+                      placeholder="Id"></el-input>
+            <el-input size="medium"
+                      class="filter-item"
+                      v-model="Condition.Name"
+                      placeholder="Name"></el-input>
+            <el-button class="filter-item"
+                       size="medium"
+                       type="default"
+                       @@click="reSearch()">搜索</el-button>
+            <!-- end 搜索条件 -->
+            <!-- 按钮功能 -->
+            <div class="other-operation">
+                @Raw(SunOperatorUtil.ListGlobalOperator(model.GlobalOperators, metaData, model.Source))
+            </div>
+            <!-- end 按钮功能 -->
+        </div>
+        <el-table :data="tableData"
+                  ref="@metaData.TableData.TableName"
+                  url="/c/xml/list/@(model.Source)"
+                  :header-cell-class-name="handleTheadAddClass"
+                  @@sort-change="sortChange">
+            @foreach (Tk5FieldInfoEx field in fields)
+            {
+                string sortable = "sortable=\"custom\"";
+                if (field.ListDetail?.TextHead == true)
+                {
+                    sortable = "";
+                }
+                <el-table-column label="@Raw(field.DisplayName)" prop="@field.NickName" @Raw(sortable)>
+                    @if (field.NickName == metaData.TableData.NameField.NickName)
+                    {
+                        <el-button type="text" slot-scope="{row}" v-tk-dialog="{url:`/detail?@SunOperatorUtil.AppendKey(metaData)`}">{{row.Name}}</el-button>
+                    }
+                    else
+                    {
+                        <div slot-scope="{row}" v-html="row.@field.NickName"> </div>
+                    }
+                </el-table-column>
+            }
+            <el-table-column label="操作">
+                <template slot-scope="{row}">
+                    @Raw(SunOperatorUtil.ListRowOperator(model.RowOperators, metaData, model.Source))
+                </template>
+            </el-table-column>
+        </el-table>
+        <el-pagination class="list-pagination"
+                       @@size-change="handleSizeChange"
+                       @@current-change="handleCurrentChange"
+                       :current-page="Page.CurrentPage+1"
+                       :page-sizes="[10, 15, 20, 25,30]"
+                       :page-size.sync="Page.PageSize"
+                       layout="total, sizes, prev, pager, next, jumper"
+                       :total="Page.TotalCount">
+        </el-pagination>
+    </div>
+</template>
+<script>
+    import listMixin from 'common/mixins/list'
+    export default {
+        mixins: [listMixin]
+    }
+</script>

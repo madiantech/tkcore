@@ -1,0 +1,51 @@
+/* toolkit : frame layout */
+.tk-wrapper { position:absolute; top:0; left:0; right:0; bottom:0; min-width:950px;_width:expression((document.documentElement.clientWidth||document.body.clientWidth)>950?"950px":""); }
+.tk-header { background:url(images/bg.png) repeat-x; }
+	.tk-headtop { height:57px; color:#fff; }
+	.tk-headtop a { color:#fff; }
+		.tk-logo { padding-left:20px; font-size:18px; font-weight:bold; line-height:56px; }
+		.tk-userinfo { float:right; height:32px; line-height:32px; padding-right:10px; margin-bottom:5px; }
+		.tk-themes { height:20px; padding-right:10px; clear:right; }
+		.tk-themes li { float:right; margin-left:5px; width:10px; height:10px; line-height:10px; overflow:hidden; border:solid 1px #ccc; cursor:pointer; }
+		.tk-themes li.on { width:8px; height:8px; border:solid 2px #ff0; }
+	.tk-headbar { height:26px; padding:1px 10px; color:#15428B; }
+	.tk-headbar a { color:#15428B; }
+		.tk-navi { float:left; }
+		.tk-help { float:right; line-height:26px; }
+.tk-body { position:absolute; top:85px; bottom:0; left:0; right:0; overflow:hidden; }
+.tk-body a { color:#15428B; }
+	.tk-sidebar { float:left; width:189px; border-right:solid 1px #6893CF; height:100%; }
+		.tk-accordion { height:100%; }
+			.acc-header h3 {  background:url(images/bg.png) repeat-x 0 -132px; line-height:26px; font-size:12px; font-weight:bold; padding-left:20px; border-bottom:solid 1px #6893CF; color:#15428B; }
+			.acc-header h3:hover { background-position:0 -162px; }
+			.acc-body { border-bottom:solid 1px #6893CF; padding:10px 10px 10px 20px; }
+	.tk-main { margin-left:0px; height:100%; position:relative; }
+		.tk-tabs { height:27px; line-height:26px; background:url(images/bg.png) repeat-x 0 -85px; overflow:hidden; color:#15428B; }
+		.tk-tabs h2 { height:26px; line-height:26px; font-size:14px; font-weight:bold; padding-left:10px; }
+		.tk-tabs ul { margin:3px 0 0 5px; height:23px; }
+		.tk-tabs ul li { float:left; padding:0 10px; line-height:22px; border:solid 1px #6893CF; cursor:pointer; margin-right:3px; border-radius:3px 3px 0 0; -khtml-border-radius:3px 3px 0 0; -webkit-border-radius:3px 3px 0 0; -moz-border-radius:3px 3px 0 0; }
+		.tk-tabs ul li span { float:left; }
+		.tk-tabs ul li del { background:url(images/icon.png) no-repeat -112px -160px; display:block; float:right; margin:3px -3px 0 3px; width:7px; height:16px; cursor:pointer; }
+		.tk-tabs ul li.on { font-weight:bold; background-color:#DAE6F7; border-bottom-color:#DAE6F7; }
+		.tk-tabs ul li.on del { display:none; }
+		.tk-container { position:absolute; top:27px; bottom:0; left:0; right:0;  overflow:auto; }
+			.tk-page-frame { margin:0; height:100%; overflow:auto; }
+			.tk-frame { width:100%; height:100%; }
+			.tk-page { margin:10px; }
+				.tk-column { float:left; padding-top:5px; min-height:200px; }
+				.tk-column .tk-module { margin:0 5px 10px; }
+.tk-footer { display:none; }
+.tk-loading { height:100px; background:url(images/indicator_medium.gif) no-repeat center center; }
+
+/* toolkit ui:dropmenu */
+ul.tk-dropmenu { height:26px; overflow:hidden; }
+ul.tk-dropmenu li { line-height:26px; }
+ul.tk-dropmenu li a { text-decoration:none; }
+ul.tk-dropmenu li a, 
+ul.tk-dropmenu li span { padding:0 21px 0 11px; }
+ul.tk-dropmenu .toplevel { background:url(images/sprite.png) no-repeat right top; cursor:pointer; height:16px; line-height:16px; margin:5px 0; z-index:2; }
+ul.tk-dropmenu .toplevel.hover { background:#CFE1F8; height:26px; line-height:26px; margin:0; border-left:solid 1px #6893CF; border-right:solid 1px #6893CF; margin-left:-1px; padding:0 20px 0 11px; }
+ul.tk-dropmenu li.last .toplevel { padding-right:18px; background-position:right -32px; }
+ul.tk-dropmenu .sublevel { background-color:#CFE1F8; border:solid 1px #6893CF; border-top:none; width:80px; cursor:pointer; margin-left:-1px; }
+ul.tk-dropmenu .sublevel.hover { font-weight:bold; }
+ul.tk-dropmenu ul { border-top:solid 1px #6893CF; margin-top:-1px; z-index:1; display:none; }

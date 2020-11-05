@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>YJC.Toolkit.SimpleRight</RootNamespace>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>YJC.Toolkit2.snk</AssemblyOriginatorKeyFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AssemblyName>YJC.Toolkit.SimpleUser.Data.Core</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\CoreWebTest\TestWeb\bin\Debug\Modules\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YJC.Toolkit.Core" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.MetaData" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.Data" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.AdoData" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.Web.Common" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.WebApp" Version="5.6.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\YJC.Toolkit.LogOn\YJC.Toolkit.LogOn.21.csproj" />
+    <ProjectReference Include="..\YJC.Toolkit.SimpleRight\YJC.Toolkit.SimpleRight.21.csproj" />
+    <ProjectReference Include="..\YJC.Toolkit.SimpleUser.Data\YJC.Toolkit.SimpleUser.Data.21.csproj" />
+  </ItemGroup>
+</Project>

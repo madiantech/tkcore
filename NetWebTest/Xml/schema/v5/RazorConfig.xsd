@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (mitu) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../bin/CommonType.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Razor">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SavePath" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Assmbly和编译源码所保存的路径，默认在Xml\Razor\_templ下</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="Position" type="tk:FilePosition">
+                    <xs:annotation>
+                      <xs:documentation>起始路径，默认为Xml</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="RelativePath" type="xs:anyURI" use="required">
+                    <xs:annotation>
+                      <xs:documentation>在起始路径后的附加路径</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="RaiseOnCompileError" type="xs:boolean">
+              <xs:annotation>
+                <xs:documentation>出现编译错误时，是否需要抛出例外，默认为True</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="RaiseOnRunError" type="xs:boolean">
+              <xs:annotation>
+                <xs:documentation>出现运行错误时，是否需要抛出例外，默认为True。不抛出例外，返回为string.Empty</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="SaveCompileCode" type="xs:boolean">
+              <xs:annotation>
+                <xs:documentation>保存编译后的源码，默认为true，这样可以查看输出的源码</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="SaveCompileAssembly" type="xs:boolean">
+              <xs:annotation>
+                <xs:documentation>保存编译后的Assembly，默认为true。下次使用时，将不在编译cshtml，直接调入Assembly</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="Service">
+              <xs:annotation>
+                <xs:documentation>设置Razor运行的Domain。Normal将在当前的AppDomain中运行。Isolated将在独立的AppDomain运行。使用Isolated时，将无法调用AppSetting等静态全局变量</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="Normal"/>
+                  <xs:enumeration value="Isolated"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" fixed="5.0"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

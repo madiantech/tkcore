@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>维修类型（工单）</tk:Content>
+    </tk:Title>
+     <tk:MetaData>
+      <tk:SingleXmlMetaData DataXml="RazorTest/WoRepairTeam.xml" ColumnCount="1" TableName="CD_WO_REPAIR_TYPE" />
+    </tk:MetaData>
+    <tk:Source>
+      <tk:SingleDbSource>
+        <tk:Resolver>
+        <tk:MetaDataResolver AutoUpdateKey="true">
+          <tk:Scheme>
+            <tk:Tk5DataXml TableName="CD_WO_REPAIR_TYPE" FileName="RazorTest/WoRepairTeam.xml"/>
+          </tk:Scheme>
+        </tk:MetaDataResolver>
+        </tk:Resolver>
+        <tk:Operators>
+          <tk:StandardOperators>
+            <tk:Right>
+              <tk:EmptyOperateRight/>
+            </tk:Right>
+            <tk:InsertOperator IsDialog="true"/>
+            <tk:UpdateOperator IsDialog="true"/>
+            <tk:DeleteOperator/>
+          </tk:StandardOperators>
+        </tk:Operators>
+        <tk:DetailOperators>
+          <tk:EmptyOperators/>
+        </tk:DetailOperators>
+      </tk:SingleDbSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:RazorModuleTemplatePageMaker ModuleTemplate="SingleDialog"/>
+    </tk:PageMaker>
+  </tk:Module>
+</tk:Toolkit>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:attributeGroup name="DialogMode">
+    <xs:attribute name="IsDialog" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>是否采用Dialog的显示方式，默认为false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:simpleType name="_tk_OperatePageStyle">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Insert"/>
+      <xs:enumeration value="Update"/>
+      <xs:enumeration value="Delete"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="_tk_OperatePageStyleList">
+    <xs:list itemType="tk:_tk_OperatePageStyle"/>
+  </xs:simpleType>
+  <xs:simpleType name="_tk_OperateStyleTotal">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="All"/>
+      <xs:enumeration value="None"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OperatePageStyle">
+    <xs:union memberTypes="tk:_tk_OperateStyleTotal tk:_tk_OperatePageStyleList"/>
+  </xs:simpleType>
+  <xs:complexType name="SimpleListOperateRightType">
+    <xs:attribute name="Operators" type="tk:OperatePageStyle">
+      <xs:annotation>
+        <xs:documentation>配置页面的按钮，默认为All，即有新建，修改和删除功能</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="_tk_BaseOperator">
+    <xs:sequence>
+      <xs:element name="Caption" type="tk:MultiLanguageType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>重载的按钮文字，如果不配置将采用默认的文字。支持多语言结构</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="IconClass" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>重载的小图标，如果不配置将采用默认图标</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="_tk_SimpleListOperatorsType">
+    <xs:complexContent>
+      <xs:extension base="tk:SimpleListOperateRightType">
+        <xs:attributeGroup ref="tk:DialogMode"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,33 @@
+#tk-easysearch
+{
+	font-size: 14px;
+	background-color: #fff;
+	/*padding: 0;
+	margin: 0;*/
+	list-style: none;
+	position: absolute;
+	z-index: 10000;
+	line-height: 20px;
+	display: none;
+	width: 150px;
+	max-height: 250px;
+	overflow: auto;
+	-moz-box-shadow: 3px 4px 5px #ccc;
+	-webkit-box-shadow: 3px 4px 5px #ccc;
+	box-shadow: 3px 4px 5px #ccc;
+}
+
+	#tk-easysearch li
+	{
+		padding: 5 5px;
+		white-space: nowrap;
+		color: #555;
+		text-align: left;
+	}
+
+		#tk-easysearch li.active
+		{
+			cursor: pointer;
+			/*background-color: #666;*/
+			color: #fff;
+		}

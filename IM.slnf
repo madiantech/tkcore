@@ -1,0 +1,19 @@
+{
+  "solution": {
+    "path": "Core.Toolkit5.5.sln",
+    "projects": [
+      "CoreTest\\TestIM\\TestIM.csproj",
+      "Core\\YJC.Toolkit.Core\\YJC.Toolkit.Core.csproj",
+      "Core\\YJC.Toolkit.MetaData\\YJC.Toolkit.MetaData.csproj",
+      "Data\\YJC.Toolkit.Data\\YJC.Toolkit.Data.csproj",
+      "IM\\DingTalkModel\\DingTalkModel.csproj",
+      "IM\\YJC.Toolkit.DingTalk\\YJC.Toolkit.DingTalk.csproj",
+      "IM\\YJC.Toolkit.IM\\YJC.Toolkit.IM.csproj",
+      "IM\\YJC.Toolkit.Weixin2.Common\\YJC.Toolkit.Weixin2.Common.csproj",
+      "IM\\YJC.Toolkit.Weixin2.WeChat.Data\\YJC.Toolkit.Weixin2.WeChat.Data.csproj",
+      "IM\\YJC.Toolkit.Weixin2.WeChat.Web\\YJC.Toolkit.Weixin2.WeChat.Web.csproj",
+      "IM\\YJC.Toolkit.Weixin2.WeChat\\YJC.Toolkit.Weixin2.WeChat.csproj",
+      "IM\\YJC.Toolkit.Weixin2.WeCorp\\YJC.Toolkit.Weixin2.WeCorp.csproj"
+    ]
+  }
+}

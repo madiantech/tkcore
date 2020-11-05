@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tk:Toolkit version="5.5" xmlns:tk="http://www.qdocuments.net">
+  <!--<RedisCache>
+    <Configuration>ip or machine-name</Configuration>
+    <InstanceName>Toolkit</InstanceName>
+  </RedisCache>-->
+</tk:Toolkit>

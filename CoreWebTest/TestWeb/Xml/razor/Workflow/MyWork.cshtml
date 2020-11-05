@@ -1,0 +1,181 @@
+﻿@inherits YJC.Toolkit.Razor.TemplatePage<TModel>
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Data;
+@{
+    DataSet ds = (DataSet)Model;
+    DataTable myWorkTable = ds.Tables["WORKFLOW"];
+    DataTable codeTable = ds.Tables["WF_WORKFLOW_DEF"];
+    if (codeTable != null)
+    {
+        codeTable.PrimaryKey = new DataColumn[] { codeTable.Columns["CODE_VALUE"] };
+    }
+    int index;
+    IEnumerable<IGrouping<string, DataRow>> group = null;
+    if (myWorkTable != null)
+    {
+        group = from row in myWorkTable.AsEnumerable()
+                group row by row.Field<string>("WI_WD_NAME");
+    }
+    DataTable dtParams = ds.Tables["Params"];
+    string name = string.Empty;
+    if (dtParams != null)
+    {
+        name = dtParams.Rows[0]["ParamValue"].ToString();
+    }
+}
+@functions {
+    string DecoderName(string key, DataTable codeTable)
+    {
+        DataRow row = codeTable.Rows.Find(key);
+        if (row != null)
+            return row["CODE_NAME"].ToString();
+        return string.Empty;
+    }
+
+    string CalcCount(IEnumerable<DataRow> rows)
+    {
+        var count = from item in rows
+                    select item.Field<int>("COUNT");
+        return count.Sum().ToString();
+    }
+    string CalcSum(DataTable dt)
+    {
+        var count = from item in dt.AsEnumerable()
+                    select item.Field<int>("COUNT");
+        return count.Sum().ToString();
+    }
+
+    string GetHRefKey(string key)
+    {
+        return "#" + key;
+    }
+
+    string UnionName(string name1, string name2)
+    {
+        return name1 + name2;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>我的工作</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+    <link rel="stylesheet" type="text/css" href="@("toolkitjs/v5/bootstrap/css/bootstrap.min.css".AppVirutalPath())" />
+    <link rel="stylesheet" type="text/css" href="@("toolkitjs/v5/bootstrap/css/font-awesome.min.css".AppVirutalPath())" />
+    <link rel="stylesheet" type="text/css" href="@("toolkitcss/v5/commonM/style.css".AppVirutalPath())" />
+</head>
+<body data-webpath="/c/PlugIn/C/WfMyWork">
+    <div class="page-header">
+        <h1 class="ml10">我的工作</h1>
+    </div> 
+    @if (codeTable != null)
+    {
+        <div class="container-fluid">
+            <form class="navbar-form navbar-left tk-datasearch" role="search" id="QueryForm" data-check="false" data-post="{&quot;Table&quot;:&quot;WF_WORKFLOW_INST&quot;,&quot;SearchMethod&quot;:&quot;Id&quot;,&quot;JsonType&quot;:&quot;Object&quot;,&quot;Fields&quot;:[{&quot;Name&quot;:&quot;Name&quot;,&quot;Type&quot;:&quot;Text&quot;}]}">
+                <div class="form-group">
+                    <label for="Name">流程名称</label>
+                    <span class="tk-control"><input type="Text" value="@name" placeholder="流程名称" id="Name" name="Name" class="form-control" data-title="流程名称" autocomplete="off"> <label class="help-block" style="display: none;"></label></span>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="_searchMethod" class="hide" autocomplete="off">
+                    </label>
+                </div>
+                <button type="button" class="btn btn-default btn-search">查询</button>
+            </form>
+        </div>
+    }
+        <div id="WfMyWork" class="container-fluid">
+            @if (codeTable != null)
+            {
+                <div class="row" style="padding-left:3px;">
+                    <!-- Nav tabs  -->
+                    <ul class="nav nav-pills nav-stacked col-lg-2 col-md-2 col-xs-3 col-sm-3" style="padding:0px;margin:0px;border:1px solid #eee;margin-top:4px;">
+                        <li role="presentation" class="active">
+                            <a href="#All" aria-controls="All" role="tab" data-toggle="tab" onclick="DownloadData()" data-id="All">
+                                所有流程
+                                <span class="badge">@Raw(CalcSum(myWorkTable))</span>
+                            </a>
+                        </li>
+                        @foreach (var groupItem in group)
+                        {
+                            <li role="presentation">
+                                <a href="@GetHRefKey(groupItem.Key)" aria-controls="@groupItem.Key" role="tab" data-toggle="tab" onclick="DownloadData()" data-id="@groupItem.Key">
+                                    @Raw(DecoderName(groupItem.Key, codeTable))
+                                    <span class="badge">@Raw(CalcCount(groupItem))</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class=" col-lg-10 col-md-10 col-xs-9 col-sm-9 tab-content" style="padding:0px;margin:0px;">
+                        <div role="tabpanel" class="tab-pane active" id="All">
+                            <div class="panel-group m5 mywork" id="AllList" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingAll1">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#AllList" href="#AllManual1" aria-expanded="true" aria-controls="AllManual1">
+                                                所有待办任务<span class="badge ml5">@Raw(CalcSum(myWorkTable))</span>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="AllManual1" data-def-name="" data-step-name="" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAllManual1" data-loaded="false">
+                                        <div class="panel-body">
+                                            拼命加载中...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @foreach (var groupItem in group)
+                        {
+                            <div role="tabpanel" class="tab-pane" id="@groupItem.Key">
+                                <div class="panel-group m5 mywork" id="@UnionName(groupItem.Key, "List")" role="tablist" aria-multiselectable="true">
+                                    @foreach (var row in groupItem)
+                                    {
+                                        string childName = UnionName(groupItem.Key, row["WI_CURRENT_STEP"].ToString());
+                                        string headName = "heading" + childName;
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="@headName">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="@GetHRefKey(UnionName(groupItem.Key, "List"))" href="@GetHRefKey(childName)" aria-expanded="true" aria-controls="@childName">
+                                                        @Raw(row["WI_CURRENT_STEP_NAME"].ToString())<span class="badge ml5">@Raw(row["COUNT"].ToString())</span>
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="@childName" data-def-name="@groupItem.Key" data-step-name="@row["WI_CURRENT_STEP"].ToString()" class="panel-collapse collapse" role="tabpanel" aria-labelledby="@headName" data-loaded="false">
+                                                <div class="panel-body">
+                                                    拼命加载中...
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div>恭喜！所有的任务都完成了</div>
+            }
+        </div>
+        <script type="text/javascript" src="@("toolkitjs/v5/lib/jquery-1.11.1.min.js".AppVirutalPath())"></script>
+        <script type="text/javascript" src="@("toolkitjs/v5/bootstrap/js/bootstrap.min.js".AppVirutalPath())"></script>
+        <script type="text/javascript" src="@("toolkitjs/v5/toolkit/toolkit.js".AppVirutalPath())"></script>
+        <script type="text/javascript" src="@("toolkitjs/v5/toolkit/coreT/toolkit.page.js".AppVirutalPath())"></script>
+        <script type="text/javascript" src="@("toolkitjs/v5/toolkit/coreT/toolkit.data.js".AppVirutalPath())"></script>
+        <script type="text/javascript" src="@("toolkitjs/v5/toolkit/coreT/toolkit.ui.js".AppVirutalPath())"></script>
+        <script type="text/javascript" src="@("toolkitjs/v5/toolkit/coreT/toolkit.normallist.js".AppVirutalPath())"></script>
+        <script type="text/javascript" src="@("userjs/Workflow/mywork.js".AppVirutalPath())"></script>
+    </body>
+</html>

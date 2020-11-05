@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="DingTalkUpdatedAction.xsd"/>
+  <xs:group name="UpdatedActionGroup">
+    <xs:choice>
+      <xs:element name="RegUpdatedAction" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>注册UpdatedAction的插件注册名</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="tk:SqlAction"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+      <xs:element ref="tk:DingTalkMessageUpdatedAction"/>
+    </xs:choice>
+  </xs:group>
+  <xs:element name="SqlAction" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>Evaluator表达式（可以使用dataSet,table,row,resolver四个变量），执行Sql的UpdateAction（使用ExecuteNonQuery方法）</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>
+ 

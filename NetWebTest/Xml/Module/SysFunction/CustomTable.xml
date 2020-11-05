@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>自定义录入表</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:SingleXmlMetaData DataXml="SysFunction/CustomTable.xml" DisableAutoDetailLink="true"/>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:SingleDbSource DisablePage="AllNoList">
+        <tk:Resolver>
+          <tk:RegResolver>CustomTable</tk:RegResolver>
+        </tk:Resolver>
+        <tk:Operators>
+          <tk:StandardOperators>
+            <tk:Right>
+              <tk:EmptyOperateRight />
+            </tk:Right>
+            <tk:Operator Id="Config" Position="Row">
+              <tk:Caption>
+                <tk:Content>字段配置</tk:Content>
+              </tk:Caption>
+              <tk:Content>~/Library/WebUpdateXmlPage.tkx?Source=SysFunction/CustomField&amp;TableId=*TableId*</tk:Content>
+            </tk:Operator>
+          </tk:StandardOperators>
+        </tk:Operators>
+      </tk:SingleDbSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:SingleRazorPageMaker ListDisplay="Striped"/>
+    </tk:PageMaker>
+  </tk:Module>
+</tk:Toolkit>

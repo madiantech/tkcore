@@ -1,0 +1,38 @@
+.easysearch {
+  line-height: normal;
+  display: inline-table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  .el-select {
+    vertical-align: middle;
+    display: table-cell;
+    ::v-deep.el-input__inner {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  .easysearch-button {
+    background-color: #f5f7fa;
+    color: #909399;
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    border: 1px solid #dcdfe6;
+    border-left: 0;
+    border-radius: 0 4px 4px 0;
+    padding: 0 20px;
+    width: 1px;
+    white-space: nowrap;
+    .el-button {
+      border-color: transparent;
+      background-color: transparent;
+      color: inherit;
+      border-top: 0;
+      border-bottom: 0;
+      // font-size: inherit;
+      // display: inline-block;
+      margin: -10px -20px;
+    }
+  }
+}

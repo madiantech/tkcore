@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="SYS_JS_CACHE">
+    <tk:TableDesc>
+      <tk:Content>JS缓存表</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="int" IsKey="true" IsEmpty="false">
+      <tk:FieldName>JC_ID</tk:FieldName>
+      <tk:NickName>Id</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>Id</tk:Content>
+      </tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>JC_MODULE_NAME</tk:FieldName>
+      <tk:NickName>ModuleName</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>模块名</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>JC_TICKS</tk:FieldName>
+      <tk:NickName>Ticks</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>时间戳</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>0</tk:Length>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>JC_DEV_MODE</tk:FieldName>
+      <tk:NickName>DevMode</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>开发/运行</tk:Content>
+      </tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>JC_DEVICE</tk:FieldName>
+      <tk:NickName>Device</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>设备</tk:Content>
+      </tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>JC_MODEL</tk:FieldName>
+      <tk:NickName>Model</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>模板</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>JC_TEMPLATE</tk:FieldName>
+      <tk:NickName>Template</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>模式</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>JC_CACHE_DEPEND</tk:FieldName>
+      <tk:NickName>CacheDepend</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>缓存依赖</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>4000</tk:Length>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>JC_HASH</tk:FieldName>
+      <tk:NickName>Hash</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>Hash</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>0</tk:Length>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>JC_MODEL_VERSION</tk:FieldName>
+      <tk:NickName>ModelVersion</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>模式版本</tk:Content>
+      </tk:DisplayName>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

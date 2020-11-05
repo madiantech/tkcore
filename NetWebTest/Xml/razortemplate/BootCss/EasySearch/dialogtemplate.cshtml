@@ -1,0 +1,35 @@
+﻿@inherits YJC.Toolkit.Razor.NormalCustomTemplate
+@using System.Data;
+@using System.Web;
+@using YJC.Toolkit.Web;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Razor;
+@{
+    Dictionary<string, string> queryString = Model.QueryString;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    @RenderLayoutPartial("../bin/css.cshtml", null)
+</head>
+<body class="tk-dataPage" data-webPath="@HtmlUtil.AppVirtualPath">
+    <div class="container-fluid">
+        <div class="input-group">
+            <input type="text" id="searchText" name="searchText" class="form-control" data-regName="@queryString.GetKeyValue("RegName")" data-refFields="@StringUtil.EscapeHtmlAttribute(queryString.GetKeyValue("RefValue"))" />
+            <span class="input-group-btn">
+                <button id="searchBtn" class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+            </span>
+        </div>
+        <div class="mt10 oa">
+            <ul id="data" class="list-group">
+            </ul>
+        </div>
+    </div>
+    @RenderLayoutPartial("../bin/js.cshtml", null)
+    <script type="text/javascript" src="@("toolkitjs/v5/toolkit/search/dialog.js?v=1".AppVirutalPath())"> </script>
+</body>
+</html>

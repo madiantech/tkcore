@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="CodeTableCommon.xsd"/>
+  <xs:element name="TenantStandardCodeTable" type="tk:StandardCodeTableType">
+    <xs:annotation>
+      <xs:documentation>支持TenantId的标准代码表，除了标准的五个字段外，还需要有CODE_TENANT_ID</xs:documentation>
+      <xs:documentation>!</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

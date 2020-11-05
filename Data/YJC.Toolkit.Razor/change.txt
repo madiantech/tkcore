@@ -1,0 +1,18 @@
+Compilation
+    IAssemblyDirectoryFormatter
+    DefaultAssemblyDirectoryFormatter
+    DefaultMetadataReferenceManager
+    LegacyFixAssemblyDirectoryFormatter
+Instumentation
+    OverrideRuntimeNodeWriterTemplateTypeNamePhase
+Razor
+    RazorLightHelperResult
+
+DefaultRazorEngine
+EngineHandler
+IRazorLightEngineFactory
+RazorLightDependencyBuilder //???
+RazorLightEngineBuilder
+RazorLightEngineWithFileSystemProjectFactory
+RazorLightOptions
+TemplateRenderer

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (DataNew) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:complexType name="ConstraintsType">
+    <xs:all>
+      <xs:element ref="tk:SingleValue" minOccurs="0"/>
+      <xs:element ref="tk:ChinaMobile" minOccurs="0"/>
+      <xs:element ref="tk:ChinaTelcom" minOccurs="0"/>
+      <xs:element ref="tk:ChinaUnicom" minOccurs="0"/>
+      <xs:element ref="tk:CurrentDate" minOccurs="0"/>
+      <xs:element name="Date" type="tk:EmptyType">
+        <xs:annotation>
+          <xs:documentation>日期类型校验</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="tk:DateRange" minOccurs="0"/>
+      <xs:element ref="tk:Double" minOccurs="0"/>
+      <xs:element ref="tk:DoubleRange" minOccurs="0"/>
+      <xs:element ref="tk:Email" minOccurs="0"/>
+      <xs:element ref="tk:FixLength" minOccurs="0"/>
+      <xs:element ref="tk:Int" minOccurs="0"/>
+      <xs:element ref="tk:IntRange" minOccurs="0"/>
+      <xs:element ref="tk:Mobile" minOccurs="0"/>
+      <xs:element ref="tk:MultipleNotEmpty" minOccurs="0"/>
+      <xs:element ref="tk:NotEmpty" minOccurs="0"/>
+      <xs:element ref="tk:PostCode" minOccurs="0"/>
+      <xs:element ref="tk:Regex" minOccurs="0"/>
+      <xs:element ref="tk:SFZ" minOccurs="0"/>
+      <xs:element ref="tk:StringLength" minOccurs="0"/>
+      <xs:element ref="tk:StringMinLength" minOccurs="0"/>
+      <xs:element ref="tk:DateAfter" minOccurs="0"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:element name="SingleValue" type="tk:MessageType">
+    <xs:annotation>
+      <xs:documentation>在数据表中该字段必须唯一的校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ChinaMobile" type="tk:MobileType">
+    <xs:annotation>
+      <xs:documentation>中国移动号码约束，在web.config中配置ChinaMobileConfig可以重载默认的校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ChinaTelcom" type="tk:MobileType">
+    <xs:annotation>
+      <xs:documentation>中国电信号码约束，在web.config中配置ChinaTelcomConfig可以重载默认的校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ChinaUnicom" type="tk:MobileType">
+    <xs:annotation>
+      <xs:documentation>中国联通号码约束，在web.config中配置ChinaUnicomConfig可以重载默认的校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CurrentDate" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>不大于当前日期的校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DateRange">
+    <xs:annotation>
+      <xs:documentation>在指定日期之间的校验</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="LowValue" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>日期范围的最小值，默认为1800/1/1</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="HighValue" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>日期范围的最大值，默认为3000/1/1</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Double" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>浮点类型校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DoubleRange">
+    <xs:annotation>
+      <xs:documentation>在指定浮点之间的校验</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="LowValue" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>浮点范围的最小值，默认为double.MinValue</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="HighValue" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>浮点范围的最大值，默认为double.MaxValue</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Email" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>格式必须是Email的校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="FixLength" type="tk:LengthType">
+    <xs:annotation>
+      <xs:documentation>长度必须是指定长度的校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Int" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>整数类型校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="IntRange">
+    <xs:annotation>
+      <xs:documentation>在指定整数范围的校验</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="LowValue" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>整数范围的最小值，默认为int.MinValue</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="HighValue" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>整数范围的最大值，默认为int.MaxValue</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Mobile" type="tk:MobileType">
+    <xs:annotation>
+      <xs:documentation>移动电话号码约束，在web.config中配置MobileConfig可以重载默认的校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MultipleNotEmpty">
+    <xs:annotation>
+      <xs:documentation>几个字段不能同时为空校验</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="OtherFields" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>其他字段的昵称，多个字段用,隔开</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotEmpty">
+    <xs:annotation>
+      <xs:documentation>不能为空的校验</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="ForceCheck" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>默认为false。true时，无论提交数据是否存在该字段都将检查，这将必然导致出错。</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="AutoTrim" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>默认为true。将提交的数据进行Trim后，在检查是否为空</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PostCode" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>格式必须是邮政编码的校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Regex">
+    <xs:annotation>
+      <xs:documentation>按照指定的正则表达式进行校验</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Message" type="xs:string" use="required">
+        <xs:annotation>
+          <xs:documentation>错误提示消息</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Pattern" type="xs:string" use="required">
+        <xs:annotation>
+          <xs:documentation>正则表达式，具体写法参考MSDN帮助</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Options">
+        <xs:annotation>
+          <xs:documentation>正则表达式的选项，默认为None。RegexOptions多个选项可以用,隔开</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="IgnoreCase"/>
+            <xs:enumeration value="Multiline"/>
+            <xs:enumeration value="ExplicitCapture"/>
+            <xs:enumeration value="Compiled"/>
+            <xs:enumeration value="Singleline"/>
+            <xs:enumeration value="IgnorePatternWhitespace"/>
+            <xs:enumeration value="RightToLeft"/>
+            <xs:enumeration value="ECMAScript"/>
+            <xs:enumeration value="CultureInvariant"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SFZ" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>格式必须是中国大陆的身份证号码的校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="StringLength" type="tk:LengthType">
+    <xs:annotation>
+      <xs:documentation>字符串长度不大于指定长度的校验</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="StringMinLength">
+    <xs:annotation>
+      <xs:documentation>输入字符串必须有一定长度的校验</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="MinLength" type="xs:positiveInteger" use="required">
+        <xs:annotation>
+          <xs:documentation>最小长度</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="TrimValue" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>校验时对值先进行trim，默认为False</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="LengthType">
+    <xs:attribute name="Length" type="xs:unsignedInt" use="required">
+      <xs:annotation>
+        <xs:documentation>指定的长度</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="MobileType">
+    <xs:attribute name="Pattern" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>使用自定义的正则表达式</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="MessageType">
+    <xs:sequence>
+      <xs:element name="Message" type="tk:MultiLanguageType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>自定义的错误消息</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DateAfter">
+    <xs:annotation>
+      <xs:documentation>在指定字段日期之后的校验</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="BeforeNickName" type="xs:Name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

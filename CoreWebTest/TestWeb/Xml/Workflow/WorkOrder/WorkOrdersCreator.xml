@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tk:Toolkit version="2.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\WfCreator.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Creator RegName="_Begin">
+    <tk:WorkflowName>DataSetExtension.GetString(row,'Code')</tk:WorkflowName>
+    <tk:Content IsMain="true">
+      <tk:Resolver>
+        <tk:DataXmlResolver AutoTrackField="true" AutoUpdateKey="true" DataXml="WorkOrder/WorkOrders.xml"/>
+      </tk:Resolver>
+      <tk:Record>
+        <tk:Key ParamName="Id" NickName="Id"/>
+      </tk:Record>
+    </tk:Content>
+    <tk:Content>
+      <tk:Resolver>
+        <tk:MetaDataResolver AutoTrackField="true" AutoUpdateKey="true">
+          <tk:Scheme>
+            <tk:Tk5DataXml FileName="WorkOrder/WorkOrders.xml"/>
+          </tk:Scheme>
+        </tk:MetaDataResolver>
+      </tk:Resolver>
+      <tk:Record>
+        <tk:Key ParamName="Id" NickName="DataId"/>
+      </tk:Record>
+    </tk:Content>
+    <tk:Content>
+      <tk:Resolver>
+        <tk:MetaDataResolver AutoUpdateKey="true">
+          <tk:Scheme>
+            <tk:Tk5DataXml FileName="WorkOrder/WorkOrdersAttachment.xml"/>
+          </tk:Scheme>
+        </tk:MetaDataResolver>
+      </tk:Resolver>
+      <tk:Record>
+        <tk:Key ParamName="Id" NickName="WoId"/>
+      </tk:Record>
+    </tk:Content>
+  </tk:Creator>
+</tk:Toolkit>

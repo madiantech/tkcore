@@ -1,0 +1,64 @@
+﻿@inherits YJC.Toolkit.Razor.ToolkitTemplatePage<TModel>
+@using System.Data;
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    INormalMetaData metaData = ViewBag.MetaData;
+    INormalTableData table = metaData.TableData;
+    IEnumerable<Tk5FieldInfoEx> fields = table.DataList;
+    DetailVueOperator model = Model as DetailVueOperator;
+    List<List<Tk5FieldInfoEx>> showFields = OperatorUtil.Arrange(table);
+    int colBase = 24 / table.ColumnCount;
+}
+<template>
+    <div class="app-container mq-detail-page">
+        <!-- 内容区域 -->
+        <div ref="detailForm"
+             class="section-content"
+             data-url="/c/xml/detail/@(model.Source)?@OperatorUtil.AppendKey(metaData)"
+             data-table-name="@metaData.TableData.TableName">
+            @foreach (var line in showFields)
+            {
+                <el-row class="row-wrapper">
+                    @foreach (var field in line)
+                    {
+                        string nickName = field.NickName;
+                        int span = field.Layout.Layout == FieldLayout.PerLine ? 24 : field.Layout.UnitNum * colBase;
+                        if (span > 24)
+                        {
+                            span = 24;
+                        }
+                        <el-col :span="@span" class="col-wrapper">
+                            <!-- 标题 -->
+                            <div class="title" title="@Raw(field.DisplayName)">@Raw(field.DisplayName):</div>
+                            <!-- 内容 -->
+                            <div class="content text" :title="data.@nickName">{{ data.@nickName }}</div>
+                        </el-col>
+                    }
+                </el-row>
+            }
+        </div>
+
+        <!-- 按钮区域 -->
+        <div class="section-button">
+            @Raw(OperatorUtil.DetailGlobalOperator(model.GlobalOperators, metaData))
+            @*<el-button v-if="settings.modifyButtonVisible" v-tk-dialog-url="'edit?id=1'" type="primary" icon="el-icon-edit">修改</el-button>*@
+            <el-button v-if="settings.backButtonVisible" icon="el-icon-back" @@click="handleBack">返回</el-button>
+        </div>
+
+        <!--modal形式打开的修改页面-->
+        <dialog-wrapper :visible="dialogVisible" :url="dialogUrl" :width="dialogWidth" :title="dialogTitle" :height="dialogHeight"
+                        @@form-closed="handleDialogClosed" />
+
+        <!--右侧抽屉形式打开的修改页面-->
+        <drawer-wrapper :visible="drawerVisible" :url="drawerUrl" :width="drawerWidth" :title="drawerTitle" @@form-closed="handleDrawerClosed" />
+    </div>
+</template>
+
+<script src="./detail-js.js"></script>
+<style scoped lang="scss" src="./detail-css.scss"></style>

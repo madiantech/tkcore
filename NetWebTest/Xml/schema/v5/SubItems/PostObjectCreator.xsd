@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="Common.xsd"/>
+  <xs:element name="JsonPostDataSetCreator">
+    <xs:annotation>
+      <xs:documentation>提交数据为Json格式，转换为DataSet</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="XmlPostDataSetCreator">
+    <xs:annotation>
+      <xs:documentation>提交数据为Xml格式，转换为DataSet</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="JsonObjectCreator">
+    <xs:annotation>
+      <xs:documentation>提交数据为Json格式，转换成对应标记了RegTypeAttribute的类型</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ReadSettings" type="tk:ReadSettingsType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>读取Json的参数配置</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="RegClassName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>类型的注册名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="ModelName" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>类型分析时采用ModelName，缺省就是默认配置</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompositeCreator">
+    <xs:annotation>
+      <xs:documentation>根据具体条件来选择相应配置的PostObjectCreator</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Item" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Condition" type="tk:NormalConditionType">
+                <xs:annotation>
+                  <xs:documentation>条件</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:group ref="tk:SimplePostCreatorGroup">
+                <xs:annotation>
+                  <xs:documentation>适配条件下使用的PostCreator</xs:documentation>
+                </xs:annotation>
+              </xs:group>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="SimplePostCreatorGroup">
+    <xs:choice>
+      <xs:element ref="tk:XmlPostDataSetCreator"/>
+      <xs:element ref="tk:JsonPostDataSetCreator"/>
+      <xs:element ref="tk:JsonObjectCreator"/>
+      <xs:element ref="tk:CompositeCreator"/>
+      <xs:element ref="tk:CustomJsonObjectCreator"/>
+      <xs:element name="NoPostObjectCreator" type="tk:EmptyType">
+        <xs:annotation>
+          <xs:documentation>无Post数据，返回null</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="SimplePostCreatorType">
+    <xs:annotation>
+      <xs:documentation>该类型为动态节点，可根据配置工厂实际情况，自由调整</xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:group ref="tk:SimplePostCreatorGroup"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="PostCreatorType">
+    <xs:choice minOccurs="0">
+      <xs:group ref="tk:SimplePostCreatorGroup"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="CustomJsonObjectCreator">
+    <xs:annotation>
+      <xs:documentation>读取Json数据包中内嵌类型的数据，转换成对应标记了RegTypeAttribute的类型</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="RegTypeName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>类型注册的注册名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="LocalName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>内嵌的Json属性名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="UseConstructor" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否使用内部的构造函数创建对象</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="ModelName" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>使用NameModelAttribute标注的名字进行分析</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

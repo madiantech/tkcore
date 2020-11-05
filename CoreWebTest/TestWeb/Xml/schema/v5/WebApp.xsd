@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../bin/AppCommon.xsd"/>
+  <xs:include schemaLocation="../bin/CommonElement.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:annotation>
+      <xs:documentation>WebApp的全局配置，需要放在Xml目录下，并以Application.xml为文件名</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Application">
+          <xs:annotation>
+            <xs:documentation>系统全局配置</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Url">
+                <xs:annotation>
+                  <xs:documentation>WebApp的一些全局路径</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="StartupPath" type="xs:anyURI" use="required">
+                    <xs:annotation>
+                      <xs:documentation>Web程序的起始页</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="LogOnPath" type="xs:anyURI">
+                    <xs:annotation>
+                      <xs:documentation>Web程序的登录地址，如果不配置，将等同于起始页</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="ErrorPage" type="xs:anyURI">
+                    <xs:annotation>
+                      <xs:documentation>错误页面，产生错误可以定向到该页面。请填写Web相对地址。不配置ErrorPage，LogonRight检查可能不会发生效力</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="HomePath" type="xs:anyURI">
+                    <xs:annotation>
+                      <xs:documentation>登录后需要显示的首页</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="MainPath" type="xs:anyURI">
+                    <xs:annotation>
+                      <xs:documentation>页面容器，包含菜单等项，有导航作用，不填写则登录后向HomePage定向。</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Info" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>系统的描述</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="FullName" type="tk:MultiLanguageType">
+                      <xs:annotation>
+                        <xs:documentation>系统的全称，用于PageTitle，支持多语言结构</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="ShortName" type="tk:MultiLanguageType">
+                      <xs:annotation>
+                        <xs:documentation>系统的简称，支持多语言结构</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Description" type="tk:MultiLanguageType" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>系统的描述，支持多语言结构</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="tk:AppAttrGroup"/>
+            <xs:attribute name="ActionResultName" type="xs:Name">
+              <xs:annotation>
+                <xs:documentation>ActionResult在Web结果中的表名，默认为ActionResult，可以修改此参数</xs:documentation>
+                <xs:documentation>!</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="UseWorkThread" type="xs:boolean">
+              <xs:annotation>
+                <xs:documentation>是否启用工作线程，默认启用</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="EnableCrossDomain" type="xs:boolean">
+              <xs:annotation>
+                <xs:documentation>是否允许Ajax的跨域访问，默认为false。设为true时，将在Response的Header中添加Access-Control-Allow-Origin和Access-Control-Allow-Credentials允许跨域访问</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="DefaultValueFile" type="xs:anyURI">
+              <xs:annotation>
+                <xs:documentation>存储默认值的配置文件，默认为Default.xml</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="ConfigFile" type="xs:anyURI">
+              <xs:annotation>
+                <xs:documentation>存储各种模块配置的配置文件，默认为Config.xml</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="AppRightBuilder" type="xs:Name">
+              <xs:annotation>
+                <xs:documentation>创建登录权限，功能权限的Builder插件注册名，默认为Empty</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="TimingInterval" type="xs:time">
+              <xs:annotation>
+                <xs:documentation>定时服务的间隔时间，默认为1分钟</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="tk:Debug"/>
+        <xs:element ref="tk:Databases"/>
+        <xs:element ref="tk:SecretKey"/>
+        <xs:element ref="tk:Hosts" minOccurs="0"/>
+        <xs:element ref="tk:IO" minOccurs="0"/>
+        <xs:element ref="tk:Upload" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="required" fixed="5.0">
+        <xs:annotation>
+          <xs:documentation>版本号</xs:documentation>
+          <xs:documentation>!</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Debug">
+    <xs:annotation>
+      <xs:documentation>调试信息配置</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:DebugType">
+          <xs:attribute name="XmlQueryString" type="xs:Name">
+            <xs:annotation>
+              <xs:documentation>将结果直接输出Xml的QueryString的Name开关，默认为_toolkit</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="XmlValue" type="xs:Name">
+            <xs:annotation>
+              <xs:documentation>将结果直接输出Xml的QueryString的Value开关，默认为xml</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="MetaDataValue" type="xs:Name">
+            <xs:annotation>
+              <xs:documentation>输出配置的MetaData内容，默认为meta</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="JsonValue" type="xs:Name">
+            <xs:annotation>
+              <xs:documentation>将结果直接输出Json的QueryString的Value开关，默认为json</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="ExcelValue" type="xs:Name">
+            <xs:annotation>
+              <xs:documentation>列表时将当前结果直接导出Excel的Value开关，默认为excel</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Upload">
+    <xs:annotation>
+      <xs:documentation>上传配置</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="TempPath" type="xs:anyURI" use="required">
+        <xs:annotation>
+          <xs:documentation>文件上传后临时保存的物理路径配置，默认映射到SolutionPath下的目录</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="TempVirtualPath" type="xs:anyURI" use="required">
+        <xs:annotation>
+          <xs:documentation>文件上传后临时保存的虚拟路径，需要和TempPath相对应</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IO">
+    <xs:annotation>
+      <xs:documentation>Input和Output的参数配置，如果是输出，配置了GZip和Encrypt，那么先GZip，然后Encrypt。如果是输入，配置GZip和Encrypt，那么先Decrypt，然后UnGzip</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="InputGZip" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Post数据流是否有GZip压缩，默认为false</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="InputEncrypt" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Post数据流是否有加密，默认为false</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="OutputGZip" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Response输出数据流是否有GZip压缩，默认为false</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="OutputEncrypt" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Response输出数据流是否有加密，默认为false</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

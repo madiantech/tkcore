@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="TableResolverCommon.xsd"/>
+  <xs:element name="TenantTableResolver" type="tk:TenantTableResolverType">
+    <xs:annotation>
+      <xs:documentation>在Tk5的DataXml基础上，支持Tenant的TableResolver</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="TenantTreeTableResolver" type="tk:TenantTableResolverType">
+    <xs:annotation>
+      <xs:documentation>在Tk5的DataXml基础上，支持Tenant的TreeTableResolver</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="TenantTableResolverType">
+    <xs:complexContent>
+      <xs:extension base="tk:MetaDataResolverType">
+        <xs:attribute name="TenantIdNickName" type="xs:Name">
+          <xs:annotation>
+            <xs:documentation>TenantId的昵称，默认为TenantId</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

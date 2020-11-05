@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>功能菜单</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:MasterDetailMetaData>
+        <tk:Master>
+          <tk:SingleXmlMetaData DataXml="UserManager/Function.xml" CommitDetail="true"/>
+        </tk:Master>
+        <tk:Detail ListStyle="Table">
+          <tk:SingleXmlMetaData DataXml="UserManager/SubFunc.xml" DisableAutoDetailLink="true"/>
+        </tk:Detail>
+      </tk:MasterDetailMetaData>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:CompositeSource>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="Detail Insert Update Delete CDetailList"/>
+          <tk:MasterDetailDbSource>
+            <tk:MasterResolver>
+              <tk:RegResolver>Function</tk:RegResolver>
+            </tk:MasterResolver>
+            <tk:Detail>
+              <tk:Resolver>
+                <tk:RegResolver>SubFunction</tk:RegResolver>
+              </tk:Resolver>
+              <tk:Relation>
+                <tk:MasterFields>Id</tk:MasterFields>
+                <tk:DetailFields>FnId</tk:DetailFields>
+              </tk:Relation>
+            </tk:Detail>
+            <tk:DetailOperators>
+              <tk:SubFuncTreeOperators FunctionKey="Function" LayerFieldName="TreeLayer" DisableRootDelete="false"/>
+              <!--<tk:SimpleTreeDetailOperators LayerFieldName="TreeLayer" IsDialog="false"/>-->
+            </tk:DetailOperators>
+          </tk:MasterDetailDbSource>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="True"/>
+          <tk:SingleDbTreeSource>
+            <tk:Resolver>
+              <tk:RegResolver>Function</tk:RegResolver>
+            </tk:Resolver>
+          </tk:SingleDbTreeSource>
+        </tk:Item>
+      </tk:CompositeSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:CompositePageMaker>
+        <tk:Item>
+          <tk:Condition SearchType="Style Post" Style="Update Insert" IsPost="false"/>
+          <tk:RazorPageTemplatePageMaker PageTemplate="MultiEdit"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="Detail"/>
+          <tk:RazorPageTemplatePageMaker PageTemplate="TreeMultiDetail"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="List"/>
+          <tk:JsonObjectPageMaker/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="C"/>
+          <tk:RazorPageTemplatePageMaker PageTemplate="Tree"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="StyleStartsWith" StartsWith="DetailList"/>
+          <tk:RazorPageTemplatePageMaker PageTemplate="DetailList"/>
+        </tk:Item>
+      </tk:CompositePageMaker>
+    </tk:PageMaker>
+    <tk:Redirector>
+      <tk:OutputRedirector/>
+    </tk:Redirector>
+  </tk:Module>
+</tk:Toolkit>

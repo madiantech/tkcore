@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="SubItems/EasySearchCommon.xsd"/>
+  <xs:include schemaLocation="SubItems/TenantEasySearch.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:group ref="tk:EasySearchGroup" maxOccurs="unbounded"/>
+      <xs:attribute name="version" type="xs:string" use="required" fixed="5.0"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="EasySearchGroup">
+    <xs:choice>
+      <xs:element ref="tk:Tk5EasySearch"/>
+      <xs:element ref="tk:Tk5CodeTableEasySearch"/>
+      <xs:element ref="tk:Tk5LevelCodeTableEasySearch"/>
+      <xs:element ref="tk:Tk5Level0CodeTableEasySearch"/>
+      <xs:element ref="tk:Tk5TreeEasySearch"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+      <xs:element ref="tk:Tk5TenantEasySearch"/>
+      <xs:element ref="tk:Tk5TenantTreeEasySearch"/>
+      <xs:element ref="tk:SqlEasySearch"/>
+    </xs:choice>
+  </xs:group>
+  <xs:element name="Tk5EasySearch" type="tk:Tk5EasySearchType">
+    <xs:annotation>
+      <xs:documentation>支持Tk5的DataXml的EasySearch配置</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Tk5CodeTableEasySearch" type="tk:CodeTableEasySearchType">
+    <xs:annotation>
+      <xs:documentation>支持Tk5的标准代码表的EasySearch配置</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Tk5LevelCodeTableEasySearch" type="tk:LevelCodeTableEasySearchType">
+    <xs:annotation>
+      <xs:documentation>Tk5以Level模式的树形标准代码表的EasySearch配置</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Tk5Level0CodeTableEasySearch" type="tk:LevelCodeTableEasySearchType">
+    <xs:annotation>
+      <xs:documentation>Tk5以Level0模式的树形标准代码表的EasySearch配置</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Tk5TreeEasySearch" type="tk:Tk5EasySearchType">
+    <xs:annotation>
+      <xs:documentation>支持Tk5的DataXml的TreeEasySearch配置</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SqlEasySearch" type="tk:SqlEasySearchType">
+    <xs:annotation>
+      <xs:documentation>以Sql结果集作为数据源的EasySearch</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

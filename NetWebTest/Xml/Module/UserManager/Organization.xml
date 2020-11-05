@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>组织机构</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:CompositeMetaData>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="Detail"/>
+          <tk:SingleXmlMetaData DataXml="UserManager/Organization.xml"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="True"/>
+          <tk:SingleXmlMetaData DataXml="UserManager/Organization.xml" ColumnCount="1" CommitDetail="true"/>
+        </tk:Item>
+      </tk:CompositeMetaData>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:SingleDbTreeSource>
+        <tk:Resolver>
+          <tk:RegResolver>Organization</tk:RegResolver>
+        </tk:Resolver>
+        <tk:DetailOperators>
+          <tk:SubFuncTreeOperators FunctionKey="Org"/>
+        </tk:DetailOperators>
+      </tk:SingleDbTreeSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:SingleTreeRazorPageMaker/>
+    </tk:PageMaker>
+  </tk:Module>
+</tk:Toolkit>

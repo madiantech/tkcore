@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="Constraint.xsd"/>
+  <xs:include schemaLocation="FieldCommon.xsd"/>
+  <xs:include schemaLocation="Display.xsd"/>
+  <xs:simpleType name="Alignment">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="center"/>
+      <xs:enumeration value="left"/>
+      <xs:enumeration value="right"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="HintDataType">
+    <xs:complexContent>
+      <xs:extension base="tk:MultiLanguageType">
+        <xs:attribute name="Position" type="tk:HintPosition">
+          <xs:annotation>
+            <xs:documentation>Hint所在的位置，默认为PlaceHolder。当Front和End仅在Text控件有效</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LayoutType">
+    <xs:attribute name="Layout" type="tk:FieldLayoutType">
+      <xs:annotation>
+        <xs:documentation>字段的布局，默认为PerUnit</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="UnitNum" type="xs:unsignedInt">
+      <xs:annotation>
+        <xs:documentation>如果布局是PerUnit，此为Unit的数量，默认为1</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ListDetailType">
+    <xs:sequence>
+      <xs:element name="Link" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>内容为HTTP或者EMAIL时，自动加对应超链。否则和内置属性匹配构成超链</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="Base" type="xs:Name">
+                <xs:annotation>
+                  <xs:documentation>Host名称，如果连接地址为相对地址，可以和Application.xml配置的Host链接为完整地址</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="Target" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>跳转页面的target</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ListDisplay" type="tk:FieldDisplayType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>设定List页面时，内容显示格式。如果不配置，将自动匹配。Double类型，设置了Format将使用DoubleDisplay。DateTime类型将使用DateTimeDisplay。Date类型使用DateDisplay。Time类型使用TimeDisplay。配置了CodeTable或EasySearch的字段使用DecoderDisplay。如果是Multiple解码，将使用MultipleDecoderDisplay。CheckBox的数据使用CheckedDisplay，Upload的数据使用UploadDisplay。如果配置了Link，将根据其类型使用HttpDisplay，MailToDisplay和HrefDisplay。其他使用NormalDisplay。</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DetailDisplay" type="tk:FieldDisplayType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>设置Detail页面时，内容显示格式。如果不配置，将采用ListDisplay的内容</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="ListWidth" type="xs:unsignedInt">
+      <xs:annotation>
+        <xs:documentation>将根据此值来设置列表时的宽度</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TextHead" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>配置为true时，此列将无法排序，主要针对Text等数据库无法排序的字段类型，默认为false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Span" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>配置为true时，将按照区间段进行查询，默认为false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="SortField" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>排序时，可以使用配置的字段，而非当前字段本身。例如创建时间和主键ID的排序顺序一致，可以在此配置为主键ID的字段名，这样可以提高排序的性能</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Search">
+      <xs:annotation>
+        <xs:documentation>配置为true时，该字段将可以搜索，默认为false。配置为only时，该字段仅产于搜索，不出现在列表中</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+          <xs:enumeration value="only"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Class" type="xs:NMTOKENS">
+      <xs:annotation>
+        <xs:documentation>List和Detail时，自定义的css class</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="EditType">
+    <xs:sequence>
+      <xs:element name="DefaultValue" type="tk:MarcoConfigItem" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>新建时，默认的缺省值</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Updating" type="tk:UpdatingType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>新建和修改时，自动给字段赋相应的值</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Attribute" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>新建和修改界面时，需要给Html属性加的属性对</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:attribute name="Name" type="xs:Name" use="required"/>
+          <xs:attribute name="Value" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Display" type="tk:FieldDisplayType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>设定编辑时，对字段的显示方式。如果不配置，将自动判定。由于很多编辑控件自动支持解码工作，所以，通常都是NormalDisplay，只有浮点数配置了Format才启动DoubleDisplay，DateTime类型使用DateTimeDisplay。Date类型使用DateDisplay。Time类型使用TimeDisplay。</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="ReadOnly" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>是否是只读类型</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Class" type="xs:NMTOKENS">
+      <xs:annotation>
+        <xs:documentation>Edit时，自定义的css class</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="FieldExtensionType">
+    <xs:attribute name="CheckValue" type="xs:string" default="1">
+      <xs:annotation>
+        <xs:documentation>Control为CheckBox时，选中时对应的值</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="UnCheckValue" type="xs:string" default="0">
+      <xs:annotation>
+        <xs:documentation>Control为CheckBox时，未选中时对应的值</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Expression" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>当字段是计算字段时，对应的表达式。表达式的写法同DataColumn的Expression属性</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Format" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Format属性用来表示数值的显示格式</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Align" type="tk:Alignment">
+      <xs:annotation>
+        <xs:documentation>指定List和Detail页面的单元格对齐方式，默认为Left</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TitleAlign" type="tk:Alignment">
+      <xs:annotation>
+        <xs:documentation>指定List页面的标题栏的对齐方式，默认为Left</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="EmptyTitle" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Control为ComboBox时，其空白栏（即NULL栏）需要显示文字</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DecoderType">
+    <xs:sequence>
+      <xs:element name="AdditionInfo" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>配置将Decoder的其它字段内容填充的数据中对应的字段名</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:attribute name="DecoderNickName" type="xs:Name" use="required">
+            <xs:annotation>
+              <xs:documentation>Decoder的字段名</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="DataNickName" type="xs:Name" use="required">
+            <xs:annotation>
+              <xs:documentation>填充的字段名</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="RegName" type="xs:Name" use="required">
+      <xs:annotation>
+        <xs:documentation>注册名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>

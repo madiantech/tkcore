@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>财税文档</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:MasterDetailMetaData>
+        <tk:Master>
+          <tk:SingleXmlMetaData DataXml="RazorTest/Document.xml"/>
+        </tk:Master>
+        <tk:Detail ListStyle="Table">
+          <tk:SingleXmlMetaData DataXml="RazorTest/DocAttachment.xml"/>
+          <tk:TableOutput>
+            <tk:AttachmentOutput IsMultiple="false" DirectShowDetail="false"/>
+          </tk:TableOutput>
+        </tk:Detail>
+      </tk:MasterDetailMetaData>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:CompositeSource>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="Detail"/>
+          <tk:SingleDbDetailListSource FillDetailData="false">
+            <tk:Resolver>
+              <tk:MetaDataResolver AutoTrackField="true" AutoUpdateKey="true">
+                <tk:Scheme>
+                  <tk:Tk5DataXml FileName="RazorTest/Document.xml"/>
+                </tk:Scheme>
+              </tk:MetaDataResolver>
+            </tk:Resolver>
+            <tk:ChildTable>
+              <tk:Resolver>
+                <tk:MetaDataResolver AutoUpdateKey="true">
+                  <tk:Scheme>
+                    <tk:Tk5DataXml FileName="RazorTest/DocAttachment.xml"/>
+                  </tk:Scheme>
+                </tk:MetaDataResolver>
+              </tk:Resolver>
+              <tk:Relation>
+                <tk:MasterFields>DocId</tk:MasterFields>
+                <tk:DetailFields>DocId</tk:DetailFields>
+              </tk:Relation>
+            </tk:ChildTable>
+          </tk:SingleDbDetailListSource>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="True"/>
+          <tk:MasterDetailDbSource PageSize="30" OrderBy="ORDER BY DOC_ORGIN_DATE DESC" SortQuery="true">
+            <tk:MasterResolver>
+              <tk:MetaDataResolver AutoTrackField="true" AutoUpdateKey="true">
+                <tk:Scheme>
+                  <tk:Tk5DataXml FileName="RazorTest/Document.xml"/>
+                </tk:Scheme>
+              </tk:MetaDataResolver>
+            </tk:MasterResolver>
+            <tk:Detail>
+              <tk:Resolver>
+                <tk:MetaDataResolver AutoUpdateKey="true">
+                  <tk:Scheme>
+                    <tk:Tk5DataXml FileName="RazorTest/DocAttachment.xml"/>
+                  </tk:Scheme>
+                </tk:MetaDataResolver>
+              </tk:Resolver>
+              <tk:Relation>
+                <tk:MasterFields>DocId</tk:MasterFields>
+                <tk:DetailFields>DocId</tk:DetailFields>
+              </tk:Relation>
+            </tk:Detail>
+          </tk:MasterDetailDbSource>
+        </tk:Item>
+      </tk:CompositeSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:RazorModuleTemplatePageMaker ModuleTemplate="MasterDetail"/>
+    </tk:PageMaker>
+  </tk:Module>
+</tk:Toolkit>

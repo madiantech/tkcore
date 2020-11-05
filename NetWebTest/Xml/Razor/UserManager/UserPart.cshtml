@@ -1,0 +1,63 @@
+﻿@inherits YJC.Toolkit.Razor.NormalCustomTemplate
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Web;
+@using System.Linq;
+@using System.Collections.Generic;
+@using System.Data;
+@functions {
+    string IsChecked(DataRow row, HashSet<int> partSet)
+    {
+        int id = row["Id"].Value<int>();
+        if (partSet.Contains(id))
+            return "checked";
+        return string.Empty;
+    }
+}
+@{
+    DataSet dataSet = (DataSet)Model;
+    DataTable userTable = dataSet.Tables["UserPart"];
+    HashSet<int> partSet = new HashSet<int>();
+    if (userTable != null)
+    {
+        foreach (DataRow row in userTable.Rows)
+            partSet.Add(row["PartId"].Value<int>());
+    }
+    DataTable partTable = dataSet.Tables["Part"];
+}
+@section Main {
+    <div class="mt10">
+        <input type="hidden" id="UserId" value="@dataSet.GetFieldValue("QueryString", "UserId")" />
+    </div>
+    @if (partTable != null)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="pull-right">
+                    <a class="mr5 checkall" href="#">全选</a>
+                    <a class="mr5 anticheck" href="#">反选</a>
+                    <a class="mr5 uncheckall" href="#">全不选</a>
+                </div>
+                角色
+            </div>
+            <div class="panel-body">
+                @foreach (DataRow row in partTable.Rows)
+                {
+                    <div class="w33p pull-left">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="@row.GetString("Id")" @IsChecked(row, partSet)>@row.GetString("Name")</label>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    <div class="text-center clearfix pt10 mb15">
+        @if (partTable != null)
+        {
+            @BootcssCommonUtil.Button("保存", "btn-save mr10", BootcssButton.Primary, false)
+        }
+        @BootcssCommonUtil.Button("关闭", "", BootcssButton.Default, false, new HtmlAttribute("data-dialog-action", "close"))
+    </div>
+}

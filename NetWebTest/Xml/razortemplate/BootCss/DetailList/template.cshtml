@@ -1,0 +1,174 @@
+﻿@inherits YJC.Toolkit.Razor.NormalDetailListTemplate
+@using System.Data;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    DataSet dataSet = (DataSet)Model;
+    DataRow countRow = dataSet.GetRow("Count");
+    string tableName = ViewBag.MetaData.Table.TableName;
+    DataTable dataTable = dataSet.Tables[tableName];
+    string url = dataSet.GetFieldValue<string>("URL", "DSelfURL");
+    string condition = dataSet.GetFieldValue<string>("Sort", "SqlCon");
+    IEnumerable<IFieldInfoEx> fields = ViewBag.MetaData.Table.TableList;
+    NormalListData pageData = (NormalListData)ViewBag.PageData;
+    DataRow sortRow = dataSet.GetRow("Sort");
+    int sortField = sortRow.GetValue<int>("SortField");
+    IFieldValueProvider provider = null;
+}
+@functions {
+    string OperatorWidth(int width)
+    {
+        if (width > 0)
+            return "width=\"" + width + "\"";
+        return string.Empty;
+    }
+
+    string CreateColAttrs(IFieldInfoEx field, int index, int sortField)
+    {
+        Tk5FieldInfoEx tk5Field = field.Convert<Tk5FieldInfoEx>();
+        HtmlAttributeBuilder builder = new HtmlAttributeBuilder();
+        if (tk5Field.ListDetail != null && tk5Field.ListDetail.ListWidth > 0)
+            builder.Add("width", tk5Field.ListDetail.ListWidth);
+        if (index == sortField)
+            builder.Add((HtmlAttribute)"selected");
+        return builder.CreateAttribute();
+    }
+
+    string CreateHeadAttrs(IFieldInfoEx field, int index, int sortField, DataRow sortRow)
+    {
+        HtmlAttributeBuilder builder = new HtmlAttributeBuilder();
+        Tk5FieldInfoEx tk5Field = field.Convert<Tk5FieldInfoEx>();
+        if (tk5Field.DataType == TkDataType.Text || (tk5Field.ListDetail != null && tk5Field.ListDetail.TextHead))
+        {
+            builder.Add("class", "text-left text-nowrap");
+        }
+        else
+        {
+            builder.Add("data-sort", index.ToString());
+            string order = sortRow.GetString("Order");
+            string sortClass = string.Empty;
+            if (index == sortField)
+            {
+                order = order == "DESC" ? "ASC" : "DESC";
+                sortClass = "sort-" + order;
+            }
+            builder.Add("data-order", order);
+            builder.Add("class", HtmlUtil.MergeClass("text-left text-nowrap", sortClass.ToLower()));
+        }
+
+        return builder.CreateAttribute();
+    }
+}
+@section DefaultListHeader {
+    <tr>
+        @if (pageData.OperatorPosition == OperatorPosition.Left)
+        {
+            <th class="text-center text-nowrap">
+                <div>@pageData.OperationCaption</div>
+            </th>
+        }
+        @{
+            int index = 0;
+        }
+        @foreach (IFieldInfoEx field in fields)
+        {
+            <th @CreateHeadAttrs(field, index++, sortField, sortRow)>
+                <div>@field.DisplayName</div>
+            </th>
+        }
+        @if (pageData.OperatorPosition == OperatorPosition.Right)
+        {
+            <th class="text-center text-nowrap">
+                <div>@pageData.OperationCaption</div>
+            </th>
+        }
+    </tr>
+}
+@section DefaultListWidth {
+    @if (pageData.OperatorPosition == OperatorPosition.Left)
+    {
+        <col @OperatorWidth(pageData.OperatorWidth) />
+    }
+    @{
+        int index = 0;
+    }
+    @foreach (IFieldInfoEx field in fields)
+    {
+        <col @CreateColAttrs(field, index++, sortField) />
+    }
+    @if (pageData.OperatorPosition == OperatorPosition.Right)
+    {
+        <col @OperatorWidth(pageData.OperatorWidth) />
+    }
+}
+<table class="@HtmlUtil.MergeClass("list-table table", pageData.Display.TableDisplayClass())">
+    <colgroup>
+        @RenderSectionOrDefault("ListWidth", "DefaultListWidth")
+    </colgroup>
+    @if (pageData.ShowListHeader)
+    {
+        <thead>
+            @RenderSectionOrDefault("ListHeader", "DefaultListHeader")
+        </thead>
+    }
+    <tbody id="pageList" data-totalcount="@countRow.GetString("TotalCount")" data-totalpage="@countRow.GetString("TotalPage")" data-sort="@sortField" data-order="@sortRow.GetString("Order")" data-page="@countRow.GetString("CurrentPage")" data-url="@url" data-condition="@condition" data-tab="@HtmlUtil.GetSelectedTab(dataSet)">
+        @if (dataTable != null)
+        {
+            @foreach (DataRow row in dataTable.Rows)
+            {
+                @{
+                string rowString = @RenderRow(row);
+                }
+                if (rowString != null)
+                {
+                    @rowString
+                }
+                else
+                {
+                    @{
+                    provider = CreateProvider(row, dataSet);
+                    }
+                    <tr>
+                        @if (pageData.OperatorPosition == OperatorPosition.Left)
+                        {
+                            <td class="text-nowrap text-center">@BootcssUtil.CreateRowOperators(dataSet, row)</td>
+                        }
+                        @foreach (IFieldInfoEx field in fields)
+                        {
+                            @{
+                            Tk5FieldInfoEx fieldInfo = field.Convert<Tk5FieldInfoEx>();
+                            string fieldString = @RenderFieldItem(row, fieldInfo);
+                            }
+                            if (fieldString == null)
+                            {
+                                <td>@fieldInfo.DisplayValue(provider)</td>
+                            }
+                            else
+                            {
+                                @fieldString
+                            }
+                        }
+                        @if (pageData.OperatorPosition == OperatorPosition.Right)
+                        {
+                            <td class="text-nowrap text-center">@BootcssUtil.CreateRowOperators(dataSet, row)</td>
+                        }
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+@if (countRow.GetValue<int>("TotalCount") == 0)
+{
+    <div class="p30">@pageData.NoDataCaption</div>
+}
+else
+{
+    @if (@pageData.ShowPage)
+    {
+        @RenderLayoutPartial("pagenumber.cshtml", Model)
+    }
+}

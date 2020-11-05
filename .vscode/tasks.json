@@ -1,0 +1,52 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/CoreWebTest/TestWeb/ToolkitWeb.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "builduser",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/User/YJC.Toolkit.SimpleUser.Data.Core/YJC.Toolkit.SimpleUser.Data.Core.csproj"
+            ],
+            "problemMatcher": "$tsc",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/CoreWebTest/TestWeb/TestWeb.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/CoreWebTest/TestWeb/TestWeb.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        }
+    ]
+}

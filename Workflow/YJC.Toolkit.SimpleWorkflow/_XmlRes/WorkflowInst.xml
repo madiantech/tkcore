@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="gb2312"?>
+<tk:Toolkit  xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="WF_WORKFLOW_INST" TableDesc="工作流实例">
+    <tk:Field DataType="int" IsKey="true">
+      <tk:FieldName>WI_ID</tk:FieldName>
+      <tk:DisplayName>流程ID</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_WD_NAME</tk:FieldName>
+      <tk:DisplayName>流程模式名</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>WI_NAME</tk:FieldName>
+      <tk:DisplayName>流程名称</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="text" IsEmpty="true">
+      <tk:FieldName>WI_CONTENT_XML</tk:FieldName>
+      <tk:DisplayName>流程内容</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="DateTime" IsEmpty="true">
+      <tk:FieldName>WI_CREATE_DATE</tk:FieldName>
+      <tk:DisplayName>流程创建日期</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_CREATE_USER</tk:FieldName>
+      <tk:DisplayName>创建人</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="Date" IsEmpty="true">
+      <tk:FieldName>WI_END_DATE</tk:FieldName>
+      <tk:DisplayName>结束日期</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_END_USER</tk:FieldName>
+      <tk:DisplayName>结束人</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_PREV_STEP_NAME</tk:FieldName>
+      <tk:DisplayName>前一个步骤名称</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_LAST_STEP</tk:FieldName>
+      <tk:DisplayName>上一个步骤</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_LAST_STEP_NAME</tk:FieldName>
+      <tk:DisplayName>上一个步骤名称</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_LAST_DISPLAY_NAME</tk:FieldName>
+      <tk:DisplayName>上一步骤</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_LAST_MANUAL</tk:FieldName>
+      <tk:DisplayName>上一人工步骤</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_LAST_MANUAL_NAME</tk:FieldName>
+      <tk:DisplayName>上一人工步骤名称</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_CURRENT_STEP</tk:FieldName>
+      <tk:DisplayName>当前步骤</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_CURRENT_STEP_NAME</tk:FieldName>
+      <tk:DisplayName>当前步骤名称</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="DateTime" IsEmpty="true">
+      <tk:FieldName>WI_CURRENT_CREATE_DATE</tk:FieldName>
+      <tk:DisplayName>当前步骤创建时间</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_STEP_TYPE</tk:FieldName>
+      <tk:DisplayName>当前步骤类型</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_CUSTOM_DATA</tk:FieldName>
+      <tk:DisplayName>流程自用数据</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_SEND_ID</tk:FieldName>
+      <tk:DisplayName>发送人</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="Date" IsEmpty="true">
+      <tk:FieldName>WI_SEND_DATE</tk:FieldName>
+      <tk:DisplayName>发送时间</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_RECEIVE_COUNT</tk:FieldName>
+      <tk:DisplayName>接收人个数</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_RECEIVE_LIST</tk:FieldName>
+      <tk:DisplayName>接收人列表</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_RECEIVE_ID</tk:FieldName>
+      <tk:DisplayName>接收人</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="Date" IsEmpty="true">
+      <tk:FieldName>WI_RECEIVE_DATE</tk:FieldName>
+      <tk:DisplayName>接收时间</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_PROCESS_ID</tk:FieldName>
+      <tk:DisplayName>处理人</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_LAST_PROCESS_ID</tk:FieldName>
+      <tk:DisplayName>上一步骤处理人</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="Date" IsEmpty="true">
+      <tk:FieldName>WI_PROCESS_DATE</tk:FieldName>
+      <tk:DisplayName>处理时间</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_REF_LIST</tk:FieldName>
+      <tk:DisplayName>参与人列表</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_ERROR_TYPE</tk:FieldName>
+      <tk:DisplayName>错误原因</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_STATUS</tk:FieldName>
+      <tk:DisplayName>状态</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_PRIORITY</tk:FieldName>
+      <tk:DisplayName>优先级</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_IS_TIMEOUT</tk:FieldName>
+      <tk:DisplayName>是否超时</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="Date" IsEmpty="true">
+      <tk:FieldName>WI_TIMEOUT_DATE</tk:FieldName>
+      <tk:DisplayName>超时时间</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_ADMIN_DATA</tk:FieldName>
+      <tk:DisplayName>指定人员/步骤</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_RETRY_TIMES</tk:FieldName>
+      <tk:DisplayName>重试次数</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="Date" IsEmpty="true">
+      <tk:FieldName>WI_NEXT_EXE_DATE</tk:FieldName>
+      <tk:DisplayName>下一次执行时间</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_MAX_RETRY_TIMES</tk:FieldName>
+      <tk:DisplayName>最大重试次数</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_PC_FLAG</tk:FieldName>
+      <tk:DisplayName>父子流程标志</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_PARENT_ID</tk:FieldName>
+      <tk:DisplayName>父流程ID</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_RETRIEVABLE</tk:FieldName>
+      <tk:DisplayName>是否支持取回</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_INFO1</tk:FieldName>
+      <tk:DisplayName>信息1</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_INFO2</tk:FieldName>
+      <tk:DisplayName>信息2</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_WE_ID</tk:FieldName>
+      <tk:DisplayName>错误ID</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_NOTE</tk:FieldName>
+      <tk:DisplayName>备注</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_APPROVE</tk:FieldName>
+      <tk:DisplayName>审批意见</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WI_APPROVE_NOTE</tk:FieldName>
+      <tk:DisplayName>审批内容</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WI_INDEX</tk:FieldName>
+      <tk:DisplayName>当前步骤序号</tk:DisplayName>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

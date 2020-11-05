@@ -1,0 +1,411 @@
+﻿@inherits YJC.Toolkit.Razor.BaseMultiEditTemplate
+@using System.Data;
+@using System.Linq;
+@using System.Text;
+@using System.Collections.Generic;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    IMultiEditModel model = CreateModel<IMultiEditModel>(Model);
+    NormalMultiEditData pageData = ViewBag.PageData;
+    HtmlAttribute attribute = pageData.DialogMode ? new HtmlAttribute("data-dialog-action", "close")
+        : new HtmlAttribute("data-url", model.RetUrl);
+    HtmlAttribute retAttr = new HtmlAttribute("data-action", "return");
+}
+@section DefaultButtons
+{
+    <div class="text-center cl">
+        @BootcssCommonUtil.Button(pageData.SaveButtonCaption, "btn-submit auto-disabled", BootcssButton.Primary, false)
+        @BootcssCommonUtil.Button(pageData.CancelCaption, "m10", BootcssButton.Default, false, attribute, retAttr)
+    </div>
+}
+@section ListFoot
+{
+    <div class="panel-footer">
+        <div class="pull-right ui-newrow">
+            <input type="number" class="w40 form-control input-sm di" style="display: inline; height: 23px; padding: 0 3px; width: 50px" value="1" />
+            <button class="btn btn-info btn-xs ml5 ui-btn-new" title="新建数据行">新建</button>
+            @RenderSectionIfDefined("OtherNewButton")
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-info btn-xs ui-btn-checkall">全选</button>
+            <button type="button" class="btn btn-info btn-xs ui-btn-checkreverse">反选</button>
+            <button type="button" class="btn btn-info btn-xs ui-btn-checknone">全不选</button>
+            <button type="button" class="btn btn-info btn-xs ui-btn-delrow">删除</button>
+            <button type="button" class="btn btn-info btn-xs ui-btn-delall">全删</button>
+        </div>
+    </div>
+}
+
+@functions
+{
+    string OperatorWidth(Tk5FieldInfoEx field)
+    {
+        int width = 0;
+        if (field.ListDetail != null && field.ListDetail.ListWidth > 0)
+            width = field.ListDetail.ListWidth;
+        if (width > 0)
+            return "width=\"" + width + "\"";
+        return string.Empty;
+    }
+
+    string GetJson(IEnumerable<INormalTableData> tables)
+    {
+        var jsonfields = from item in tables select item.JsonFields;
+        var json = string.Format("{{\"Tables\":[{0}]}}", string.Join(",", jsonfields));
+        return StringUtil.EscapeHtmlAttribute(json);
+    }
+
+    string ShowListFoot(INormalTableData tableData)
+    {
+        if (tableData.IsFix)
+            return string.Empty;
+        else
+            return RenderSection("ListFoot");
+    }
+
+    string Control(Tk5FieldInfoEx field, IFieldValueProvider row, bool needId)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("<span class=\"tk-control\">");
+        builder.AppendLine(field.ControlHtml(row, needId));
+        builder.AppendLine("</span>");
+        return builder.ToString();
+    }
+
+    string GetHiddenControl(IEnumerable<Tk5FieldInfoEx> hiddenFields, IFieldValueProvider row, bool needId)
+    {
+        StringBuilder builder = new StringBuilder();
+        foreach (var field in hiddenFields)
+            builder.AppendLine(RenderHidden(row, field, needId));
+
+        return builder.ToString();
+    }
+
+    string RenderNormalControl(IEnumerable<Tk5FieldInfoEx> normalFields, IFieldValueProvider provider,
+        bool needId, string tableName, bool showCaption, string dataClass)
+    {
+        StringBuilder builder = new StringBuilder();
+        foreach (Tk5FieldInfoEx field in normalFields)
+        {
+            string fieldString = RenderFieldItem(provider, tableName, field);
+            if (fieldString != null)
+                builder.AppendLine(fieldString);
+            else
+            {
+                builder.AppendFormat("<div class=\"{0}\">", HtmlCommonUtil.MergeClass("tk-column form-group", field.LayoutClass()));
+                builder.AppendFormat("<dl {0}>", dataClass);
+                if (showCaption)
+                    builder.AppendFormat("<dt>{0}</dt>", field.DisplayName);
+                builder.AppendLine("<dd>").Append(Control(field, provider, needId)).AppendLine("</dd></dl></div>");
+            }
+        }
+        return builder.ToString();
+    }
+
+    string RenderTableControl(IEnumerable<Tk5FieldInfoEx> normalFields, IFieldValueProvider row, string tableName)
+    {
+        StringBuilder builder = new StringBuilder();
+
+        foreach (Tk5FieldInfoEx field in normalFields)
+        {
+            string fieldString = RenderFieldItem(row, tableName, field);
+            if (fieldString != null)
+                builder.AppendLine(fieldString);
+            else
+            {
+                builder.AppendLine("<td><div class=\"form-group mb1\">");
+                builder.AppendLine(Control(field, row, false)).AppendLine("</div></td>");
+            }
+        }
+        return builder.ToString();
+    }
+
+    string GetJsHandler(string tableName)
+    {
+        SingleTableEditData editData = GetTableData(tableName);
+        if (editData == null)
+            return string.Empty;
+        if (string.IsNullOrEmpty(editData.OnRowAdded) && string.IsNullOrEmpty(editData.OnRowDeleted))
+            return string.Empty;
+        StringBuilder builder = new StringBuilder();
+        if (!string.IsNullOrEmpty(editData.OnRowAdded))
+            builder.AppendFormat(" data-rowadded=\"{0}\"", editData.OnRowAdded);
+        if (!string.IsNullOrEmpty(editData.OnRowDeleted))
+            builder.AppendFormat(" data-rowdeleted=\"{0}\"", editData.OnRowDeleted);
+
+        return builder.ToString();
+    }
+}
+@{
+    INormalMetaData metaData = ViewBag.MetaData;
+    IEnumerable<INormalTableData> tables = metaData.TableDatas;
+    bool showCaption = pageData.ShowCaption;
+    string dataClass = showCaption ? string.Empty : "class=\"nocaption\"";
+}
+<form action="@pageData.FormAction" method="POST" id="PostForm" class="tk-dataform p5 mb15" role="form" data-check="true" data-post="@GetJson(tables)">
+    @foreach (INormalTableData tableData in tables)
+    {
+        @{
+        IEnumerable<Tk5FieldInfoEx> hiddenFields = tableData.HiddenList;
+        IEnumerable<Tk5FieldInfoEx> normalFields = tableData.DataList;
+        }
+        if (tableData.ListStyle == TableShowStyle.None)
+        {
+            @{
+            IFieldValueProvider provider = model.CreateMainObjectProvider(tableData);
+            }
+            <div class="panel panel-info tk-datatable" id="@tableData.TableName" @GetJsHandler(tableData.TableName)>
+                <div class="panel-heading">
+                    <h3 class="panel-title">@tableData.TableDesc</h3>
+                </div>
+                <div class="@HtmlUtil.MergeClass("panel-body table-row", "column" + tableData.ColumnCount.ToString())">
+                    <div class="hide">
+                        @GetHiddenControl(hiddenFields, provider, true)
+                        @if (tableData.HasEditKey)
+                        {
+                            @HtmlCommonUtil.HiddenKey(tableData, provider, true)
+                        }
+                    </div>
+                    <div class="p10 pull-left w100p">
+                        @RenderNormalControl(normalFields, provider, true, tableData.TableName, showCaption, dataClass)
+                    </div>
+                </div>
+            </div>
+        }
+        else if (tableData.ListStyle == TableShowStyle.Table)
+        {
+            <div class="panel panel-info tk-datatable" id="@tableData.TableName" @GetJsHandler(tableData.TableName)>
+                <div class="panel-heading">
+                    <h3 class="panel-title">@tableData.TableDesc</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="list-table table">
+                        <colgroup>
+                            @if (!tableData.IsFix)
+                            {
+                                <col width="30" class="checkcol" />
+                                <col width="30" class="rowindex" />
+                            }
+                            @foreach (Tk5FieldInfoEx field in normalFields)
+                            {
+                                <col @OperatorWidth(field) />
+                            }
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                @if (!tableData.IsFix)
+                                {
+                                    <th class="text-center text-nowrap">
+                                        <div>
+                                            <input type="checkbox" class="e-checkall" />
+                                        </div>
+                                    </th>
+                                    <th class="text-center text-nowrap">
+                                        <div>&nbsp;</div>
+                                    </th>
+                                }
+                                @foreach (Tk5FieldInfoEx field in normalFields)
+                                {
+                                    <th class="text-center text-nowrap">
+                                        <div>@field.DisplayName</div>
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        @if (!tableData.IsFix)
+                        {
+                            <tbody class="template" title="数据行模板">
+                                @{
+                            IFieldValueProvider emptyProvider = model.CreateEmptyProvider();
+                            string rowTemplate = RenderRow(tableData.TableName, emptyProvider);
+                                }
+                                @if (rowTemplate != null)
+                                {
+                                    @rowTemplate
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td class="vam" style="vertical-align: middle">
+                                            <span>
+                                                <input type="checkbox" class="row-index e-checkdatarow" />
+                                            </span>
+                                        </td>
+                                        <td class="vam" style="vertical-align: middle">
+                                            <span class="row-index">1</span>
+                                            @GetHiddenControl(hiddenFields, emptyProvider, false)
+                                            @if (tableData.HasEditKey)
+                                            {
+                                                @HtmlCommonUtil.HiddenKey(tableData, emptyProvider, false)
+                                            }
+                                        </td>
+                                        @RenderTableControl(normalFields, emptyProvider, tableData.TableName)
+                                    </tr>
+                                }
+                            </tbody>
+                        }
+                        <tbody class="list">
+                            @{
+                        var rows = model.CreateDataRowsProvider(tableData);
+                        int index = 0;
+                            }
+                            @foreach (var provider in rows)
+                            {
+                                string rowString = RenderRow(tableData.TableName, provider);
+                                if (rowString != null)
+                                {
+                                    @rowString
+                                }
+                                else
+                                {
+                                    <tr class="table-row">
+                                        @if (!tableData.IsFix)
+                                        {
+                                            <td class="vam" style="vertical-align: middle">
+                                                <span>
+                                                    <input type="checkbox" class="row-index e-checkdatarow" value="@(++index)" />
+                                                </span>
+                                            </td>
+                                            <td class="vam" style="vertical-align: middle">
+                                                <span class="row-index">@index</span>
+                                            </td>
+                                        }
+                                        <td class="hide">
+                                            @GetHiddenControl(hiddenFields, provider, false)
+                                            @if (tableData.HasEditKey)
+                                            {
+                                                @HtmlCommonUtil.HiddenKey(tableData, provider, false)
+                                            }
+                                        </td>
+                                        @RenderTableControl(normalFields, provider, tableData.TableName)
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @ShowListFoot(tableData)
+            </div>
+        }
+        else if (tableData.ListStyle == TableShowStyle.Normal)
+        {
+            <div class="panel panel-info tk-datatable" id="@tableData.TableName" @GetJsHandler(tableData.TableName)>
+                <div class="panel-heading">
+                    <h3 class="panel-title">@tableData.TableDesc</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="list-table table">
+                        <colgroup>
+                            @if (!tableData.IsFix)
+                            {
+                                <col width="30" class="checkcol" />
+                                <col width="30" class="rowindex" />
+                            }
+                            <col class="subforms" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                @if (!tableData.IsFix)
+                                {
+                                    <th class="text-center text-nowrap">
+                                        <div>
+                                            <input type="checkbox" class="e-checkall" />
+                                        </div>
+                                    </th>
+                                    <th class="text-center text-nowrap">
+                                        <div>&nbsp;</div>
+                                    </th>
+                                }
+                                <th class="text-center text-nowrap"><div>请填写@(tableData.TableDesc)信息</div></th>
+                            </tr>
+                        </thead>
+                        @if (!tableData.IsFix)
+                        {
+                            <tbody class="template" title="数据行模板">
+                                @{
+                            IFieldValueProvider emptyProvider = model.CreateEmptyProvider();
+                            string rowTemplate = RenderRow(tableData.TableName, emptyProvider);
+                                }
+                                @if (rowTemplate != null)
+                                {
+                                    @rowTemplate
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td class="vam" style="vertical-align: middle">
+                                            <span>
+                                                <input type="checkbox" class="row-index e-checkdatarow" />
+                                            </span>
+                                        </td>
+                                        <td class="vam" style="vertical-align: middle">
+                                            <span class="row-index">1</span>
+                                            @GetHiddenControl(hiddenFields, emptyProvider, false)
+                                            @if (tableData.HasEditKey)
+                                            {
+                                                @HtmlCommonUtil.HiddenKey(tableData, emptyProvider, false)
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="@HtmlCommonUtil.MergeClass("tk-datatable", "column" + tableData.ColumnCount.ToString())">
+                                                @RenderNormalControl(normalFields, emptyProvider, false, tableData.TableName, showCaption, dataClass)
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        }
+                        <tbody class="list">
+                            @{
+                        var rows = model.CreateDataRowsProvider(tableData);
+                        int index = 0;
+                            }
+                            @foreach (var provider in rows)
+                            {
+                                string rowString = RenderRow(tableData.TableName, provider);
+                                if (rowString != null)
+                                {
+                                    @rowString
+                                }
+                                else
+                                {
+                                    <tr class="table-row">
+                                        @if (!tableData.IsFix)
+                                        {
+                                            <td class="vam" style="vertical-align: middle">
+                                                <span>
+                                                    <input type="checkbox" class="row-index e-checkdatarow" value="@(++index)" />
+                                                </span>
+                                            </td>
+                                            <td class="vam" style="vertical-align: middle">
+                                                <span class="row-index">@index</span>
+                                            </td>
+                                        }
+                                        <td class="hide">
+                                            @GetHiddenControl(hiddenFields, provider, false)
+                                            @if (tableData.HasEditKey)
+                                            {
+                                                @HtmlCommonUtil.HiddenKey(tableData, provider, false)
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="@HtmlCommonUtil.MergeClass("tk-datatable", "column" + tableData.ColumnCount.ToString())">
+                                                @RenderNormalControl(normalFields, provider, false, tableData.TableName, showCaption, dataClass)
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @ShowListFoot(tableData)
+            </div>
+        }
+    }
+</form>
+@RenderSectionOrDefault("ModuleButtons", "DefaultButtons")

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="DingTalkMessage.xsd"/>
+  <xs:element name="DingTalkMessageUpdatedAction" type="tk:DingTalkSendMessageType">
+    <xs:annotation>
+      <xs:documentation>发送钉钉消息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

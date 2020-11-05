@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CB43A96F-6FCC-4941-BE87-8EEE6F90422D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YJC.Toolkit</RootNamespace>
+    <AssemblyName>YJC.Toolkit.WebApp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\_lib\tk5.5\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\Toolkit.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>YJC.Toolkit2.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cache\FileCacheAttribute.cs" />
+    <Compile Include="Cache\FileConfig.cs" />
+    <Compile Include="Cache\FileDependency.cs" />
+    <Compile Include="Cache\FilesCacheAttribute.cs" />
+    <Compile Include="Cache\FilesConfig.cs" />
+    <Compile Include="Data\TraceModule.cs" />
+    <Compile Include="Data\_Display\DialogHrefDisplayConfig.cs" />
+    <Compile Include="Data\_Display\HrefDisplayConfig.cs" />
+    <Compile Include="Data\_Display\ListRefDisplayConfig.cs" />
+    <Compile Include="Data\_Display\UploadImgDisplayConfig.cs" />
+    <Compile Include="Data\_Expression\ModuleCreatorExpression.cs" />
+    <Compile Include="Data\_Expression\CcSourceExpression.cs" />
+    <Compile Include="Data\DownloadAttachmentSource.cs" />
+    <Compile Include="Data\LogOffSource.cs" />
+    <Compile Include="Data\_Expression\PageStyleExpression.cs" />
+    <Compile Include="Data\QueryConditionPostObject.cs" />
+    <Compile Include="Data\QueryConditionSource.cs" />
+    <Compile Include="Data\_Expression\QueryStringParamExpression.cs" />
+    <Compile Include="Data\_Expression\SourceExpression.cs" />
+    <Compile Include="Data\WebUploadInfo.cs" />
+    <Compile Include="Data\UploadSource.cs" />
+    <Compile Include="Data\WebUploadResult.cs" />
+    <Compile Include="Decoder\EasySearchInput.cs" />
+    <Compile Include="Decoder\EasySearchOutput.cs" />
+    <Compile Include="Decoder\EasySearchSource.cs" />
+    <Compile Include="Decoder\EasySearchTreeSource.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Right\SimpleLogOnRight.cs" />
+    <Compile Include="Right\SubFuncFieldOperateRight.cs" />
+    <Compile Include="Right\SubFuncFieldOperateRightConfig.cs" />
+    <Compile Include="Right\SubFuncOperateRight.cs" />
+    <Compile Include="Right\SubFuncOperateRightConfig.cs" />
+    <Compile Include="Right\WebAppRight.cs" />
+    <Compile Include="Sys\NetUrlBuilder.cs" />
+    <Compile Include="Sys\WebAppSettingExtension.cs" />
+    <Compile Include="Sys\WebDefaultXmlConfig.cs" />
+    <Compile Include="Sys\WebUtil.cs" />
+    <Compile Include="Sys\_App\ExceptionIndexer.cs" />
+    <Compile Include="Sys\_Exception\ErrorPageSource.cs" />
+    <Compile Include="Sys\_Exception\FileExceptionHandler.cs" />
+    <Compile Include="Sys\_Exception\FileExceptionHandlerConfig.cs" />
+    <Compile Include="Sys\_Exception\PageMakerExceptionHandler.cs" />
+    <Compile Include="Sys\_Exception\PageMakerExceptionHandlerConfig.cs" />
+    <Compile Include="Sys\_Exception\ReLogonExceptionHandlerConfig.cs" />
+    <Compile Include="Web\_Handler\CcToolkitHandlerFactory.cs" />
+    <Compile Include="Web\_Handler\CcHandlerInfoCreator.cs" />
+    <Compile Include="Web\_Handler\IHandlerInfoCreator.cs" />
+    <Compile Include="Web\_Handler\TkHandlerInfoCreator.cs" />
+    <Compile Include="Web\_Handler\VpHandlerInfoCreator.cs" />
+    <Compile Include="Web\_Handler\HanlderInfoCreatorAttribute.cs" />
+    <Compile Include="Web\_Handler\HanlderInfoCreatorPlugInFactory.cs" />
+    <Compile Include="Web\UrlParser.cs" />
+    <Compile Include="Web\Page\WebInitHttpHandler.cs" />
+    <Compile Include="Web\Page\WebUploadPage.cs" />
+    <Compile Include="Web\Page\WebInitServlet.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\SessionUtil.cs" />
+    <Compile Include="Web\_HtmlUpload\HtmlUploadPage.cs" />
+    <Compile Include="Web\_HtmlUpload\HtmlUploadSource.cs" />
+    <Compile Include="Web\_PageMaker\ExceptionPostPageMaker.cs" />
+    <Compile Include="Web\_PageMaker\JsonPageMaker.cs" />
+    <Compile Include="Web\_PageMaker\JsonPageMakerAttribute.cs" />
+    <Compile Include="Web\_PageMaker\JsonPageMakerConfig.cs" />
+    <Compile Include="Web\_PageMaker\JsonpDataSetPageMaker.cs" />
+    <Compile Include="Web\_PageMaker\JsonpDataSetPageMakerAttribute.cs" />
+    <Compile Include="Web\_PageMaker\JsonpDataSetPageMakerConfig.cs" />
+    <Compile Include="Web\_PageMaker\JsonpObjectPageMaker.cs" />
+    <Compile Include="Web\_PageMaker\JsonpObjectPageMakerAttribute.cs" />
+    <Compile Include="Web\_PageMaker\JsonpObjectPageMakerConfig.cs" />
+    <Compile Include="Web\_PageMaker\PostPageMakerAttribute.cs" />
+    <Compile Include="Web\_PageMaker\TreePostPageMaker.cs" />
+    <Compile Include="Web\_PageMaker\TreePostPageMakerConfig.cs" />
+    <Compile Include="Web\_Page\WebPagePlugInAttribute.cs" />
+    <Compile Include="Web\_Page\WebPagePlugInFactory.cs" />
+    <Compile Include="Web\_Handler\AbbreviateConfigItem.cs" />
+    <Compile Include="Web\_Handler\AbbreviateHandlerXml.cs" />
+    <Compile Include="Web\_PageMaker\JsonResultPageMaker.cs" />
+    <Compile Include="Web\_PageMaker\JsonResultPageMakerAttribute.cs" />
+    <Compile Include="Web\_PageMaker\JsonResultPageMakerConfig.cs" />
+    <Compile Include="Web\Page\WebDeleteContentXmlPage.cs" />
+    <Compile Include="Web\_Handler\ToolkitUploadPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\_Handler\UploadFileInfo.cs" />
+    <Compile Include="Web\InternalCallerInfo.cs" />
+    <Compile Include="Sys\_App\ExceptionHandlerConfigItem.cs" />
+    <Compile Include="Sys\_Exception\ErrorPageExceptionHandler.cs" />
+    <Compile Include="Sys\_Exception\ErrorPageExceptionHandlerConfig.cs" />
+    <Compile Include="Sys\_Exception\BaseOutputExceptionHandler.cs" />
+    <Compile Include="Sys\_Exception\ReLogonExceptionHandler.cs" />
+    <Compile Include="Web\_Handler\WebStartPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sys\_App\WebConfigItem.cs" />
+    <Compile Include="Sys\_App\WebAppExtensionXml.cs" />
+    <Compile Include="Sys\_Exception\ErrorPageException.cs" />
+    <Compile Include="Sys\_Exception\ExceptionHandlerConfigAttribute.cs" />
+    <Compile Include="Sys\_Exception\ExceptionHanlderConfigFactory.cs" />
+    <Compile Include="Sys\_Exception\IExceptionHandler.cs" />
+    <Compile Include="Sys\_App\IWebInitialization.cs" />
+    <Compile Include="Sys\_App\SessionGlobal.cs" />
+    <Compile Include="Sys\_App\WebApp.cs" />
+    <Compile Include="Sys\_App\WebGlobal.cs" />
+    <Compile Include="Sys\_App\WebGlobalVariable.cs" />
+    <Compile Include="Sys\_Exception\ExceptionUtil.cs" />
+    <Compile Include="Web\_PageMaker\PostPageMaker.cs" />
+    <Compile Include="Web\_PageMaker\PostPageMakerConfig.cs" />
+    <Compile Include="Web\_PageMaker\WebSourceXsltPageMakerConfig.cs" />
+    <Compile Include="Web\PageInfo.cs" />
+    <Compile Include="Web\UrlInfo.cs" />
+    <Compile Include="Web\WebPageInfo.cs" />
+    <Compile Include="Web\_PageMaker\BaseObjectConfig.cs" />
+    <Compile Include="Web\_PageMaker\BaseObjectPageMaker.cs" />
+    <Compile Include="Web\_PageMaker\CompositePageMakerConfig.cs" />
+    <Compile Include="Web\_PageMaker\CompositePageMakerItemConfig.cs" />
+    <Compile Include="Web\_PageMaker\JsonObjectPageMaker.cs" />
+    <Compile Include="Web\_PageMaker\JsonObjectPageMakerAttribute.cs" />
+    <Compile Include="Web\_PageMaker\JsonObjectPageMakerConfig.cs" />
+    <Compile Include="Web\_PageMaker\JsonDataSetPageMaker.cs" />
+    <Compile Include="Web\_PageMaker\JsonDataSetPageMakerAttribute.cs" />
+    <Compile Include="Web\_PageMaker\JsonDataSetPageMakerConfig.cs" />
+    <Compile Include="Web\Page\WebDeleteXmlHttpHandler.cs" />
+    <Compile Include="Web\Page\WebDeleteXmlPage.cs" />
+    <Compile Include="Web\Page\WebDeleteXmlServlet.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Page\WebDetailXmlHttpHandler.cs" />
+    <Compile Include="Web\Page\WebDetailXmlPage.cs" />
+    <Compile Include="Web\Page\WebDetailXmlServlet.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Page\WebInsertXmlHttpHandler.cs" />
+    <Compile Include="Web\Page\WebInsertXmlPage.cs" />
+    <Compile Include="Web\Page\WebInsertXmlServlet.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Page\WebListXmlHttpHandler.cs" />
+    <Compile Include="Web\Page\WebListXmlPage.cs" />
+    <Compile Include="Web\Page\WebListXmlServlet.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Page\WebModuleContentHttpHandler.cs" />
+    <Compile Include="Web\Page\WebModuleContentPage.cs" />
+    <Compile Include="Web\Page\WebModuleContentServlet.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Page\WebModuleRedirectHttpHandler.cs" />
+    <Compile Include="Web\Page\WebModuleRedirectPage.cs" />
+    <Compile Include="Web\Page\WebModuleRedirectServlet.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Page\WebUpdateXmlHttpHandler.cs" />
+    <Compile Include="Web\Page\WebUpdateXmlPage.cs" />
+    <Compile Include="Web\Page\WebUpdateXmlServlet.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\_PageMaker\WebFilePageMakerAttribute.cs" />
+    <Compile Include="Web\_PageMaker\XmlPageMaker.cs" />
+    <Compile Include="Web\_PageMaker\XmlPageMakerAttribute.cs" />
+    <Compile Include="Web\_PageMaker\XmlPageMakerConfig.cs" />
+    <Compile Include="Web\WebFileContent.cs" />
+    <Compile Include="Web\_PageMaker\WebFilePageMaker.cs" />
+    <Compile Include="Web\_PageMaker\CompositePageMaker.cs" />
+    <Compile Include="Web\_PageMaker\WebFilePageMakerConfig.cs" />
+    <Compile Include="Web\_Handler\IWebHandler.cs" />
+    <Compile Include="Web\_Handler\TkHandlerCacheCreator.cs" />
+    <Compile Include="Web\_Handler\TkxXml.cs" />
+    <Compile Include="Web\_Handler\ToolkitHandlerFactory.cs" />
+    <Compile Include="Web\_Handler\ToolkitHttpHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\_Handler\ToolkitServlet.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\InternalUriUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\_Page\WebBaseContentPage.cs" />
+    <Compile Include="Web\_Page\WebBaseModuleContentPage.cs" />
+    <Compile Include="Web\_Page\WebBaseModuleRedirectPage.cs" />
+    <Compile Include="Web\_Page\WebBasePage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\_Page\WebBaseRedirectPage.cs" />
+    <Compile Include="Web\InternalWebUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="YJC.Toolkit2.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\YJC.Toolkit.Core\YJC.Toolkit.Core.csproj">
+      <Project>{9aff9cc4-42a6-471b-95c9-af07cebc19e5}</Project>
+      <Name>YJC.Toolkit.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\YJC.Toolkit.MetaData\YJC.Toolkit.MetaData.csproj">
+      <Project>{59f7b4ed-95ad-40b6-ad3b-419fe66c4521}</Project>
+      <Name>YJC.Toolkit.MetaData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\YJC.Toolkit.AdoData\YJC.Toolkit.AdoData.csproj">
+      <Project>{5922e5bd-4c19-457f-865c-98d4a50560eb}</Project>
+      <Name>YJC.Toolkit.AdoData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\YJC.Toolkit.Data\YJC.Toolkit.Data.csproj">
+      <Project>{711b30cd-066c-4d32-ad35-5fbac6104cd8}</Project>
+      <Name>YJC.Toolkit.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\YJC.Toolkit.Web.Common\YJC.Toolkit.Web.Common.csproj">
+      <Project>{6d94df04-07a9-44b6-92f3-6b50eb6a2afe}</Project>
+      <Name>YJC.Toolkit.Web.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

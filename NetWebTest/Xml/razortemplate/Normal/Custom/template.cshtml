@@ -1,0 +1,23 @@
+﻿@inherits YJC.Toolkit.Razor.BaseToolkit2Template
+@using YJC.Toolkit.Web;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    @RenderLayoutPartial("../bin/css.cshtml", null)
+    @ViewBag.Script.CreateUserCss()
+</head>
+<body data-webpath="@HtmlCommonUtil.AppVirtualPath">
+    <div class="container-fluid">
+        @RenderSectionIfDefined("Header")
+        @RenderSectionIfDefined("Main")
+        @RenderSectionIfDefined("Footer")
+    </div>
+    @RenderLayoutPartial("../bin/js.cshtml", null)
+    @ViewBag.Script.CreateUserJavaScript()
+    @RenderSectionIfDefined("Script")
+</body>
+</html>

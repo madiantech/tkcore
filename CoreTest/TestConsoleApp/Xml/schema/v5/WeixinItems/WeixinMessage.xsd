@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (mitu) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="WeixinCommon.xsd"/>
+  <xs:simpleType name="MessageType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Text"/>
+      <xs:enumeration value="Image"/>
+      <xs:enumeration value="Voice"/>
+      <xs:enumeration value="Video"/>
+      <xs:enumeration value="Location"/>
+      <xs:enumeration value="Link"/>
+      <xs:enumeration value="Event"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ReplyMessageType">
+    <xs:choice>
+      <xs:element ref="tk:TextMessage"/>
+      <xs:element ref="tk:NewsMessage"/>
+      <xs:element ref="tk:RegMessage"/>
+      <xs:element ref="tk:DataRowNewsMessage"/>
+      <xs:element ref="tk:TextMarcoMessage"/>
+      <xs:element ref="tk:LinkMessage"/>
+      <xs:element ref="tk:EmptyMessage"/>
+      <xs:any namespace="##other" processContents="lax" maxOccurs="unbounded"/>
+      <xs:element ref="tk:ImageMessage"/>
+      <xs:element ref="tk:VoiceMessage"/>
+      <xs:element ref="tk:VideoMessage"/>
+      <xs:element ref="tk:MusicMessage"/>
+      <xs:element name="NewsMarcoMessage"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="TextMessage">
+    <xs:annotation>
+      <xs:documentation>文本消息</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Content" type="tk:MultiLanguageType">
+          <xs:annotation>
+            <xs:documentation>文本消息的内容</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="MediaType">
+    <xs:attribute name="FileName" type="xs:anyURI" use="required">
+      <xs:annotation>
+        <xs:documentation>媒体文件的路径</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Position" type="tk:FilePosition">
+      <xs:annotation>
+        <xs:documentation>文件的位置，默认为XmlPath</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="ImageMessage" type="tk:MediaType">
+    <xs:annotation>
+      <xs:documentation>图片消息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="VoiceMessage" type="tk:MediaType">
+    <xs:annotation>
+      <xs:documentation>语音消息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="VideoMessage">
+    <xs:annotation>
+      <xs:documentation>视频消息</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:MediaType">
+          <xs:attribute name="Title" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>视频消息的标题</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="Description" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>视频消息的描述</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MusicMessage">
+    <xs:annotation>
+      <xs:documentation>音乐消息</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="Title" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>音乐标题</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>音乐描述</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="MusicUrl" type="xs:anyURI">
+        <xs:annotation>
+          <xs:documentation>音乐链接</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="HQMusicUrl" type="xs:anyURI">
+        <xs:annotation>
+          <xs:documentation>高质量音乐链接</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="ThumbMediaFileName" type="xs:anyURI" use="required">
+        <xs:annotation>
+          <xs:documentation>缩略图的媒体文件路径</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Position" type="tk:FilePosition">
+        <xs:annotation>
+          <xs:documentation>文件的位置，默认为XmlPath</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsMessage">
+    <xs:annotation>
+      <xs:documentation>图文消息</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence maxOccurs="10">
+        <xs:element ref="tk:Article">
+          <xs:annotation>
+            <xs:documentation>每个图文消息的定义</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegMessage" type="xs:Name">
+    <xs:annotation>
+      <xs:documentation>注册插件返回的消息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="ArticleType">
+    <xs:sequence>
+      <xs:element name="Title" type="tk:MultiLanguageType">
+        <xs:annotation>
+          <xs:documentation>图文消息标题</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="tk:MultiLanguageType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>图文消息描述</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PicUrl" type="tk:UrlType">
+        <xs:annotation>
+          <xs:documentation>图片链接，支持JPG、PNG格式</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Url" type="tk:UrlType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>点击图文消息跳转链接</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Article" type="tk:ArticleType"/>
+  <xs:element name="DataRowNewsMessage">
+    <xs:annotation>
+      <xs:documentation>根据配置的Sql来生成图文消息，DataRow的每一个字段可以用宏:FieldName来定义</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Sql" type="tk:MarcoConfigItem">
+          <xs:annotation>
+            <xs:documentation>SQL语句</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="EmptyMessage" type="tk:MultiLanguageType">
+          <xs:annotation>
+            <xs:documentation>SQL查询为空时，返回文本消息的内容显示</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Article" type="tk:ArticleType" minOccurs="0" maxOccurs="9">
+          <xs:annotation>
+            <xs:documentation>如果配置，将作为起始的图文消息出现，相当于页首</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="DataRowArticle">
+          <xs:annotation>
+            <xs:documentation>通过Sql选取出来的DataRow，每条一个图文（但和Article以及FootArticle在一起最多只能10个）</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Title" type="tk:MarcoConfigItem">
+                <xs:annotation>
+                  <xs:documentation>图文消息标题</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Description" type="tk:MarcoConfigItem" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>图文消息描述</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="PicUrl" type="tk:UrlMarcoType">
+                <xs:annotation>
+                  <xs:documentation>图片链接，支持JPG、PNG格式</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Url" type="tk:UrlMarcoType" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>点击图文消息跳转链接</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FootArticle" type="tk:ArticleType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>如果配置，将作为最后一个图文消息出现，相当于页脚</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Context" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>Sql语句调用数据库上下文名称，不写为默认Context</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="UrlMarcoType">
+    <xs:complexContent>
+      <xs:extension base="tk:MarcoConfigItem">
+        <xs:attribute name="Base" type="xs:Name">
+          <xs:annotation>
+            <xs:documentation>Application.xml中Host节配置的名称</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LinkMessage">
+    <xs:annotation>
+      <xs:documentation>串联执行每个配置的消息，并返回最后一个消息的返回结果</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded">
+        <xs:element name="Item" type="tk:ReplyMessageType">
+          <xs:annotation>
+            <xs:documentation>串联的每个消息处理</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TextMarcoMessage">
+    <xs:annotation>
+      <xs:documentation>文本消息，支持宏，可以使用{OpenId}</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Content" type="tk:MarcoConfigItem">
+          <xs:annotation>
+            <xs:documentation>宏文本消息的内容</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmptyMessage">
+    <xs:annotation>
+      <xs:documentation>不返回消息</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="RazorCommon.xsd"/>
+  <xs:simpleType name="_tk_RazorTemplate">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="BootcssDetail"/>
+      <xs:enumeration value="BootcssEdit"/>
+      <xs:enumeration value="BootcssList"/>
+      <xs:enumeration value="BootcssCustom"/>
+      <xs:enumeration value="BootcssObjectEdit"/>
+      <xs:enumeration value="NormalList"/>
+      <xs:enumeration value="NormalEdit"/>
+      <xs:enumeration value="NormalDetail"/>
+      <xs:enumeration value="NormalCustom"/>
+      <xs:enumeration value="NormalTree"/>
+      <xs:enumeration value="NormalTreeDetail"/>
+      <xs:enumeration value="NormalDetailList"/>
+      <xs:enumeration value="NormalMultiEdit"/>
+      <xs:enumeration value="NormalMultiDetail"/>
+      <xs:enumeration value="NormalQueryCondition"/>
+      <xs:enumeration value="NormalQueryResult"/>
+      <xs:enumeration value="MultiTreeDetail"/>
+      <xs:enumeration value="NormalObjectEdit"/>
+      <xs:enumeration value="NormalObjectList"/>
+      <xs:enumeration value="NormalObjectDetail"/>
+      <xs:enumeration value="NormalObjectTree"/>
+      <xs:enumeration value="NormalObjectTreeDetail"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RazorTemplateType">
+    <xs:union memberTypes="xs:Name tk:_tk_RazorTemplate"/>
+  </xs:simpleType>
+  <xs:complexType name="RazorPageMakerType">
+    <xs:complexContent>
+      <xs:extension base="tk:__tk_BaseRazorPageMakerType">
+        <xs:attribute name="Template" type="tk:RazorTemplateType" use="required">
+          <xs:annotation>
+            <xs:documentation>Razor基准模板，使用RazorTemplateAttribute注册的注册名</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RazorPageMaker" type="tk:RazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>使用Razor引擎，通过预定义的Razor模板，模板对应的PageData以及元数据，再辅以重载Razor文件合成Html输出</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PostRazorPageMaker">
+    <xs:annotation>
+      <xs:documentation>在Get时使用RazorPageMaker输出Html，在Post时使用PostPageMaker输出Json或者Xml</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:RazorPageMakerType">
+          <xs:group ref="tk:PostElementGroup"/>
+          <xs:attributeGroup ref="tk:PostAttrGroup"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListRazorPageMaker">
+    <xs:annotation>
+      <xs:documentation>基于RazorPageMaker，针对List页面，在QueryString中存在GetData=Page时，只输出列表的数据，而非整个html</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:RazorPageMakerType">
+          <xs:attribute name="GetDataTemplate" type="xs:anyURI"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FreeRazorPageMaker">
+    <xs:annotation>
+      <xs:documentation>使用Razor引擎，但是没有Razor模板，以纯粹的Razor文件生成Html输出</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:__tk_BaseRazorElement">
+          <xs:attribute name="Position" type="tk:FilePosition">
+            <xs:annotation>
+              <xs:documentation>文件相对位置，默认为Xml</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="RegType" type="xs:Name">
+            <xs:annotation>
+              <xs:documentation>使用自定义Razor模板时，该模板的类型注册名。如果使用默认Razor模板，此处不需要配置</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="RazorFile" type="xs:anyURI" use="required">
+            <xs:annotation>
+              <xs:documentation>Razor文件名，需要包含相对路径</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SingleRazorPageMaker" type="tk:SingleRazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>单表新建，修改，删除等综合的RazorPageMaker</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="SingleRazorPageMakerType">
+    <xs:complexContent>
+      <xs:extension base="tk:CompositeRazorPageMakerType">
+        <xs:attribute name="ListDisplay" type="tk:TableDisplayType" default="Striped"/>
+        <xs:attribute name="DialogHeight" type="xs:unsignedInt"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CompositeRazorPageMakerType">
+    <xs:sequence>
+      <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tk:__tk_BaseRazorPageMakerType">
+              <xs:group ref="tk:PostElementGroup"/>
+              <xs:attributeGroup ref="tk:PostAttrGroup"/>
+              <xs:attribute name="Style" type="tk:PageStyleIntf" use="required"/>
+              <xs:attribute name="Template" type="tk:RazorTemplateType">
+                <xs:annotation>
+                  <xs:documentation>Razor基准模板，使用RazorTemplateAttribute注册的注册名</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SingleDialogRazorPageMaker" type="tk:SingleRazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>单表新建，修改，删除等综合的RazorPageMaker，新建修改等操作为Dialog界面</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SingleDialogObjectRazorPageMaker" type="tk:SingleRazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>Object新建，修改，删除等综合的RazorPageMaker，新建修改等操作为Dialog界面</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SingleObjectRazorPageMaker" type="tk:SingleRazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>Object新建，修改，删除等综合的RazorPageMaker</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="SingleTreeRazorPageMakerType">
+    <xs:complexContent>
+      <xs:extension base="tk:CompositeRazorPageMakerType">
+        <xs:attributeGroup ref="tk:TreeDataAttrGrp"/>
+        <xs:attribute name="TreeModelName" type="xs:Name">
+          <xs:annotation>
+            <xs:documentation>生成Tree数据的Json格式时，使用的ModelName。该属性为高级配置，通常不配置。</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SingleTreeRazorPageMaker" type="tk:SingleTreeRazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>单表新建，修改，删除等综合的TreeRazorPageMaker，新建修改等操作为普通界面</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SingleDialogTreeRazorPageMaker" type="tk:SingleTreeRazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>单表新建，修改，删除等综合的TreeRazorPageMaker，新建修改等操作为Dialog界面</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MasterDetailTreeRazorPageMaker" type="tk:SingleTreeRazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>主从表新建，修改，删除等综合的TreeRazorPageMaker，新建修改等操作为普通界面</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SingleDialogObjectTreeRazorPageMaker" type="tk:SingleTreeRazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>Object新建，修改，删除等综合的TreeRazorPageMaker，新建修改等操作为Dialog界面</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MasterDetailRazorPageMaker" type="tk:SingleRazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>主从表新建，修改，删除等综合的RazorPageMaker</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ExceptionRazorPageMaker" type="tk:EmptyType">
+    <xs:annotation>
+      <xs:documentation>使用BootCss\Bin\Exception.cshtml输出Get的错误，发送文件Id输出Post的错误的PageMaker(Exception专用)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SingleDetailListRazorPageMaker" type="tk:SingleRazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>表新建，修改，删除，列表为单表模式。Detail为多表模式的PageMaker</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SingleDialogDetailListRazorPageMaker" type="tk:SingleRazorPageMakerType">
+    <xs:annotation>
+      <xs:documentation>表列表，删除为单表模式；新建，修改为Dialog界面；Detail为多表模式的PageMaker</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="QueryRazorPageMaker">
+    <xs:annotation>
+      <xs:documentation>Get时使用条件模板输出条件，Post时使用结果模板输出结果。是针对Query模型的PageMaker</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:__tk_BaseRazorElement">
+          <xs:attribute name="ConditionTemplate" type="xs:Name"/>
+          <xs:attribute name="ResultTemplate" type="xs:Name"/>
+          <xs:attribute name="ConditionRazorFile" type="xs:anyURI"/>
+          <xs:attribute name="ResultRazorFile" type="xs:anyURI"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RazorStylePageMaker">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:RazorPageMakerType">
+          <xs:attribute name="TemplateStyle">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="List"/>
+                <xs:enumeration value="Edit"/>
+                <xs:enumeration value="Detail"/>
+                <xs:enumeration value="DetailList"/>
+                <xs:enumeration value="Tree"/>
+                <xs:enumeration value="TreeDetail"/>
+                <xs:enumeration value="MultiEdit"/>
+                <xs:enumeration value="MultiDetail"/>
+                <xs:enumeration value="Custom"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

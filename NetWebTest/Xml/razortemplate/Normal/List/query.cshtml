@@ -1,0 +1,35 @@
+﻿@inherits YJC.Toolkit.Razor.BaseListTemplate
+@using System.Data;
+@using System.Linq;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    IListMetaData metaData = ViewBag.MetaData;
+    IListTableData table = metaData.TableData;
+    IListModel model = CreateModel<IListModel>(Model);
+    var queryFields = table.QueryFields;
+    IFieldValueProvider queryProvider = model.CreateQueryProvider();
+    string json = table.JsonFields;
+    NormalListData pageData = (NormalListData)ViewBag.PageData;
+}
+@if (Enumerable.Count(queryFields) > 0)
+{
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <form class="navbar-form navbar-left tk-datasearch" role="search" id="QueryForm" data-check="false" data-post="@StringUtil.EscapeHtmlAttribute(json)">
+                @foreach (Tk5FieldInfoEx field in queryFields)
+                {
+                    <div class="form-group">
+                        <label for="@field.NickName">@field.DisplayName</label>
+                        @field.SearchControlHtml(queryProvider)
+                    </div>
+                }
+                @BootcssCommonUtil.ShowSearchCheckBox(pageData.SearchCheckBox)
+                <button type="button" class="btn btn-default btn-search">查询</button>
+            </form>
+        </div>
+    </nav>
+}

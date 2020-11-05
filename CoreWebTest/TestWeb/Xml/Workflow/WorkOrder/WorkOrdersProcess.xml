@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tk:Toolkit version="2.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\WfProcess.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table ListStyle="Normal" Action="Update" UpdateMode="OneRow">
+    <tk:SingleXmlMetaData DataXml="WorkOrder/WorkOrders.xml"/>
+    <tk:TableResolver>
+      <tk:MetaDataResolver AutoTrackField="true" AutoUpdateKey="true">
+        <tk:Scheme>
+          <tk:Tk5DataXml FileName="WorkOrder/WorkOrders.xml"/>
+        </tk:Scheme>
+      </tk:MetaDataResolver>
+    </tk:TableResolver>
+  </tk:Table>
+  <tk:Table ListStyle="Table" Action="Update" UpdateMode="Merge" UseMeta="false">
+    <tk:SingleXmlMetaData DataXml="WorkOrder/WorkOrdersAttachment.xml"/>
+    <tk:TableResolver>
+      <tk:MetaDataResolver AutoUpdateKey="true">
+        <tk:Scheme>
+          <tk:Tk5DataXml FileName="WorkOrder/WorkOrdersAttachment.xml"/>
+        </tk:Scheme>
+      </tk:MetaDataResolver>
+    </tk:TableResolver>
+  </tk:Table>
+  <!--<tk:RecordLog TableName="WO_WORK_ORDERS">
+		<tk:DataPicker>
+			<DataRecordLog>
+        </DataRecordLog>
+		</tk:DataPicker>
+		<tk:LogData>
+			<DataUpdateLog/>
+		</tk:LogData>
+	</tk:RecordLog>-->
+  <tk:Relation MasterTableName="WO_WORK_ORDERS" DetailTableName="WO_WORK_ORDERS_ATTACHMENT">
+    <tk:MasterFields>Id</tk:MasterFields>
+    <tk:DetailFields>WoId</tk:DetailFields>
+  </tk:Relation>
+</tk:Toolkit>

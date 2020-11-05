@@ -1,0 +1,51 @@
+﻿@inherits YJC.Toolkit.Razor.NormalListTemplate
+@using System.Data;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    DataSet dataSet = (DataSet)Model;
+    DataRow countRow = dataSet.GetRow("Count");
+    int currentPage = countRow.GetValue<int>("CurrentPage");
+    int totalPage = countRow.GetValue<int>("TotalPage");
+    NormalListData pageData = (NormalListData)ViewBag.PageData;
+}
+@functions {
+    string GetPageTitle(int i)
+    {
+        return string.Format("查看第{0}页", i);
+    }
+
+    string IsActive(int index, int currentPage)
+    {
+        if (index == currentPage)
+            return " class=\"active\"";
+        else
+            return string.Empty;
+    }
+}
+@if (totalPage >= 0)
+{
+    @{
+        int pageNumberCount = pageData.PageNumberCount;
+        int startPage = currentPage == 0 ? 0 : ((int)Math.Ceiling((currentPage + 1) / (double)pageNumberCount) - 1) * pageNumberCount;
+        int endPage = startPage <= (totalPage - pageNumberCount) ? startPage + pageNumberCount : totalPage + 1;
+        int firstPage = currentPage < 1 ? 0 : currentPage - 1;
+        int lastPage = currentPage + 1 > totalPage ? totalPage : currentPage + 1;
+    }
+    <ul class="pagination pull-right">
+        @if (totalPage >= pageNumberCount)
+        {
+            <li @IsActive(firstPage, currentPage)><a href="#" data-page="@(firstPage + 1)" title="上一页">&lt;</a></li>
+        }
+        @for (int i = startPage; i < endPage; ++i)
+        {
+            <li @IsActive(i, currentPage)><a href="#" data-page="@(i + 1)" title="@GetPageTitle(i + 1)">@(i + 1)</a></li>
+        }
+        @if (totalPage >= pageNumberCount)
+        {
+            <li @IsActive(lastPage, currentPage)><a href="#" data-page="@(lastPage + 1)" title="下一页">></a></li>
+        }
+        <li><span>共<b>@(totalPage + 1)</b>页，<b>@countRow.GetString("TotalCount")</b>条记录</span></li>
+    </ul>
+}

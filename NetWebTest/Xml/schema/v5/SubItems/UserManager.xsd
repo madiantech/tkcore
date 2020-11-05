@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:complexType name="UserManagerType">
+    <xs:choice>
+      <xs:element ref="tk:SimpleUserManager"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="SimpleUserManager">
+    <xs:annotation>
+      <xs:documentation>基于SimpleRight封装的用户接口</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="ContextConfig" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>用户等表所在的数据库连接配置名，如果不配置取默认的数据库连接配置</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

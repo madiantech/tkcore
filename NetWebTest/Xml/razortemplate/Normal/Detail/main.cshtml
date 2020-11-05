@@ -1,0 +1,69 @@
+﻿@inherits YJC.Toolkit.Razor.BaseToolkit2Template
+@using System.Data;
+@using System.Collections.Generic;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    NormalDetailData pageData = ViewBag.PageData;
+    IDetailModel model = CreateModel<IDetailModel>(Model);
+    HtmlAttribute attribute = pageData.DialogMode ? new HtmlAttribute("data-dialog-action", "close")
+        : new HtmlAttribute("data-url", model.RetUrl);
+    HtmlAttribute retAttr = new HtmlAttribute("data-action", "return");
+
+    INormalMetaData metaData = ViewBag.MetaData;
+    INormalTableData table = metaData.TableData;
+    IEnumerable<Tk5FieldInfoEx> fields = table.DataList;
+    IFieldValueProvider provider = model.CreateMainObjectProvider(metaData.TableData);
+
+    int captionCol = pageData.CaptionColumn;
+    int dataCol = pageData.DataColumn;
+    bool showHint = pageData.AppendHint;
+    bool ignoreEmptyField = pageData.IgnoreEmptyField;
+}
+@section DefaultButtons
+{
+    <div class="text-center clearfix mt5">
+        @BootcssCommonUtil.CreateOperators(model.DetailOperators, provider)
+        @BootcssCommonUtil.Button("<i class='icon-remove mr5'></i>" + pageData.CancelCaption, "", BootcssButton.Default, false, attribute, retAttr)
+    </div>
+}
+<form method="POST" id="DetailForm" class="tk-dataform form-horizontal p5 mb15" role="form">
+    <div id="@(table.TableName + "_Detail")" class="@HtmlCommonUtil.MergeClass("tk-datatable", "column" + table.ColumnCount.ToString())">
+        <div class="p10">
+            @foreach (Tk5FieldInfoEx field in fields)
+            {
+                @{
+                string fieldString = RenderFieldItem(provider, field);
+                string value = provider[field.NickName].ToString();
+                }
+                if (fieldString != null)
+                {
+                    @fieldString
+                }
+                else
+                {
+                    @if (ignoreEmptyField && string.IsNullOrEmpty(value))
+                    {
+                        continue;
+                    }
+                    <div class="@HtmlCommonUtil.MergeClass("tk-column", field.LayoutClass(), "pt10")">
+                        <dl>
+                            <dt>@field.DisplayName</dt>
+                            <dd>
+                                <span class="tk-control">
+                                    @field.Detail(provider, showHint, false)
+                                </span>
+                            </dd>
+                        </dl>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    @RenderSectionIfDefined("AdditionData")
+</form>
+@RenderSectionOrDefault("ModuleButtons", "DefaultButtons")

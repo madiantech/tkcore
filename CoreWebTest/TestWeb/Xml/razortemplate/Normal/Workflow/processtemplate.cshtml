@@ -1,0 +1,45 @@
+﻿@inherits YJC.Toolkit.Razor.ToolkitTemplatePage<TModel>
+@using System.Data;
+@using System.Linq;
+@using YJC.Toolkit.Web;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.MetaData;
+@{
+    IMultiEditModel model = CreateModel<IMultiEditModel>(Model);
+    NormalEditData pageData = (NormalEditData)ViewBag.PageData;
+    IFieldValueProvider instProvider = model.CreateMainObjectProvider("WF_WORKFLOW_INST");
+    string title = instProvider["WdName_Name"].ToString() + " - " + instProvider["CurrentStepName"].ToString();
+}
+@section DefaultHeader {
+    <h5 class="text-orange">@ViewBag.Title</h5>
+}
+@section DefaultFooter {
+    @RenderRazorOutputData(pageData.Footer, Model)
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    @RenderPart("@../Bin/css.cshtml", null)
+    @Raw(ViewBag.Script.CreateUserCss())
+</head>
+<body id="@ModelUtil.GetPageId(model.PageStyle)" class="tk-dataPage" data-webpath="@HtmlCommonUtil.AppVirtualPath">
+    <div class="container-fluid">
+        @if (pageData.ShowTitle)
+        {
+            @RenderSection("DefaultHeader")
+        }
+        @RenderSectionIfDefined("Main", "@processmain.cshtml", Model)
+        @RenderSectionOrDefault("Footer", "DefaultFooter")
+    </div>
+    @RenderPart("@../Bin/js.cshtml", null)
+    <script type="text/javascript" src="@("userjs/Workflow/toolkit.process.js".AppVirutalPath())"></script>
+    @Raw(ViewBag.Script.CreateUserJavaScript())
+    @RenderSectionIfDefined("Script")
+</body>
+</html>

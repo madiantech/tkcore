@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="WeixinItems/WeixinMessage.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DingTalk">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="App" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>钉钉微应用</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="ShortName" type="xs:ID" use="required">
+                    <xs:annotation>
+                      <xs:documentation>唯一标识钉钉App的标识符，要求在整个定义中保持唯一</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="AgentId" type="xs:int" use="required">
+                    <xs:annotation>
+                      <xs:documentation>钉钉App设置页面中的AgentId</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="AppName" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation>应用名称</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="AppKey" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation>钉钉App设置页面中的AppKey</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="AppSecret" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation>钉钉App设置页面中的AppSecret</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="DefaultAppName" type="xs:IDREF" use="required">
+              <xs:annotation>
+                <xs:documentation>默认的AppName，当内部不配置AppName时，均使用该默认的AppName</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" fixed="5.0"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

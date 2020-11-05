@@ -1,0 +1,37 @@
+﻿@inherits YJC.Toolkit.Razor.MultiEditTemplatePage<TModel>
+@using System.Data;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Data;
+@{
+    IMultiEditModel model = CreateModel<IMultiEditModel>(Model);
+    var providers = model.CreateDataRowsProvider("WO_WORK_ORDERS_ATTACHMENT");
+
+}
+<div class="clearfix" id="WO_WORK_ORDERS_ATTACHMENT">
+    @foreach (var provider in providers)
+    {
+        UploadInfo info = new UploadInfo
+        {
+            FileName = provider["FileName"].ToString(),
+            ContentType = provider["ContentType"].ToString(),
+            FileSize = provider["Size"].Value<int>(),
+            ServerPath = provider["FilePath"].ToString(),
+            WebPath = $"/c/source/C/DownloadAttachment?NoFileName=False&Cache=True&Id={provider["Id"]}"
+        };
+        <div class="upload-status uploading table-row">
+            <input type="hidden" value="@provider["Id"].ToString()" name="Id" />
+            <input type="hidden" value="@provider["WoId"].ToString()" name="WoId" />
+            <div data-control="Upload1" data-fileSize="Size" data-serverPath="FilePath" data-contentType="ContentType" name="FileName" data-value="@info.ToJson()">
+                <a href="#" target="_blank" class="text-center">
+                    <i class="file-icon glyphicon glyphicon-file"></i>
+                    <p>@provider["FileName"].ToString()</p>
+                </a>
+                <button type="button" class="file-remove btn btn-danger btn-xs glyphicon glyphicon-remove"></button>
+            </div>
+        </div>
+    }
+    <button id="uploadBtn" class="upload-status glyphicon glyphicon-plus"></button>
+    <input id="fileCtrl" type="file" capture="camera" style="display: none;"></input>
+</div>

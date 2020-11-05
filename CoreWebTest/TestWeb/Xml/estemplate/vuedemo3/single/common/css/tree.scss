@@ -1,0 +1,38 @@
+.tree-container {
+  display: flex;
+  height: 100%;
+  .tree-main {
+    min-width: 300px;
+    /deep/ .el-card__body {
+      height: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      .el-tree {
+        height: 100%;
+        overflow: auto;
+        &.el-tree_hadtop {
+          height: calc(100% - 45px);
+          margin-top: 5px;
+          &.el-tree_hadbottom {
+            height: calc(100% - 78px);
+          }
+        }
+        &.el-tree_hadbottom {
+          height: calc(100% - 33px);
+          margin-bottom: 5px;
+        }
+        .el-tree-node__label[class*="el-icon-"]::before{
+          margin-right: 2px;
+        }
+      }
+    }
+    .tree-main_bottom {
+      text-align: center;
+    }
+  }
+  .tree-detail {
+    flex: 1;
+    margin-left: 20px;
+    overflow: auto;
+  }
+}

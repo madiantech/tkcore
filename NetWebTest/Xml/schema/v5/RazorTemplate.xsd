@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../bin/AppCommon.xsd"/>
+  <xs:include schemaLocation="../bin/CommonElement.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="tk:Simple"/>
+        <xs:element ref="tk:Standard"/>
+        <xs:element ref="tk:SimpleItems"/>
+      </xs:choice>
+      <xs:attribute name="version" use="required" fixed="1.0"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="TemplateAttrGrp">
+    <xs:attribute name="List" type="xs:anyURI">
+      <xs:annotation>
+        <xs:documentation>List模式的文件名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Edit" type="xs:anyURI">
+      <xs:annotation>
+        <xs:documentation>Edit模式的文件名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Detail" type="xs:anyURI">
+      <xs:annotation>
+        <xs:documentation>Detail模式的文件名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="DetailList" type="xs:anyURI">
+      <xs:annotation>
+        <xs:documentation>DetailList模式的文件名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Tree" type="xs:anyURI">
+      <xs:annotation>
+        <xs:documentation>Tree模式的文件名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TreeDetail" type="xs:anyURI">
+      <xs:annotation>
+        <xs:documentation>TreeDetail模式的文件名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="MultiEdit" type="xs:anyURI">
+      <xs:annotation>
+        <xs:documentation>MultiEdit模式的文件名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="MultiDetail" type="xs:anyURI">
+      <xs:annotation>
+        <xs:documentation>MultiDetail模式的文件名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="MultiTreeDetail" type="xs:anyURI">
+      <xs:annotation>
+        <xs:documentation>MultiTreeDetail模式的文件名</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="NamePathGrp">
+    <xs:attribute name="UseNamePath" type="xs:boolean" default="true">
+      <xs:annotation>
+        <xs:documentation>是否使用类型的名称作为路径名，如果是Object类型，会在类型后追加Object。默认为true，如果为false，不添加目录需要自行配置</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:simpleType name="RazorTemplateStyle">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="List"/>
+      <xs:enumeration value="Edit"/>
+      <xs:enumeration value="Detail"/>
+      <xs:enumeration value="DetailList"/>
+      <xs:enumeration value="Tree"/>
+      <xs:enumeration value="TreeDetail"/>
+      <xs:enumeration value="MultiEdit"/>
+      <xs:enumeration value="MultiDetail"/>
+      <xs:enumeration value="Custom"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attributeGroup name="__tk_TemplateAttrGrp">
+    <xs:attribute name="BasePath" type="xs:anyURI" use="required">
+      <xs:annotation>
+        <xs:documentation>模板的基准路径，在xml\razortemplate的基础上进行基准扩展</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attributeGroup ref="tk:RegItem"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="__tk_TemplateItemAttrGrp">
+    <xs:attribute name="Style" type="tk:RazorTemplateStyle" use="required">
+      <xs:annotation>
+        <xs:documentation>Razor模板的类型</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsNormal" type="xs:boolean" use="required">
+      <xs:annotation>
+        <xs:documentation>true代表数据是常规的DataSet类型，false代表数据是非常规的Object类型</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TemplateFilePath" type="xs:anyURI" use="required">
+      <xs:annotation>
+        <xs:documentation>Razor模板文件的路径，以基准路径为准的相对路径</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="Standard">
+    <xs:annotation>
+      <xs:documentation>标准Razor套件模板注册类型</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TemplateItem" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Assembly" type="xs:anyURI" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>Razor模板文件如果使用了其他Assembly中的类型，需要在此注明相应的Assembly以便进行编译。以Web\Bin为基准路径</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="tk:__tk_TemplateItemAttrGrp"/>
+            <xs:attribute name="RazorTemplateType" type="xs:Name">
+              <xs:annotation>
+                <xs:documentation>Razor模板的的基类型注册名（需要用RegTypeAttribute注册）。如果不填写，将根据Style和IsNormal获取默认的类型。</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="RazorDataType" type="xs:Name">
+              <xs:annotation>
+                <xs:documentation>Razor模板使用的微数据类型的注册名（需要用RegTypeAttribute注册）。如果不填写，将根据Style和IsNormal获取默认的类型。</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attributeGroup ref="tk:__tk_TemplateAttrGrp"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Simple">
+    <xs:annotation>
+      <xs:documentation>简单Razor套件模板配置类型，只需要配置对应的模板名称，其他按照默认值处理</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Normal">
+          <xs:annotation>
+            <xs:documentation>数据为DataSet的模板文件配置</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attributeGroup ref="tk:NamePathGrp"/>
+            <xs:attributeGroup ref="tk:TemplateAttrGrp"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Object" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>数据为Object的模板文件配置</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attributeGroup ref="tk:NamePathGrp"/>
+            <xs:attributeGroup ref="tk:TemplateAttrGrp"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Custom" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>自定义模板文件的配置</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:anyURI">
+                <xs:attributeGroup ref="tk:NamePathGrp"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attributeGroup ref="tk:__tk_TemplateAttrGrp"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SimpleItems">
+    <xs:annotation>
+      <xs:documentation>简单Razor套件模板配置类型，只需要配置对应的模板名称，其他按照默认值处理</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TemplateItem" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attributeGroup ref="tk:__tk_TemplateItemAttrGrp"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attributeGroup ref="tk:__tk_TemplateAttrGrp"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

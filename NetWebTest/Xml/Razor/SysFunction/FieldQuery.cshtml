@@ -1,0 +1,14 @@
+﻿@inherits YJC.Toolkit.Razor.NormalMultiEditTemplate
+@using YJC.Toolkit.Web;
+@using YJC.Toolkit.Sys;
+@{ 
+    short display = ObjectExtension.Value<short>(Model.Row["Query"]);
+    string checkString = display == 1 ? "checked" : string.Empty;
+}
+<td>
+    <div class="form-group mb1">
+        <span class="tk-control db">
+            <input type="checkbox" class="vam" data-uncheck-value="0" name="Query" value="1" @checkString>
+        </span>
+    </div>
+</td>

@@ -1,0 +1,13 @@
+{
+  "solution": {
+    "path": "Core.Toolkit5.5.sln",
+    "projects": [
+      "User\\YJC.Toolkit.LogOn\\YJC.Toolkit.LogOn.csproj",
+      "User\\YJC.Toolkit.SimpleRight\\YJC.Toolkit.SimpleRight.csproj",
+      "User\\YJC.Toolkit.SimpleUser.Data.Core\\YJC.Toolkit.SimpleUser.Data.Core.csproj",
+      "User\\YJC.Toolkit.SimpleUser.Data\\YJC.Toolkit.SimpleUser.Data.csproj",
+      "CoreTest\\SchemaPage\\SchemaPage.csproj",
+      "Workflow\\YJC.Toolkit.UserIntf\\YJC.Toolkit.UserIntf.csproj"
+    ]
+  }
+}

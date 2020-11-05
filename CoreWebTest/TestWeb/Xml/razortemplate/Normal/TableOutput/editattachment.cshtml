@@ -1,0 +1,77 @@
+﻿@inherits YJC.Toolkit.Razor.MultiEditTemplatePage<TModel>
+@using System.Data;
+@using System.Linq;
+@using System.Text;
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    IMultiEditModel model = (IMultiEditModel)Model;
+    NormalMultiEditData pageData = ViewBag.PageData;
+    INormalTableData tableData = ViewBag.MetaData;
+    IEnumerable<Tk5FieldInfoEx> hiddenFields = tableData.HiddenList;
+    var providers = model.CreateDataRowsProvider(tableData);
+    Tk5FieldInfoEx uploadField = (from field in tableData.DataList
+                                  where field.Upload != null
+                                  select field).FirstOrDefault();
+    var upload = uploadField.AssertUpload();
+    IUploadProcessor2 processor = upload.CreateUploadProcessor2();
+    var attrBuilder = CreateUploadAttribute(upload, processor);
+    int maxSize = upload.MaxSize;
+    if (maxSize == 0)
+    {
+        maxSize = 20 * 1024 * 1024;
+    }
+    IFieldValueProvider emptyProvider = model.CreateEmptyProvider();
+    (bool IsMultiple, int dummy) customData = ViewBag.CustomData;
+    string multiple = customData.IsMultiple ? "multiple" : string.Empty;
+}
+@functions
+{
+    HtmlAttributeBuilder CreateUploadAttribute(Tk5UploadConfig upload, IUploadProcessor2 processor)
+    {
+        HtmlAttributeBuilder builder = new HtmlAttributeBuilder();
+        builder.Add("data-fileSize", upload.SizeField);
+        builder.Add("data-serverPath", upload.ServerPathField);
+        builder.Add("data-contentType", upload.MimeTypeField);
+        if (processor is IUploadExtension extension)
+        {
+            string uploadUrl = extension.UploadUrl;
+            if (!string.IsNullOrEmpty(uploadUrl))
+                builder.Add("data-url", uploadUrl);
+        }
+        return builder;
+    }
+}
+<div class="clearfix upload-content" id="@tableData.TableName">
+    @foreach (var provider in providers)
+    {
+        <div class="upload-status-new table-row">
+            @foreach (var field in hiddenFields)
+            {
+                @Raw(RenderHidden(provider, field, false))
+            }
+            <div data-control="Upload1" @Raw(attrBuilder.CreateAttribute()) name="@uploadField.NickName" data-value="@(processor.CreateValue(upload, provider)?.ToJson())">
+                <button type="button" class="file-remove btn btn-danger btn-xs glyphicon glyphicon-remove"></button>
+            </div>
+        </div>
+    }
+    <button name="uploadBtn" class="upload-status-new glyphicon glyphicon-plus"></button>
+    <div temp class="upload-status-new table-row" style="display:none;">
+        @foreach (var field in hiddenFields)
+        {
+            @Raw(RenderHidden(emptyProvider, field, false))
+        }
+        <div data-control="" @Raw(attrBuilder.CreateAttribute()) name="@(uploadField.NickName)" data-value="">
+            <a class="text-center">
+                <i class="file-icon icon-spinner icon-spin mr5 ml5"></i>
+                <p>正在上传……</p>
+            </a>
+        </div>
+    </div>
+    <input name="fileCtrl" @Raw(attrBuilder.CreateAttribute()) type="file" capture="camera" @multiple style="display: none;" data-maxSize="@maxSize" />
+</div>

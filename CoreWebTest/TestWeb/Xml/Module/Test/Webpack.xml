@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>抽奖活动</tk:Content>
+    </tk:Title>
+    <tk:Source>
+      <tk:RegNameSource>Webpack</tk:RegNameSource>
+    </tk:Source>
+  </tk:Module>
+</tk:Toolkit>

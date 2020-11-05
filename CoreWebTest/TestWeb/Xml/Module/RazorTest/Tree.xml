@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>测试用户</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:SingleXmlMetaData DataXml="UserManager/Function.xml" DisableAutoDetailLink="true"/>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:CompositeSource>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="CVue"/>
+          <VueFrameSource Model="SunVueDemo" Template="SingleTree"/>
+        </tk:Item>
+        <!--        <tk:Item>
+          <tk:Condition SearchType="Style" Style="C"/>
+          
+        </tk:Item>
+-->
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="CDetailVue"/>
+          <DetailOperatorSource>
+            <tk:Operators>
+              <tk:SimpleDetailOperators/>
+            </tk:Operators>
+          </DetailOperatorSource>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="CInsertVue CUpdateVue CIndexVue"/>
+          <tk:EmptyObjectSource UseCallerInfo="true"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="True"/>
+          <tk:SingleDbTreeSource>
+            <tk:Resolver>
+              <tk:TreeMetaDataResolver AutoUpdateKey="true">
+                <tk:Scheme>
+                  <tk:Tk5DataXml FileName="UserManager/Function.xml"/>
+                </tk:Scheme>
+              </tk:TreeMetaDataResolver>
+            </tk:Resolver>
+          </tk:SingleDbTreeSource>
+        </tk:Item>
+      </tk:CompositeSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:CompositePageMaker>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="CVue"/>
+          <tk:FreeRazorPageMaker FileName="RazorTest/testpart1.cshtml" UseTemplate="false"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style Post" Style="Insert Update" IsPost="true"/>
+          <tk:RazorModuleTemplatePageMaker ModuleTemplate="SingleTree"/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="Delete"/>
+          <tk:PostPageMaker DestUrl="Custom">
+            <tk:CustomUrl>ListRefresh</tk:CustomUrl>
+          </tk:PostPageMaker>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="List"/>
+          <tk:JsonObjectPageMaker/>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="CMoveUpDown CMoveNode"/>
+          <tk:PostPageMaker DestUrl="Custom">
+            <tk:CustomUrl> </tk:CustomUrl>
+          </tk:PostPageMaker>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="True"/>
+          <tk:JsonMetaDataSetPageMaker/>
+        </tk:Item>
+      </tk:CompositePageMaker>
+    </tk:PageMaker>
+    <tk:WebPage SupportLogOn="false"/>
+  </tk:Module>
+</tk:Toolkit>

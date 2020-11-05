@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="SubItems/FieldCommon.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tk:Table"/>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" fixed="5.0"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Table">
+    <xs:annotation>
+      <xs:documentation>表定义</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TableDesc" type="tk:MultiLanguageType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>表描述</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="tk:Field" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="IdName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>表名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Field">
+    <xs:annotation>
+      <xs:documentation>字段定义</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FieldName" type="xs:ID">
+          <xs:annotation>
+            <xs:documentation>字段名</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="DisplayName" type="tk:MultiLanguageType">
+          <xs:annotation>
+            <xs:documentation>字段的显示名</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Hint" type="tk:MultiLanguageType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>字段的提示</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="tk:Control"/>
+        <xs:element name="SummaryDef" type="xs:IDREFS" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="DataType" type="tk:TkDataType" use="required">
+        <xs:annotation>
+          <xs:documentation>字段类型</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="IsEmpty" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否允许为空，默认是true</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Precision" type="xs:unsignedInt">
+        <xs:annotation>
+          <xs:documentation>浮点的精度</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="OrderNumber" type="xs:unsignedInt">
+        <xs:annotation>
+          <xs:documentation>行次</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Style">
+        <xs:annotation>
+          <xs:documentation>字段类型，默认为Data</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Title"/>
+            <xs:enumeration value="Data"/>
+            <xs:enumeration value="Sum"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Indent" type="xs:unsignedByte">
+        <xs:annotation>
+          <xs:documentation>缩进字数</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Control">
+    <xs:annotation>
+      <xs:documentation>使用的控件</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Attribute" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>新建和修改界面时，需要给Html属性加的属性对</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attribute name="Name" type="xs:Name" use="required"/>
+            <xs:attribute name="Value" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Control" type="tk:ControlType" use="required">
+        <xs:annotation>
+          <xs:documentation>控件类型</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Order" type="xs:unsignedInt" use="required">
+        <xs:annotation>
+          <xs:documentation>顺序</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="SYS_ORGANIZATION" NameField="Name">
+    <tk:TableDesc>
+      <tk:Content>组织机构表</tk:Content>
+    </tk:TableDesc>
+    <tk:FakeDeleteInfo FieldName="Active" Value="0"/>
+    <tk:Tree/>
+    <tk:Field DataType="string" IsKey="true" IsEmpty="false">
+      <tk:FieldName>ORG_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>机构ID</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>机构名称</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>100</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="20" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_CODE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>机构代码</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="30" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_CITY</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>地区</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>6</tk:Length>
+      <tk:EasySearch RegName="SX"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="40" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_LEVEL</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>机构级别</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>2</tk:Length>
+      <tk:CodeTable RegName="CD_ORG_LEVEL"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Combo" Order="50" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_LAYER</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>层次</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="60" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_PARENT_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>上级机构</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:EasySearch RegName="ORG"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Label" Order="70" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>ORG_IS_LEAF</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>是否是叶节点</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="CheckBox" Order="80" DefaultShow="None"/>
+      <tk:Extension CheckValue="1" UnCheckValue="0"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_MANAGER</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>负责人</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="90" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_MANAGER_PHONE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>负责人电话</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="100" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_ADDRESS</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>地址</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="110" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_BILL_ADDRESS</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>Bill地址</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="120" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_POST_CODE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>邮政编码</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>10</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="130" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_TELEPHONE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>公司电话</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>50</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="140" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_UNITE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>合并机构</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="150" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>ORG_ACTIVE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>是否注销</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="160" DefaultShow="All"/>
+      <tk:Extension CheckValue="1" UnCheckValue="0"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_NOTE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备注</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>500</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="170" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_CREATE_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>创建人</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:EasySearch RegName="USER"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="180" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime">
+      <tk:FieldName>ORG_CREATE_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>创建时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="190" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_UPDATE_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>更新人</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>64</tk:Length>
+      <tk:EasySearch RegName="USER"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="200" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="DateTime">
+      <tk:FieldName>ORG_UPDATE_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>更新时间</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="210" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_UNUSED1</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用1</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>200</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="220" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>ORG_UNUSED2</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用2</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>200</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="230" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>ORG_UNUSED3</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用3</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="240" DefaultShow="None"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>ORG_UNUSED4</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>备用4</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="250" DefaultShow="None"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

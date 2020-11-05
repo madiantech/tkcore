@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0R" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.qdocuments.net ResourceDataXml.xsd">
+  <tk:Table TableName="SYS_ATTACHMENT">
+    <tk:Field DataType="int" IsKey="true">
+      <tk:FieldName>SA_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>附件ID</tk:Content>
+      </tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>SA_ORIGINAL_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>名称</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>SA_SERVER_PATH</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>路径</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>SA_SIZE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>大小</tk:Content>
+      </tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>SA_CONTENT_TYPE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>类型</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+    </tk:Field>
+    <tk:Field DataType="blob">
+      <tk:FieldName>SA_CONTENT</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>内容</tk:Content>
+      </tk:DisplayName>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

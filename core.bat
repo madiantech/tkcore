@@ -1,0 +1,1 @@
+nant -buildfile:core.build

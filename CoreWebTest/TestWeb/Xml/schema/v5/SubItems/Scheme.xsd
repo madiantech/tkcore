@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="Common.xsd"/>
+  <xs:complexType name="TableSchemeType">
+    <xs:choice>
+      <xs:element ref="tk:TypeTableScheme"/>
+      <xs:element ref="tk:StandardCodeTableScheme"/>
+      <xs:element ref="tk:Tk5DataXml"/>
+      <xs:element ref="tk:DbTableScheme"/>
+      <xs:element ref="tk:DbCustomTable"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="TypeTableScheme">
+    <xs:annotation>
+      <xs:documentation>从标记TypeSchemeAttribute的类型中提取获得相应的单表Scheme</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="TypeRegName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>类型的注册名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StandardCodeTableScheme">
+    <xs:annotation>
+      <xs:documentation>获取标准代码表的单表Scheme</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="TableName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>代码表的表名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Tk5DataXml">
+    <xs:annotation>
+      <xs:documentation>根据Tk5的DataXml获取得到的单表Scheme</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="FileName" type="xs:anyURI" use="required">
+        <xs:annotation>
+          <xs:documentation>DataXml的文件名，以Xml\Data为基准</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="TableName" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>如果配置将重载DataXml文件中的表名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DbTableScheme">
+    <xs:annotation>
+      <xs:documentation>从数据库提取表信息得到的单表Scheme</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="tk:__tk_ContextGroup"/>
+      <xs:attribute name="TableName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>数据表名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="KeyFields" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>数据表的主键字段，多个以,隔开。如果不配置，将尝试通过数据库获取（如果数据库不支持将报错）</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Fields" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>数据表的字段名，可以填*，多个字段可以以,隔开</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DbCustomTable">
+    <xs:annotation>
+      <xs:documentation>通过SYS_CUSTOM_TABLE表的定义获取单表Scheme，该配置只有包含了YJC.Toolkit.SysFunction.dll才有效</xs:documentation>
+      <xs:documentation>!</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="tk:__tk_ContextGroup"/>
+      <xs:attribute name="TableName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>在SYS_CUSTOM_TABLE中CT_TABLE_NAME的表名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="TableSchemeExType">
+    <xs:choice>
+      <xs:element ref="tk:Tk5DataXml"/>
+      <xs:element ref="tk:TypeTableScheme"/>
+      <xs:element ref="tk:UnionScheme"/>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="UnionScheme">
+    <xs:annotation>
+      <xs:documentation>将多个表的Scheme合并成一个表的Scheme，适用于定义类似于视图的Scheme</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TableDesc" type="tk:MultiLanguageType">
+          <xs:annotation>
+            <xs:documentation>表描述，支持多语言结构</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Item" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>需要进行合并的Scheme</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Scheme" type="tk:TableSchemeExType">
+                <xs:annotation>
+                  <xs:documentation>原有的TableScheme</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="ExceptField" type="xs:Name" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>需要排除的字段</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="NickNameAlias" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>昵称的重命名</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="SrcNickName" type="xs:Name" use="required">
+                    <xs:annotation>
+                      <xs:documentation>原有TableScheme定义的昵称</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="NewNickName" type="xs:Name" use="required">
+                    <xs:annotation>
+                      <xs:documentation>在新的Scheme中的昵称</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="TableName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>新的表名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

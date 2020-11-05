@@ -1,0 +1,29 @@
+#util-calendar { font-size:12px; font-family:tahoma, Arial, Helvetica, simsun, sans-serif; overflow:hidden; zoom:1; background-color:#fff; -moz-box-shadow:3px 4px 5px #ccc; -webkit-box-shadow:3px 4px 5px #ccc; box-shadow:3px 4px 5px #ccc; margin:0; padding:0; position:absolute; z-index:10; }
+.month-col1 { width:187px; }
+.month-col2 { width:374px; }
+#util-calendar .date-list{float:left; width:187px; height:202px; overflow:hidden; }
+#util-calendar .date-list label{line-height:22px; height:22px; display:block; text-align:center; font-size:12px; font-weight:bold;}
+#util-calendar .date-list dl { margin:6px 6px 0;width:175px;}
+#util-calendar .datelist1 dl { margin-left:0; border-left:solid 1px #ccc; padding-left:5px; }
+#util-calendar .date-list dt { float:left; width:25px; height:22px; background:#ececec; font-weight:normal; color:#666; font-size:12px; line-height:20px; text-align:center; }
+#util-calendar .date-list .week0,.date-list .week6{color:#ff9900;}
+#util-calendar .date-list dd { clear:both; padding-top:1px; display:inline-block; margin:0;}
+#util-calendar .date-list dd a { font-size:11px; text-align:center; height:24px; width:22px; line-height:24px; float:left; padding:0 2px 1px 1px;  color:#272E7E; font-weight:bold; text-decoration:none!important; cursor:pointer; }
+#util-calendar .date-list dd a:hover { background:#272E7E;color:#fff; }
+#util-calendar .date-list dd .today{border:1px solid #ffe4a9; background:#fff5d1;width:20px; height:22px; line-height:22px;}
+#util-calendar .date-list dd .current{background:#272E7E;color:#fff;}
+#util-calendar .date-list dd .foretime{color:#aaa;font-size:11px; text-align:center; height:24px; width:22px; line-height:24px; float:left; padding:0 2px 1px 1px; font-weight:bold; text-decoration:none!important;}
+#util-calendar .date-list dd .fu{color:#aaa;cursor:inherit;}
+#util-calendar .date-action { height:22px; position:absolute; top:0px; left:0; _position:relative; _top:0; _left:0; _margin-top:-207px; }
+.month-col1 .date-action { width:187px; }
+.month-col2 .date-action { width:374px; }
+#util-calendar .lastmonth,
+#util-calendar .nextmonth,
+#util-calendar .lastyear,
+#util-calendar .nextyear { float:left; display:block; width:20px; font-weight:bold; height:22px; overflow:hidden; line-height:22px; cursor:pointer; text-align:center; }
+#util-calendar .lastmonth:hover,
+#util-calendar .nextmonth:hover,
+#util-calendar .lastyear:hover,
+#util-calendar .nextyear:hover{ color:#f90; }
+#util-calendar .nextyear,
+#util-calendar .nextmonth { float:right; }

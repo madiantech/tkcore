@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="Condition">
+    <tk:TableDesc>
+      <tk:Content>指数计算</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="string" IsKey="true" PlaceHolder="false">
+      <tk:FieldName>Index</tk:FieldName>
+      <tk:NickName>Index</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>指数</tk:Content>
+      </tk:DisplayName>
+      <tk:CodeTable RegName="TradeMode"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Combo" Order="10" DefaultShow="All"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="string" PlaceHolder="false">
+      <tk:FieldName>Plate</tk:FieldName>
+      <tk:NickName>Plate</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>板块</tk:Content>
+      </tk:DisplayName>
+      <tk:CodeTable RegName="NumType"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Combo" Order="20" DefaultShow="All"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="string" PlaceHolder="false">
+      <tk:FieldName>COM_TRADE</tk:FieldName>
+      <tk:NickName>COM_TRADE</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>行业</tk:Content>
+      </tk:DisplayName>
+      <tk:CodeTable RegName="ImportStatus"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Combo" Order="30" DefaultShow="All"/>
+      <tk:ListDetail Search="true"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>COM_DETAIL_TRADE</tk:FieldName>
+      <tk:NickName>COM_DETAIL_TRADE</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>细分行业</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control DefaultShow="All" Order="35" Control="Text"/>
+      <tk:ListDetail Search="true" Span="true"/>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="false" PlaceHolder="false">
+      <tk:FieldName>Day</tk:FieldName>
+      <tk:NickName>Day</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>对比指标</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>30</tk:Length>
+      <tk:CodeTable RegName="AccountItem"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Combo" Order="40" DefaultShow="All"/>
+      <tk:ListDetail Search="true"/>
+      <tk:Edit>
+        <tk:DefaultValue>LR15</tk:DefaultValue>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="false" PlaceHolder="false">
+      <tk:FieldName>DateType</tk:FieldName>
+      <tk:NickName>DateType</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>数据时期</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>30</tk:Length>
+      <tk:CodeTable RegName="DateCode"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Combo" Order="50" DefaultShow="All"/>
+      <tk:ListDetail Search="true"/>
+      <tk:Edit>
+        <tk:DefaultValue>1212</tk:DefaultValue>
+      </tk:Edit>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

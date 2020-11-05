@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:simpleType name="HintPosition">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="PlaceHolder"/>
+      <xs:enumeration value="Front"/>
+      <xs:enumeration value="End"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="UpdatingType">
+    <xs:simpleContent>
+      <xs:extension base="MarcoConfigItem">
+        <xs:attribute name="UpdateKind" use="required">
+          <xs:simpleType>
+            <xs:restriction base="xs:NMTOKEN">
+              <xs:enumeration value="Insert"/>
+              <xs:enumeration value="InsUpd"/>
+              <xs:enumeration value="Update"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="FieldLayoutType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="PerUnit"/>
+      <xs:enumeration value="PerLine"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FieldKind">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Calc"/>
+      <xs:enumeration value="Data"/>
+      <xs:enumeration value="Virtual"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ControlType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Text"/>
+      <xs:enumeration value="Label"/>
+      <xs:enumeration value="Date"/>
+      <xs:enumeration value="DateTime"/>
+      <xs:enumeration value="Time"/>
+      <xs:enumeration value="Combo"/>
+      <xs:enumeration value="ListBox"/>
+      <xs:enumeration value="CheckBox"/>
+      <xs:enumeration value="Password"/>
+      <xs:enumeration value="EasySearch"/>
+      <xs:enumeration value="MultipleEasySearch"/>
+      <xs:enumeration value="CheckBoxList"/>
+      <xs:enumeration value="RichText"/>
+      <xs:enumeration value="RadioGroup"/>
+      <xs:enumeration value="Hidden"/>
+      <xs:enumeration value="TextArea"/>
+      <xs:enumeration value="Upload"/>
+      <xs:enumeration value="Custom"/>
+      <xs:enumeration value="None"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="_tk_DefaultShowAll">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="All"/>
+      <xs:enumeration value="AllNoList"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="_tk_PageStyleList">
+    <xs:list itemType="_tk_Normal_Style"/>
+  </xs:simpleType>
+  <xs:simpleType name="DefaultShowType">
+    <xs:union memberTypes="_tk_DefaultShowAll _tk_PageStyleList"/>
+  </xs:simpleType>
+  <xs:attributeGroup name="UpLoadAttributes">
+    <xs:attribute name="ServerPathField" type="xs:Name" use="required">
+      <xs:annotation>
+        <xs:documentation>存放服务器路径字段的昵称</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ContentField" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>存放内容字段的昵称</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="MimeTypeField" type="xs:Name" use="required">
+      <xs:annotation>
+        <xs:documentation>存放Mime类型字段的昵称</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="SizeField" type="xs:Name" use="required">
+      <xs:annotation>
+        <xs:documentation>存放文件大小的字段的昵称</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsView" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>是否预览，，仅当上传文件是图片类型时有效。默认为False</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="MaxSize" type="xs:unsignedInt">
+      <xs:annotation>
+        <xs:documentation>文件最大上传大小</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="FileExt">
+      <xs:annotation>
+        <xs:documentation>上传文件扩展名限制。有两种格式，如果只允许某种扩展名上传，那么直接写这种文件的扩展名，如.jpeg.gif.jpg，中间不要有间隔，需要带扩展名的"."。如果不允许某种扩展名删除，那么在[]中写不允许的扩展名，如[.exe.bat.com]</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(.\w+)*(\[(.\w+)*\])?"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+</xs:schema>

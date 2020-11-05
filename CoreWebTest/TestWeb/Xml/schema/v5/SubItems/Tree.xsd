@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="Scheme.xsd"/>
+  <xs:include schemaLocation="DataRight.xsd"/>
+  <xs:include schemaLocation="TableResolver.xsd"/>
+  <xs:complexType name="TreeConfigType">
+    <xs:choice>
+      <xs:element ref="tk:NormalDbTree"/>
+      <xs:element name="LevelTree" type="tk:LevelTreeType">
+        <xs:annotation>
+          <xs:documentation>通过编码规律定义树形结构，不足的编码留空</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Level0Tree" type="tk:LevelTreeType">
+        <xs:annotation>
+          <xs:documentation>通过编码规律定义树形结构，不足的编码补0</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="tk:ResolverTree"/>
+      <xs:element name="RegNameTree" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>根据配置的注册名实例化Tree</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any namespace="##local" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="NormalDbTree">
+    <xs:annotation>
+      <xs:documentation>常规Id，ParentId树形结构定义（需要符合数据库规范）</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tk:TableScheme"/>
+        <xs:element name="DbTree" type="tk:DbTreeType">
+          <xs:annotation>
+            <xs:documentation>数据表结构定义</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="DataRight" type="tk:DataRightType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>数据权限</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DbTreeType">
+    <xs:attribute name="IdField" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>Id字段昵称，如果不配置将是Id</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ParentIdField" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>ParentId字段昵称，如果不配置将是ParentId</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="NameField" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>Name字段昵称，如果不配置将是Name</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="LeafField" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>Leaf字段昵称，如果不配置将是IsLeaf</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="LayerField" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>Layer字段昵称，如果不配置将是Layer</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="RootId" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>根结点的值，如果不配置将是-1。支持Evaluator表达式</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="SearchType">
+      <xs:annotation>
+        <xs:documentation>根节点的搜索方式，默认根据ParentIdField和RootId结合搜索根节点。如果是Id，将使用IdField和RootId结合搜索根节点。如果是Custom，那么需要通过代码指定自己搜索根节点的方式。</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="ParentId"/>
+          <xs:enumeration value="Id"/>
+          <xs:enumeration value="Custom"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="LevelTreeType">
+    <xs:sequence>
+      <xs:element ref="tk:TableScheme"/>
+      <xs:element name="LevelTree">
+        <xs:annotation>
+          <xs:documentation>编码层级定义</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Level" type="xs:unsignedInt" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>编码层级定义，定义每级编码的长度</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="IdField" type="xs:Name">
+            <xs:annotation>
+              <xs:documentation>Id字段昵称，如果不配置将是Id</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="NameField" type="xs:Name">
+            <xs:annotation>
+              <xs:documentation>Name字段昵称，如果不配置将是Name</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TableScheme" type="tk:TableSchemeType">
+    <xs:annotation>
+      <xs:documentation>TableScheme的定义</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ResolverTree">
+    <xs:annotation>
+      <xs:documentation>通过Tk5TreeTableResolver获取Tree</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Resolver" type="tk:ResolverType">
+          <xs:annotation>
+            <xs:documentation>Resolver的配置，这里使用RegResolver或者TreeResolver比较合适</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="DataRight" type="tk:DataRightType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>数据权限</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

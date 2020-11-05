@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<tk:Table TableName="SYS_UPDATE_RECORD" NameField="FunctionName">
+		<tk:TableDesc>
+			<tk:Content>数据修改记录</tk:Content>
+		</tk:TableDesc>
+		<tk:Field DataType="int" IsKey="true" IsEmpty="false">
+			<tk:FieldName>SUR_ID</tk:FieldName>
+			<tk:NickName>Id</tk:NickName>
+			<tk:DisplayName>
+				<tk:Content>ID</tk:Content>
+			</tk:DisplayName>
+			<tk:Layout Layout="PerUnit" UnitNum="1"/>
+			<tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+		</tk:Field>
+		<tk:Field DataType="int">
+			<tk:FieldName>SUR_TENANT_ID</tk:FieldName>
+			<tk:DisplayName>
+				<tk:Content>租户ID</tk:Content>
+			</tk:DisplayName>
+			<tk:Layout Layout="PerUnit" UnitNum="1"/>
+			<tk:Control Control="Hidden" Order="20" DefaultShow="All"/>
+		</tk:Field>
+		<tk:Field DataType="string">
+			<tk:FieldName>SUR_FUNCTION_NAME</tk:FieldName>
+			<tk:DisplayName>
+				<tk:Content>功能名称</tk:Content>
+			</tk:DisplayName>
+			<tk:Layout Layout="PerUnit" UnitNum="1"/>
+			<tk:Control Control="Text" Order="30" DefaultShow="All"/>
+		</tk:Field>
+		<tk:Field DataType="string">
+			<tk:FieldName>SUR_FUNCTION_KEY</tk:FieldName>
+			<tk:DisplayName>
+				<tk:Content>功能名称</tk:Content>
+			</tk:DisplayName>
+			<tk:Layout Layout="PerUnit" UnitNum="1"/>
+			<tk:Control Control="Hidden" Order="40" DefaultShow="All"/>
+		</tk:Field>
+		<tk:Field DataType="string">
+			<tk:FieldName>SUR_TYPE</tk:FieldName>
+			<tk:DisplayName>
+				<tk:Content>操作类型</tk:Content>
+			</tk:DisplayName>
+			<tk:CodeTable RegName="DataRecordHanldType"></tk:CodeTable>
+			<tk:Control Control="Combo" Order="50" DefaultShow="All"></tk:Control>
+		</tk:Field>
+		<tk:Field DataType="string">
+			<tk:FieldName>SUR_TABLE_NAME</tk:FieldName>
+			<tk:DisplayName>
+				<tk:Content>操作的表</tk:Content>
+			</tk:DisplayName>
+			<tk:Control Control="Hidden" Order="60" DefaultShow="All"></tk:Control>
+		</tk:Field>
+		<tk:Field DataType="int">
+			<tk:FieldName>SUR_DATA_ID</tk:FieldName>
+			<tk:DisplayName>
+				<tk:Content>操作记录ID</tk:Content>
+			</tk:DisplayName>
+			<tk:Control Control="Text" Order="70" DefaultShow="All"></tk:Control>
+		</tk:Field>
+		<tk:Field DataType="string">
+			<tk:FieldName>SUR_ITEM</tk:FieldName>
+			<tk:DisplayName>
+				<tk:Content>操作项</tk:Content>
+			</tk:DisplayName>
+			<tk:Control Control="Text" Order="80" DefaultShow="All"></tk:Control>
+		</tk:Field>
+		<tk:Field DataType="text">
+			<tk:FieldName>SUR_OLD_VALUE</tk:FieldName>
+			<tk:DisplayName>
+				<tk:Content>旧值</tk:Content>
+			</tk:DisplayName>
+			<tk:Control Control="Text" Order="90" DefaultShow="All"></tk:Control>
+		</tk:Field>
+		<tk:Field DataType="text">
+			<tk:FieldName>SUR_NEW_VALUE</tk:FieldName>
+			<tk:DisplayName>
+				<tk:Content>新值</tk:Content>
+			</tk:DisplayName>
+			<tk:Control Control="Text" Order="100" DefaultShow="All"></tk:Control>
+		</tk:Field>
+		<tk:Field DataType="int">
+			<tk:FieldName>SUR_UPDATE_ID</tk:FieldName>
+			<tk:DisplayName>
+				<tk:Content>操作人</tk:Content>
+			</tk:DisplayName>
+			<tk:EasySearch RegName="USER"/>
+			<tk:Control Control="EasySearch" Order="110" DefaultShow="All"></tk:Control>
+		</tk:Field>
+		<tk:Field DataType="DateTime">
+			<tk:FieldName>SUR_UPDATE_DATE</tk:FieldName>
+			<tk:DisplayName>
+				<tk:Content>操作时间</tk:Content>
+			</tk:DisplayName>
+			<tk:Control Control="DateTime" Order="120" DefaultShow="All"></tk:Control>
+		</tk:Field>
+	</tk:Table>
+</tk:Toolkit>

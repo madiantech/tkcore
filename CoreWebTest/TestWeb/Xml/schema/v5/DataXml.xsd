@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="SubItems/DataXmlCommon.xsd"/>
+  <xs:include schemaLocation="SubItems/UploadProcessor.xsd"/>
+  <xs:include schemaLocation="SubItems/Tree.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:annotation>
+      <xs:documentation>Tk5关于表的元数据表述，以该文件作为UI和数据操作的基准文件（当然在此基础上，可以进行重载）。原则上，一张数据表对应一个DataXml文件。该文件必须在Xml/Data目录下。</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tk:Table">
+          <xs:annotation>
+            <xs:documentation>数据表的定义</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" fixed="5.0">
+        <xs:annotation>
+          <xs:documentation>版本号</xs:documentation>
+          <xs:documentation>!</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Table">
+    <xs:annotation>
+      <xs:documentation>表定义</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TableDesc" type="tk:MultiLanguageType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>表描述，支持多语言结构</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="tk:FakeDeleteInfo" minOccurs="0"/>
+        <xs:element name="Tree" type="tk:DbTreeType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>树结构定义（如果表是遵循数据库定义规范定义的树结构表，需要定义此节点）</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="tk:Field" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="TableName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>表名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="NameField" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>显示名称字段的昵称</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FakeDeleteInfo" type="tk:FakeDeleteType">
+    <xs:annotation>
+      <xs:documentation>假删除字段定义（如果业务逻辑规定该表删除都是假删需要定义此节点）</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Field">
+    <xs:annotation>
+      <xs:documentation>字段定义</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FieldName" type="xs:Name">
+          <xs:annotation>
+            <xs:documentation>字段名，保证在该表中唯一</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="NickName" type="xs:Name" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>字段的昵称，保证在该表中唯一</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="DisplayName" type="tk:MultiLanguageType">
+          <xs:annotation>
+            <xs:documentation>字段的显示名，支持多语言结构</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Hint" type="tk:HintDataType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>字段的提示，支持多语言结构</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Length" type="xs:unsignedInt" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>如果是字符串或者Binary类型时，字段的长度</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:choice minOccurs="0">
+          <xs:element ref="tk:CodeTable"/>
+          <xs:element ref="tk:EasySearch"/>
+        </xs:choice>
+        <xs:element ref="tk:Layout" minOccurs="0"/>
+        <xs:element ref="tk:Control"/>
+        <xs:element name="Constraints" type="tk:ConstraintsType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>字段的校验，该节点为动态结点，但由于使用的All节点，无法配置xs:any，因此如有必要可以修改相应的schema定义</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="tk:ListDetail" minOccurs="0"/>
+        <xs:element ref="tk:Edit" minOccurs="0"/>
+        <xs:element ref="tk:Extension" minOccurs="0"/>
+        <xs:element ref="tk:Upload" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="DataType" type="tk:TkDataType" use="required">
+        <xs:annotation>
+          <xs:documentation>字段类型</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="IsKey" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否是主键，默认为false</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="IsAutoInc" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否是自增字段，默认为false</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="IsEmpty" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>是否允许为空，默认是true</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Precision" type="xs:unsignedInt">
+        <xs:annotation>
+          <xs:documentation>浮点的精度</xs:documentation>
+          <xs:documentation>!</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Kind" type="tk:FieldKind">
+        <xs:annotation>
+          <xs:documentation>字段类型，默认为Data，表示是数据表中物理字段。如果是Calc，那么需要配置Extension节点下的Expression属性，Expression的语法参考DataColumn类的Expression属性。如果是Virtual，那么将创建一个虚拟字段，但是该字段的填充需要自行靠代码完成</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="PlaceHolder" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>当为true时如果没有Hint时，自动将DisplayName设置为PlaceHolder。默认为True</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Layout" type="tk:LayoutType">
+    <xs:annotation>
+      <xs:documentation>字段的布局</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Control">
+    <xs:annotation>
+      <xs:documentation>使用的控件</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Page" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>在某个页面可以按照此配置展示，而不是默认的控件</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attribute name="Style" type="tk:PageStyleIntf" use="required">
+              <xs:annotation>
+                <xs:documentation>指定的页面类型</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="Control" type="tk:ControlType" use="required">
+              <xs:annotation>
+                <xs:documentation>需要重载的控件类型</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="Order" type="xs:unsignedInt">
+              <xs:annotation>
+                <xs:documentation>如果配置，将重载Order</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="CustomControl" type="xs:Name">
+              <xs:annotation>
+                <xs:documentation>如果配置，将重载自定义控件</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="CustomControlData" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>如果配置，将重载自定义控件的附加数据</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Control" type="tk:ControlType" use="required">
+        <xs:annotation>
+          <xs:documentation>控件类型</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Order" type="xs:unsignedInt" use="required">
+        <xs:annotation>
+          <xs:documentation>顺序，字段显示将按照该值由小到大排列</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="DefaultShow" type="tk:DefaultShowType" use="required">
+        <xs:annotation>
+          <xs:documentation>默认需要在哪些页面展示</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="CustomControl" type="xs:Name">
+        <xs:annotation>
+          <xs:documentation>自定义控件的名称</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="CustomControlData" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>自定义控件的附加数据</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListDetail" type="tk:ListDetailType">
+    <xs:annotation>
+      <xs:documentation>列表和详细页面需用的特性</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Edit" type="tk:EditType">
+    <xs:annotation>
+      <xs:documentation>新建和修改页面需用的特性</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Extension" type="tk:FieldExtensionType">
+    <xs:annotation>
+      <xs:documentation>扩展特性</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Upload">
+    <xs:annotation>
+      <xs:documentation>上传配置，需要按照规范定义参与上传的字段，同时指定UploadProcessor·，对上传文件进行相关处理（如存入数据库，或者上传到阿里云）</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:UploadProcessorType">
+          <xs:attributeGroup ref="tk:UpLoadAttributes"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EasySearch">
+    <xs:annotation>
+      <xs:documentation>EasySearch配置，如果控件是EasySearch，MultipleEasySearch需要配置该节点</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:DecoderType">
+          <xs:sequence>
+            <xs:element name="RefValue" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>EasySearch的级联（即该字段的EasySearch需要参考其他EasySearch或者Combo字段进行进一步过滤。如选择了部门后，再选择的人员需要限定在该部门中）</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:attribute name="Field" type="xs:Name" use="required">
+                  <xs:annotation>
+                    <xs:documentation>自身表中要关联字段</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="RefField" type="xs:Name" use="required">
+                  <xs:annotation>
+                    <xs:documentation>要参照关联的字段，需要配置字段的昵称</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CodeTable" type="tk:DecoderType">
+    <xs:annotation>
+      <xs:documentation>代码表配置，如果控件是Combo，RadioGroup，CheckBoxList需要配置该节点</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

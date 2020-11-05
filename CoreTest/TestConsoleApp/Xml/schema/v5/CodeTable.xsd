@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../bin/CommonType.xsd"/>
+  <xs:include schemaLocation="SubItems/Cache.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:group ref="tk:CodeTableGroup" maxOccurs="unbounded"/>
+      <xs:attribute name="version" type="xs:string" use="required" fixed="5.0"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="CodeTableGroup">
+    <xs:choice>
+      <xs:element ref="tk:StandardCodeTable">
+        <xs:annotation>
+          <xs:documentation>标准代码表，含有CODE_VALUE等五个字段。（CD_开始的表一般无需定义）</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="tk:Tk5CodeTable"/>
+      <xs:element ref="tk:SqlCodeTable"/>
+      <xs:any namespace="##other" processContents="lax" maxOccurs="unbounded"/>
+    </xs:choice>
+  </xs:group>
+  <xs:attributeGroup name="CodeTableAttrGroup">
+    <xs:attribute name="Context" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>数据库连接的名称，不写使用调用的DbContext</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="OrderBy" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>排序，如果填写需要加上order by</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="NameExpression" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>显示的名称，默认是{Name}。可以通过修改此定义修改显示。用{字段名}即可</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="StandardCodeTable">
+    <xs:annotation>
+      <xs:documentation>标准代码表，还有CODE_VALUE等五个字段。（CD_开始的表一般无需定义）</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FilterSql" type="tk:MarcoConfigItem" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>过滤Sql</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="TableName" type="xs:Name" use="required">
+        <xs:annotation>
+          <xs:documentation>表名</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attributeGroup ref="tk:AuthorAttrGroup"/>
+      <xs:attributeGroup ref="tk:CodeTableAttrGroup"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Tk5CodeTable">
+    <xs:annotation>
+      <xs:documentation>支持Tk5的DataXml的代码表配置</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FilterSql" type="tk:MarcoConfigItem" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>过滤Sql</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="CacheDependency" type="tk:DependencyType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>缓存依赖</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="DataXml" type="xs:anyURI" use="required">
+        <xs:annotation>
+          <xs:documentation>Toolkit 5格式的DataXml，要求支持NameField</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attributeGroup ref="tk:RegItem"/>
+      <xs:attributeGroup ref="tk:CodeTableAttrGroup"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SqlCodeTable">
+    <xs:annotation>
+      <xs:documentation>由一条SQL构成的CodeTable</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Sql" type="tk:MarcoConfigItem">
+          <xs:annotation>
+            <xs:documentation>单条SQL语句，选出的列中必须有Value和Name列，支持宏查询</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="CacheDependency" type="tk:DependencyType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>缓存依赖</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attributeGroup ref="tk:RegItem"/>
+      <xs:attribute name="Context">
+        <xs:annotation>
+          <xs:documentation>数据库连接的名称，不写使用调用的DbContext</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

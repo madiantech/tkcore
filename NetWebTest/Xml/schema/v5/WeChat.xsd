@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by cjy (baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="WeixinItems/WeixinMessage.xsd"/>
+  <xs:simpleType name="AESKey">
+    <xs:annotation>
+      <xs:documentation>回调模式下配置的消息体加密</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="43" fixed="true"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="WeChat">
+          <xs:complexType>
+            <xs:attribute name="AppId" type="xs:string" use="required">
+              <xs:annotation>
+                <xs:documentation>微信公众号分配的AppId</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="AppSecret">
+              <xs:annotation>
+                <xs:documentation>开发者凭据，在权限管理组中寻找</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="Token" type="xs:string" use="required">
+              <xs:annotation>
+                <xs:documentation>微信公众号设置的Token</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="OpenId" type="xs:string" use="required">
+              <xs:annotation>
+                <xs:documentation>微信公众号的OpenId</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="EncodingAESKey" type="tk:AESKey">
+              <xs:annotation>
+                <xs:documentation>公众号使用加密模式时，需要配置相应的AESKey</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="MessageMode">
+              <xs:annotation>
+                <xs:documentation>公众号消息模式</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="Normal"/>
+                  <xs:enumeration value="Mixture"/>
+                  <xs:enumeration value="Secure"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" fixed="5.0"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

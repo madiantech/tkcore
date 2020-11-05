@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="../bin/CommonElement.xsd"/>
+  <xs:include schemaLocation="../bin/CommonType.xsd"/>
+  <xs:element name="Toolkit">
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded">
+        <xs:element name="CodeData">
+          <xs:annotation>
+            <xs:documentation>对于相对固定，比较简单的代码表，可以用Xml来配置来实现。免去访问数据库的烦恼</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="tk:Row" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>一条代码记录</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="tk:RegItem"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="required" fixed="5.0"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Row">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Value" type="xs:token">
+          <xs:annotation>
+            <xs:documentation>代码值，要求在此配置中保证唯一</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Name" type="tk:MultiLanguageType">
+          <xs:annotation>
+            <xs:documentation>代码显示的名称，支持多语言配置</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

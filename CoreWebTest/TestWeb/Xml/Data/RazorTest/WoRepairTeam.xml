@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="CD_WO_REPAIR_TEAM">
+    <tk:TableDesc>
+      <tk:Content>维修班组（工单）</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="int" IsKey="true" IsEmpty="false">
+      <tk:FieldName>CODE_VALUE</tk:FieldName>
+      <tk:NickName>Value</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>CODE_VALUE</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+      <tk:ListDetail>
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>CODE_NAME</tk:FieldName>
+      <tk:NickName>Name</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>名称</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="20" DefaultShow="All"/>
+      <!--<tk:ListDetail>
+        <tk:ListDisplay>
+          <tk:ListRefDisplay Mode="Dialog">
+            <tk:NormalDisplay/>
+          </tk:ListRefDisplay>
+        </tk:ListDisplay>
+      </tk:ListDetail>-->
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>CODE_TENANT_ID</tk:FieldName>
+      <tk:NickName>TenantId</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>租户Id</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="30" DefaultShow="All"/>
+      <tk:ListDetail>
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>CODE_SORT</tk:FieldName>
+      <tk:NickName>Sort</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>排序</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="40" DefaultShow="All"/>
+      <tk:ListDetail>
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:DefaultValue>0</tk:DefaultValue>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>CODE_PY</tk:FieldName>
+      <tk:NickName>Py</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>拼音</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>255</tk:Length>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="50" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>CODE_DEL</tk:FieldName>
+      <tk:NickName>Del</tk:NickName>
+      <tk:DisplayName>
+        <tk:Content>是否假删</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="CheckBox" Order="60" DefaultShow="All"/>
+      <tk:ListDetail>
+        <tk:ListDisplay>
+          <tk:AutoDisplay/>
+        </tk:ListDisplay>
+        <tk:DetailDisplay>
+          <tk:AutoDisplay/>
+        </tk:DetailDisplay>
+      </tk:ListDetail>
+      <tk:Edit>
+        <tk:Display>
+          <tk:AutoDisplay Style="Edit"/>
+        </tk:Display>
+      </tk:Edit>
+      <tk:Extension CheckValue="1" UnCheckValue="0"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<tk:Table TableName="WO_WORK_ORDERS_ATTACHMENT">
+		<tk:TableDesc>
+			<tk:Content>工单附件表</tk:Content>
+		</tk:TableDesc>
+		<tk:Field DataType="int" IsKey="true" IsEmpty="false">
+			<tk:FieldName>OA_ID</tk:FieldName>
+			<tk:NickName>Id</tk:NickName>
+			<tk:DisplayName>
+				<tk:Content>Id</tk:Content>
+			</tk:DisplayName>
+			<tk:Layout Layout="PerUnit" UnitNum="1"/>
+			<tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+			<tk:ListDetail>
+				<tk:ListDisplay>
+					<tk:AutoDisplay/>
+				</tk:ListDisplay>
+				<tk:DetailDisplay>
+					<tk:AutoDisplay/>
+				</tk:DetailDisplay>
+			</tk:ListDetail>
+			<tk:Edit>
+				<tk:Display>
+					<tk:AutoDisplay Style="Edit"/>
+				</tk:Display>
+			</tk:Edit>
+		</tk:Field>
+		<tk:Field DataType="int">
+			<tk:FieldName>OA_WO_ID</tk:FieldName>
+			<tk:NickName>WoId</tk:NickName>
+			<tk:DisplayName>
+				<tk:Content>工单Id</tk:Content>
+			</tk:DisplayName>
+			<tk:Layout Layout="PerUnit" UnitNum="1"/>
+			<tk:Control Control="Hidden" Order="20" DefaultShow="All"/>
+			<tk:ListDetail>
+				<tk:ListDisplay>
+					<tk:AutoDisplay/>
+				</tk:ListDisplay>
+				<tk:DetailDisplay>
+					<tk:AutoDisplay/>
+				</tk:DetailDisplay>
+			</tk:ListDetail>
+			<tk:Edit>
+				<tk:Display>
+					<tk:AutoDisplay Style="Edit"/>
+				</tk:Display>
+			</tk:Edit>
+		</tk:Field>
+		<tk:Field DataType="string">
+			<tk:FieldName>OA_FILE_NAME</tk:FieldName>
+			<tk:NickName>FileName</tk:NickName>
+			<tk:DisplayName>
+				<tk:Content>文件名</tk:Content>
+			</tk:DisplayName>
+			<tk:Length>100</tk:Length>
+			<tk:Layout Layout="PerUnit" UnitNum="1"/>
+			<tk:Control Control="Upload" Order="30" DefaultShow="All"/>
+			<tk:ListDetail>
+				<tk:ListDisplay>
+					<tk:AutoDisplay/>
+				</tk:ListDisplay>
+				<tk:DetailDisplay>
+					<tk:AutoDisplay/>
+				</tk:DetailDisplay>
+			</tk:ListDetail>
+			<tk:Edit>
+				<tk:Display>
+					<tk:AutoDisplay Style="Edit"/>
+				</tk:Display>
+			</tk:Edit>
+			<tk:Upload ServerPathField="FilePath" MimeTypeField="ContentType" SizeField="Size" ContentField="Content">
+				<tk:DbUploadProcessor/>
+			</tk:Upload>
+		</tk:Field>
+		<tk:Field DataType="string">
+			<tk:FieldName>OA_FILE_PATH</tk:FieldName>
+			<tk:NickName>FilePath</tk:NickName>
+			<tk:DisplayName>
+				<tk:Content>文件路径</tk:Content>
+			</tk:DisplayName>
+			<tk:Length>255</tk:Length>
+			<tk:Layout Layout="PerUnit" UnitNum="1"/>
+			<tk:Control Control="Text" Order="40" DefaultShow="None"/>
+			<tk:ListDetail>
+				<tk:ListDisplay>
+					<tk:AutoDisplay/>
+				</tk:ListDisplay>
+				<tk:DetailDisplay>
+					<tk:AutoDisplay/>
+				</tk:DetailDisplay>
+			</tk:ListDetail>
+			<tk:Edit>
+				<tk:Display>
+					<tk:AutoDisplay Style="Edit"/>
+				</tk:Display>
+			</tk:Edit>
+		</tk:Field>
+		<tk:Field DataType="string">
+			<tk:FieldName>OA_CONTENT_TYPE</tk:FieldName>
+			<tk:NickName>ContentType</tk:NickName>
+			<tk:DisplayName>
+				<tk:Content>文件类型</tk:Content>
+			</tk:DisplayName>
+			<tk:Length>100</tk:Length>
+			<tk:Layout Layout="PerUnit" UnitNum="1"/>
+			<tk:Control Control="Text" Order="50" DefaultShow="None"/>
+			<tk:ListDetail>
+				<tk:ListDisplay>
+					<tk:AutoDisplay/>
+				</tk:ListDisplay>
+				<tk:DetailDisplay>
+					<tk:AutoDisplay/>
+				</tk:DetailDisplay>
+			</tk:ListDetail>
+			<tk:Edit>
+				<tk:Display>
+					<tk:AutoDisplay Style="Edit"/>
+				</tk:Display>
+			</tk:Edit>
+		</tk:Field>
+		<tk:Field DataType="int">
+			<tk:FieldName>OA_SIZE</tk:FieldName>
+			<tk:NickName>Size</tk:NickName>
+			<tk:DisplayName>
+				<tk:Content>文件大小</tk:Content>
+			</tk:DisplayName>
+			<tk:Layout Layout="PerUnit" UnitNum="1"/>
+			<tk:Control Control="Text" Order="60" DefaultShow="None"/>
+			<tk:ListDetail>
+				<tk:ListDisplay>
+					<tk:AutoDisplay/>
+				</tk:ListDisplay>
+				<tk:DetailDisplay>
+					<tk:AutoDisplay/>
+				</tk:DetailDisplay>
+			</tk:ListDetail>
+			<tk:Edit>
+				<tk:Display>
+					<tk:AutoDisplay Style="Edit"/>
+				</tk:Display>
+			</tk:Edit>
+		</tk:Field>
+		<tk:Field DataType="int">
+			<tk:FieldName>OA_CONTENT</tk:FieldName>
+			<tk:NickName>Content</tk:NickName>
+			<tk:DisplayName>
+				<tk:Content>文件内容Id</tk:Content>
+			</tk:DisplayName>
+			<tk:Layout Layout="PerUnit" UnitNum="1"/>
+			<tk:Control Control="Text" Order="70" DefaultShow="None"/>
+			<tk:ListDetail>
+				<tk:ListDisplay>
+					<tk:AutoDisplay/>
+				</tk:ListDisplay>
+				<tk:DetailDisplay>
+					<tk:AutoDisplay/>
+				</tk:DetailDisplay>
+			</tk:ListDetail>
+			<tk:Edit>
+				<tk:Display>
+					<tk:AutoDisplay Style="Edit"/>
+				</tk:Display>
+			</tk:Edit>
+		</tk:Field>
+	</tk:Table>
+</tk:Toolkit>

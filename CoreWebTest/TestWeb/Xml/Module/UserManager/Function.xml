@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\Module.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Module>
+    <tk:Title>
+      <tk:Content>功能菜单</tk:Content>
+    </tk:Title>
+    <tk:MetaData>
+      <tk:MasterDetailMetaData>
+        <tk:Master>
+          <tk:SingleXmlMetaData DataXml="UserManager/Function.xml" CommitDetail="true"/>
+        </tk:Master>
+        <tk:Detail ListStyle="Table">
+          <tk:SingleXmlMetaData DataXml="UserManager/SubFunc.xml" DisableAutoDetailLink="true"/>
+          <tk:TableOutput>
+            <tk:TableOutput>
+              <tk:OtherNewButton ContentType="Text"><![CDATA[<button class="btn btn-info btn-xs" id="newEmpty" title="新建空操作">空操作</button>
+    <button class="btn btn-info btn-xs" id="newStd" title="新建标准操作">标准操作</button>
+    <button class="btn btn-info btn-xs" id="newTreeStd" title="新建标准树操作">标准树操作</button>]]></tk:OtherNewButton>
+            </tk:TableOutput>
+          </tk:TableOutput>
+        </tk:Detail>
+      </tk:MasterDetailMetaData>
+    </tk:MetaData>
+    <tk:Source>
+      <tk:CompositeSource>
+        <tk:Item>
+          <tk:Condition SearchType="Style" Style="Detail Insert Update Delete CDetailList"/>
+          <tk:MasterDetailDbSource>
+            <tk:MasterResolver>
+              <tk:RegResolver>Function</tk:RegResolver>
+            </tk:MasterResolver>
+            <tk:Detail>
+              <tk:Resolver>
+                <tk:RegResolver>SubFunction</tk:RegResolver>
+              </tk:Resolver>
+              <tk:Relation>
+                <tk:MasterFields>Id</tk:MasterFields>
+                <tk:DetailFields>FnId</tk:DetailFields>
+              </tk:Relation>
+            </tk:Detail>
+            <tk:DetailOperators>
+              <tk:SubFuncTreeOperators FunctionKey="Function" LayerFieldName="TreeLayer" DisableRootDelete="false"/>
+            </tk:DetailOperators>
+          </tk:MasterDetailDbSource>
+        </tk:Item>
+        <tk:Item>
+          <tk:Condition SearchType="True"/>
+          <tk:SingleDbTreeSource>
+            <tk:Resolver>
+              <tk:RegResolver>Function</tk:RegResolver>
+            </tk:Resolver>
+          </tk:SingleDbTreeSource>
+        </tk:Item>
+      </tk:CompositeSource>
+    </tk:Source>
+    <tk:PageMaker>
+      <tk:RazorModuleTemplatePageMaker ModuleTemplate="MultipleTree">
+        <tk:PageTemplate Style="C">
+          <tk:RazorData>
+            <tk:NormalTreeData ShowNewRootButton="true" IsNewRootDialog="false"/>
+          </tk:RazorData>
+        </tk:PageTemplate>
+        <tk:PageTemplate Style="Update">
+          <tk:Script>userjs/UserManager/function.js</tk:Script>
+        </tk:PageTemplate>
+        <tk:PageTemplate Style="Insert">
+          <tk:Script>userjs/UserManager/function.js</tk:Script>
+        </tk:PageTemplate>
+      </tk:RazorModuleTemplatePageMaker>
+    </tk:PageMaker>
+    <tk:Redirector>
+      <tk:OutputRedirector/>
+    </tk:Redirector>
+  </tk:Module>
+</tk:Toolkit>

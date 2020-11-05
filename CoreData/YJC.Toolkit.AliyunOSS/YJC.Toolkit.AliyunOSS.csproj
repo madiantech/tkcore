@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>YJC.Toolkit</RootNamespace>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>YJC.Toolkit2.snk</AssemblyOriginatorKeyFile>
+    <Version>5.5.1</Version>
+    <Authors>Chen Jiangyong</Authors>
+    <Company>Toolkit</Company>
+    <Product>Toolkit5.5</Product>
+    <AssemblyVersion>5.5.0.0</AssemblyVersion>
+    <FileVersion>5.5.0.0</FileVersion>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\..\_lib\tk5.5\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aliyun.OSS.SDK.NetCore" Version="2.9.1" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CoreWeb\YJC.Toolkit.WebApp\YJC.Toolkit.WebApp.csproj" />
+    <ProjectReference Include="..\..\Core\YJC.Toolkit.Core\YJC.Toolkit.Core.csproj" />
+    <ProjectReference Include="..\..\Core\YJC.Toolkit.MetaData\YJC.Toolkit.MetaData.csproj" />
+    <ProjectReference Include="..\..\Data\YJC.Toolkit.AdoData\YJC.Toolkit.AdoData.csproj" />
+    <ProjectReference Include="..\..\Data\YJC.Toolkit.Data\YJC.Toolkit.Data.csproj" />
+    <ProjectReference Include="..\..\Data\YJC.Toolkit.Web.Common\YJC.Toolkit.Web.Common.csproj" />
+  </ItemGroup>
+</Project>

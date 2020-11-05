@@ -1,0 +1,17 @@
+﻿@inherits YJC.Toolkit.Razor.MultiEditTemplatePage<TModel>
+@using System.Data;
+@using System.Linq;
+@using System.Text;
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Html;
+@using YJC.Toolkit.MetaData;
+@using YJC.Toolkit.Data;
+@using YJC.Toolkit.Razor;
+@using YJC.Toolkit.Sys;
+@using YJC.Toolkit.Web;
+@{
+    NormalMultiDetailData pageData = ViewBag.PageData;
+    INormalTableData tableData = ViewBag.MetaData;
+    int index = ViewBag.Index;
+}
+<div id="@tableData.TableName" data-loaded="false" class="hide" data-index="@index"></div>

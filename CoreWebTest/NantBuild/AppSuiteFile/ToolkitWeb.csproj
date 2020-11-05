@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Error\**" />
+    <Content Remove="Error\**" />
+    <EmbeddedResource Remove="Error\**" />
+    <None Remove="Error\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Xml\razortemplate\Normal\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YJC.Toolkit.Core" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.MetaData" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.Data" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.AdoData" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.Web.Common" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.WebApp" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.MsSqlClient" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.MySql" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.Evaluator" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.Cache" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.RedisCache" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.Excel" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.Razor" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.Razor.Web" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.Razor.Web.Common" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.Excel.Web" Version="5.6.0" />
+    <PackageReference Include="YJC.Toolkit.JWT" Version="5.6.0" />
+  </ItemGroup>
+
+</Project>

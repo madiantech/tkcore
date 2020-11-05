@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (DataNew) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tk="http://www.qdocuments.net" targetNamespace="http://www.qdocuments.net" elementFormDefault="qualified">
+  <xs:include schemaLocation="OperatorCommon.xsd"/>
+  <xs:element name="WfCreateOperator" type="tk:WfCreateOperatorType">
+    <xs:annotation>
+      <xs:documentation>创建工作流操作</xs:documentation>
+      <xs:documentation>!</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:attributeGroup name="WfName">
+    <xs:attribute name="WorkflowName" type="xs:Name" use="required">
+      <xs:annotation>
+        <xs:documentation>工作流的名称</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="WfOperateRight">
+    <xs:attribute name="WfPrefix" type="xs:Name">
+      <xs:annotation>
+        <xs:documentation>IsApplyWf前面的前缀，如果有的话</xs:documentation>
+        <xs:documentation>!</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ReadOnly" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>为true时，可以禁止新增、修改、删除按钮的出现。默认为false。</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:complexType name="WfCreateOperatorType">
+    <xs:complexContent>
+      <xs:extension base="tk:_tk_BaseOperator">
+        <xs:attributeGroup ref="tk:WfName"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SimpleWorkflowDetailOperators">
+    <xs:annotation>
+      <xs:documentation>在详情的基础上，追加启动发送工作流的按钮，并根据工作流是否启动来决定这些按钮是否显示</xs:documentation>
+      <xs:documentation>!</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tk:WfCreateOperatorType">
+          <xs:attributeGroup ref="tk:DialogMode"/>
+          <xs:attributeGroup ref="tk:WfOperateRight"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateWorkflowOperateRight">
+    <xs:annotation>
+      <xs:documentation>在List的基础上进行叠加，增加对创建工作流的支持。通过检测IsApplyWf字段来获知是否有权限</xs:documentation>
+      <xs:documentation>!</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="tk:WfOperateRight"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SimpleWorkflowListOperators">
+    <xs:annotation>
+      <xs:documentation>在简单列表的基础上，根据工作流是否启动来决定修改和删除按钮是否显示</xs:documentation>
+      <xs:documentation>!</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="tk:DialogMode"/>
+      <xs:attributeGroup ref="tk:WfOperateRight"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

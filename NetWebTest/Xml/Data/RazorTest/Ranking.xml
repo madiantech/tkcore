@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\DataXml.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="MT_RANKING" NameField="Name">
+    <tk:TableDesc>
+      <tk:Content>排名数据表</tk:Content>
+    </tk:TableDesc>
+    <tk:Field DataType="int" IsKey="true">
+      <tk:FieldName>RK_RANKING_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>编号</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Hidden" Order="10" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>RK_RANKING_TYPE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>排名类别</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>12</tk:Length>
+      <tk:CodeTable RegName="RankingType"/>
+      <tk:Layout Layout="PerUnit" UnitNum="2"/>
+      <tk:Control Control="RadioGroup" Order="20" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="Date">
+      <tk:FieldName>RK_DATE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>排名日期</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="DateTime" Order="30" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>RK_RANKING</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>名次</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="40" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>RK_NAME</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>姓名</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>120</tk:Length>
+      <tk:Layout Layout="PerLine" UnitNum="1"/>
+      <tk:Control Control="RichText" Order="50" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="Date">
+      <tk:FieldName>RK_BIRTHDAY</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>出生日期</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Date" Order="60" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>RK_COUNTRY_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>国籍</tk:Content>
+      </tk:DisplayName>
+      <tk:Length>6</tk:Length>
+      <tk:CodeTable RegName="CD_COUNTRY"/>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Combo" Order="70" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="double">
+      <tk:FieldName>RK_SCORE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>积分</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="80" DefaultShow="All"/>
+      <tk:Extension Format="0"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>RK_NUM</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>参赛数量</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="90" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="short">
+      <tk:FieldName>RK_CHANGE</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>与上期变化</tk:Content>
+      </tk:DisplayName>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="Text" Order="100" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="int">
+      <tk:FieldName>RK_PLAYER_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>球员编号</tk:Content>
+      </tk:DisplayName>
+      <tk:EasySearch RegName="Player">
+        <tk:AdditionInfo DecoderNickName="AvatarId" DataNickName="PlayerPicId"/>
+      </tk:EasySearch>
+      <tk:Layout Layout="PerUnit" UnitNum="1"/>
+      <tk:Control Control="EasySearch" Order="110" DefaultShow="All"/>
+    </tk:Field>
+    <tk:Field DataType="int" Kind="Virtual">
+      <tk:FieldName>RK_PLAYER_PIC_ID</tk:FieldName>
+      <tk:DisplayName>
+        <tk:Content>球员头像</tk:Content>
+      </tk:DisplayName>
+      <tk:Control DefaultShow="All" Order="120" Control="Hidden"/>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="gb2312"?>
+<tk:Toolkit version="5.0" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tk:Table TableName="WF_WORKFLOW_DEF" TableDesc="工作流模式定义">
+    <tk:Field DataType="int">
+      <tk:FieldName>WD_ID</tk:FieldName>
+      <tk:DisplayName>ID</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsKey="true">
+      <tk:FieldName>WD_SHORT_NAME</tk:FieldName>
+      <tk:DisplayName>标识名</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>WD_NAME</tk:FieldName>
+      <tk:DisplayName>名称</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WD_DESCRIPTION</tk:FieldName>
+      <tk:DisplayName>描述</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="text" IsEmpty="true">
+      <tk:FieldName>WD_CONTENT</tk:FieldName>
+      <tk:DisplayName>定义内容</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="int" IsEmpty="true">
+      <tk:FieldName>WD_IS_USED</tk:FieldName>
+      <tk:DisplayName>是否使用</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WD_VERSION</tk:FieldName>
+      <tk:DisplayName>版本号</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string" IsEmpty="true">
+      <tk:FieldName>WD_VERSION_DESC</tk:FieldName>
+      <tk:DisplayName>版本描述</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>WD_CREATE_ID</tk:FieldName>
+      <tk:DisplayName>创建人</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="DateTime">
+      <tk:FieldName>WD_CREATE_DATE</tk:FieldName>
+      <tk:DisplayName>创建时间</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="string">
+      <tk:FieldName>WD_UPDATE_ID</tk:FieldName>
+      <tk:DisplayName>修改人</tk:DisplayName>
+    </tk:Field>
+    <tk:Field DataType="DateTime">
+      <tk:FieldName>WD_UPDATE_DATE</tk:FieldName>
+      <tk:DisplayName>修改时间</tk:DisplayName>
+    </tk:Field>
+  </tk:Table>
+</tk:Toolkit>

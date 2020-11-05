@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <RootNamespace>Toolkit.SchemaSuite</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\CoreWebTest\TestWeb\bin\Debug\netcoreapp2.2\Modules\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YJC.Toolkit.Core" Version="5.5.6" />
+    <PackageReference Include="YJC.Toolkit.MetaData" Version="5.5.6" />
+    <PackageReference Include="YJC.Toolkit.Data" Version="5.5.12" />
+    <PackageReference Include="YJC.Toolkit.AdoData" Version="5.5.17" />
+    <PackageReference Include="YJC.Toolkit.Razor" Version="5.5.6" />
+    <PackageReference Include="YJC.Toolkit.Razor.Web.Common" Version="5.5.16" />
+    <PackageReference Include="YJC.Toolkit.Web.Common" Version="5.5.7" />
+    <PackageReference Include="YJC.Toolkit.WebApp" Version="5.5.11" />
+  </ItemGroup>
+</Project>

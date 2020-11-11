@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XMLSpy v2010 (http://www.altova.com) by Chen Jiangyong (Baison) -->
-<tk:Toolkit version="5.0" xsi:schemaLocation="http://www.qdocuments.net ..\..\schema\v5\EasySearch.xsd" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <tk:Tk5TenantEasySearch DataXml="RazorTest/User.xml" RegName="TENANT_USER" Author="YJC" CreateDate="2014-07-12" Description="用户"/>
-  <tk:Tk5TenantTreeEasySearch DataXml="RazorTest/Organization.xml" RegName="TENANT_ORG" Author="YJC" CreateDate="2014-07-12" Description="组织"/>
-</tk:Toolkit>

@@ -1,1 +1,0 @@
-YUITool -o ..\toolkit.js -i URI.js jqextend.js jsextend.js toolkit.core.js toolkit.json.js toolkit.cookie.js toolkit.base.js toolkit.string.js toolkit.util.js toolkit.stat.js  toolkit.init.js -path E:\VS2014\Mitu.CXCS\ManageWeb\WebSite\toolkitjs\v5\toolkit\base

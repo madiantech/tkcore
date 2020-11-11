@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<tk:Toolkit version="5.0" xmlns:tk="http://www.qdocuments.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.qdocuments.net schema\v5\ConsoleApp.xsd">
-  <tk:Application CommandTimeout="600" Path="..\..\.." Culture="zh-CHS" UseCache="false" CacheTime="01:00:00" />
-  <tk:Debug Debug="true" ShowException="true" />
-  <tk:Databases>
-    <tk:Database Default="true" SqlProvider="SQL Server2005" Name="Workflow" ConnectionString="USER ID=sa;PASSWORD=windows95;INITIAL CATALOG=MituCXCS;DATA SOURCE=localhost;CONNECT TIMEOUT=30" DbProvider="SQL Server" ProviderName="System.Data.SqlClient" />
-  </tk:Databases>
-  <tk:SecretKey Key="hello" IV="AAAAAAAAAAAAAAAAAAAAAA==" />
-</tk:Toolkit>

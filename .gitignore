@@ -336,6 +336,8 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
+**YJC.Toolkit2.snk
+
 # BeatPulse healthcheck temp database
 healthchecksdb
 /NetWebTest/Xml/Razor/_temp

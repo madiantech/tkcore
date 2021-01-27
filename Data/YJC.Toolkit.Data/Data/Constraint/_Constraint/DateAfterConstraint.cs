@@ -24,7 +24,7 @@ namespace YJC.Toolkit.Data.Constraint
             DateTime afterTime = value.Value<DateTime>();
             if (beforeTime > afterTime)
                 return CreateErrorObject(string.Format(ObjectUtil.SysCulture, "{0}必须在{1}之后！",
-                        BeforeField.DisplayName, Field.DisplayName));
+                    Field.DisplayName, BeforeField.DisplayName));
 
             return null;
         }

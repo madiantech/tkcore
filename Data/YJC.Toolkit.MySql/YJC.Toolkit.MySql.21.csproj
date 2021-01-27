@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>YJC.Toolkit2.snk</AssemblyOriginatorKeyFile>
-    <Version>5.6.0</Version>
+    <Version>5.6.1</Version>
     <Authors>Chen Jiangyong</Authors>
     <Company>Toolkit</Company>
     <Product>Toolkit5.6</Product>
@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="MySql.Data" Version="8.0.21" />
+    <PackageReference Include="MySql.Data" Version="8.0.22" />
   </ItemGroup>
 
   <ItemGroup>

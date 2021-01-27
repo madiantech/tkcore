@@ -21,11 +21,17 @@ namespace YJC.Toolkit.Data
             DecoderSelfUrl = dataSet.GetFieldValue<string>("URL", "DSelfURL");
 
             DataRow countRow = dataSet.GetRow("Count");
-            PageInfo = new CountInfo(1, 1, 1);
-            PageInfo.ReadFromDataRow(countRow);
+            if (countRow != null)
+            {
+                PageInfo = new CountInfo(1, 1, 1);
+                PageInfo.ReadFromDataRow(countRow);
+            }
             DataRow sortRow = dataSet.GetRow("Sort");
-            SortInfo = new ListSortInfo(null);
-            SortInfo.ReadFromDataRow(sortRow);
+            if (sortRow != null)
+            {
+                SortInfo = new ListSortInfo(null);
+                SortInfo.ReadFromDataRow(sortRow);
+            }
 
             DataTable table = dataSet.Tables["ListOperator"];
             ListOperators = Operator.ReadFromDataTable(table);

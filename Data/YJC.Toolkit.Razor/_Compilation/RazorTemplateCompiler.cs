@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using YJC.Toolkit.Cache;
 using YJC.Toolkit.Sys;
@@ -164,7 +165,7 @@ namespace YJC.Toolkit.Razor
                 length++;
             }
 
-            var builder = new InplaceStringBuilder(length);
+            var builder = new StringBuilder(length);
             if (addLeadingSlash)
             {
                 builder.Append('/');

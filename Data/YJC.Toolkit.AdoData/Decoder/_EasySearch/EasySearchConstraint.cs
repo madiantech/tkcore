@@ -25,6 +25,7 @@ namespace YJC.Toolkit.Decoder
             string value, int position, params object[] args)
         {
             DataRow row = GetPostRow(inputData, position);
+
             string hdFieldValue = row[HdFieldName].ToString();
 
             if (string.IsNullOrEmpty(value) && string.IsNullOrEmpty(hdFieldValue))
@@ -48,7 +49,6 @@ namespace YJC.Toolkit.Decoder
             return CreateErrorObject(error);
         }
 
-
         public string EasySearchName { get; private set; }
 
         public string HdFieldName { get; private set; }
@@ -61,6 +61,7 @@ namespace YJC.Toolkit.Decoder
                 case EasySearchErrorType.NotExist:
                     errorMsg = Field.DisplayName + TkWebApp.EasySearchNotExist;
                     break;
+
                 case EasySearchErrorType.VariousTwo:
                     errorMsg = Field.DisplayName + TkWebApp.EasySearchVariousTwo;
                     break;
@@ -73,6 +74,10 @@ namespace YJC.Toolkit.Decoder
         {
             DataSet dataSet = inputData.PostObject.Convert<DataSet>();
             DataTable postTable = dataSet.Tables[TableName];
+            if (!postTable.Columns.Contains(HdFieldName))
+            {
+                HdFieldName = $"{Field.NickName}_Name";
+            }
             TkDebug.Assert(postTable.Columns.Contains(HdFieldName), string.Format(ObjectUtil.SysCulture,
                 "提交上的表{0}中没有包含字段{1}，请检查提交的Xml", TableName, HdFieldName), this);
 

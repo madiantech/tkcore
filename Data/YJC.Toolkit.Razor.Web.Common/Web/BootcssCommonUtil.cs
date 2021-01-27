@@ -136,6 +136,7 @@ namespace YJC.Toolkit.Web
             builder.Add("type", "checkbox");
             builder.Add("id", "_searchMethod");
             string caption;
+            bool isHide = false;
             if (((int)method & 4) == 4)
             {
                 builder.Add("class", "vam");
@@ -143,12 +144,19 @@ namespace YJC.Toolkit.Web
             }
             else
             {
+                isHide = true;
                 builder.Add("class", "hide");
                 caption = string.Empty;
             }
             if ((method & SearchDataMethod.Exactly) == SearchDataMethod.Exactly)
                 builder.Add((HtmlAttribute)"checked");
-            return string.Format(ObjectUtil.SysCulture, Html.CheckBox, builder.CreateAttribute(), caption);
+            string html = string.Format(ObjectUtil.SysCulture, Html.CheckBox,
+                builder.CreateAttribute(), caption);
+            if (isHide)
+            {
+                return $"<div class=\"hide\">{html}</div>";
+            }
+            return html;
         }
     }
 }

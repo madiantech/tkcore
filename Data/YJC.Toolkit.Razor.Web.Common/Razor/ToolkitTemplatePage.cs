@@ -48,6 +48,14 @@ namespace YJC.Toolkit.Razor
             return html.Value;
         }
 
+        public string RenderHidden(IFieldValueProvider provider, string tableName, Tk5FieldInfoEx field, bool needId = true)
+        {
+            HtmlString html = RenderFieldItem(provider, tableName, field);
+            if (html == null)
+                return field.Hidden(provider, needId);
+            return html.Value;
+        }
+
         public string MakeRelativePath(string path)
         {
             TkDebug.AssertArgumentNullOrEmpty(path, nameof(path), this);

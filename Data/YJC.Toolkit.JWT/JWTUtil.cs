@@ -31,16 +31,24 @@ namespace YJC.Toolkit.Web
         //    return cer;
         //}
 
-        public static string CreateEncodingInfo(IUserInfo userInfo)
+        public static string CreateEncodingInfo(IUserInfo userInfo, string hostValue, int? port)
         {
             if (userInfo is JWTUserInfo jwtInfo)
                 return EncodeToJwt(jwtInfo);
             else
             {
                 if (userInfo.IsSupportTenant())
-                    jwtInfo = new JWTTetantUserInfo(userInfo);
+                    jwtInfo = new JWTTetantUserInfo(userInfo)
+                    {
+                        Host = hostValue,
+                        Port = port
+                    };
                 else
-                    jwtInfo = new JWTUserInfo(userInfo);
+                    jwtInfo = new JWTUserInfo(userInfo)
+                    {
+                        Host = hostValue,
+                        Port = port
+                    };
                 return EncodeToJwt(jwtInfo);
             }
         }
@@ -64,6 +72,13 @@ namespace YJC.Toolkit.Web
             }
             else
                 return result;
+        }
+
+        public static bool IsValidHost(JWTUserInfo userInfo, string host, int? port)
+        {
+            TkDebug.AssertArgumentNull(userInfo, nameof(userInfo), null);
+
+            return userInfo.Host == host && userInfo.Port == port;
         }
 
         public static DateTime CalcValidTime()

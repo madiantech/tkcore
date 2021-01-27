@@ -47,8 +47,8 @@ namespace YJC.Toolkit {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性
-        ///   重写当前线程的 CurrentUICulture 属性。
+        ///   重写当前线程的 CurrentUICulture 属性，对
+        ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture {
@@ -183,8 +183,8 @@ namespace YJC.Toolkit {
         ///  &lt;span class=&quot;input-group-btn&quot;&gt;
         ///    &lt;button class=&quot;btn btn-default&quot; type=&quot;button&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-search&quot;&gt;&lt;/i&gt;&lt;/button&gt;
         ///  &lt;/span&gt;
-        ///&lt;/div&gt;{2}
-        ///&lt;/span&gt; 的本地化字符串。
+        ///&lt;/div&gt;
+        ///&lt;/span&gt;{2} 的本地化字符串。
         /// </summary>
         internal static string MultipleEasySearch {
             get {

@@ -8,7 +8,7 @@ using YJC.Toolkit.Sys;
 
 namespace YJC.Toolkit.Web
 {
-    public class CompositePageMaker : IPageMaker, ISupportMetaData, ICallerInfo
+    public class CompositePageMaker : IPageMaker, ISupportMetaData, ICallerInfo, ISupportRazorData
     {
         private class PageMakerInfo : IOrder
         {
@@ -179,6 +179,24 @@ namespace YJC.Toolkit.Web
         internal void InternalSetCallInfo(IPageData pageData)
         {
             SetCallInfo(pageData);
+        }
+
+        public object GetRazorData(ISource source, IPageData pageData, OutputData outputData)
+        {
+            fList.Sort(OrderComparer.Comparer);
+            foreach (PageMakerInfo item in fList)
+            {
+                if (item.Function(source, pageData, outputData))
+                {
+                    var pageMaker = item.PageMaker;
+                    if (pageMaker is ISupportRazorData support)
+                        return support.GetRazorData(source, pageData, outputData);
+
+                    break;
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -60,6 +60,9 @@ namespace YJC.Toolkit.Right
         [SimpleAttribute]
         public string DialogTitle { get; private set; }
 
+        [SimpleAttribute]
+        public bool UseKey { get; private set; }
+
         private static string GetQueryString(IFieldInfo[] keyFields)
         {
             StringBuilder builder = new StringBuilder();

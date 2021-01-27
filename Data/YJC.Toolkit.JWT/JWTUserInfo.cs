@@ -62,6 +62,11 @@ namespace YJC.Toolkit.Web
                 UseRequestHeader = false;
                 if (IsLogOn)
                     ValidTime = JWTUtil.CalcValidTime();
+                if (info is JWTUserInfo jwt)
+                {
+                    Host = jwt.Host;
+                    Port = jwt.Port;
+                }
             }
         }
 
@@ -113,6 +118,12 @@ namespace YJC.Toolkit.Web
         public string HeaderName => JWT_HEADER;
 
         public bool UseRequestHeader { get; private set; }
+
+        [SimpleAttribute]
+        public string Host { get; set; }
+
+        [SimpleAttribute]
+        public int? Port { get; set; }
 
         public string Token
         {

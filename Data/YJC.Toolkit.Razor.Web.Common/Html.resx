@@ -186,8 +186,8 @@
   &lt;span class="input-group-btn"&gt;
     &lt;button class="btn btn-default" type="button"&gt;&lt;i class="glyphicon glyphicon-search"&gt;&lt;/i&gt;&lt;/button&gt;
   &lt;/span&gt;
-&lt;/div&gt;{2}
-&lt;/span&gt;</value>
+&lt;/div&gt;
+&lt;/span&gt;{2}</value>
   </data>
   <data name="Switcher" xml:space="preserve">
     <value>&lt;div class="switch text-right" data-control="CheckBox"&gt;

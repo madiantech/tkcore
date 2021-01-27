@@ -58,14 +58,6 @@ namespace YJC.Toolkit.Sys
             if (!Directory.Exists(appPath))
                 return result;
 
-            //AppDomain domain = AppDomain.CurrentDomain;
-            //Assembly[] assemblies = domain.GetAssemblies();
-
-            //Dictionary<string, Assembly> loaded = new Dictionary<string, Assembly>();
-            //foreach (var assembly in assemblies)
-            //    if (!loaded.ContainsKey(assembly.FullName))
-            //        loaded.Add(assembly.FullName, assembly);
-
             IEnumerable<string> binFiles = Directory.EnumerateFiles(appPath, "*.dll", SearchOption.TopDirectoryOnly);
             foreach (string fileName in binFiles)
             {
@@ -76,27 +68,15 @@ namespace YJC.Toolkit.Sys
                     {
                         Assembly assembly = manager.TryGetAssembly(name.FullName);
                         if (assembly == null)
-                            assembly = manager.LoadAssembly(name);
+                            assembly = NeitherContext ? manager.LoadAssembly(name, fileName) : manager.LoadAssembly(name);
                         result.Add(name, assembly);
                     }
-                    //if (loaded.TryGetValue(name.FullName, out assembly))
-                    //{
-                    //    result.Add(name, assembly);
-                    //    loaded.Remove(name.FullName);
-                    //}
-                    //else
-                    //{
-                    //    assembly = Assembly.Load(name);
-                    //    result.Add(name, assembly);
-                    //}
                 }
                 catch (Exception ex)
                 {
                     HandleStartedExeception("SLoadAssembly", GetType(), ex);
                 }
             }
-            //foreach (var item in loaded.Values)
-            //    result.AddLoadedAssembly(item);
 
             return result;
         }

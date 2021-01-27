@@ -18,10 +18,10 @@ namespace YJC.Toolkit.Data
         private DictionaryList<IFieldInfo> fKeyFieldInfos;
         private IFieldInfo[] fKeyFieldArray;
 
-        public TableSelector(ITableScheme scheme, IDbDataSource source)
+        private TableSelector(ITableScheme scheme, IDbDataSource source, bool useCache)
         {
-            TkDebug.AssertArgumentNull(scheme, "scheme", null);
-            TkDebug.AssertArgumentNull(source, "source", null);
+            TkDebug.AssertArgumentNull(scheme, nameof(scheme), null);
+            TkDebug.AssertArgumentNull(source, nameof(source), null);
 
             fSourceScheme = fScheme = scheme;
             Source = source;
@@ -29,22 +29,28 @@ namespace YJC.Toolkit.Data
             Context = source.Context;
             HostDataSet = source.DataSet;
             fDataAdapter = Context.CreateDataAdapter();
-            TableSchemeData schemaData = TableSchemeData.Create(Context, scheme);
+            TableSchemeData schemaData = useCache ? TableSchemeData.Create(Context, scheme)
+                : new TableSchemeData(Context, scheme);
             SetSchemeData(schemaData);
         }
 
+        public TableSelector(ITableScheme scheme, IDbDataSource source)
+            : this(scheme, source, true)
+        {
+        }
+
         public TableSelector(string tableName, IDbDataSource source)
-            : this(DbUtil.CreateTableScheme(tableName, source.Context), source)
+            : this(DbUtil.CreateTableScheme(tableName, source.Context), source, false)
         {
         }
 
         public TableSelector(string tableName, string keyFields, IDbDataSource source)
-            : this(DbUtil.CreateTableScheme(tableName, keyFields, source.Context), source)
+            : this(DbUtil.CreateTableScheme(tableName, keyFields, source.Context), source, false)
         {
         }
 
         public TableSelector(string tableName, string keyFields, string fields, IDbDataSource source)
-            : this(DbUtil.CreateTableScheme(tableName, keyFields, fields, source.Context), source)
+            : this(DbUtil.CreateTableScheme(tableName, keyFields, fields, source.Context), source, false)
         {
         }
 

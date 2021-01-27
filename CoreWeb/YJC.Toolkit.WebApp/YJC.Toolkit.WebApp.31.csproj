@@ -5,7 +5,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>YJC.Toolkit2.snk</AssemblyOriginatorKeyFile>
     <RootNamespace>YJC.Toolkit</RootNamespace>
-    <Version>5.6.0</Version>
+    <Version>5.6.3</Version>
     <Authors>Chen Jiangyong</Authors>
     <Company>Toolkit</Company>
     <Product>Toolkit5.6</Product>
@@ -28,11 +28,11 @@
     <Compile Remove="Right\SubFuncOperateRight.cs" />
     <Compile Remove="Right\SubFuncOperateRightConfig.cs" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>

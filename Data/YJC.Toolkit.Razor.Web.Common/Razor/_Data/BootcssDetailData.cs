@@ -41,10 +41,10 @@ namespace YJC.Toolkit.Razor
         [SimpleAttribute]
         public bool ShowPicture { get; set; }
 
-        [SimpleAttribute]
+        [SimpleAttribute(DefaultValue = RazorDataConst.CAPTION_COLUMN)]
         public int CaptionColumn { get; set; }
 
-        [SimpleAttribute]
+        [SimpleAttribute(DefaultValue = RazorDataConst.CONTROL_COLUMN)]
         public int DataColumn { get; set; }
 
         [SimpleAttribute]

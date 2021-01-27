@@ -7,11 +7,9 @@ namespace YJC.Toolkit.Data
     public sealed class LanguageText
     {
         private CultureInfo fCulture;
-        private readonly HashSet<CultureInfo> fSet;
 
         public LanguageText()
         {
-            fSet = new HashSet<CultureInfo>();
         }
 
         [TextContent]
@@ -29,15 +27,6 @@ namespace YJC.Toolkit.Data
                 if (fCulture != value)
                 {
                     fCulture = value;
-                    fSet.Clear();
-                    if (value != null)
-                    {
-                        do
-                        {
-                            fSet.Add(value);
-                            value = value.Parent;
-                        } while (!string.IsNullOrEmpty(value.Name));
-                    }
                 }
             }
         }
@@ -46,7 +35,14 @@ namespace YJC.Toolkit.Data
         {
             TkDebug.AssertArgumentNull(info, "info", this);
 
-            return fSet.Contains(info);
+            while (!string.IsNullOrEmpty(info.Name))
+            {
+                if (info.Name == fCulture.Name)
+                    return true;
+
+                info = info.Parent;
+            }
+            return false;
         }
     }
 }

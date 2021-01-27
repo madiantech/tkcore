@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using YJC.Toolkit.Sys;
 using YJC.Toolkit.Threading;
@@ -135,7 +136,7 @@ namespace YJC.Toolkit.Cache
 
         public void Clean()
         {
-            CacheUtil.TryCleanCache(fCaches.Values);
+            CacheUtil.TryCleanCache(fCaches.Values.ToArray());
         }
 
         //public static void SetDefaultCacheCreator(ICacheCreator creator)

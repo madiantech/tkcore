@@ -45,6 +45,7 @@ namespace YJC.Toolkit.Decoder
             TkDebug.AssertArgumentNull(regName.StartsWith("CD_", StringComparison.CurrentCulture),
                 string.Format(ObjectUtil.SysCulture, "当前注册名为{0}，不是以CD_开始的，无法删除", regName), this);
 
+            DestroyCacheInstance(regName);
             RemoveInstancePlugIn(regName);
         }
     }

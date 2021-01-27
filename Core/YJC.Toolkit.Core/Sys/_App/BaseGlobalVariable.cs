@@ -71,33 +71,7 @@ namespace YJC.Toolkit.Sys
 
         protected virtual AppPathAssembly CreateAppPathAssembly(string appPath, AssemblyManager manager)
         {
-            //AppDomain domain = AppDomain.CurrentDomain;
-            //Assembly[] assemblies = domain.GetAssemblies();
-
             AppPathAssembly result = new AppPathAssembly();
-            //result.Add(ToolkitConst.TOOLKIT_CORE_NAME, ToolkitConst.TOOLKIT_CORE_ASSEMBLY);
-            //foreach (var assembly in assemblies)
-            //{
-            //    try
-            //    {
-            //        string location = assembly.Location;
-            //        if (!string.IsNullOrEmpty(location))
-            //        {
-            //            if (location.StartsWith(appPath, StringComparison.CurrentCultureIgnoreCase))
-            //            {
-            //                AssemblyName name = new AssemblyName(assembly.FullName);
-            //                result.Add(name, assembly);
-            //            }
-            //            else
-            //                result.AddLoadedAssembly(assembly);
-            //        }
-            //        else
-            //            result.AddLoadedAssembly(assembly);
-            //    }
-            //    catch
-            //    {
-            //    }
-            //}
             if (!Directory.Exists(appPath))
                 return result;
 
@@ -111,7 +85,7 @@ namespace YJC.Toolkit.Sys
                     {
                         Assembly assembly = manager.TryGetAssembly(name.FullName);
                         if (assembly == null)
-                            assembly = manager.LoadAssembly(name);
+                            assembly = NeitherContext ? manager.LoadAssembly(name, fileName) : manager.LoadAssembly(name);
                         result.Add(name, assembly);
                     }
                 }
@@ -132,51 +106,20 @@ namespace YJC.Toolkit.Sys
                 return Assembly.LoadFile(assemblyName.CodeBase);
         }
 
-        //private IEnumerable<AssemblyName> CreateModuleAssemblies(BaseAppSetting appSetting)
-        //{
-        //    IEnumerable<string> files = Directory.EnumerateFiles(appSetting.PlugInPath,
-        //        "*.dll", SearchOption.AllDirectories);
-        //    fPlugIns = new Dictionary<string, string>();
-        //    foreach (var file in files)
-        //    {
-        //        AssemblyName name;
-        //        try
-        //        {
-        //            name = AssemblyName.GetAssemblyName(file);
-        //            if (string.IsNullOrEmpty(name.CodeBase))
-        //                name.CodeBase = file;
-        //            fPlugIns.Add(name.FullName, file);
-        //        }
-        //        catch
-        //        {
-        //            name = null;
-        //        }
-        //        if (name != null)
-        //            yield return name;
-        //    }
-        //}
-
         private void InitializeToolkitCore()
         {
             AppPathAssembly.AddPlugInFactory(FactoryManager, ToolkitConst.TOOLKIT_CORE_ASSEMBLY);
             LoadAssembly(ToolkitConst.TOOLKIT_CORE_ASSEMBLY);
         }
 
-        //protected IEnumerable<AssemblyName> GetModuleAssemblies(BaseAppSetting appSetting)
-        //{
-        //    if (!Directory.Exists(appSetting.PlugInPath))
-        //        return Enumerable.Empty<AssemblyName>();
-        //    else
-        //    {
-        //        return CreateModuleAssemblies(appSetting);
-        //    }
-        //}
-
         public void Initialize(BaseAppSetting appSetting, object application)
         {
             TkDebug.AssertArgumentNull(appSetting, "appSetting", this);
 
             fManager = new AssemblyManager();
+            if (NeitherContext)
+                AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+
             // 初始化AppPath下所有的Assembly
             AppPathAssembly = CreateAppPathAssembly(appSetting.AppPath, fManager);
             TkDebug.AssertNotNull(AppPathAssembly, "CreateAppPathAssembly返回为空", this);
@@ -206,17 +149,6 @@ namespace YJC.Toolkit.Sys
                     continue;
                 LoadAssembly(assembly);
             }
-
-            //fLoadedAssemblyDict = new Dictionary<string, Assembly>();
-            //Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            //foreach (var ass in assemblies)
-            //{
-            //    if (!fLoadedAssemblyDict.ContainsKey(ass.FullName))
-            //        fLoadedAssemblyDict.Add(ass.FullName, ass);
-            //}
-
-            if (NeitherContext)
-                AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
             fPlugIn = new PlugInAssembly(appSetting, fManager);
             //IEnumerable<AssemblyName> moduleAssembyNames = GetModuleAssemblies(appSetting);
@@ -286,7 +218,7 @@ namespace YJC.Toolkit.Sys
             var assembly = fManager.TryGetAssembly(args.Name);
             if (assembly != null)
                 return assembly;
-            return fPlugIn.TryLoadAssembly(fManager, NeitherContext, args.Name);
+            return fPlugIn?.TryLoadAssembly(fManager, NeitherContext, args.Name);
         }
 
         internal void AddCodeError(BasePlugInAttribute attribute, Type type, PlugInErrorType errorType)

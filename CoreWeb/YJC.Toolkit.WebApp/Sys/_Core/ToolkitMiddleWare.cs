@@ -55,7 +55,8 @@ namespace YJC.Toolkit.Sys
                 try
                 {
                     var info = JWTUtil.DecodeFromJwt(auth);
-                    context.User = new ToolkitClaimsPrincipal(info);
+                    if (JWTUtil.IsValidHost(info, request.Host.Host, request.Host.Port))
+                        context.User = new ToolkitClaimsPrincipal(info);
                 }
                 catch (Exception ex)
                 {
